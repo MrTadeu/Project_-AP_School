@@ -2,6 +2,7 @@
   "files.exclude": {
     ".vscode": true,
     "test_time.exe": true,
-    "login_menu.exe": true
+    "login_menu.exe": true,
+    ".gitattributes": true
   }
 }
