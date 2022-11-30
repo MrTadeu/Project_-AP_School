@@ -1,18 +1,27 @@
 #include <stdio.h>
 
 typedef struct{
-    char name_user;
-    char password;
-}user;
-
+    int id_permission, enable;
+}hasPermission;
+typedef struct{    
+    int id;
+    char name;
+    hasPermission* permission;
+}cargo;
 typedef struct{
-    user admin;
-    user student;
-    user teacher;
+    int id;
+    char name;
 }permission;
 
+typedef struct{
+    char* username_login;
+    char* password_login;
+}user_login;
+void register_people(user_login *storage, int* cont);
+
 void main(){
-    int opcao;
+    int opcao, cont = 0;
+    user_login* storage;
     printf("**************************************************\n");
     printf("***************       Menu LOGIN      ************\n");
     printf("**************************************************\n");
@@ -30,7 +39,7 @@ void main(){
             printf("Login");
             break;
         case 2:
-            register_people(p);
+            register_people(storage, &cont);
             break;
         default:
             printf("Opção inválida");
@@ -38,10 +47,17 @@ void main(){
     }
 }
 
-void register_people(permission *p){
+void register_people(user_login *storage, int* cont){
+    storage = malloc(sizeof(user_login));
+    int i = *cont;
     printf("---------Register---------\n");
     printf("Username: ");
-    scanf("%s", p->admin);
+    scanf("%s", &storage[i].username_login);
+    printf("Password: ");
+    scanf("%s", &storage[i].password_login);
+    i++;
+    *cont = i;
+
 }
 /* 
 void login(){

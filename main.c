@@ -14,5 +14,4 @@ typedef struct{
 void main(){
     int opcao;
     
-    
 }

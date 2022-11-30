@@ -5,5 +5,8 @@
     "login_menu.exe": true,
     ".gitattributes": true,
     ".gitignore": true
+  },
+  "files.associations": {
+    "stdio.h": "c"
   }
 }
