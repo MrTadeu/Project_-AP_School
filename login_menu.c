@@ -66,7 +66,7 @@ void register_users(user_login *storage, int* cont){
     storage = realloc(storage, sizeof(user_login)*(i+1));
     i++;
     *cont = i;
-    /* register_storage(storage, i);*/
+    /* register_storage(storage, i);*/   //I don't know why this function is not working
 } 
 
 /* void register_storage(user_login *storage, int cont){
