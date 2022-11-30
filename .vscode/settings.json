@@ -8,6 +8,7 @@
   },
   "files.associations": {
     "stdio.h": "c",
-    "color.h": "c"
+    "color.h": "c",
+    "colorprint.h": "c"
   }
 }
