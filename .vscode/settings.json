@@ -9,6 +9,7 @@
   "files.associations": {
     "stdio.h": "c",
     "color.h": "c",
-    "colorprint.h": "c"
+    "colorprint.h": "c",
+    "stdlib.h": "c"
   }
 }
