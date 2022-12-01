@@ -77,17 +77,18 @@ static int color_checker(const char* str, validator* valida_tag){
     }
     else{
         while(i < lenght_str){
-            if(str[i] == '['){
+            if(str[i] == '[' &&  str[i+2] == ']'){
                 valida_tag->valid = 1;
-                valida_tag->tag = TAG_OPEN;
-                return 1;
-            }
-            else if(str[i] == ']'){
-                valida_tag->valid = 1;
-                valida_tag->tag = TAG_CLOSE;
-                return 1;
+                if(str[i+1] == '/'){
+                    valida_tag->tag = TAG_CLOSE;
+                }
+                else{
+                    valida_tag->tag = TAG_OPEN;
+                }
+                break;
             }
             i++;
+
         }
     }
     if(valida_tag->valid == 0){
@@ -97,63 +98,35 @@ static int color_checker(const char* str, validator* valida_tag){
 static void what_color(int* string, color_t* color) {
     int i;
     if(strcmp(string, "[") == 0){
-        if(strcmp(string, "b") == 0 || strcmp(string, "blue") == 0){
+        if(strcmp(string, "b") == 0 /* || strcmp(string, "blue") == 0 */){
             color->color = BLUE;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "g") == 0 || strcmp(string, "green") == 0){
+        else if(strcmp(string, "g") == 0 /* || strcmp(string, "green") == 0 */){
             color->color = GREEN;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "r") == 0 || strcmp(string, "red") == 0){
+        else if(strcmp(string, "r") == 0 /* || strcmp(string, "red") == 0 */){
             color->color = RED;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "y") == 0 || strcmp(string, "yellow") == 0){
+        else if(strcmp(string, "y") == 0 /* || strcmp(string, "yellow") == 0 */){
             color->color = YELLOW;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "m") == 0 || strcmp(string, "magenta") == 0){
+        else if(strcmp(string, "m") == 0 /* || strcmp(string, "magenta") == 0 */){
             color->color = MAGENTA;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "c") == 0 || strcmp(string, "cyan") == 0){
+        else if(strcmp(string, "c") == 0/*  || strcmp(string, "cyan") == 0 */){
             color->color = CYAN;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "w") == 0 || strcmp(string, "white") == 0){
+        else if(strcmp(string, "w") == 0/*  || strcmp(string, "white") == 0 */){
             color->color = WHITE;
             color->type = FOREGROUND;
         }
-        else if(strcmp(string, "br") == 0 || strcmp(string, "bred") == 0){
-            color->color = RED;
-            color->type = FOREGROUND;
-        }
-        else if(strcmp(string, "bg") == 0 || strcmp(string, "bgreen") == 0){
-            color->color = GREEN;
-            color->type = BACKGROUND;
-        }
-        else if(strcmp(string, "by") == 0 || strcmp(string, "byellow") == 0){
-            color->color = YELLOW;
-            color->type = BACKGROUND;
-        }
-        else if(strcmp(string, "bb") == 0 || strcmp(string, "bblue") == 0){
-            color->color = BLUE;
-            color->type = BACKGROUND;
-        }
-        else if(strcmp(string, "bm") == 0 || strcmp(string, "bmagenta") == 0){
-            color->color = MAGENTA;
-            color->type = BACKGROUND;
-        }
-        else if(strcmp(string, "bc") == 0 || strcmp(string, "bcyan") == 0){
-            color->color = CYAN;
-            color->type = BACKGROUND;
-        }
-        else if(strcmp(string, "bw") == 0 || strcmp(string, "bwhite") == 0){
-            color->color = WHITE;
-            color->type = BACKGROUND;
-        }
-        else if(strcmp(string, "reset") == 0 || strcmp(string, "rr") == 0){
+        else if(strcmp(string, "r") == 0 /* || strcmp(string, "reset") == 0 */){
             color->color = RESET;
             color->type = FOREGROUND;
         }
