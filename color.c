@@ -95,6 +95,7 @@ static int color_checker(const char* str, validator* valida_tag){
         return 0;
     }
 }
+
 static void what_color(int* string, color_t* color) {
     int i;
     if(strcmp(string, "[") == 0){

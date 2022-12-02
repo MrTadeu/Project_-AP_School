@@ -28,8 +28,7 @@ void register_storage(user_login *storage, int cont);
 void main(){
     int opcao, cont = 0;
     user_login* storage;
-    do
-    {
+    do{
         printf("**************************************************\n");
         printf("***************       Menu LOGIN      ************\n");
         printf("**************************************************\n");
