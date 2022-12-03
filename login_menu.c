@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
+#include "printf_color.h"
 
 typedef struct{
     int id_permission, enable;
@@ -58,7 +57,7 @@ void main(){
 void register_users(user_login *storage, int* cont){
     storage = malloc(sizeof(user_login));
     int i = *cont;
-    printf("---------Register---------\n");
+    printf_color("---------<red>Register<stop>---------\n");
     printf("Username: ");
     scanf("%s", &storage[i].username_login);
     printf("Password: ");

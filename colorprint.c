@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 char* replaceWord(const char* s, const char* oldW, const char* newW){ 
     char* result; 
     int i, cnt = 0; 
@@ -45,10 +47,19 @@ char* replaceWord(const char* s, const char* oldW, const char* newW){
 char* printf_color(const char* str){
     char red[] = "\033[0;31m";
     char blue[] = "\033[0;34m";
+    char black[] = "\033[0;30m";
+    char magenta[] = "\033[0;35m";
+    char cyan[] = "\033[0;36m";
     char green[] = "\033[0;32m";
     char yellow[] = "\033[0;33m";
     char reset[] = "\033[0m";
     char* result = replaceWord(str, "<red>", red);
-    result = replaceWord(result, "</red>", reset);
+    result = replaceWord(result, "<blue>", blue);
+    result = replaceWord(result, "<black>", black);
+    result = replaceWord(result, "<magenta>", magenta);
+    result = replaceWord(result, "<cyan>", cyan);
+    result = replaceWord(result, "<green>", green);
+    result = replaceWord(result, "<yellow>", yellow);
+    result = replaceWord(result, "</stop>", reset);
     return result;
 }

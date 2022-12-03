@@ -1,0 +1,1 @@
+char* printf_color(const char* str);
