@@ -1,6 +1,5 @@
 {
   "files.exclude": {
-    "login_menu.exe": true,
     ".gitattributes": true,
     ".gitignore": true,
     "colorprint.exe": true,
