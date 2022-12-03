@@ -64,10 +64,8 @@ typedef struct EArtigo
 
 EArtigo Eartigos[MAX];
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Listar Menus///////////////////////////////////////////
 
-// A função lista todos os menus existentes
+// A funï¿½ï¿½o lista todos os menus existentes
 
 void listar_menus()
 {
@@ -84,10 +82,10 @@ void listar_menus()
     while(fread(&s[i], sizeof(Menu),1,fp))
     {
         printf ("\n Nome do Menu: %s", s[i].nomemenu);
-        printf ("\n Hambúrger: %s", s[i].ham);
+        printf ("\n Hambï¿½rger: %s", s[i].ham);
         printf ("\n Bebida: %s", s[i].beb);
         printf ("\n Aperitivo: %s", s[i].ext);
-        printf ("\n Preço: %.2f", s[i].preco);
+        printf ("\n Preï¿½o: %.2f", s[i].preco);
     }
     fclose(fp);
     getchar();
@@ -95,10 +93,8 @@ void listar_menus()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Novo Menu///////////////////////////////////////////
 
-// A função cria um novo menu
+// A funï¿½ï¿½o cria um novo menu
 
 void novo_menu()
 {
@@ -130,9 +126,9 @@ void novo_menu()
         printf ("\n ----------Hamburgers----------\n");
 
         while (fread(&s1[i], sizeof(HArtigo),1,fp1)){
-            printf (" Código: %d \n Nome: %s \n Preço: %.2f \n\n", s1[i].codigo, s1[i].nome, s1[i].preco);
+            printf (" Cï¿½digo: %d \n Nome: %s \n Preï¿½o: %.2f \n\n", s1[i].codigo, s1[i].nome, s1[i].preco);
         }
-        printf (" Insira o código do produto que deseja adicionar: ");
+        printf (" Insira o cï¿½digo do produto que deseja adicionar: ");
         scanf ("%d", &j);
         rewind(fp1);
         while(fread(&s1[i], sizeof(HArtigo),1,fp1)){
@@ -160,9 +156,9 @@ void novo_menu()
 
         printf ("\n ----------Bebidas----------\n");
         while (fread(&s2[i], sizeof(BArtigo),1,fp2)){
-            printf (" Código: %d \n Nome: %s \n Preço: %.2f \n\n", s2[i].codigo, s2[i].nome, s2[i].preco);
+            printf (" Cï¿½digo: %d \n Nome: %s \n Preï¿½o: %.2f \n\n", s2[i].codigo, s2[i].nome, s2[i].preco);
         }
-        printf (" Insira o código do produto que deseja adicionar: ");
+        printf (" Insira o cï¿½digo do produto que deseja adicionar: ");
         scanf ("%d", &j);
         rewind(fp2);
         while(fread(&s2[i], sizeof(BArtigo),1,fp2)){
@@ -187,9 +183,9 @@ void novo_menu()
         }
         printf ("---------Aperitivos----------\n");
         while (fread(&s3[i], sizeof(EArtigo),1,fp3)){
-            printf (" Código: %d \n Nome: %s \n Preço: %.2f \n\n", s3[i].codigo, s3[i].nome, s3[i].preco);
+            printf (" Cï¿½digo: %d \n Nome: %s \n Preï¿½o: %.2f \n\n", s3[i].codigo, s3[i].nome, s3[i].preco);
         }
-        printf (" Insira o código do produto que deseja adicionar: ");
+        printf (" Insira o cï¿½digo do produto que deseja adicionar: ");
         scanf ("%d", &j);
         rewind(fp3);
         while(fread(&s3[i], sizeof(EArtigo),1,fp3)){
@@ -206,10 +202,8 @@ void novo_menu()
     fclose(fp);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Remover Menu////////////////////////////////////////
 
-// A função permite remover menus existentes
+// A funï¿½ï¿½o permite remover menus existentes
 
 void remover_menu()
 {
@@ -256,15 +250,13 @@ void remover_menu()
         printf("\n Menu removido com sucesso!");
     }
     else{
-        printf("Menu não encontrado!");
+        printf("Menu nï¿½o encontrado!");
         fclose(fp);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Listar Encomendas//////////////////////////////////////
 
-// função que lista todas as encomendas
+// funï¿½ï¿½o que lista todas as encomendas
 
 void listar_encomendas()
 {
@@ -283,10 +275,10 @@ void listar_encomendas()
 
         printf ("\n Nome do Cliente: %s %s", s[i].nome_3, s[i].nome_4);
         printf ("\n NIF do cliente: %d", s[i].NIF2);
-        printf ("\n Hambúrger: %s", s[i].ham);
+        printf ("\n Hambï¿½rger: %s", s[i].ham);
         printf ("\n Bebida: %s", s[i].beb);
         printf ("\n Aperitivo: %s", s[i].ext);
-        printf ("\n Preço: %f", s[i].preco);
+        printf ("\n Preï¿½o: %f", s[i].preco);
     }
     fclose(fp);
     getchar();
@@ -294,10 +286,8 @@ void listar_encomendas()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Nova Encomenda//////////////////////////////////////
 
-// Função para criar uma nova encomenda
+// Funï¿½ï¿½o para criar uma nova encomenda
 
 void nova_encomenda()
 {
@@ -337,10 +327,10 @@ void nova_encomenda()
     while(fread(&s1[i], sizeof(Menu),1,fp1))
     {
         printf ("\n Nome do Menu: %s", s1[i].nomemenu);
-        printf ("\n Hambúrger: %s", s1[i].ham);
+        printf ("\n Hambï¿½rger: %s", s1[i].ham);
         printf ("\n Bebida: %s", s1[i].beb);
         printf ("\n Aperitivo: %s", s1[i].ext);
-        printf ("\n Preço: %.2f", s1[i].preco);
+        printf ("\n Preï¿½o: %.2f", s1[i].preco);
     }
 
 
@@ -390,10 +380,8 @@ void nova_encomenda()
     return;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Listar Clientes////////////////////////////////////////
 
-//Função que lista todos os clientes
+//Funï¿½ï¿½o que lista todos os clientes
 
 void listar_clientes()
 {
@@ -423,10 +411,8 @@ void listar_clientes()
     return;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////Inserir Cliente////////////////////////////////////////
 
-//Função que insere n numeros de clientes
+//Funï¿½ï¿½o que insere n numeros de clientes
 
 void novocliente()
 {
@@ -458,14 +444,14 @@ void novocliente()
         printf ("Insira o numero de telefone: ");
         scanf ("%d%*c", &s[i].telefone);
         if (s[i].telefone<900000000 || s[i].telefone>999999999){
-            printf ("Insira um numero de telefone válido!");
+            printf ("Insira um numero de telefone vï¿½lido!");
             getchar();
             return;
         }
         printf ("Insira o NIF: ");
         scanf ("%d%*c", &s[i].NIF);
         if (s[i].NIF<100000000 || s[i].NIF>999999999){
-            printf ("Insira um valor de NIF válido!");
+            printf ("Insira um valor de NIF vï¿½lido!");
             getchar();
             return;
         }
@@ -476,10 +462,8 @@ void novocliente()
     return;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////Procurar Cliente///////////////////////////////////////////
 
-//Função para procurar os dados dos clientes pelo NIF
+//Funï¿½ï¿½o para procurar os dados dos clientes pelo NIF
 
 void procurar_cliente()
 {
@@ -507,7 +491,7 @@ void procurar_cliente()
             }
             else{
                 system("cls");
-                printf("\n Não Existe um cliente com esse NIF.");
+                printf("\n Nï¿½o Existe um cliente com esse NIF.");
             }
         }
     fclose(fp);
@@ -516,10 +500,8 @@ void procurar_cliente()
     return;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////Alterar Cliente/////////////////////////////////////////////
 
-//Função para alterar dados do cliente
+//Funï¿½ï¿½o para alterar dados do cliente
 
 void update_cliente()
 {
@@ -569,15 +551,13 @@ void update_cliente()
         printf("\nArtigo removido com sucesso!");
     }
     else{
-        printf("Nif não encontrado!");
+        printf("Nif nï¿½o encontrado!");
         fclose(fp);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////Remover Cliente//////////////////////////////////////////////
 
-//A função permite remover um cliente
+//A funï¿½ï¿½o permite remover um cliente
 
 void remover_clientes()
 {
@@ -622,15 +602,13 @@ void remover_clientes()
         printf("\nArtigo removido com sucesso!");
     }
     else{
-        printf("Nif não encontrado!");
+        printf("Nif nï¿½o encontrado!");
         fclose(fp);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////Menu Remover Artigos(hamburguer)///////////////////////////////////////
 
-//A função permite remover um hamburguer;
+//A funï¿½ï¿½o permite remover um hamburguer;
 
 void remover_ham()
 {
@@ -645,7 +623,7 @@ void remover_ham()
         printf ("Erro!");
         return;
     }
-    printf("\n Introduza o nome do Hambúrguer: ");
+    printf("\n Introduza o nome do Hambï¿½rguer: ");
     scanf("%s", nnome);
     while(fread(&s[i], sizeof(HArtigo),1,fp)){
         ss[contar]=s[i];
@@ -677,15 +655,13 @@ void remover_ham()
         printf("\nArtigo removido com sucesso!");
     }
     else{
-        printf("Nome não encontrado!");
+        printf("Nome nï¿½o encontrado!");
         fclose(fp);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
-////////////////////Menu Remover artigo(bebida)///////////////////////////
 
-// A função permite remover uma bebida
+// A funï¿½ï¿½o permite remover uma bebida
 
 void remover_beb()
 {
@@ -732,15 +708,12 @@ void remover_beb()
         printf("\n Artigo removido com sucesso!");
     }
     else{
-        printf("\n Nome não encontrado!");
+        printf("\n Nome nï¿½o encontrado!");
         fclose(fp);
     }
 }
 
-/////////////////////////////////////////////////////////////////////////////
-////////////////////Menu Remover artigo(aperitivo)///////////////////////////
-
-//A Função permite remover um aperitivo
+//A Funï¿½ï¿½o permite remover um aperitivo
 
 void remover_ape()
 {
@@ -787,13 +760,11 @@ void remover_ape()
         printf("\n Artigo removido com sucesso!");
     }
     else{
-        printf("\n Nome não encontrado!");
+        printf("\n Nome nï¿½o encontrado!");
         fclose(fp);
     }
 }
 
-//////////////////////////////////////////////////////////////////
-////////////////////Menu Remover artigo///////////////////////////
 
 char menu_remover_artigo()
 {
@@ -831,8 +802,6 @@ void remover_artigo()
     }   while(op!='4'); system("cls");
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////Menu Inserir Novo Artigo ---Hamburger//////////////////////////////////////////////
 
 //Inserir novo Hamburger
 
@@ -859,11 +828,11 @@ void inserir_novo_artigo_hamburger()
     }
     for (i = 0; i < n; i++)
     {
-        printf (" Código: ");
+        printf (" Cï¿½digo: ");
         scanf("%d%*c", &s[i].codigo);
         printf (" Nome: ");
         gets (s[i].nome);
-        printf (" Preço: ");
+        printf (" Preï¿½o: ");
         scanf ("%f%*c", &s[i].preco);
         fwrite (&s[i],sizeof(HArtigo),1,fp);
     }
@@ -871,8 +840,6 @@ void inserir_novo_artigo_hamburger()
     return;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////Menu Inserir Novo Artigo ---Bebida/////////////////////////////////////////////////
 
 //Inserir nova bebida
 
@@ -899,11 +866,11 @@ void inserir_novo_artigo_bebida()
     }
     for (i = 0; i < n; i++)
     {
-        printf (" Código: ");
+        printf (" Cï¿½digo: ");
         scanf("%d%*c", &s[i].codigo);
         printf (" Nome: ");
         gets (s[i].nome);
-        printf (" Preço: ");
+        printf (" Preï¿½o: ");
         scanf ("%f%*c", &s[i].preco);
         fwrite (&s[i],sizeof(BArtigo),1,fp);
     }
@@ -911,8 +878,6 @@ void inserir_novo_artigo_bebida()
     return;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////Menu Inserir Novo Artigo ---Aperitivos/////////////////////////////////////////////
 
 //Inserir novo aperitivo
 
@@ -939,11 +904,11 @@ void inserir_novo_artigo_aperitivos()
     }
     for (i = 0; i < n; i++)
     {
-        printf (" Código: ");
+        printf (" Cï¿½digo: ");
         scanf("%d%*c", &s[i].codigo);
         printf (" Nome: ");
         gets (s[i].nome);
-        printf (" Preço: ");
+        printf (" Preï¿½o: ");
         scanf ("%f%*c", &s[i].preco);
         fwrite (&s[i],sizeof(EArtigo),1,fp);
     }
@@ -951,8 +916,6 @@ void inserir_novo_artigo_aperitivos()
     return;
 }
 
-/////////////////////////////////////////////////////////////////////
-////////////////////////Menu Inserir Novo Artigo/////////////////////
 
 char menu_inserir_novo_artigo()
 {
@@ -990,10 +953,8 @@ void inserir_novo_artigo()
     }   while(op!='4'); system("cls");
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////Listar Artigos////////////////////////////////////////////////
 
-//Listar todos os Hambúrgeres, bebidas e acompanhamentos.
+//Listar todos os Hambï¿½rgeres, bebidas e acompanhamentos.
 
 void listar_artigos()
 {
@@ -1010,7 +971,7 @@ void listar_artigos()
 
     printf ("\n ----------Hamburgers----------\n");
     while (fread(&s1[i], sizeof(HArtigo),1,fp1)){
-        printf (" Código: %d \n Nome: %s \n Preço: %.2f \n\n", s1[i].codigo, s1[i].nome, s1[i].preco);
+        printf (" Cï¿½digo: %d \n Nome: %s \n Preï¿½o: %.2f \n\n", s1[i].codigo, s1[i].nome, s1[i].preco);
     }
     fclose(fp1);
 
@@ -1025,7 +986,7 @@ void listar_artigos()
 
     printf (" ----------Bebidas----------\n");
     while (fread(&s2[i], sizeof(BArtigo),1,fp2)){
-        printf (" Código: %d \n Nome: %s \n Preço: %.2f \n\n", s2[i].codigo, s2[i].nome, s2[i].preco);
+        printf (" Cï¿½digo: %d \n Nome: %s \n Preï¿½o: %.2f \n\n", s2[i].codigo, s2[i].nome, s2[i].preco);
     }
     fclose(fp2);
 
@@ -1041,7 +1002,7 @@ void listar_artigos()
 
     printf (" ---------Aperitivos----------\n");
     while (fread(&s3[i], sizeof(EArtigo),1,fp3)){
-        printf (" Código: %d \n Nome: %s \n Preço: %.2f \n\n", s3[i].codigo, s3[i].nome, s3[i].preco);
+        printf (" Cï¿½digo: %d \n Nome: %s \n Preï¿½o: %.2f \n\n", s3[i].codigo, s3[i].nome, s3[i].preco);
     }
     fclose(fp3);
     getchar();
@@ -1049,10 +1010,8 @@ void listar_artigos()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////Total Faturado////////////////////////////////////////////////////////////
 
-//Função que permite ver o total faturado
+//Funï¿½ï¿½o que permite ver o total faturado
 
 void total_faturado()
 {
@@ -1074,18 +1033,15 @@ void total_faturado()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////Menu Faturação////////////////////////////////////////////////////////////
-
 char menufaturacao()
 {
     char op;
     printf ("\n -----------------------------------\n");
-    printf (" --------------Faturação------------\n");
+    printf (" --------------Faturaï¿½ï¿½o------------\n");
     printf (" ---------(1)Total Faturado---------\n");
     printf (" --------------(2)Sair--------------\n");
     printf (" -----------------------------------\n\n");
-    printf (" Opção: ");
+    printf (" Opï¿½ï¿½o: ");
     scanf ("%s", &op);
     return op;
 }
@@ -1108,8 +1064,6 @@ void faturacao()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////MENU GERIR ENCOMENDAS/////////////////////////////////////////////////////////
 
 char menu_menus()
 {
@@ -1121,7 +1075,7 @@ char menu_menus()
     printf (" ------(3)Remover Menu-------\n");
     printf (" -----------(4)Sair----------\n");
     printf (" ----------------------------\n\n");
-    printf (" Opção: ");
+    printf (" Opï¿½ï¿½o: ");
     scanf ("%s", &op);
     return op;
 }
@@ -1149,9 +1103,6 @@ void omenu()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////MENU GERIR ENCOMENDAS/////////////////////////////////////////////////////////
-
 char menu_gerir_encomendas()
 {
     char op;
@@ -1161,7 +1112,7 @@ char menu_gerir_encomendas()
     printf (" ---------(2)Nova Encomenda--------\n");
     printf (" --------------(3)Sair-------------\n");
     printf (" ----------------------------------\n\n");
-    printf (" Opção: ");
+    printf (" Opï¿½ï¿½o: ");
     scanf ("%s", &op);
     return op;
 }
@@ -1187,8 +1138,6 @@ void gerir_encomendas()
     return;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////MENU GERIR CLIENTES/////////////////////////////////////////////////////////
 
 char menu_gerir_clientes()
 {
@@ -1202,7 +1151,7 @@ char menu_gerir_clientes()
     printf (" ------(5)Remover todos os Cliente------\n");
     printf (" ----------------(6)Sair---------------\n");
     printf (" --------------------------------------\n\n");
-    printf (" Opção: ");
+    printf (" Opï¿½ï¿½o: ");
     scanf ("%s", &op);
     return op;
 }
@@ -1237,8 +1186,6 @@ void gerir_clientes()
     return;
 }
 
-//////////////////////////////////////////////////FIM MENU GERIR CLIENTES//////////////////////////////////////////////////////
-////////////////////////////////////////////////////Menu Gerir Artigos/////////////////////////////////////////////////////////
 
 char menu_gerir_artigos()
 {
@@ -1250,7 +1197,7 @@ char menu_gerir_artigos()
     printf (" -----------(3)Remover Artigo----------\n");
     printf (" ----------------(4)Sair---------------\n");
     printf (" --------------------------------------\n\n");
-    printf (" Opção: ");
+    printf (" Opï¿½ï¿½o: ");
     scanf ("%s", &op);
     return op;
 }
@@ -1281,8 +1228,6 @@ void gerir_artigos()
 }
 
 
-///////////////////////////////////////////////////////////FIM///////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////MENU PRINCIPAL/////////////////////////////////////////////////////////
 
 char adminstrador()
 {
@@ -1293,10 +1238,10 @@ char adminstrador()
     printf (" -----------(2)Gerir Clientes----------\n");
     printf (" ----------(3)Gerir Encomendas---------\n");
     printf (" ------------(4)Gerir Menus------------\n");
-    printf (" -------------(5)Faturação-------------\n");
+    printf (" -------------(5)Faturaï¿½ï¿½o-------------\n");
     printf (" ----------------(6)Sair---------------\n");
     printf (" --------------------------------------\n\n");
-    printf (" Opção: ");
+    printf (" Opï¿½ï¿½o: ");
     scanf ("%s", &op);
     return op;
 }
@@ -1335,5 +1280,3 @@ int main()
     return 0;
 }
 
-///////////////////////////////////////////////////////////FIM MENU PRINCIPAL///////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////FFFFIIIIMMMM///////////////////////////////////////////////////////////////
