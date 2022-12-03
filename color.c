@@ -77,7 +77,7 @@ static int color_checker(const char* str, validator* valida_tag){
     }
     else{
         while(i < lenght_str){
-            if(str[i] == '[' &&  str[i+2] == ']'){
+            if(str[i] == '[' &&  (str[i+2] == ']' || str[i+3] == ']')){
                 valida_tag->valid = 1;
                 if(str[i+1] == '/'){
                     valida_tag->tag = TAG_CLOSE;
