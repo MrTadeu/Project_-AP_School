@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "All_functions\global.h"
 
 typedef struct{
     char admin;
@@ -13,5 +14,5 @@ typedef struct{
 
 void main(){
     int opcao;
-    
+    printf_color("<red>---------<stop>---------\n");
 }
