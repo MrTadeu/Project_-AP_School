@@ -4,7 +4,7 @@
     ".gitattributes": true,
     ".gitignore": true,
     "colorprint.exe": true,
-    "finalfile.exe": true
+    ".vscode": true
   },
   "files.associations": {
     "stdio.h": "c",
@@ -13,6 +13,7 @@
     "stdlib.h": "c",
     "printf_color.h": "c",
     "printfcolor.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "global.h": "c"
   }
 }
