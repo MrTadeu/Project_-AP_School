@@ -41,7 +41,10 @@ char* replaceWord(const char* s, const char* oldW, const char* newW){
     result = replaceWord(result, "</red>", reset);
     printf("%s", result);
 } */
-char* printf_color(char* str, char* color){ 
-    char* result = (char*)malloc(strlen(str) + strlen(color) + 1); 
-
+char* printf_color(const char* str){
+    char red[] = "\033[0;31m";
+    char reset[] = "\033[0m";
+    char* result = replaceWord(str, "<red>", red);
+    result = replaceWord(result, "</red>", reset);
+    return result;
 }
