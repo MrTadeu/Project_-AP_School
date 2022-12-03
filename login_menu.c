@@ -36,7 +36,7 @@ void main(){
         printf("**        2 -> Registrar                        **\n");
         printf("**************************************************\n");
         printf("**************************************************\n");
-        printf("Qual a opção que pretende?");
+        printf("Qual a opção que pretende? ");
         scanf("%d", &opcao);
         switch(opcao){
         case 0:
