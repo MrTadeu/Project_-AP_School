@@ -44,7 +44,7 @@ char* replaceWord(const char* s, const char* oldW, const char* newW){
     result = replaceWord(result, "</red>", reset);
     printf("%s", result);
 }  */
-char* printf_color(const char* str){
+void* printf_color(const char* str){
     char red[] = "\033[0;31m";
     char blue[] = "\033[0;34m";
     char black[] = "\033[0;30m";
@@ -60,6 +60,6 @@ char* printf_color(const char* str){
     result = replaceWord(result, "<cyan>", cyan);
     result = replaceWord(result, "<green>", green);
     result = replaceWord(result, "<yellow>", yellow);
-    result = replaceWord(result, "</stop>", reset);
-    return result;
+    result = replaceWord(result, "<stop>", reset);
+    printf("%s", result);
 }
