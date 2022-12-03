@@ -1,13 +1,13 @@
+//#include "printfcolor.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 char* replaceWord(const char* s, const char* oldW, const char* newW){ 
-    char* result; 
-    int i, cnt = 0; 
+    char* result;
+    int i, cnt = 0;
     int newWlen = strlen(newW); 
-    int oldWlen = strlen(oldW); 
-  
+    int oldWlen = strlen(oldW);
     // Counting the number of times old word 
     // occur in the string 
     for (i = 0; s[i] != '\0'; i++) { 
@@ -19,7 +19,6 @@ char* replaceWord(const char* s, const char* oldW, const char* newW){
     }
     // Making new string of enough length 
     result = (char*)malloc(i + cnt * (newWlen - oldWlen) + 1); 
-  
     i = 0; 
     while (*s) { 
         // compare the substring with the result 

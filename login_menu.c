@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "printf_color.h"
+//#include "printfcolor.h"
 
 typedef struct{
     int id_permission, enable;

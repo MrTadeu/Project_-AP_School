@@ -1,16 +1,18 @@
 {
   "files.exclude": {
-    ".vscode": true,
-    "test_time.exe": true,
     "login_menu.exe": true,
     ".gitattributes": true,
     ".gitignore": true,
-    "colorprint.exe": true
+    "colorprint.exe": true,
+    "finalfile.exe": true
   },
   "files.associations": {
     "stdio.h": "c",
     "color.h": "c",
     "colorprint.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "printf_color.h": "c",
+    "printfcolor.h": "c",
+    "string.h": "c"
   }
 }
