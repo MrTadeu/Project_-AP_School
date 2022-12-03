@@ -76,7 +76,7 @@ void register_users(user_login *storage, int* cont){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    for (int i = 0; i < cont; i++){
+    for (int i = 0; i <= cont; i++){
         fprintf(userstxt, "%s %s", storage[i].username_login, storage[i].password_login);
     }
     fclose(userstxt);
