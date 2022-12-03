@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "color.h" 
 
 
 
@@ -41,7 +40,7 @@ void main(){
         scanf("%d", &opcao);
         switch(opcao){
         case 0:
-            printf(RED"Saindo do programa...\n"RESET);
+            printf("Saindo do programa...\n");
             break;
         case 1:
             printf("Login");

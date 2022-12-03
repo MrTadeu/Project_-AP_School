@@ -4,7 +4,8 @@
     "test_time.exe": true,
     "login_menu.exe": true,
     ".gitattributes": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "colorprint.exe": true
   },
   "files.associations": {
     "stdio.h": "c",
