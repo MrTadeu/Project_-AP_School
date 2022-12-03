@@ -43,7 +43,7 @@ char* replaceWord(const char* s, const char* oldW, const char* newW){
     char* result = replaceWord(str, "<red>", red);
     result = replaceWord(result, "</red>", reset);
     printf("%s", result);
-} */
+}  */
 char* printf_color(const char* str){
     char red[] = "\033[0;31m";
     char blue[] = "\033[0;34m";
