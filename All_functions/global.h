@@ -16,3 +16,4 @@ void progress_update();
 #endif
 
 /* <-------------------------------- /Printcolor --------------------------------> */
+int isdigit_cheker(char *str);

@@ -65,7 +65,7 @@ void register_users(){
     do{
         printc("[blue]Nome[/blue]: ");
         scanf(" %[^\n]", people.username);
-    }while(people.username == NULL || /* isdigit(people.username[0] falta verificar para cada caracter*/));
+    }while(people.username == NULL || isdigit_cheker(people.username));
     printc("[blue]Regime[/blue]: ");
     scanf("%s", people.regime);
     printc("[blue]Ano[/blue]: ");
