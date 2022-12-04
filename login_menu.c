@@ -4,6 +4,8 @@
 #include <windows.h>
 #include "All_functions\global.h"
 
+const char* PERSON_FORMAT_OUT = "%s;%d\n";
+
 typedef struct{
     int id_permission, enable;
 }hasPermission;
@@ -85,7 +87,7 @@ void register_people(user_login *people, int cont){
         exit(1);
     }
     for (int i = 0; i < cont; i++){
-        fprintf(userstxt, "%s;%s\n", people[i].username_login, people[i].password_login);
+        fprintf(userstxt, PERSON_FORMAT_OUT, people[i].username_login, people[i].password_login);
     }
     fclose(userstxt);
 }
