@@ -66,20 +66,32 @@ void register_users(user_login *people, int* cont){
     scanf("%s", &people[*cont].password_login);
     people = realloc(people, sizeof(user_login)*(*cont+1));
     *cont = *cont + 1;
-    spinner_start(0, "[green]Registado com sucesso![/green]\n");
+    spinner_start(0, "Initialize...");
+    int i, mul = 10;
+    for(i = 0; i < 10 * mul; i++) {
+        Sleep(3);
+        spinner_update("[yellow]A ler[/yellow] [bw][red]%d[/red][/bw]...", i);
+    }
+    spinner_done("[green]Foi Registado com sucesso![/green]\n");
     register_people(people, *cont);   //I don't know why this function is not working
 }
 
 void register_people(user_login *people, int cont){
-    FILE* userstxt = fopen("users.txt", "w");
+    FILE* userstxt = fopen("users.txt", "a");
+    printf("ola");
     if (userstxt == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    for (int i = 0; i <= cont; i++){
+    printf("ola2");
+    printf("\nlslls %d", cont);
+    for (int i = 0; i < cont; i++){
         fprintf(userstxt, "%s;%s", people[i].username_login, people[i].password_login);
+        printf("ola3");
     }
+    printf("ola4");
     fclose(userstxt);
+    printf("ola5");
 }
 /* void login(){
     printf("---------Login---------\n");
