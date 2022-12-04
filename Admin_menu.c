@@ -108,7 +108,10 @@ void read_register_people(user_login *people, int cont){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    for(int i = 0; i < cont; i++){
+    fseek(usersbin, 0, SEEK_END); // Moving pointer to end
+    int size_file = ftell(usersbin)/sizeof(user_login); // ftell(usersbin) retorna o numero de bytes do ficheiro no caso 64 que é o sizeof(user_login)
+    printf("Fim do ficheiro: %d", size_file);
+    for(int i = 0; i < size_file; i++){
         size_t elements_read = fread(&people[i], sizeof(user_login), 1, usersbin);
         if (elements_read == 0){
             exit(2);
