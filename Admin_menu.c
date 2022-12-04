@@ -24,8 +24,9 @@ typedef struct{
     int  year;
 }user_login;
 
-void register_users(user_login *people, int* cont);
+void register_users(user_login *people,  int* cont);
 void register_people(user_login *people, int cont);
+void read_register_people(user_login *people, int cont);
 
 void main(){
     int opcao, cont = 0;
@@ -65,7 +66,7 @@ void register_users(user_login *people, int* cont){
     }
     printc("---------[red]Register[/red]---------\n");
     printc("[blue]Nome[/blue]: ");
-    scanf("%s", people[*cont].username);
+    scanf(" %[^\n]", people[*cont].username);
     printc("[blue]Regime[/blue]: ");
     scanf("%s", people[*cont].regime);
     printc("[blue]Ano[/blue]: ");
@@ -82,18 +83,37 @@ void register_users(user_login *people, int* cont){
     }
     spinner_done("[green]Foi Registado com sucesso![/green]\n");
     register_people(people, *cont);   //I don't know why this function is not working
+    read_register_people(people, *cont);
 }
 
 void register_people(user_login *people, int cont){
-    FILE* usersbin = fopen("users.bin", "wb");
-    
+    FILE* usersbin = fopen("users.bin", "ab");
     if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    size_t elements_writen= fwrite(&people, sizeof(user_login), 1,usersbin/* &people[i].regime, &people[i].year, &people[i].course */);
-    if (elements_writen == 0){
-        exit(2);
+    for(int i = 0; i < cont; i++){
+        size_t elements_writen = fwrite(&people[i], sizeof(user_login), 1, usersbin);
+        if (elements_writen == 0){
+            exit(2);
+        }
+    }
+    
+    fclose(usersbin);
+}
+
+void read_register_people(user_login *people, int cont){
+    FILE* usersbin = fopen("users.bin", "rb");
+    if (usersbin == NULL){
+        printf("Erro ao abrir o ficheiro!");
+        exit(1);
+    }
+    for(int i = 0; i < cont; i++){
+        size_t elements_read = fread(&people[i], sizeof(user_login), 1, usersbin);
+        if (elements_read == 0){
+            exit(2);
+        }
+        printf("%s %s %d %s", people[i].username, people[i].regime, people[i].year, people[i].course);
     }
     fclose(usersbin);
 }
