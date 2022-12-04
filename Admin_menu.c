@@ -24,13 +24,13 @@ typedef struct{
     int  year;
 }user_login;
 
-void register_users(user_login *people,  int* cont);
-void register_people(user_login *people, int cont);
-void read_register_people(user_login *people, int cont);
+void register_users();
+void register_people(user_login people);
+void read_register_people();
 
 void main(){
     int opcao, cont = 0;
-    user_login* people;
+    user_login people;
     do{
         printf("**************************************************\n");
         printf("***************      Menu ADMIN       ************\n");
@@ -47,7 +47,7 @@ void main(){
             printf("Saindo do programa...\n");
             break;
         case 1:
-            register_users(people, &cont);
+            register_users();
             break;
         case 2:
             break;
@@ -58,23 +58,17 @@ void main(){
     } while (opcao != 0);
 }
 
-void register_users(user_login *people, int* cont){
-    people = malloc(sizeof(user_login));
-    if(people == NULL){
-        printf("Erro ao alocar memória\n");
-        exit(1);
-    }
+void register_users(){
+    user_login people;
     printc("---------[red]Register[/red]---------\n");
     printc("[blue]Nome[/blue]: ");
-    scanf(" %[^\n]", people[*cont].username);
+    scanf(" %[^\n]", people.username);
     printc("[blue]Regime[/blue]: ");
-    scanf("%s", people[*cont].regime);
+    scanf("%s", people.regime);
     printc("[blue]Ano[/blue]: ");
-    scanf("%d", &people[*cont].year);
+    scanf("%d", &people.year);
     printc("[blue]Curso[/blue]: ");
-    scanf("%s", people[*cont].course);
-    people = realloc(people, sizeof(user_login)*(*cont+1));
-    *cont = *cont + 1;
+    scanf("%s", people.course);
     spinner_start(0, "Initialize...");
     int i, mul = 10;
     for(i = 0; i < 10 * mul; i++){
@@ -82,43 +76,29 @@ void register_users(user_login *people, int* cont){
         spinner_update("[yellow]A ler[/yellow] [bw][red]%d[/red][/bw]...", i);
     }
     spinner_done("[green]Foi Registado com sucesso![/green]\n");
-    register_people(people, *cont);   //I don't know why this function is not working
-    read_register_people(people, *cont);
+    register_people(people);   //I don't know why this function is not working
+    read_register_people(); 
 }
 
-void register_people(user_login *people, int cont){
+void register_people(user_login people){
     FILE* usersbin = fopen("users.bin", "ab");
     if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    size_t elements_writen = 0;
-    for(int i = 0; i < cont; i++){
-        size_t elements_writen = fwrite(&people[i], sizeof(user_login), 1, usersbin);
-    }
-    if (elements_writen == 0){
-            exit(2);
-        }
+    fwrite(&people, sizeof(user_login), 1, usersbin);
     fclose(usersbin);
 }
 
-void read_register_people(user_login *people, int cont){
+void read_register_people(){
     FILE* usersbin = fopen("users.bin", "rb");
+    user_login* people = (user_login*) malloc(sizeof(user_login));
     if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    fseek(usersbin, 0, SEEK_END); // Moving pointer to end
-    int size_file = ftell(usersbin)/sizeof(user_login); // ftell(usersbin) retorna o numero de bytes do ficheiro no caso 64 que é o sizeof(user_login)
-    printf("Fim do ficheiro: %d\n", size_file);
-    size_t elements_writen = 0;
-    for(int i = 0; i < size_file; i++){
-        printf("valor de i: %d\n", i);
-        size_t elements_read = fread(&people[i], sizeof(user_login), 1, usersbin);
-        printf("%s %s %d %s", people[i].username, people[i].regime, people[i].year, people[i].course);
-    }
-    if (elements_writen == 0){
-            exit(245);
+    while(fread(people, sizeof(user_login),1,usersbin)){
+        printf("%s %s %d %s", people->username, people->regime, people->year, people->course);
     }
     fclose(usersbin);
 }
