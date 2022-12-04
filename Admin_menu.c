@@ -81,7 +81,7 @@ void register_users(){
 }
 
 void register_people(user_login people){
-    FILE* usersbin = fopen("users.bin", "ab");
+    FILE* usersbin = fopen("../data/bin/students", "ab");
     if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
@@ -91,7 +91,7 @@ void register_people(user_login people){
 }
 
 void read_register_people(){
-    FILE* usersbin = fopen("users.bin", "rb");
+    FILE* usersbin = fopen("../data/bin/students", "rb");
     user_login* people = (user_login*) malloc(sizeof(user_login));
     if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
