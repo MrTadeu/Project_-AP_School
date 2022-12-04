@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "All_functions\global.h"
 
 typedef struct{
@@ -21,15 +22,16 @@ typedef struct{
     char* password_login;
 }user_login;
 
-void register_users(user_login *storage, int* cont);
-void register_storage(user_login *storage, int cont);
+void register_users(user_login *people, int* cont);
+void register_people(user_login *people, int cont);
 
 void main(){
     int opcao, cont = 0;
-    user_login* storage;
+    user_login* people;
     do{
+        ;
         printf("**************************************************\n");
-        printf("***************       Menu LOGIN      ************\n");
+        printf("***************      Menu LOGIN       ************\n");
         printf("**************************************************\n");
         printf("**        0 -> Sair                             **\n");
         printf("**        1 -> Login                            **\n");
@@ -46,7 +48,7 @@ void main(){
             printf("Login");
             break;
         case 2:
-            register_users(storage, &cont);
+            register_users(people, &cont);
             break;
         default:
             printf("Opção inválida\n");
@@ -55,31 +57,30 @@ void main(){
     } while (opcao != 0);
 }
 
-void register_users(user_login *storage, int* cont){
-    storage = malloc(sizeof(user_login));
-    int i = *cont;
-    printf_color("---------<red>Register<stop>---------\n");
+void register_users(user_login *people, int* cont){
+    people = malloc(sizeof(user_login));
+    printc("---------[red]Register[/red]---------\n");
     printf("Username: ");
-    scanf("%s", &storage[i].username_login);
+    scanf("%s", &people[*cont].username_login);
     printf("Password: ");
-    scanf("%s", &storage[i].password_login);
-    storage = realloc(storage, sizeof(user_login)*(i+1));
-    i++;
-    *cont = i;
-    /* register_storage(storage, i);*/   //I don't know why this function is not working
-} 
+    scanf("%s", &people[*cont].password_login);
+    people = realloc(people, sizeof(user_login)*(*cont+1));
+    *cont = *cont + 1;
+    spinner_start(0, "[green]Registado com sucesso![/green]\n");
+    register_people(people, *cont);   //I don't know why this function is not working
+}
 
-/* void register_storage(user_login *storage, int cont){
-    FILE* userstxt = fopen("users.txt", "a");
+void register_people(user_login *people, int cont){
+    FILE* userstxt = fopen("users.txt", "w");
     if (userstxt == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
     for (int i = 0; i <= cont; i++){
-        fprintf(userstxt, "%s %s", storage[i].username_login, storage[i].password_login);
+        fprintf(userstxt, "%s;%s", people[i].username_login, people[i].password_login);
     }
     fclose(userstxt);
-} */
+}
 /* void login(){
     printf("---------Login---------\n");
     printf("Username: ");
