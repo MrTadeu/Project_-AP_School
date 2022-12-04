@@ -29,7 +29,7 @@ void main(){
     user_login* people;
     do{
         printf("**************************************************\n");
-        printf("***************       Menu LOGIN      ************\n");
+        printf("***************      Menu LOGIN       ************\n");
         printf("**************************************************\n");
         printf("**        0 -> Sair                             **\n");
         printf("**        1 -> Login                            **\n");
@@ -66,17 +66,21 @@ void register_users(user_login *people, int* cont){
     people = realloc(people, sizeof(user_login)*(i+1));
     i++;
     *cont = i;
+    for(int j = 0; j < i; j++){
+        printf("Username: %s", people[j].username_login);
+        printf("Password: %s", people[j].password_login);
+    }
     register_people(people, i);   //I don't know why this function is not working
 } 
 
 void register_people(user_login *people, int cont){
-    FILE* userstxt = fopen("users.txt", "a");
+    FILE* userstxt = fopen("users.txt", "w");
     if (userstxt == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
     for (int i = 0; i <= cont; i++){
-        fprintf(userstxt, "%s %s", people[i].username_login, people[i].password_login);
+        fprintf(userstxt, "%s;%s", people[i].username_login, people[i].password_login);
     }
     fclose(userstxt);
 }
