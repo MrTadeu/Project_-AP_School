@@ -28,7 +28,6 @@ void main(){
     int opcao, cont = 0;
     user_login* people;
     do{
-        ;
         printf("**************************************************\n");
         printf("***************      Menu LOGIN       ************\n");
         printf("**************************************************\n");
@@ -71,7 +70,7 @@ void register_users(user_login *people, int* cont){
     *cont = *cont + 1;
     spinner_start(0, "Initialize...");
     int i, mul = 10;
-    for(i = 0; i < 10 * mul; i++) {
+    for(i = 0; i < 10 * mul; i++){
         Sleep(3);
         spinner_update("[yellow]A ler[/yellow] [bw][red]%d[/red][/bw]...", i);
     }
