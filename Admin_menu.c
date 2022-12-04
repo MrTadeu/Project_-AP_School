@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "All_functions\global.h"
 
-const char* PERSON_FORMAT_OUT = "%s;%d\n";
+const char* PERSON_FORMAT_OUT = "%s;%s;%d;%s\n";
 
 typedef struct{
     int id_permission, enable;
@@ -20,7 +20,8 @@ typedef struct{
 }permission;
 
 typedef struct{
-    char username_login[20], password_login[20];
+    char username[20], regime[20], course[20];
+    int  year;
 }user_login;
 
 void register_users(user_login *people, int* cont);
@@ -63,10 +64,14 @@ void register_users(user_login *people, int* cont){
         exit(1);
     }
     printc("---------[red]Register[/red]---------\n");
-    printf("Username: ");
-    scanf("%s", people[*cont].username_login);
-    printf("Password: ");
-    scanf("%s", people[*cont].password_login);
+    printc("[blue]Nome[/blue]: ");
+    scanf("%s", people[*cont].username);
+    printc("[blue]Regime[/blue]: ");
+    scanf("%s", people[*cont].regime);
+    printc("[blue]Ano[/blue]: ");
+    scanf("%d", &people[*cont].year);
+    printc("[blue]Curso[/blue]: ");
+    scanf("%s", people[*cont].course);
     people = realloc(people, sizeof(user_login)*(*cont+1));
     *cont = *cont + 1;
     spinner_start(0, "Initialize...");
@@ -80,15 +85,15 @@ void register_users(user_login *people, int* cont){
 }
 
 void register_people(user_login *people, int cont){
-    FILE* userstxt = fopen("users.txt", "a");
-    if (userstxt == NULL){
+    FILE* usersbin = fopen("users.bin", "ab");
+    if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
     for (int i = 0; i < cont; i++){
-        fprintf(userstxt, PERSON_FORMAT_OUT, people[i].username_login, people[i].password_login);
+        fprintf(usersbin, PERSON_FORMAT_OUT, people[i].username, people[i].regime, people[i].year, people[i].course);
     }
-    fclose(userstxt);
+    fclose(usersbin);
 }
 /* void login(){
     printf("---------Login---------\n");
