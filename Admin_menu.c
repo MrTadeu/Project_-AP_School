@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <ctype.h>
 #include "All_functions\global.h"
 
 const char* PERSON_FORMAT_OUT = "%s;%s;%d;%s\n";
@@ -61,8 +62,10 @@ void main(){
 void register_users(){
     user_login people;
     printc("---------[red]Register[/red]---------\n");
-    printc("[blue]Nome[/blue]: ");
-    scanf(" %[^\n]", people.username);
+    do{
+        printc("[blue]Nome[/blue]: ");
+        scanf(" %[^\n]", people.username);
+    }while(people.username == NULL || /* isdigit(people.username[0] falta verificar para cada caracter*/));
     printc("[blue]Regime[/blue]: ");
     scanf("%s", people.regime);
     printc("[blue]Ano[/blue]: ");
@@ -98,7 +101,7 @@ void read_register_people(){
         exit(1);
     }
     while(fread(people, sizeof(user_login),1,usersbin)){
-        printf("%s %s %d %s", people->username, people->regime, people->year, people->course);
+        printf("%s %s %d %s\n", people->username, people->regime, people->year, people->course);
     }
     fclose(usersbin);
 }
