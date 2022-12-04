@@ -18,8 +18,7 @@ typedef struct{
 }permission;
 
 typedef struct{
-    char* username_login;
-    char* password_login;
+    char username_login[20], password_login[20];
 }user_login;
 
 void register_users(user_login *people, int* cont);
@@ -59,11 +58,15 @@ void main(){
 
 void register_users(user_login *people, int* cont){
     people = malloc(sizeof(user_login));
+    if(people == NULL){
+        printf("Erro ao alocar memória\n");
+        exit(1);
+    }
     printc("---------[red]Register[/red]---------\n");
     printf("Username: ");
-    scanf("%s", &people[*cont].username_login);
+    scanf("%s", people[*cont].username_login);
     printf("Password: ");
-    scanf("%s", &people[*cont].password_login);
+    scanf("%s", people[*cont].password_login);
     people = realloc(people, sizeof(user_login)*(*cont+1));
     *cont = *cont + 1;
     spinner_start(0, "Initialize...");
@@ -78,20 +81,15 @@ void register_users(user_login *people, int* cont){
 
 void register_people(user_login *people, int cont){
     FILE* userstxt = fopen("users.txt", "a");
-    printf("ola");
     if (userstxt == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    printf("ola2");
     printf("\nlslls %d", cont);
     for (int i = 0; i < cont; i++){
-        fprintf(userstxt, "%s;%s", people[i].username_login, people[i].password_login);
-        printf("ola3");
+        fprintf(userstxt, "%s;%s\n", people[i].username_login, people[i].password_login);
     }
-    printf("ola4");
     fclose(userstxt);
-    printf("ola5");
 }
 /* void login(){
     printf("---------Login---------\n");
