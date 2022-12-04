@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "All_functions\global.h"
 
 typedef struct{
@@ -28,6 +29,7 @@ void main(){
     int opcao, cont = 0;
     user_login* people;
     do{
+        ;
         printf("**************************************************\n");
         printf("***************      Menu LOGIN       ************\n");
         printf("**************************************************\n");
@@ -57,21 +59,16 @@ void main(){
 
 void register_users(user_login *people, int* cont){
     people = malloc(sizeof(user_login));
-    int i = *cont;
     printc("---------[red]Register[/red]---------\n");
     printf("Username: ");
-    scanf("%s", &people[i].username_login);
+    scanf("%s", &people[*cont].username_login);
     printf("Password: ");
-    scanf("%s", &people[i].password_login);
-    people = realloc(people, sizeof(user_login)*(i+1));
-    i++;
-    *cont = i;
-    for(int j = 0; j < i; j++){
-        printf("Username: %s", people[j].username_login);
-        printf("Password: %s", people[j].password_login);
-    }
-    register_people(people, i);   //I don't know why this function is not working
-} 
+    scanf("%s", &people[*cont].password_login);
+    people = realloc(people, sizeof(user_login)*(*cont+1));
+    *cont = *cont + 1;
+    spinner_start(0, "[green]Registado com sucesso![/green]\n");
+    register_people(people, *cont);   //I don't know why this function is not working
+}
 
 void register_people(user_login *people, int cont){
     FILE* userstxt = fopen("users.txt", "w");
