@@ -85,7 +85,6 @@ void register_people(user_login *people, int cont){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    printf("\nlslls %d", cont);
     for (int i = 0; i < cont; i++){
         fprintf(userstxt, "%s;%s\n", people[i].username_login, people[i].password_login);
     }
