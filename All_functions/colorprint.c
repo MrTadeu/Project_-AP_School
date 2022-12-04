@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "colorprint_header.h"
 
 #ifndef STRICT
 #define STRICT 0
@@ -367,10 +366,10 @@ static void vprintf_color(int enable, const char* fmt, va_list arg) {
 }
 
 
-void printf_color(int enable, const char *fmt, ...) {
+void printc(const char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
-    vprintf_color(enable, fmt, ap);
+    vprintf_color(1, fmt, ap);
     va_end(ap);
 }
 
@@ -427,35 +426,35 @@ static const char** spinner_values[] = {
 
 static char** spinner_value = (char**)spinner_value_0;
 
-void spinner_start(int color, unsigned int type, const char* fmt, ...) {
+void spinner_start(unsigned int type, const char* fmt, ...) {
     spinner_value = (char**)spinner_values[type % (sizeof(spinner_values) / sizeof(spinner_values[0]))];
     spinner_state = 0;
     printf("\x1b[s[%s] ", spinner_value[spinner_state]);
     va_list ap;
     va_start(ap, fmt);
-    vprintf_color(color, fmt, ap);
+    vprintf_color(1, fmt, ap);
     va_end(ap);
     fflush(stdout);
 }
 
 
-void spinner_update(int color, const char* fmt, ...) {
+void spinner_update(const char* fmt, ...) {
     spinner_state++;
     if(!spinner_value[spinner_state]) spinner_state = 0;
     printf("\x1b[u[%s] \x1b[K", spinner_value[spinner_state]);
     va_list ap;
     va_start(ap, fmt);
-    vprintf_color(color, fmt, ap);
+    vprintf_color(1, fmt, ap);
     va_end(ap);
     fflush(stdout);
 }
 
 
-void spinner_done(int color, const char* fmt, ...) {
+void spinner_done(const char* fmt, ...) {
     printf("\x1b[u[#] \x1b[K");
     va_list ap;
     va_start(ap, fmt);
-    vprintf_color(color, fmt, ap);
+    vprintf_color(1, fmt, ap);
     va_end(ap);
     fflush(stdout);
 }
@@ -464,35 +463,35 @@ void spinner_done(int color, const char* fmt, ...) {
 static int progress_state, progress_max;
 char* progress_format;
 
-void progress_start(int color, int max, char* fmt) {
+void progress_start(int max, char* fmt) {
     progress_state = 0;
     progress_max = max;
     progress_format = "[g]\x1b(0a\x1b(B[/g]";
     if(fmt != NULL) progress_format = fmt;
-    printf_color(color, "\x1b[s\x1b(0x\x1b(B");
+    printc("\x1b[s\x1b(0x\x1b(B");
     int i;
     for(i = 0; i < 40; i++) {
         printf(" ");
     }
-    printf_color(color, "\x1b(0x\x1b(B %3d%%", 0);
+    printc("\x1b(0x\x1b(B %3d%%", 0);
     fflush(stdout);
 }
 
 
-void progress_update(int color) {
+void progress_update() {
     progress_state++;
     if(progress_state > progress_max) {
         progress_state = progress_max;
     }
-    printf_color(1, "\x1b[u\x1b(0x\x1b(B");
+    printc("\x1b[u\x1b(0x\x1b(B");
     int i;
     for(i = 0; i < 40 * progress_state / progress_max; i++) {
-        printf_color(color, progress_format);
+        printc(progress_format);
     }
     for(; i < 40; i++) {
         printf(" ");
     }
-    printf_color(1, "\x1b(0x\x1b(B %3d%%", 100 * progress_state / progress_max);
+    printc("\x1b(0x\x1b(B %3d%%", 100 * progress_state / progress_max);
     if(progress_state == progress_max) printf("\n");
     fflush(stdout);
 }

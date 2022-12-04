@@ -58,7 +58,7 @@ void main(){
 void register_users(user_login *people, int* cont){
     people = malloc(sizeof(user_login));
     int i = *cont;
-    printf_color("---------<red>Register<stop>---------\n");
+    printc("---------[red]Register[/red]---------\n");
     printf("Username: ");
     scanf("%s", &people[i].username_login);
     printf("Password: ");
