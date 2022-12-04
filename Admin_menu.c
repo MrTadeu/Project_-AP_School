@@ -113,10 +113,8 @@ void read_register_people(user_login *people, int cont){
     printf("Fim do ficheiro: %d", size_file);
     for(int i = 0; i < size_file; i++){
         size_t elements_read = fread(&people[i], sizeof(user_login), 1, usersbin);
-        if (elements_read == 0){
-            exit(2);
-        }
         printf("%s %s %d %s", people[i].username, people[i].regime, people[i].year, people[i].course);
+        
     }
     fclose(usersbin);
 }
