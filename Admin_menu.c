@@ -85,13 +85,15 @@ void register_users(user_login *people, int* cont){
 }
 
 void register_people(user_login *people, int cont){
-    FILE* usersbin = fopen("users.bin", "ab");
+    FILE* usersbin;
+    fopen(&usersbin, "users.bin", "ab");
     if (usersbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    for (int i = 0; i < cont; i++){
-        fprintf(usersbin, PERSON_FORMAT_OUT, people[i].username, people[i].regime, people[i].year, people[i].course);
+    size_t ELEMENT_number= fwrite(&people, sizeof(user_login), 1,usersbin/* &people[i].regime, &people[i].year, &people[i].course */);
+    if (ELEMENT_number == 0){
+        exit(2);
     }
     fclose(usersbin);
 }
