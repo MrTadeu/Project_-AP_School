@@ -1,7 +1,8 @@
 {
   "files.exclude": {
     ".gitattributes": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "test_time.exe": true
   },
   "files.associations": {
     "stdio.h": "c",
