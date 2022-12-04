@@ -1,4 +1,3 @@
-/* <-------------------------------- Printcolor --------------------------------> */
 #ifndef CJAG_COLORPRINT
 #define CJAG_COLORPRINT
 
@@ -14,5 +13,3 @@ void progress_start(int color, int max, char* fmt);
 void progress_update(int color);
 
 #endif
-
-/* <-------------------------------- /Printcolor --------------------------------> */
