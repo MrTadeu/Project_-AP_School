@@ -129,7 +129,7 @@ void readBin(){
     rewind(file); */
     
 
-    for (int i = 0; i < 50000; i++){
+    for (int i = 0; ; i++){
         size_t nameLen;
         if(fread(&nameLen, sizeof(size_t), 1, file) != 1) break;
         char *name = malloc(nameLen);
