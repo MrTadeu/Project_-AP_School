@@ -83,44 +83,56 @@ void saveBin(AlunoFile *alunosFile, int n_linhas_lidas){
         return -1;
     }
 
-    /* fwrite(&n_linhas_lidas, sizeof(int), 1, file); */
     for (int i = 0; i < n_linhas_lidas; i++){
         fwrite(&alunosFile[i], sizeof(AlunoFile), 1, file);
     }
-
     fclose(file);
 }
 
+
 void readBin(){
-    AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
+    AlunoFile *alunosFile = malloc(sizeof(AlunoFile)*5000);
     FILE *file = fopen("../data/bin/students.bin","rb");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         return -1;
     }
 
-    /* fread(&n_linhas_lidas, sizeof(int), 1, file); */
-    /* for (int i = 0; i < n_linhas_lidas; i++){
-        fread(&alunosFile[i], sizeof(AlunoFile), 1, file);
-    } */
+
+    fseek (file, 0 , SEEK_END);
+    int sizex = ftell (file)/sizeof(AlunoFile);
+    printf("Size: %d", sizex);
+    rewind(file);
+
+
+
     int i = 0;
-    while(fread(alunosFile, sizeof(AlunoFile),1,file)){
+    while (!feof(file)){
+        if (fread(&alunosFile[i], sizeof(AlunoFile), 1, file)){
+            printf("\n\tERRO %d!", i);
         printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+
+        }
         i++;
     }
 
-    /* for (int i = 0; i < n_linhas_lidas; i++){
-        printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+
+    /* for (int i = 0; i < sizex; i++){
+        fread(&alunosFile[i], sizeof(AlunoFile), 1, file);
     }
  */
+    /* for (int i = 0; i < sizex; i++){
+        printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+    } */
+
     fclose(file);
 }
 
 void main(){
     AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
     int n_linhas_lidas = 0;
-    alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
+    /* alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
     orderByName(alunosFile, n_linhas_lidas);
-    saveBin(alunosFile, n_linhas_lidas);
+    saveBin(alunosFile, n_linhas_lidas); */
     readBin();
 }
