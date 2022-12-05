@@ -12,11 +12,23 @@ typedef struct {
     int ano, id;
 } AlunoFile;
 
-void main(){
+void orderByName(AlunoFile *alunos, int n_alunos) {
+    int i, j;
+    AlunoFile aux;
+    for (i = 0; i < n_alunos; i++) {
+        for (j = i + 1; j < n_alunos; j++) {
+            if (strcmp(alunos[i].nome, alunos[j].nome) > 0) {
+                aux = alunos[i];
+                alunos[i] = alunos[j];
+                alunos[j] = aux;
+            }
+        }
+    }
+}
+
+AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
     FILE *file = fopen("../data/alunos.txt","r");
-    AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
     char **filedata = malloc(50*sizeof(char *)), *linhaString = malloc(250);
-    int n_linhas_lidas = 0;
 
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
@@ -36,31 +48,74 @@ void main(){
                 pch = strtok (NULL, "\t \r\n");
                 count++;
             }
+            alunosFile = realloc(alunosFile, ((*n_linhas_lidas)+1)*sizeof(AlunoFile));
 
-            printf("\nA linha %d contem %d campos:\n", n_linhas_lidas, count);
-            for (int i = 0; i < count; i++)
-                printf("\tcampo %02d = V[%02d] = [%s]\n", i+1, i, filedata[i]);
-
-            alunosFile = realloc(alunosFile, ((n_linhas_lidas)+1)*sizeof(AlunoFile));
-            
             //Name
-            alunosFile[n_linhas_lidas].nome = malloc((strlen(filedata[0])+1));
-            strcpy(alunosFile[n_linhas_lidas].nome, filedata[0]);
+            alunosFile[*n_linhas_lidas].nome = malloc((strlen(filedata[0])+1));
+            strcpy(alunosFile[*n_linhas_lidas].nome, filedata[0]);
             //Role / REGIME
-            alunosFile->role = malloc((strlen(filedata[2])+1));
-            strcpy(alunosFile->role, filedata[2]);
+            alunosFile[*n_linhas_lidas].role = malloc((strlen(filedata[1])+1));
+            strcpy(alunosFile[*n_linhas_lidas].role, filedata[1]);
             //Year
-            alunosFile->ano = atoi(filedata[3]);
+            alunosFile[*n_linhas_lidas].ano = atoi(filedata[2]);
             //ID / Número
-            alunosFile->id = atoi(filedata[4]);
+            alunosFile[*n_linhas_lidas].id = atoi(filedata[3]);
             //Course 
-            alunosFile->course = malloc((strlen(filedata[1])+1));
-            strcpy(alunosFile->course, filedata[1]);
+            alunosFile[*n_linhas_lidas].course = malloc((strlen(filedata[4])+1));
+            strcpy(alunosFile[*n_linhas_lidas].course, filedata[4]);
 
-            n_linhas_lidas++;
+            *n_linhas_lidas = *n_linhas_lidas + 1;
         }
-        
     }
-  
+
+    for (int i = 0; i < *n_linhas_lidas; i++){
+        printf("\nLinha %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+    }
+
     fclose(file);
+    return alunosFile;
+}
+
+void saveBin(AlunoFile *alunosFile, int n_linhas_lidas){
+    FILE *file = fopen("../data/bin/students.bin","wb");
+    if (!file) {
+        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        return -1;
+    }
+
+    fwrite(&n_linhas_lidas, sizeof(int), 1, file);
+    for (int i = 0; i < n_linhas_lidas; i++){
+        fwrite(&alunosFile[i], sizeof(AlunoFile), 1, file);
+    }
+
+    fclose(file);
+}
+
+void readBin(int n_linhas_lidas){
+    AlunoFile *alunosFile = malloc(n_linhas_lidas*sizeof(AlunoFile));
+    FILE *file = fopen("../data/bin/students.bin","rb");
+    if (!file) {
+        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        return -1;
+    }
+
+    fread(&n_linhas_lidas, sizeof(int), 1, file);
+    for (int i = 0; i < n_linhas_lidas; i++){
+        fread(&alunosFile[i], sizeof(AlunoFile), 1, file);
+    }
+
+    for (int i = 0; i < n_linhas_lidas; i++){
+        printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+    }
+
+    fclose(file);
+}
+
+void main(){
+    AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
+    int n_linhas_lidas = 0;
+    alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
+    orderByName(alunosFile, n_linhas_lidas);
+    saveBin(alunosFile, n_linhas_lidas);
+    readBin(n_linhas_lidas);
 }
