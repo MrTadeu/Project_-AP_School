@@ -178,10 +178,6 @@ void main(){
     int n_linhas_lidas = 0;
     alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
     //orderBynome(alunosFile, n_linhas_lidas);
-    for (size_t i = 0; i < 25; i++)
-    {
     saveBin(alunosFile, n_linhas_lidas);
-    }
-    
     readBin();
 }
