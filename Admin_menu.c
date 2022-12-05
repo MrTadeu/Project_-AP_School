@@ -65,7 +65,13 @@ void register_users(){
     do{
         printc("[blue]Nome[/blue]: ");
         scanf(" %[^\n]", people.username);
-    }while(people.username == NULL || isdigit_cheker(people.username));
+        if (people.username == NULL || isdigit_cheker(people.username)){
+            printc("[red]Nome inválido[/red]\n");
+        }
+        else{
+            break;
+        }
+    }while(1);
     printc("[blue]Regime[/blue]: ");
     scanf("%s", people.regime);
     printc("[blue]Ano[/blue]: ");
@@ -84,26 +90,27 @@ void register_users(){
 }
 
 void register_people(user_login people){
-    FILE* usersbin = fopen("../data/bin/students", "ab");
-    if (usersbin == NULL){
+    FILE* studentsbin = fopen("data/bin/students.bin", "ab");
+    if (studentsbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    fwrite(&people, sizeof(user_login), 1, usersbin);
-    fclose(usersbin);
+    fwrite(&people, sizeof(user_login), 1, studentsbin);
+    
+    fclose(studentsbin);
 }
 
 void read_register_people(){
-    FILE* usersbin = fopen("../data/bin/students", "rb");
+    FILE* studentsbin = fopen("data/bin/students.bin", "rb");
     user_login* people = (user_login*) malloc(sizeof(user_login));
-    if (usersbin == NULL){
+    if (studentsbin == NULL){
         printf("Erro ao abrir o ficheiro!");
         exit(1);
     }
-    while(fread(people, sizeof(user_login),1,usersbin)){
+    while(fread(people, sizeof(user_login),1,studentsbin)){
         printf("%s %s %d %s\n", people->username, people->regime, people->year, people->course);
     }
-    fclose(usersbin);
+    fclose(studentsbin);
 }
 /* void login(){
     printf("---------Login---------\n");
