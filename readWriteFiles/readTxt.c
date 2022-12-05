@@ -12,7 +12,7 @@ typedef struct {
     int ano, id;
 } AlunoFile;
 
-void orderByName(AlunoFile *alunos, int n_alunos) {
+void orderBynome(AlunoFile *alunos, int n_alunos) {
     int i, j;
     AlunoFile aux;
     for (i = 0; i < n_alunos; i++) {
@@ -50,7 +50,7 @@ AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
             }
             alunosFile = realloc(alunosFile, ((*n_linhas_lidas)+1)*sizeof(AlunoFile));
 
-            //Name
+            //nome
             alunosFile[*n_linhas_lidas].nome = malloc((strlen(filedata[0])+1));
             strcpy(alunosFile[*n_linhas_lidas].nome, filedata[0]);
             //Role / REGIME
@@ -83,11 +83,35 @@ void saveBin(AlunoFile *alunosFile, int n_linhas_lidas){
         return -1;
     }
 
-    for (int i = 0; i < n_linhas_lidas; i++){
+    /* for (int i = 0; i < n_linhas_lidas; i++){
         fwrite(&alunosFile[i], sizeof(AlunoFile), 1, file);
+    } */
+
+    for (int i = 0; i < n_linhas_lidas; i++){
+        size_t nomeLen = strlen(alunosFile[i].nome) + 1;
+        fwrite(&nomeLen, sizeof(size_t), 1, file);
+        fwrite(alunosFile[i].nome, nomeLen, 1, file);
+
+        size_t roleLen = strlen(alunosFile[i].role) + 1;
+        fwrite(&roleLen, sizeof(size_t), 1, file);
+        fwrite(alunosFile[i].role, roleLen, 1, file);
+
+        size_t courseLen = strlen(alunosFile[i].course) + 1;
+        fwrite(&courseLen, sizeof(size_t), 1, file);
+        fwrite(alunosFile[i].course, courseLen, 1, file);
+
+        fwrite(&alunosFile[i].ano, sizeof(int), 1, file);
+        fwrite(&alunosFile[i].id, sizeof(int), 1, file);
     }
-    fclose(file);
+    
+
+
+    
+
+
+    fclose(file);fclose(file);
 }
+
 
 
 void readBin(){
@@ -99,29 +123,50 @@ void readBin(){
     }
 
 
-    fseek (file, 0 , SEEK_END);
-    int sizex = ftell (file)/sizeof(AlunoFile);
-    printf("Size: %d", sizex);
-    rewind(file);
+   /*  fseek(file, 0, SEEK_END);
+    int size = ftell(file)/sizeof(AlunoFile);
+    printf("size: %d", size);
+    rewind(file); */
+    
+
+    for (int i = 0; i < 50000; i++){
+        size_t nameLen;
+        if(fread(&nameLen, sizeof(size_t), 1, file) != 1) break;
+        char *name = malloc(nameLen);
+        fread(name, nameLen, 1, file);
+        size_t roleLen;
+        fread(&roleLen, sizeof(size_t), 1, file);
+        char *role = malloc(roleLen);
+        fread(role, roleLen, 1, file);
+        size_t courseLen;
+        fread(&courseLen, sizeof(size_t), 1, file);
+        char *course = malloc(courseLen);
+        fread(course, courseLen, 1, file);
+        int year;
+        fread(&year, sizeof(int), 1, file);
+        int id;
+        fread(&id, sizeof(int), 1, file);
+
+        printf("\nLine read %d: %s\t%s\t%d\t%d\t%s", i+1, name, role, year, id, course);
+    }
 
 
 
-    int i = 0;
-    while (!feof(file)){
-        if (fread(&alunosFile[i], sizeof(AlunoFile), 1, file)){
-            printf("\n\tERRO %d!", i);
+    
+
+
+
+
+
+
+    /* int i = 0;
+
+    while (fread(&alunosFile[i], sizeof(AlunoFile), 1, file)){
         printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
-
-        }
         i++;
     }
-
-
-    /* for (int i = 0; i < sizex; i++){
-        fread(&alunosFile[i], sizeof(AlunoFile), 1, file);
-    }
  */
-    /* for (int i = 0; i < sizex; i++){
+    /* for (int i = 0; i < j-1; i++){
         printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
     } */
 
@@ -129,10 +174,14 @@ void readBin(){
 }
 
 void main(){
-    AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
+    AlunoFile *alunosFile = malloc(sizeof(AlunoFile)*2);
     int n_linhas_lidas = 0;
-    /* alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
-    orderByName(alunosFile, n_linhas_lidas);
-    saveBin(alunosFile, n_linhas_lidas); */
+    alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
+    //orderBynome(alunosFile, n_linhas_lidas);
+    for (size_t i = 0; i < 25; i++)
+    {
+    saveBin(alunosFile, n_linhas_lidas);
+    }
+    
     readBin();
 }
