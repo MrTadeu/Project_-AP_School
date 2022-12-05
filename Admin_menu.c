@@ -72,8 +72,16 @@ void register_users(){
             break;
         }
     }while(1);
-    printc("[blue]Regime[/blue]: ");
-    scanf("%s", people.regime);
+    do{
+        printc("[blue]Regime[/blue]: ");
+        scanf("%s", people.regime);
+        if (people.username == NULL || isdigit_cheker(people.username)){
+            printc("[red]Regime inválido[/red]\n");
+        }
+        else{
+            break;
+        }
+    }while(1);
     printc("[blue]Ano[/blue]: ");
     scanf("%d", &people.year);
     printc("[blue]Curso[/blue]: ");
