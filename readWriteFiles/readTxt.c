@@ -77,13 +77,13 @@ AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
 }
 
 void saveBin(AlunoFile *alunosFile, int n_linhas_lidas){
-    FILE *file = fopen("../data/bin/students.bin","wb");
+    FILE *file = fopen("../data/bin/students.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         return -1;
     }
 
-    fwrite(&n_linhas_lidas, sizeof(int), 1, file);
+    /* fwrite(&n_linhas_lidas, sizeof(int), 1, file); */
     for (int i = 0; i < n_linhas_lidas; i++){
         fwrite(&alunosFile[i], sizeof(AlunoFile), 1, file);
     }
@@ -91,23 +91,28 @@ void saveBin(AlunoFile *alunosFile, int n_linhas_lidas){
     fclose(file);
 }
 
-void readBin(int n_linhas_lidas){
-    AlunoFile *alunosFile = malloc(n_linhas_lidas*sizeof(AlunoFile));
+void readBin(){
+    AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
     FILE *file = fopen("../data/bin/students.bin","rb");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         return -1;
     }
 
-    fread(&n_linhas_lidas, sizeof(int), 1, file);
-    for (int i = 0; i < n_linhas_lidas; i++){
+    /* fread(&n_linhas_lidas, sizeof(int), 1, file); */
+    /* for (int i = 0; i < n_linhas_lidas; i++){
         fread(&alunosFile[i], sizeof(AlunoFile), 1, file);
+    } */
+    int i = 0;
+    while(fread(alunosFile, sizeof(AlunoFile),1,file)){
+        printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+        i++;
     }
 
-    for (int i = 0; i < n_linhas_lidas; i++){
+    /* for (int i = 0; i < n_linhas_lidas; i++){
         printf("\nLinha read %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
     }
-
+ */
     fclose(file);
 }
 
@@ -117,5 +122,5 @@ void main(){
     alunosFile = getTxt(alunosFile, &n_linhas_lidas);  
     orderByName(alunosFile, n_linhas_lidas);
     saveBin(alunosFile, n_linhas_lidas);
-    readBin(n_linhas_lidas);
+    readBin();
 }
