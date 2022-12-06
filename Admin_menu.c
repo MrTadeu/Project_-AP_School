@@ -5,11 +5,18 @@
 #include <ctype.h>
 #include "All_functions\global.h"
 
-const char* PERSON_FORMAT_OUT = "%s;%s;%d;%s\n";
-
 typedef struct{
     int id_permission, enable;
 }hasPermission;
+
+typedef struct{
+    int id;
+    hasPermission chorar, listar, nomes, registrar;
+
+}
+
+
+
 typedef struct{    
     int id;
     char name;

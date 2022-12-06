@@ -3,8 +3,7 @@
     ".gitattributes": true,
     ".gitignore": true,
     "test_time.exe": true,
-    "Admin_menu.exe": true,
-    "readWriteFiles\\readTxt.exe": true
+    "Admin_menu.exe": true
   },
   "files.associations": {
     "stdio.h": "c",
@@ -12,6 +11,7 @@
     "colorprint.h": "c",
     "stdlib.h": "c",
     "string.h": "c",
-    "global.h": "c"
+    "global.h": "c",
+    "structs.h": "c"
   }
 }
