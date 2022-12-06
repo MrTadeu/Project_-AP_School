@@ -69,7 +69,7 @@ AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
         while (pch != NULL){
             filedata[count] = malloc((strlen(pch)+1));
             strcpy(filedata[count], pch);
-            pch = strtok (NULL, "\t \r\n");
+            pch = strtok (NULL, "\t\r\n");
             count++;
         }
         alunosFile = realloc(alunosFile, ((*n_linhas_lidas)+1)*sizeof(AlunoFile));
@@ -97,66 +97,6 @@ AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
 
     fclose(file);
     return alunosFile;
-}
-
-void saveBin(AlunoFile *alunosFile, int n_linhas_lidas){
-    FILE *file = fopen("../data/bin/students.bin","ab");
-    if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
-        exit(1);
-    }
-
-    for (int i = 0; i < n_linhas_lidas; i++){
-        size_t nomeLen = strlen(alunosFile[i].nome) + 1;
-        fwrite(&nomeLen, sizeof(size_t), 1, file);
-        fwrite(alunosFile[i].nome, nomeLen, 1, file);
-
-        size_t roleLen = strlen(alunosFile[i].role) + 1;
-        fwrite(&roleLen, sizeof(size_t), 1, file);
-        fwrite(alunosFile[i].role, roleLen, 1, file);
-
-        size_t courseLen = strlen(alunosFile[i].course) + 1;
-        fwrite(&courseLen, sizeof(size_t), 1, file);
-        fwrite(alunosFile[i].course, courseLen, 1, file);
-
-        fwrite(&alunosFile[i].ano, sizeof(int), 1, file);
-        fwrite(&alunosFile[i].id, sizeof(int), 1, file);
-    }
-    fclose(file);fclose(file);
-}
-
-
-
-void readBin(){
-    AlunoFile *alunosFile = malloc(sizeof(AlunoFile)*5000);
-    FILE *file = fopen("../data/bin/students.bin","rb");
-    if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
-        exit(1);
-    }
-
-    for (int i = 0;; i++){
-        size_t nameLen;
-        if(fread(&nameLen, sizeof(size_t), 1, file) != 1) break;
-        char *name = malloc(nameLen);
-        fread(name, nameLen, 1, file);
-        size_t roleLen;
-        fread(&roleLen, sizeof(size_t), 1, file);
-        char *role = malloc(roleLen);
-        fread(role, roleLen, 1, file);
-        size_t courseLen;
-        fread(&courseLen, sizeof(size_t), 1, file);
-        char *course = malloc(courseLen);
-        fread(course, courseLen, 1, file);
-        int year;
-        fread(&year, sizeof(int), 1, file);
-        int id;
-        fread(&id, sizeof(int), 1, file);
-
-        printf("\nLine read %d: %s\t%s\t%d\t%d\t%s", i+1, name, role, year, id, course);
-    }
-
-    fclose(file);
 }
 
 role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles){
@@ -229,7 +169,7 @@ course *getAllCourses(AlunoFile *alunosFile, int n_linhas_lidas, int *n_courses)
                 break;
             }
         }
-        if (!found){
+        if (found==0){
             courses = realloc(courses, ((*n_courses)+1)*sizeof(course));
             courses[*n_courses].id = id_course++;
             courses[*n_courses].name = malloc((strlen(alunosFile[i].course)+1));
@@ -358,16 +298,12 @@ void main(){
 
 
     for (int i = 0; i < n_courses; i++){
+        printf("%d", n_courses);
         printf("\nCURSOS ID: %d NAME: %s", courses[i].id, courses[i].name);
     }
 
     for (int i = 0; i < n_roles; i++){
         printf("\nREGIMES ID: %d NAME: %s", roles[i].id, roles[i].name);
     }
-    
-    
 
-
-    /* saveBin(alunosFile, n_linhas_lidas);
-    readBin(); */
 }
