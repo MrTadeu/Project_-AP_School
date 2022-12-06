@@ -278,7 +278,7 @@ course *readBinCourses(){
     return courses;
 }
 
-AlunoFile *ConvertAluno(AlunoFile *alunosFile, int n_linhas_lidas, role *roles, int n_roles, course *courses, int n_courses){
+Aluno *ConvertAluno(AlunoFile *alunosFile, int n_linhas_lidas, role *roles, int n_roles, course *courses, int n_courses){
     Aluno *alunos = malloc(sizeof(Aluno)*n_linhas_lidas);
     for (int i = 0; i < n_linhas_lidas; i++){
         alunos[i].nome = malloc((strlen(alunosFile[i].nome)+1));
