@@ -18,5 +18,25 @@ void progress_update();
 #endif
 
 /* <-------------------------------- /Printcolor --------------------------------> */
+
+/* <-------------------------------- functionsString --------------------------------> */
 int isdigit_cheker(char *str);
+
+/* <-------------------------------- /functionsString --------------------------------> */
+
+/* <-------------------------------- readWrite --------------------------------> */
+AlunoFile *readFile(char *filename, int *n_linhas_lidas);
+
+void saveBinAlunos(AlunoFile *alunosFile, int n_linhas_lidas);
+
+AlunoFile *readBinAlunos();
+
+void saveBinRoles(role *roles, int n_roles);
+
+role *readBinRoles();
+
+role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles);
+
+/* <-------------------------------- /readWrite --------------------------------> */
+
 
