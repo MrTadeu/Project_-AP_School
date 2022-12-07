@@ -21,7 +21,8 @@ void progress_update();
 
 /* <-------------------------------- functionsString --------------------------------> */
 int isdigit_cheker(char *str);
-
+char *lowercase(char *str);
+char *uppercase(char *str);
 /* <-------------------------------- /functionsString --------------------------------> */
 
 /* <-------------------------------- readWrite --------------------------------> */
@@ -34,7 +35,14 @@ course *readBinCourses();
 role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles);
 void saveBinRoles(role *roles, int n_roles);
 role *readBinRoles();
-
+void printAlunos(Aluno *alunos, int n_linhas_lidas);
+void resetarpermissions(ConjuntoPermissionsStruct *permission);
+void setPermissions_basics(Aluno *alunos, int* n_linhas_lidas);
+void listaralunos(Aluno *alunos, int* n_linhas_lidas);
+void ListarCargosExistentes(ConjuntoPermissionsStruct *permissions);
+void criarcargo(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission);
+void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission, int *id_aluno_basico, int cargocriado);
+void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission);
 /* <-------------------------------- /readWrite --------------------------------> */
 
 

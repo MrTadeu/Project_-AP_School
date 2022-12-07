@@ -2,6 +2,15 @@
     int lerAlunos, escreverAlunos, listarAlunos, deletarAlunos, lerCursos, escreverCursos, listarCursos, deletarCursos, lerRoles, escreverRoles, listarRoles, deletarRoles;
 }hasPermission;*/
 
+typedef struct{
+    int id[6];
+    char *name;
+}permissionindividual;
+
+typedef struct{    
+permissionindividual permission[10];
+}ConjuntoPermissionsStruct;
+
 typedef struct{    
     int id;
     char *name;
