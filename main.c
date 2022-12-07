@@ -17,7 +17,7 @@ void main(){
     Aluno *alunos;
     role *roles;
     course *courses;
-    ConjuntoPermissionsStruct *permissions;
+    ConjuntoPermissionsStruct *permissions = malloc(sizeof(ConjuntoPermissionsStruct));
     int n_linhas_lidas = 0, n_roles = 0, n_courses = 0;
     alunosFile = getTxt(alunosFile, &n_linhas_lidas);
 
@@ -41,9 +41,12 @@ void main(){
         printf("\nREGIMES ID: %d NAME: %s", roles[i].id, roles[i].name);
     }
 
-resetarpermissions(permissions);
-setPermissions_basics(alunos, &n_linhas_lidas);
-criarcargo(alunos,&n_linhas_lidas, permissions);
-associarcargoexistente(alunos,&n_linhas_lidas,permissions);
-listaralunos(alunos,&n_linhas_lidas);
+
+    printf("\nola123");
+    resetarpermissions(permissions);
+    printf("\nola123");
+    setPermissions_basics(alunos, &n_linhas_lidas);
+    criarcargo(alunos,&n_linhas_lidas, permissions);
+    associarcargoexistente(alunos,&n_linhas_lidas,permissions);
+    listaralunos(alunos,&n_linhas_lidas);
 }

@@ -7,7 +7,8 @@ void resetarpermissions(ConjuntoPermissionsStruct *permissions)
 {
     for(int i = 0; i < 10 ; i++)
     {
-            strcpy(permissions[i].permission->name, "NULL");
+        permissions[i].permission->name = malloc(5);
+        strcpy(permissions[i].permission->name, "NULL");
     }
 }
 
