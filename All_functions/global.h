@@ -1,3 +1,5 @@
+#include "structs.h"
+
 /* <-------------------------------- Printcolor --------------------------------> */
 #ifndef CJAG_COLORPRINT
 #define CJAG_COLORPRINT
@@ -17,3 +19,4 @@ void progress_update();
 
 /* <-------------------------------- /Printcolor --------------------------------> */
 int isdigit_cheker(char *str);
+
