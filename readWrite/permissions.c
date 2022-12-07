@@ -1,21 +1,18 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "../All_functions/structs.h"
 
-typedef struct{
-    int lerAlunos, escreverAlunos, listarAlunos, deletarAlunos, lerCursos, escreverCursos, listarCursos, deletarCursos, lerRoles, escreverRoles, listarRoles, deletarRoles;
-}hasPermission;
-
-/* typedef struct{
-    rolesID registo, listarAlunos, deletarAlunos;
-}prmissionsTipe; */
-typedef struct{    
-    int id;
-    char *name;
-    hasPermission permission;
-}role;
-typedef struct {
-    char *nome;
-    int id_role, ano, id, id_course;
-}Aluno;
-
-void permissions(){
-    
+void setPermissions(Aluno *alunos, int* n_linhas_lidas) //serve para criar os cargos basicos
+{
+    for(int i = 0; i < *n_linhas_lidas ; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            alunos[i].id_permission[0] = alunos[i].id_role; 
+            if(j != 0)
+            alunos[i].id_permission[j] = 0;
+        }
+    }
 }
+

@@ -105,11 +105,7 @@ void printAlunos(Aluno *alunos, int n_linhas_lidas){
     }
 }
 
-void setPermmissions(role* roles){
-    
-}
-
-/* void main(){
+ void main(){
     AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
     Aluno *alunos;
     role *roles;
@@ -138,4 +134,3 @@ void setPermmissions(role* roles){
     }
 
 }
- */
