@@ -1,11 +1,11 @@
-typedef struct{
+/*typedef struct{
     int lerAlunos, escreverAlunos, listarAlunos, deletarAlunos, lerCursos, escreverCursos, listarCursos, deletarCursos, lerRoles, escreverRoles, listarRoles, deletarRoles;
-}hasPermission;
+}hasPermission;*/
 
 typedef struct{    
     int id;
     char *name;
-    hasPermission permission;
+    //hasPermission permission;
 }role;
 
 typedef struct{
@@ -15,8 +15,7 @@ typedef struct{
 
 typedef struct {
     char *nome;
-    int id_role, ano, id, id_course;
-    role permission;
+    int id_role, ano, id, id_course, id_permission[10];
 }Aluno;
 
 typedef struct {
