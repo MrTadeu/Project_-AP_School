@@ -25,7 +25,7 @@ course *getAllCourses(AlunoFile *alunosFile, int n_linhas_lidas, int *n_courses)
 }
 
 void saveBinCourses(course *courses, int n_courses){
-    FILE *file = fopen("../data/bin/courses.bin","ab");
+    FILE *file = fopen("data/bin/courses.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
@@ -43,7 +43,7 @@ void saveBinCourses(course *courses, int n_courses){
 
 course *readBinCourses(){
     course *courses = malloc(sizeof(course));
-    FILE *file = fopen("../data/bin/courses.bin","rb");
+    FILE *file = fopen("data/bin/courses.bin","rb");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);

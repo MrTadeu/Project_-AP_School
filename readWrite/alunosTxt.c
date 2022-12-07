@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../All_functions/structs.h" 
+#include "..\All_functions\global.h"
 
 AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
-    FILE *file = fopen("../data/alunos.txt","r");
+    FILE *file = fopen("data/alunos.txt","r");
     char **filedata = malloc(5*sizeof(char *)), *linhaString = malloc(250);
 
     if (!file) {
@@ -76,7 +76,7 @@ Aluno *ConvertAluno(AlunoFile *alunosFile, int n_linhas_lidas, role *roles, int 
 }
 
 void saveBinAlunos(Aluno *alunos, int n_linhas_lidas){
-    FILE *file = fopen("../data/bin/alunos.bin","ab");
+    FILE *file = fopen("data/bin/alunos.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
@@ -105,7 +105,7 @@ void printAlunos(Aluno *alunos, int n_linhas_lidas){
     }
 }
 
- void main(){
+ /* void main(){
     AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
     Aluno *alunos;
     role *roles;
@@ -134,3 +134,4 @@ void printAlunos(Aluno *alunos, int n_linhas_lidas){
     }
 
 }
+ */

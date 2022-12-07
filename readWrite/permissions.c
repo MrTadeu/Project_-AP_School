@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../All_functions/structs.h"
+#include "../All_functions/global.h"
 
 void resetarpermissions(ConjuntoPermissionsStruct *permissions)
 {

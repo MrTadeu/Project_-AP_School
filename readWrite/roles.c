@@ -25,7 +25,7 @@ role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles){
 }
 
 void saveBinRoles(role *roles, int n_roles){
-    FILE *file = fopen("../data/bin/roles.bin","ab");
+    FILE *file = fopen("data/bin/roles.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
@@ -42,7 +42,7 @@ void saveBinRoles(role *roles, int n_roles){
 
 role *readBinRoles(){
     role *roles = malloc(sizeof(role));
-    FILE *file = fopen("../data/bin/roles.bin","rb");
+    FILE *file = fopen("data/bin/roles.bin","rb");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
