@@ -21,7 +21,7 @@ void setPermissions_basics(Aluno *alunos, int* n_linhas_lidas) //serve para cria
             alunos[i].id_permission[0] = alunos[i].id_role; //identifica tipo de pessoa(aluno,professor)
             alunos[i].id_permission[1] = alunos[i].ano; //Identifica o ano (1,2,3,4)
             alunos[i].id_permission[2] = alunos[i].id_course;//Identifica o curso (EI,EE,CONT) 
-            alunos[i].id_permission[3] = 1; //Identifica se tem ou nao alguma necessidade especial
+            alunos[i].id_permission[3] = 1; //Necessidade especial
             if(j >= 4)
             alunos[i].id_permission[j] = 0;
         }
@@ -30,6 +30,9 @@ void setPermissions_basics(Aluno *alunos, int* n_linhas_lidas) //serve para cria
 
 void listaralunos(Aluno *alunos, int* n_linhas_lidas)
 {
+    printf("\033[1;33m");
+    printf("Listar Alunos:\n");
+    printf("\033[0m");
     for(int i = 0; i < *n_linhas_lidas ; i++)
     {
         printf("\nNome: %s\nRole: %d\nAno: %d\t\tID Permissao: ", alunos[i].nome, alunos[i].id_role, alunos[i].ano);
@@ -43,6 +46,9 @@ void listaralunos(Aluno *alunos, int* n_linhas_lidas)
 }
 void ListarCargosExistentes(permissionindividual *permissions)
 {
+    printf("\033[1;33m");
+    printf("Listar Cargos Existentes:\n");
+    printf("\033[0m");
     for(int i = 0; i < 10 ; i++)
     {
         if(strcmp(permissions[i].name, "NULL") != 0)
@@ -58,6 +64,9 @@ void ListarCargosExistentes(permissionindividual *permissions)
 }
 int criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
 {   
+printf("\033[1;33m");
+printf("Criar Cargo:\n");
+printf("\033[0m");
 int i, associarcargo, associarcargoGI, id_aluno_basico[4], flag;
 for(i = 0; i < 10 ; i++) 
 {
@@ -93,12 +102,16 @@ for (int j = 0; j < 7; j++)
 fwrite(permission, sizeof(permissionindividual), 1, fp);
 fclose(fp); 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+do{
 printf("Dejesa associar este cargo?\n1 - Sim\n2 - Nao\n");
-scanf("%d", &associarcargo);
+scanf("%d", &associarcargo);    
+}while(associarcargo != 1 && associarcargo != 2);
 if(associarcargo == 1)
 {
+do{
 printf("A um grupo de alunos ou aluno individual?\n1 - Grupo\n2 - Individual\n");
-scanf("%d", &associarcargoGI);  
+scanf("%d", &associarcargoGI);     
+}while(associarcargoGI != 1 && associarcargoGI != 2);
 }
 else
 {
@@ -134,10 +147,8 @@ else
 if(associarcargoGI == 2)
 {  
     int id_aluno_individual;
-    //definir aluno individual ao qual quer associar o cargo
     printf("\nDigite o ID do aluno (4 digitos) ao qual quer associar o cargo: ");
     scanf("%d", &id_aluno_individual);
-    //verificar se existe algum aluno com o ID inserido
     int l;
     for(l = 0; l < *n_linhas_lidas ; l++)
     {
@@ -190,10 +201,17 @@ printf("Cargo associado com sucesso!\n\n");
 void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
 {   
 int id_cargo , flag = 0 , i, id_aluno_basico[4], associarcargo; 
-printf("/033[0;31mAssociar Cargo Existente: \n");
-printf("/033[0;34m\nLista de permicoes: \n");
-printf("/033[0m1 - Ler Alunos\n2 - Escrever Alunos\n3 - Listar Alunos\n4 - Deletar Alunos\n5 - Ler Cursos\n6 - Escrever Cursos\n7 - Listar Cursos\n8 - Deletar Cursos\n9 - Ler Roles\n10 - Escrever Roles\n11 - Listar Roles\n12 - Deletar Roles\n");
-printf("/033[0;34m\nCargos Existentes\n");
+printf("/033[0;33m");
+printf("Associar Cargo Existente: \n");
+printf("/033[0m");
+printf("/033[0;34m");
+printf("\nLista de permicoes: \n");
+printf("/033[0m");
+printf("/033[0;34m");
+printf("1 - Ler Alunos\n2 - Escrever Alunos\n3 - Listar Alunos\n4 - Deletar Alunos\n5 - Ler Cursos\n6 - Escrever Cursos\n7 - Listar Cursos\n8 - Deletar Cursos\n9 - Ler Roles\n10 - Escrever Roles\n11 - Listar Roles\n12 - Deletar Roles\n");
+printf("/033[0m");
+printf("/033[0;34m");
+printf("\nCargos Existentes\n");
 printf("/033[0m ");
 ListarCargosExistentes(permission);
 do{ //Escolher cargo a associar
