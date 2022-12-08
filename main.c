@@ -50,6 +50,7 @@ void main(){
     listaralunos(alunos,&n_linhas_lidas);
     printf("\nola123");
     criarcargo(alunos,&n_linhas_lidas, permissions);
+    listaralunos(alunos,&n_linhas_lidas);
     printf("\nola123");
     ListarCargosExistentes(permissions);  
     printf("\nola123"); 

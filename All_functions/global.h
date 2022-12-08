@@ -40,7 +40,7 @@ void resetarpermissions(permissionindividual *permission);
 void setPermissions_basics(Aluno *alunos, int* n_linhas_lidas);
 void listaralunos(Aluno *alunos, int* n_linhas_lidas);
 void ListarCargosExistentes(permissionindividual *permissions);
-void criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission);
+int criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission);
 void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission, int *id_aluno_basico, int cargocriado);
 void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission);
 /* <-------------------------------- /readWrite --------------------------------> */

@@ -32,12 +32,13 @@ void listaralunos(Aluno *alunos, int* n_linhas_lidas)
 {
     for(int i = 0; i < *n_linhas_lidas ; i++)
     {
-        printf("\nNome: %s\tRole: %d\tAno: %d\tID Aluno: %d\tCurso: %d\tID Permissao: ", alunos[i].nome, alunos[i].id_role, alunos[i].ano, alunos[i].id, alunos[i].id_course);
+        printf("\nNome: %s\nRole: %d\nAno: %d\t\tID Permissao: ", alunos[i].nome, alunos[i].id_role, alunos[i].ano);
         for(int j = 0; j < 10; j++)
         {
             printf("|%d", alunos[i].id_permission[j]);
         }
         printf("|");
+        printf("\nID Aluno: %d\nCurso: %d\n", alunos[i].id, alunos[i].id_course);
     }
 }
 void ListarCargosExistentes(permissionindividual *permissions)
@@ -55,15 +56,20 @@ void ListarCargosExistentes(permissionindividual *permissions)
         }
     }
 }
-void criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
+int criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
 {   
 int i, associarcargo, associarcargoGI, id_aluno_basico[4], flag;
-for(i = 0; i < 10 ; i++)
+for(i = 0; i < 10 ; i++) 
 {
     if(strcmp(permission[i].name, "NULL") == 0)
     break;
 }
-printf("\nDigite o nome do cargo: teste %d", i );
+if(i==10)
+{
+    printf("\nNao e possivel criar mais cargos\n\n");
+    return 1;
+}
+printf("\nDigite o nome do cargo: ");
 scanf("%s", permission[i].name);
 printf("Escolha as permissoes a adicionar ao cargo:\n\n");
 printf("1 - Ler Alunos\n2 - Escrever Alunos\n3 - Listar Alunos\n4 - Deletar Alunos\n5 - Ler Cursos\n6 - Escrever Cursos\n7 - Listar Cursos\n8 - Deletar Cursos\n9 - Ler Roles\n10 - Escrever Roles\n11 - Listar Roles\n12 - Deletar Roles\n");
@@ -80,42 +86,50 @@ for(int j = 0; j < 6; j++)
         }
     }
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 printf("\nCargo criado com sucesso!\n");
-/* FILE* fp = fopen("data/bin/permissions.bin", "ab");
+FILE* fp = fopen("data/bin/permissions.bin", "wb");
 for (int j = 0; j < 7; j++)
-fwrite(permission[i].id[j], sizeof(int), 1, fp);
-fclose(fp); */
+fwrite(permission, sizeof(permissionindividual), 1, fp);
+fclose(fp); 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 printf("Dejesa associar este cargo?\n1 - Sim\n2 - Nao\n");
 scanf("%d", &associarcargo);
 if(associarcargo == 1)
 {
 printf("A um grupo de alunos ou aluno individual?\n1 - Grupo\n2 - Individual\n");
 scanf("%d", &associarcargoGI);  
+}
+else
+{
+    printf("\n\n");
+    return 0;
+}
 if(associarcargoGI == 1)
-{   //definir grupo de alunos ao qual quer associar o cargo
-    printf("\nDigite o ID_basico_geral dos alunos (4 primeiros digitos) ao qual quer associar o cargo: ");
-    for(int i = 0; i < 4 ; i++)
-    {
-        scanf("%d", &id_aluno_basico[i]);
+{   
+//definir grupo de alunos ao qual quer associar o cargo
+printf("\nDigite o ID_basico_geral dos alunos (4 primeiros digitos) ao qual quer associar o cargo:");
+for(int i = 0; i < 4 ; i++)
+{
+    scanf("%d", &id_aluno_basico[i]);
+}
+//verificar se existe algum aluno com o ID basico inserido
+for(int i = 0; i < *n_linhas_lidas ; i++)
+{   flag = 0;
+    for(int j = 0; j < 4; j++)
+    {   
+        if(alunos[i].id_permission[j] == id_aluno_basico[j]) 
+        flag++;
     }
-    //verificar se existe algum aluno com o ID basico inserido
-    for(int i = 0; i < *n_linhas_lidas ; i++)
-    {
-        for(int j = 0; j < 3; j++)
-        {   
-            flag = 0;
-            if(strcmp(alunos[i].id_permission[j],id_aluno_basico[j]) == 0)
-            flag = 1;
-            if(flag == 1)
-            break;
-        }
-    }
-    if(flag = 0)
-    {
-        printf("\nNao foi encontrado nenhum aluno com o ID_basico_geral inserido!\n");
-    }
-    else
-        associarcargoaluno(alunos, n_linhas_lidas, permission, id_aluno_basico, i);
+    if(flag == 4)
+        i = *n_linhas_lidas;
+}
+if(flag < 4)
+{
+    printf("\nNao foi encontrado nenhum aluno com o ID_basico_geral inserido!\n");
+}
+else
+    associarcargoaluno(alunos, n_linhas_lidas, permission, id_aluno_basico, i);
 }
 if(associarcargoGI == 2)
 {  
@@ -147,21 +161,20 @@ if(associarcargoGI == 2)
     }
 
 }
-}
-printf("\n");
+printf("\n\n");
 }
 
 void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission, int *id_aluno_basico, int cargocriado)
 {
 int flag = 0;
 for(int l = 0; l<*n_linhas_lidas ;l++)
-{
+{   flag = 0;
     for(int k = 0; k<4; k++)
-    {   flag = 0;
-        if(strcmp(alunos[l].id_permission[k],id_aluno_basico[k]) == 0)
-        flag = 1;
+    {
+        if(alunos[l].id_permission[k] == id_aluno_basico[k])
+        flag++;
     }   
-    if(flag == 1)
+    if(flag == 4)
     {
     alunos[l].id_permission[4] = permission[cargocriado].id[0];
     alunos[l].id_permission[5] = permission[cargocriado].id[1];
@@ -171,27 +184,29 @@ for(int l = 0; l<*n_linhas_lidas ;l++)
     alunos[l].id_permission[9] = permission[cargocriado].id[5];                    
     }
 }
-printf("Cargo associado com sucesso!\n");
+printf("Cargo associado com sucesso!\n\n");
 }        
 
 void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
 {   
-int id_cargo , flag = 0 , i, id_aluno_basico[4], associarcargo;    
-for(i = 0; i < 10 ; i++)
-{
-    if(strcmp(permission[i].name, "NULL") != 0)
-    {
-        printf("\nID de cargo: %d\nNome: %s\n\n", i+1, permission[i].name);
-    }
-    else
-    break;
-}
-do
-{
+int id_cargo , flag = 0 , i, id_aluno_basico[4], associarcargo; 
+printf("/033[0;31mAssociar Cargo Existente: \n");
+printf("/033[0;34m\nLista de permicoes: \n");
+printf("/033[0m1 - Ler Alunos\n2 - Escrever Alunos\n3 - Listar Alunos\n4 - Deletar Alunos\n5 - Ler Cursos\n6 - Escrever Cursos\n7 - Listar Cursos\n8 - Deletar Cursos\n9 - Ler Roles\n10 - Escrever Roles\n11 - Listar Roles\n12 - Deletar Roles\n");
+printf("/033[0;34m\nCargos Existentes\n");
+printf("/033[0m ");
+ListarCargosExistentes(permission);
+do{ //Escolher cargo a associar
 printf("\nDigite o ID do cargo que deseja associar ao aluno: ");
-scanf("%d", &id_cargo);        
-}while(id_cargo > i);
-id_cargo--;
+scanf("%d", &id_cargo);
+id_cargo--;        
+if(strcmp(permission[id_cargo].name, "NULL") == 0 || id_cargo < 0 || id_cargo >= 10)
+{
+    printf("\nCargo nao encontrado!\n");
+    flag = 1;
+}
+}while(flag == 1);
+
 printf("\nCargo selecionado: %s\nPretende associa-lo a um grupo de alunos ou a um aluno individual?\n1 - Grupo\n2 - Individual\n", permission[id_cargo].name);
 scanf("%d", &associarcargo);
 if(associarcargo == 1)
@@ -202,24 +217,29 @@ for(int i = 0; i < 4 ; i++)
     scanf("%d", &id_aluno_basico[i]);
 }
 for(int i = 0; i < *n_linhas_lidas ; i++)
-{
-    for(int j = 0; j < 3; j++)
+{   flag = 0;
+    for(int j = 0; j < 4; j++)
     {   
-        flag = 0;
-        if(strcmp(alunos[i].id_permission[j],id_aluno_basico[j]) == 0)
-        flag = 1;
-        if(flag == 1)
+        if(alunos[i].id_permission[j] == id_aluno_basico[j])
+        flag++;
+        if(flag == 4)
         break;
     }
 }
-for(int l = 0; l<*n_linhas_lidas ;l++)
+if(flag < 4)
 {
+    printf("\nNao foi encontrado nenhum aluno com o ID inserido!\n");
+}
+else
+{
+for(int l = 0; l<*n_linhas_lidas ;l++)
+{   flag = 0;
     for( int k = 0; k<4; k++)
-    {   flag = 0;
-        if(strcmp(alunos[l].id_permission[k],id_aluno_basico[k]) == 0)
-        flag = 1;
+    {   
+        if(alunos[l].id_permission[k] == id_aluno_basico[k])
+        flag++;
     }   
-    if(flag == 1)
+    if(flag == 4)
     {
     alunos[l].id_permission[4] = permission[id_cargo].id[0];
     alunos[l].id_permission[5] = permission[id_cargo].id[1];
@@ -228,6 +248,7 @@ for(int l = 0; l<*n_linhas_lidas ;l++)
     alunos[l].id_permission[8] = permission[id_cargo].id[4];
     alunos[l].id_permission[9] = permission[id_cargo].id[5];                    
     }
+}
 }
 }
 else if(associarcargo == 2)
