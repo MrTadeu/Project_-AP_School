@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include "../All_functions/global.h"
 
-void resetarpermissions(ConjuntoPermissionsStruct *permissions)
+void resetarpermissions(permissionindividual *permissions)
 {
     for(int i = 0; i < 10 ; i++)
     {
-        permissions[i].permission->name = malloc(5);
-        strcpy(permissions[i].permission->name, "NULL");
+        permissions[i].name = malloc(5);
+        strcpy(permissions[i].name, "NULL");
     }
 }
 
@@ -40,58 +40,58 @@ void listaralunos(Aluno *alunos, int* n_linhas_lidas)
         printf("|");
     }
 }
-void ListarCargosExistentes(ConjuntoPermissionsStruct *permissions)
+void ListarCargosExistentes(permissionindividual *permissions)
 {
     for(int i = 0; i < 10 ; i++)
     {
-        if(strcmp(permissions[i].permission->name, "NULL") != 0)
+        if(strcmp(permissions[i].name, "NULL") != 0)
         {
-            printf("\nNome do cargo: %s\tID do cargo: %d\tPermissoes: ", permissions[i].permission->name, i);
+            printf("\nNome do cargo: %s\tID do cargo: %d\tPermissoes: ", permissions[i].name, i+1);
             for(int j = 0; j < 6; j++)
             {
-                printf("|%d", permissions[i].permission->id[j]);
+                printf("|%d", permissions[i].id[j]);
             }
             printf("|");
         }
     }
 }
-void criarcargo(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission)
+void criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
 {   
-int i, associarcargo, id_aluno_basico[4], flag;
+int i, associarcargo, associarcargoGI, id_aluno_basico[4], flag;
 for(i = 0; i < 10 ; i++)
 {
-    if(strcmp(permission[i].permission->name, "NULL") == 0)
+    if(strcmp(permission[i].name, "NULL") == 0)
     break;
 }
-printf("\nDigite o nome do cargo: ");
-scanf("%s", permission[i].permission->name);
-printf("Escolha as permissoes a adicionr ao cargo:\n\n");
+printf("\nDigite o nome do cargo: teste %d", i );
+scanf("%s", permission[i].name);
+printf("Escolha as permissoes a adicionar ao cargo:\n\n");
 printf("1 - Ler Alunos\n2 - Escrever Alunos\n3 - Listar Alunos\n4 - Deletar Alunos\n5 - Ler Cursos\n6 - Escrever Cursos\n7 - Listar Cursos\n8 - Deletar Cursos\n9 - Ler Roles\n10 - Escrever Roles\n11 - Listar Roles\n12 - Deletar Roles\n");
-for(int j = 0; j < 6; i++)
+for(int j = 0; j < 6; j++)
 {
     printf("\nDigite a permissao\nPara parar insira -1: ");//cria vetor de permissoes em posicao livre
-    scanf("%d", &permission[i].permission->id[j]);
-    if(permission[i].permission->id[j] == -1)
+    scanf("%d", &permission[i].id[j]);
+    if(permission[i].id[j] == -1)
     {
         while(j<6)
         {
-            permission[i].permission->id[j] = 0;
+            permission[i].id[j] = 0;
             j++;
         }
     }
 }
 printf("\nCargo criado com sucesso!\n");
-FILE* fp = fopen("permissions.txt", "ab");
-fwrite(i,sizeof(int),5,fp);
+/* FILE* fp = fopen("data/bin/permissions.bin", "ab");
 for (int j = 0; j < 7; j++)
-{
-    fwrite(permission[i].permission->id[j], sizeof(ConjuntoPermissionsStruct), 1, fp);
-}
-fwrite(i,sizeof(int),5,fp);
-fclose(fp);
-printf("Dejesa adicionar o cargo a um grupo de alunos ou aluno individual?\n1 - Grupo\n2 - Individual\n");
+fwrite(permission[i].id[j], sizeof(int), 1, fp);
+fclose(fp); */
+printf("Dejesa associar este cargo?\n1 - Sim\n2 - Nao\n");
 scanf("%d", &associarcargo);
 if(associarcargo == 1)
+{
+printf("A um grupo de alunos ou aluno individual?\n1 - Grupo\n2 - Individual\n");
+scanf("%d", &associarcargoGI);  
+if(associarcargoGI == 1)
 {   //definir grupo de alunos ao qual quer associar o cargo
     printf("\nDigite o ID_basico_geral dos alunos (4 primeiros digitos) ao qual quer associar o cargo: ");
     for(int i = 0; i < 4 ; i++)
@@ -117,7 +117,7 @@ if(associarcargo == 1)
     else
         associarcargoaluno(alunos, n_linhas_lidas, permission, id_aluno_basico, i);
 }
-if(associarcargo == 2)
+if(associarcargoGI == 2)
 {  
     int id_aluno_individual;
     //definir aluno individual ao qual quer associar o cargo
@@ -138,19 +138,20 @@ if(associarcargo == 2)
     }
     else
     {
-    alunos[l].id_permission[4] = permission[i].permission->id[0];
-    alunos[l].id_permission[5] = permission[i].permission->id[1];
-    alunos[l].id_permission[6] = permission[i].permission->id[2];
-    alunos[l].id_permission[7] = permission[i].permission->id[3];
-    alunos[l].id_permission[8] = permission[i].permission->id[4];
-    alunos[l].id_permission[9] = permission[i].permission->id[5];         
+    alunos[l].id_permission[4] = permission[i].id[0];
+    alunos[l].id_permission[5] = permission[i].id[1];
+    alunos[l].id_permission[6] = permission[i].id[2];
+    alunos[l].id_permission[7] = permission[i].id[3];
+    alunos[l].id_permission[8] = permission[i].id[4];
+    alunos[l].id_permission[9] = permission[i].id[5];         
     }
 
+}
 }
 printf("\n");
 }
 
-void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission, int *id_aluno_basico, int cargocriado)
+void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission, int *id_aluno_basico, int cargocriado)
 {
 int flag = 0;
 for(int l = 0; l<*n_linhas_lidas ;l++)
@@ -162,25 +163,25 @@ for(int l = 0; l<*n_linhas_lidas ;l++)
     }   
     if(flag == 1)
     {
-    alunos[l].id_permission[4] = permission[cargocriado].permission->id[0];
-    alunos[l].id_permission[5] = permission[cargocriado].permission->id[1];
-    alunos[l].id_permission[6] = permission[cargocriado].permission->id[2];
-    alunos[l].id_permission[7] = permission[cargocriado].permission->id[3];
-    alunos[l].id_permission[8] = permission[cargocriado].permission->id[4];
-    alunos[l].id_permission[9] = permission[cargocriado].permission->id[5];                    
+    alunos[l].id_permission[4] = permission[cargocriado].id[0];
+    alunos[l].id_permission[5] = permission[cargocriado].id[1];
+    alunos[l].id_permission[6] = permission[cargocriado].id[2];
+    alunos[l].id_permission[7] = permission[cargocriado].id[3];
+    alunos[l].id_permission[8] = permission[cargocriado].id[4];
+    alunos[l].id_permission[9] = permission[cargocriado].id[5];                    
     }
 }
 printf("Cargo associado com sucesso!\n");
 }        
 
-void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission)
+void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission)
 {   
 int id_cargo , flag = 0 , i, id_aluno_basico[4], associarcargo;    
 for(i = 0; i < 10 ; i++)
 {
-    if(strcmp(permission[i].permission->name, "NULL") != 0)
+    if(strcmp(permission[i].name, "NULL") != 0)
     {
-        printf("\nID de cargo: %d\nNome: %s\n\n", i+1, permission[i].permission->name);
+        printf("\nID de cargo: %d\nNome: %s\n\n", i+1, permission[i].name);
     }
     else
     break;
@@ -191,7 +192,7 @@ printf("\nDigite o ID do cargo que deseja associar ao aluno: ");
 scanf("%d", &id_cargo);        
 }while(id_cargo > i);
 id_cargo--;
-printf("\nCargo selecionado: %s\nPretende associa-lo a um grupo de alunos ou a um aluno individual?\n1 - Grupo\n2 - Individual\n", permission[id_cargo].permission->name);
+printf("\nCargo selecionado: %s\nPretende associa-lo a um grupo de alunos ou a um aluno individual?\n1 - Grupo\n2 - Individual\n", permission[id_cargo].name);
 scanf("%d", &associarcargo);
 if(associarcargo == 1)
 {
@@ -220,12 +221,12 @@ for(int l = 0; l<*n_linhas_lidas ;l++)
     }   
     if(flag == 1)
     {
-    alunos[l].id_permission[4] = permission[id_cargo].permission->id[0];
-    alunos[l].id_permission[5] = permission[id_cargo].permission->id[1];
-    alunos[l].id_permission[6] = permission[id_cargo].permission->id[2];
-    alunos[l].id_permission[7] = permission[id_cargo].permission->id[3];
-    alunos[l].id_permission[8] = permission[id_cargo].permission->id[4];
-    alunos[l].id_permission[9] = permission[id_cargo].permission->id[5];                    
+    alunos[l].id_permission[4] = permission[id_cargo].id[0];
+    alunos[l].id_permission[5] = permission[id_cargo].id[1];
+    alunos[l].id_permission[6] = permission[id_cargo].id[2];
+    alunos[l].id_permission[7] = permission[id_cargo].id[3];
+    alunos[l].id_permission[8] = permission[id_cargo].id[4];
+    alunos[l].id_permission[9] = permission[id_cargo].id[5];                    
     }
 }
 }
@@ -251,12 +252,12 @@ else if(associarcargo == 2)
     }
     else
     {
-    alunos[l].id_permission[4] = permission[id_cargo].permission->id[0];
-    alunos[l].id_permission[5] = permission[id_cargo].permission->id[1];
-    alunos[l].id_permission[6] = permission[id_cargo].permission->id[2];
-    alunos[l].id_permission[7] = permission[id_cargo].permission->id[3];
-    alunos[l].id_permission[8] = permission[id_cargo].permission->id[4];
-    alunos[l].id_permission[9] = permission[id_cargo].permission->id[5];         
+    alunos[l].id_permission[4] = permission[id_cargo].id[0];
+    alunos[l].id_permission[5] = permission[id_cargo].id[1];
+    alunos[l].id_permission[6] = permission[id_cargo].id[2];
+    alunos[l].id_permission[7] = permission[id_cargo].id[3];
+    alunos[l].id_permission[8] = permission[id_cargo].id[4];
+    alunos[l].id_permission[9] = permission[id_cargo].id[5];         
     }
 }
 }

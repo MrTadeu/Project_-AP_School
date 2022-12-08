@@ -7,9 +7,9 @@ typedef struct{
     char *name;
 }permissionindividual;
 
-typedef struct{    
+/* typedef struct{    
 permissionindividual permission[10];
-}ConjuntoPermissionsStruct;
+}ConjuntoPermissionsStruct; */
 
 typedef struct{    
     int id;

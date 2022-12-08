@@ -36,13 +36,13 @@ role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles);
 void saveBinRoles(role *roles, int n_roles);
 role *readBinRoles();
 void printAlunos(Aluno *alunos, int n_linhas_lidas);
-void resetarpermissions(ConjuntoPermissionsStruct *permission);
+void resetarpermissions(permissionindividual *permission);
 void setPermissions_basics(Aluno *alunos, int* n_linhas_lidas);
 void listaralunos(Aluno *alunos, int* n_linhas_lidas);
-void ListarCargosExistentes(ConjuntoPermissionsStruct *permissions);
-void criarcargo(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission);
-void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission, int *id_aluno_basico, int cargocriado);
-void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, ConjuntoPermissionsStruct *permission);
+void ListarCargosExistentes(permissionindividual *permissions);
+void criarcargo(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission);
+void associarcargoaluno(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission, int *id_aluno_basico, int cargocriado);
+void associarcargoexistente(Aluno *alunos, int *n_linhas_lidas, permissionindividual *permission);
 /* <-------------------------------- /readWrite --------------------------------> */
 
 

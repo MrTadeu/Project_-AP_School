@@ -1,9 +1,9 @@
 {
   "files.exclude": {
     ".gitattributes": true,
-    ".gitignore": true,
     "test_time.exe": true,
-    "Admin_menu.exe": true
+    "Admin_menu.exe": true,
+    ".gitignore": true
   },
   "files.associations": {
     "stdio.h": "c",
