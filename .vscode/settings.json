@@ -3,7 +3,8 @@
     ".gitattributes": true,
     "test_time.exe": true,
     "Admin_menu.exe": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "main.exe": true
   },
   "files.associations": {
     "stdio.h": "c",
