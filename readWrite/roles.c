@@ -3,8 +3,8 @@
 #include <string.h>
 #include "../All_functions/structs.h"
 
-role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles){
-    role *roles = malloc(sizeof(role));
+roleStruct *getAllRoles(AlunoFileStruct *alunosFile, int n_linhas_lidas, int *n_roles){
+    roleStruct *roles = malloc(sizeof(roleStruct));
     for (int i = 0; i < n_linhas_lidas; i++){
         int found = 0;
         for (int j = 0; j < *n_roles; j++){
@@ -14,7 +14,7 @@ role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles){
             }
         }
         if (!found){
-            roles = realloc(roles, ((*n_roles)+1)*sizeof(role));
+            roles = realloc(roles, ((*n_roles)+1)*sizeof(roleStruct));
             roles[*n_roles].id = *n_roles+1;
             roles[*n_roles].name = malloc((strlen(alunosFile[i].role)+1));
             strcpy(roles[*n_roles].name, alunosFile[i].role);
@@ -24,8 +24,8 @@ role *getAllRoles(AlunoFile *alunosFile, int n_linhas_lidas, int *n_roles){
     return roles;
 }
 
-void saveBinRoles(role *roles, int n_roles){
-    FILE *file = fopen("../data/bin/roles.bin","ab");
+void saveBinRoles(roleStruct *roles, int n_roles){
+    FILE *file = fopen("data/bin/roles.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
@@ -40,16 +40,16 @@ void saveBinRoles(role *roles, int n_roles){
     fclose(file);
 }
 
-role *readBinRoles(){
-    role *roles = malloc(sizeof(role));
-    FILE *file = fopen("../data/bin/roles.bin","rb");
+roleStruct *readBinRoles(){
+    roleStruct *roles = malloc(sizeof(roleStruct));
+    FILE *file = fopen("data/bin/roles.bin","rb");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
     }
 
     for (int i = 0;; i++){
-        roles = realloc(roles, (i+1)*sizeof(role));
+        roles = realloc(roles, (i+1)*sizeof(roleStruct));
         if(fread(&roles[i].id, sizeof(int), 1, file) != 1) break;
 
         size_t roleLen;

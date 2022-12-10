@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <string.h>
+#include <ctype.h>
 
 int isdigit_cheker(char *str){
     int i;

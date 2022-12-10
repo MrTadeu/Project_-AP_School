@@ -3,8 +3,8 @@
 #include <string.h>
 #include "../All_functions/structs.h" 
 
-course *getAllCourses(AlunoFile *alunosFile, int n_linhas_lidas, int *n_courses){
-    course *courses = malloc(sizeof(course));
+courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_linhas_lidas, int *n_courses){
+    courseStruct *courses = malloc(sizeof(courseStruct));
     for (int i = 0; i < n_linhas_lidas; i++){
         int found = 0;
         for (int j = 0; j < *n_courses; j++){
@@ -14,7 +14,7 @@ course *getAllCourses(AlunoFile *alunosFile, int n_linhas_lidas, int *n_courses)
             }
         }
         if (!found){
-            courses = realloc(courses, ((*n_courses)+1)*sizeof(course));
+            courses = realloc(courses, ((*n_courses)+1)*sizeof(courseStruct));
             courses[*n_courses].id = *n_courses+1;
             courses[*n_courses].name = malloc((strlen(alunosFile[i].course)+1));
             strcpy(courses[*n_courses].name, alunosFile[i].course);
@@ -24,8 +24,8 @@ course *getAllCourses(AlunoFile *alunosFile, int n_linhas_lidas, int *n_courses)
     return courses;
 }
 
-void saveBinCourses(course *courses, int n_courses){
-    FILE *file = fopen("../data/bin/courses.bin","ab");
+void saveBinCourses(courseStruct *courses, int n_courses){
+    FILE *file = fopen("data/bin/courses.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
@@ -41,16 +41,16 @@ void saveBinCourses(course *courses, int n_courses){
     fclose(file);
 }
 
-course *readBinCourses(){
-    course *courses = malloc(sizeof(course));
-    FILE *file = fopen("../data/bin/courses.bin","rb");
+courseStruct *readBinCourses(){
+    courseStruct *courses = malloc(sizeof(courseStruct));
+    FILE *file = fopen("data/bin/courses.bin","rb");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
     }
 
     for (int i = 0;; i++){
-        courses = realloc(courses, (i+1)*sizeof(course));
+        courses = realloc(courses, (i+1)*sizeof(courseStruct));
         if(fread(&courses[i].id, sizeof(int), 1, file) != 1) break;
 
         size_t courseLen;

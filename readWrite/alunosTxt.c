@@ -3,8 +3,8 @@
 #include <string.h>
 #include "../All_functions/structs.h" 
 
-AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
-    FILE *file = fopen("../data/alunos.txt","r");
+AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas){
+    FILE *file = fopen("data/alunos.txt","r");
     char **filedata = malloc(5*sizeof(char *)), *linhaString = malloc(250);
 
     if (!file) {
@@ -25,16 +25,16 @@ AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
             pch = strtok (NULL, "\t\r\n");
             count++;
         }
-        alunosFile = realloc(alunosFile, ((*n_linhas_lidas)+1)*sizeof(AlunoFile));
+        alunosFile = realloc(alunosFile, ((*n_linhas_lidas)+1)*sizeof(AlunoFileStruct));
 
         //nome
-        alunosFile[*n_linhas_lidas].nome = malloc((strlen(filedata[0])+1));
-        strcpy(alunosFile[*n_linhas_lidas].nome, filedata[0]);
+        alunosFile[*n_linhas_lidas].name = malloc((strlen(filedata[0])+1));
+        strcpy(alunosFile[*n_linhas_lidas].name, filedata[0]);
         //Role / REGIME
         alunosFile[*n_linhas_lidas].role = malloc((strlen(filedata[1])+1));
         strcpy(alunosFile[*n_linhas_lidas].role, filedata[1]);
         //Year
-        alunosFile[*n_linhas_lidas].ano = atoi(filedata[2]);
+        alunosFile[*n_linhas_lidas].year = atoi(filedata[2]);
         //ID / Número
         alunosFile[*n_linhas_lidas].id = atoi(filedata[3]);
         //Course 
@@ -45,19 +45,19 @@ AlunoFile* getTxt(AlunoFile *alunosFile, int *n_linhas_lidas){
     }
 
     for (int i = 0; i < *n_linhas_lidas; i++){
-        printf("\nLinha %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].nome, alunosFile[i].role, alunosFile[i].ano, alunosFile[i].id, alunosFile[i].course);
+        printf("\nLinha %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].name, alunosFile[i].role, alunosFile[i].year, alunosFile[i].id, alunosFile[i].course);
     }
 
     fclose(file);
     return alunosFile;
 }
 
-Aluno *ConvertAluno(AlunoFile *alunosFile, int n_linhas_lidas, role *roles, int n_roles, course *courses, int n_courses){
-    Aluno *alunos = malloc(sizeof(Aluno)*n_linhas_lidas);
+AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, roleStruct *roles, int n_roles, courseStruct *courses, int n_courses){
+    AlunoStruct *alunos = malloc(sizeof(AlunoStruct)*n_linhas_lidas);
     for (int i = 0; i < n_linhas_lidas; i++){
-        alunos[i].nome = malloc((strlen(alunosFile[i].nome)+1));
-        strcpy(alunos[i].nome, alunosFile[i].nome);
-        alunos[i].ano = alunosFile[i].ano;
+        alunos[i].name = malloc((strlen(alunosFile[i].name)+1));
+        strcpy(alunos[i].name, alunosFile[i].name);
+        alunos[i].year = alunosFile[i].year;
         alunos[i].id = alunosFile[i].id;
         for (int j = 0; j < n_roles; j++){
             if (strcmp(alunosFile[i].role, roles[j].name) == 0){
@@ -75,45 +75,42 @@ Aluno *ConvertAluno(AlunoFile *alunosFile, int n_linhas_lidas, role *roles, int 
     return alunos;
 }
 
-void saveBinAlunos(Aluno *alunos, int n_linhas_lidas){
-    FILE *file = fopen("../data/bin/alunos.bin","ab");
+void saveBinAlunos(AlunoStruct *alunos, int n_linhas_lidas){
+    FILE *file = fopen("data/bin/alunos.bin","ab");
     if (!file) {
         printf("\n\n\tImpossivel abrir Ficheiro \n\n");
         exit(1);
     }
     for (int i = 0; i < n_linhas_lidas; i++){
         fwrite(&alunos[i].id, sizeof(int), 1, file);
-        fwrite(&alunos[i].ano, sizeof(int), 1, file);
+        fwrite(&alunos[i].year, sizeof(int), 1, file);
         fwrite(&alunos[i].id_role, sizeof(int), 1, file);
         fwrite(&alunos[i].id_course, sizeof(int), 1, file);
 
-        size_t nomeLen = strlen(alunos[i].nome) + 1;
+        size_t nomeLen = strlen(alunos[i].name) + 1;
         fwrite(&nomeLen, sizeof(size_t), 1, file);
-        fwrite(alunos[i].nome, nomeLen, 1, file);
+        fwrite(alunos[i].name, nomeLen, 1, file);
     }
     fclose(file);
 }
 
-void printAlunos(Aluno *alunos, int n_linhas_lidas){
+void printAlunos(AlunoStruct *alunos, int n_linhas_lidas){
     for (int i = 0; i < n_linhas_lidas; i++){
         printf("ID: %d\n", alunos[i].id);
-        printf("Nome: %s\n", alunos[i].nome);
-        printf("Ano: %d\n", alunos[i].ano);
+        printf("Nome: %s\n", alunos[i].name);
+        printf("Ano: %d\n", alunos[i].year);
         printf("ID Role: %d\n", alunos[i].id_role);
         printf("ID Course: %d\n", alunos[i].id_course);
         printf("\n");
     }
 }
 
-void setPermmissions(role* roles){
-    
-}
 
 /* void main(){
-    AlunoFile *alunosFile = malloc(sizeof(AlunoFile));
-    Aluno *alunos;
+    AlunoFileStruct *alunosFile = malloc(sizeof(AlunoFileStruct));
+    AlunoStruct *alunos;
     role *roles;
-    course *courses;
+    courseStruct *courses;
     int n_linhas_lidas = 0, n_roles = 0, n_courses = 0;
     alunosFile = getTxt(alunosFile, &n_linhas_lidas);
 

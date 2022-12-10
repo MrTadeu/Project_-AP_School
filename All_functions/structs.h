@@ -1,29 +1,32 @@
 typedef struct{
-    int id_permission, enable;
-}hasPermission;
+    int lerAluno, escreverAluno, listarAluno, deletarAluno, lerCurso, escreverCurso, listarCurso, deletarCurso, lerRole, escreverRole, listarRole, deletarRole;
+} PermissionsType;
 
 typedef struct{    
     int id;
     char *name;
-    hasPermission* permission;
-}role;
+    PermissionsType perm;
+}roleStruct;
+
 
 typedef struct{
-    int id;
-    char name;
-}permission;
+    int id_cargo;
+    int enable[12];
+} permissionFileStruct;
+
 
 typedef struct{
     int id;
     char *name;
-} course;
+} courseStruct;
 
 typedef struct {
-    char *nome;
-    int id_role, ano, id, id_course;
-} Aluno;
+    char *name;
+    int id_role, year, id, id_course;
+} AlunoStruct;
+
 
 typedef struct {
-    char *nome, *role, *course;
-    int ano, id;
-} AlunoFile;
+    char *name, *role, *course;
+    int year, id;
+} AlunoFileStruct;
