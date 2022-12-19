@@ -28,16 +28,16 @@ char *uppercase(char *str);
 
 /* <-------------------------------- readWrite --------------------------------> */
 AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas);
-AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, regimeStruct *roles, int n_roles, courseStruct *courses, int n_courses);
+AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, regimeStruct *regimes, int n_regimes, courseStruct *courses, int n_courses);
 void saveBinAlunos(AlunoStruct *alunos, int n_linhas_lidas);
 courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_linhas_lidas, int *n_courses);
 void saveBinCourses(courseStruct *courses, int n_courses);
 courseStruct *readBinCourses();
-regimeStruct *getAllRoles(AlunoFileStruct *alunosFile, int n_linhas_lidas, int *n_roles);
-void saveBinRoles(regimeStruct *roles, int n_roles);
-regimeStruct *readBinRoles();
+regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_linhas_lidas, int *n_regimes);
+void saveBinRegimes(regimeStruct *regimes, int n_regimes);
+regimeStruct *readBinRegimes();
 void printAlunos(AlunoStruct *alunos, int n_linhas_lidas);
-void setRulesBinByTxt(regimeStruct *roles, int n_roles);
+void setPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);
 permissionFileStruct* readBinPermissions(int *n_perms);
 AlunoStruct readBinAluno(int id_aluno);
 /* <-------------------------------- /readWrite --------------------------------> */

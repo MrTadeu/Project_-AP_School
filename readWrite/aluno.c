@@ -14,7 +14,7 @@
     for (int i = 0;; i++){
         if(fread(&alunos[i].id, sizeof(int), 1, file) != 1) break;
         fread(&alunos[i].ano, sizeof(int), 1, file);
-        fread(&alunos[i].id_role, sizeof(int), 1, file);
+        fread(&alunos[i].id_regime, sizeof(int), 1, file);
         fread(&alunos[i].id_course, sizeof(int), 1, file);
 
         size_t nameLen;
@@ -46,9 +46,9 @@ AlunoStruct readBinAluno(int id_aluno){
         printf("\n\n\tImpossivel abrir Ficheiro alunos.bin\n\n");
         exit(1);
     }
-    FILE *file_roles = fopen("data/bin/roles.bin","rb");
-    if (!file_roles) {
-        printf("\n\n\tImpossivel abrir Ficheiro roles.bin\n\n");
+    FILE *file_regimes = fopen("data/bin/regimes.bin","rb");
+    if (!file_regimes) {
+        printf("\n\n\tImpossivel abrir Ficheiro regimes.bin\n\n");
         exit(1);
     }
     FILE *file_course = fopen("data/bin/course.bin","rb");
@@ -64,7 +64,7 @@ AlunoStruct readBinAluno(int id_aluno){
 
             //GET ALUNO DATA FROM FILE
             fread(&aluno.year, sizeof(int), 1, file_alunos);
-            fread(&aluno.id_role, sizeof(int), 1, file_alunos);
+            fread(&aluno.id_regime, sizeof(int), 1, file_alunos);
             fread(&aluno.id_course, sizeof(int), 1, file_alunos);
 
             size_t nameLen;
@@ -74,12 +74,12 @@ AlunoStruct readBinAluno(int id_aluno){
 
 
             for (int j = 0;; j++){
-                if(fread(&aluno.id_role, sizeof(int), 1, file_roles) != 1) break;
-                if (aluno.id_role == aluno.id_role){
-                    size_t roleLen;
-                    fread(&roleLen, sizeof(size_t), 1, file_roles);
-                    aluno.name = malloc(roleLen);
-                    fread(aluno.name, roleLen, 1, file_roles);
+                if(fread(&aluno.id_regime, sizeof(int), 1, file_regimes) != 1) break;
+                if (aluno.id_regime == aluno.id_regime){
+                    size_t regimeLen;
+                    fread(&regimeLen, sizeof(size_t), 1, file_regimes);
+                    aluno.name = malloc(regimeLen);
+                    fread(aluno.name, regimeLen, 1, file_regimes);
                     break;
                 }
             }

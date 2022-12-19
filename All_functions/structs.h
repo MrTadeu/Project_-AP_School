@@ -1,5 +1,5 @@
 typedef struct{
-    int lerAluno, escreverAluno, listarAluno, deletarAluno, lerCurso, escreverCurso, listarCurso, deletarCurso, lerRole, escreverRole, listarRole, deletarRole;
+    int lerAluno, escreverAluno, listarAluno, deletarAluno, lerCurso, escreverCurso, listarCurso, deletarCurso, lerRegime, escreverRegime, listarRegime, deletarRegime;
 } PermissionsType;
 
 typedef struct{    
@@ -10,7 +10,7 @@ typedef struct{
 
 
 typedef struct{
-    int id_cargo;
+    int id_regime;
     PermissionsType perm;
 } permissionFileStruct;
 
@@ -22,11 +22,11 @@ typedef struct{
 
 typedef struct {
     char *name;
-    int id_role, year, id, id_course;
+    int id_regime, year, id, id_course;
 } AlunoStruct;
 
 
 typedef struct {
-    char *name, *role, *course;
+    char *name, *regime, *course;
     int year, id;
 } AlunoFileStruct;

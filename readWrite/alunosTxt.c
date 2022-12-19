@@ -30,9 +30,9 @@ AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas){
         //nome
         alunosFile[*n_linhas_lidas].name = malloc((strlen(filedata[0])+1));
         strcpy(alunosFile[*n_linhas_lidas].name, filedata[0]);
-        //Role / REGIME
-        alunosFile[*n_linhas_lidas].role = malloc((strlen(filedata[1])+1));
-        strcpy(alunosFile[*n_linhas_lidas].role, filedata[1]);
+        //REGIME
+        alunosFile[*n_linhas_lidas].regime = malloc((strlen(filedata[1])+1));
+        strcpy(alunosFile[*n_linhas_lidas].regime, filedata[1]);
         //Year
         alunosFile[*n_linhas_lidas].year = atoi(filedata[2]);
         //ID / Número
@@ -45,23 +45,23 @@ AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas){
     }
 
     for (int i = 0; i < *n_linhas_lidas; i++){
-        printf("\nLinha %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].name, alunosFile[i].role, alunosFile[i].year, alunosFile[i].id, alunosFile[i].course);
+        printf("\nLinha %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].name, alunosFile[i].regime, alunosFile[i].year, alunosFile[i].id, alunosFile[i].course);
     }
 
     fclose(file);
     return alunosFile;
 }
 
-AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, regimeStruct *roles, int n_roles, courseStruct *courses, int n_courses){
+AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, regimeStruct *regimes, int n_regimes, courseStruct *courses, int n_courses){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct)*n_linhas_lidas);
     for (int i = 0; i < n_linhas_lidas; i++){
         alunos[i].name = malloc((strlen(alunosFile[i].name)+1));
         strcpy(alunos[i].name, alunosFile[i].name);
         alunos[i].year = alunosFile[i].year;
         alunos[i].id = alunosFile[i].id;
-        for (int j = 0; j < n_roles; j++){
-            if (strcmp(alunosFile[i].role, roles[j].name) == 0){
-                alunos[i].id_role = roles[j].id;
+        for (int j = 0; j < n_regimes; j++){
+            if (strcmp(alunosFile[i].regime, regimes[j].name) == 0){
+                alunos[i].id_regime = regimes[j].id;
                 break;
             }
         }
@@ -84,7 +84,7 @@ void saveBinAlunos(AlunoStruct *alunos, int n_linhas_lidas){
     for (int i = 0; i < n_linhas_lidas; i++){
         fwrite(&alunos[i].id, sizeof(int), 1, file);
         fwrite(&alunos[i].year, sizeof(int), 1, file);
-        fwrite(&alunos[i].id_role, sizeof(int), 1, file);
+        fwrite(&alunos[i].id_regime, sizeof(int), 1, file);
         fwrite(&alunos[i].id_course, sizeof(int), 1, file);
 
         size_t nomeLen = strlen(alunos[i].name) + 1;
@@ -99,7 +99,7 @@ void printAlunos(AlunoStruct *alunos, int n_linhas_lidas){
         printf("ID: %d\n", alunos[i].id);
         printf("Nome: %s\n", alunos[i].name);
         printf("Ano: %d\n", alunos[i].year);
-        printf("ID Role: %d\n", alunos[i].id_role);
+        printf("ID Regime: %d\n", alunos[i].id_regime);
         printf("ID Course: %d\n", alunos[i].id_course);
         printf("\n");
     }
