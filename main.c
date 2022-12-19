@@ -6,9 +6,9 @@
 void main(){
     AlunoFileStruct *alunosFile = malloc(sizeof(AlunoFileStruct));
     AlunoStruct *alunos;
-    roleStruct *roles;
+    regimeStruct *roles;
     courseStruct *courses;
-    int n_linhas_lidas = 0, n_roles = 0, n_courses = 0;
+    int n_linhas_lidas = 0, n_roles = 0, n_courses = 0, n_perms = 0;
     alunosFile = getTxt(alunosFile, &n_linhas_lidas);
 
     roles = getAllRoles(alunosFile, n_linhas_lidas, &n_roles);
@@ -33,9 +33,9 @@ void main(){
         printf("\nREGIMES ID: %d NAME: %s", roles[i].id, roles[i].name);
     }
 
-    /* setRulesBinByTxt(roles, n_roles);
-    readBinPermissions(); */
+    setRulesBinByTxt(roles, n_roles);
+    readBinPermissions(&n_perms);
 
-    AlunoStruct test = getAluno(4344);
-    printf("\n ID: %d \t Nome: %s \t Ano: %d \t ID Role: %d \t ID Course: %d \t", test.id, test.name, test.year, test.id_role, test.id_course);
+    /* AlunoStruct test = getAluno(4344);
+    printf("\n ID: %d \t Nome: %s \t Ano: %d \t ID Role: %d \t ID Course: %d \t", test.id, test.name, test.year, test.id_role, test.id_course); */
 }

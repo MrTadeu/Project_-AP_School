@@ -52,7 +52,7 @@ AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas){
     return alunosFile;
 }
 
-AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, roleStruct *roles, int n_roles, courseStruct *courses, int n_courses){
+AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_linhas_lidas, regimeStruct *roles, int n_roles, courseStruct *courses, int n_courses){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct)*n_linhas_lidas);
     for (int i = 0; i < n_linhas_lidas; i++){
         alunos[i].name = malloc((strlen(alunosFile[i].name)+1));

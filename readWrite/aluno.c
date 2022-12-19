@@ -38,7 +38,7 @@
     return alunos;
 } */
 
-AlunoStruct getAluno(int id_aluno){
+AlunoStruct readBinAluno(int id_aluno){
     AlunoStruct aluno;
 
     FILE *file_alunos = fopen("data/bin/alunos.bin","rb");
@@ -84,9 +84,6 @@ AlunoStruct getAluno(int id_aluno){
                 }
             }
             
-
-
-
 
 
 

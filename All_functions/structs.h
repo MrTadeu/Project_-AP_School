@@ -6,12 +6,12 @@ typedef struct{
     int id;
     char *name;
     PermissionsType perm;
-}roleStruct;
+}regimeStruct;
 
 
 typedef struct{
     int id_cargo;
-    int enable[12];
+    PermissionsType perm;
 } permissionFileStruct;
 
 

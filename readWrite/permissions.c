@@ -6,7 +6,7 @@
 int numero_de_perms = 12;
 
 
-void setRulesBinByTxt(roleStruct *roles, int n_roles){
+void setRulesBinByTxt(regimeStruct *roles, int n_roles){
     FILE *file = fopen("data/bin/permission.bin", "ab");
     permissionFileStruct permFile;
     if (file == NULL){
@@ -14,34 +14,33 @@ void setRulesBinByTxt(roleStruct *roles, int n_roles){
         exit(1);
     }
 
-
     for (int i = 0; i < n_roles; i++){
         permFile.id_cargo = roles[i].id;
         printf("\n%dº Cargo - %s\n", roles[i].id, roles[i].name);
         printf("Tem permissao para ler alunos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[0]);
+        scanf("%d", &permFile.perm.lerAluno);
         printf("Tem permissao para escrever alunos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[1]);
+        scanf("%d", &permFile.perm.escreverAluno);
         printf("Tem permissao para listar alunos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[2]);
+        scanf("%d", &permFile.perm.listarAluno);
         printf("Tem permissao para deletar alunos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[3]);
+        scanf("%d", &permFile.perm.deletarAluno);
         printf("Tem permissao para ler cursos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[4]);
+        scanf("%d", &permFile.perm.lerCurso);
         printf("Tem permissao para escrever cursos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[5]);
+        scanf("%d", &permFile.perm.escreverCurso);
         printf("Tem permissao para listar cursos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[6]);
+        scanf("%d", &permFile.perm.listarCurso);
         printf("Tem permissao para deletar cursos? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[7]);
+        scanf("%d", &permFile.perm.deletarCurso);
         printf("Tem permissao para ler regimes? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[8]);
+        scanf("%d", &permFile.perm.lerRole);
         printf("Tem permissao para escrever regimes? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[9]);
+        scanf("%d", &permFile.perm.escreverRole);
         printf("Tem permissao para listar regimes? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[10]);
+        scanf("%d", &permFile.perm.listarRole);
         printf("Tem permissao para deletar regimes? (1 - Sim, 0 - Nao): ");
-        scanf("%d", &permFile.enable[11]);
+        scanf("%d", &permFile.perm.deletarRole);
 
         fwrite(&permFile, sizeof(permissionFileStruct),1,file);
     }
@@ -49,23 +48,19 @@ void setRulesBinByTxt(roleStruct *roles, int n_roles){
     fclose(file);
 }
 
-void readBinPermissions(){
+permissionFileStruct *readBinPermissions(int *n_perms){
     FILE *file = fopen("data/bin/permission.bin", "rb");
-    permissionFileStruct permFile;
+    permissionFileStruct *permFile = (permissionFileStruct *) malloc(sizeof(permissionFileStruct));
     if (file == NULL){
         printf("\nErro ao abrir o ficheiro permission.bin");
         exit(1);
     }
 
     while (fread(&permFile, sizeof(permissionFileStruct), 1, file)){
-        printf("\n\nID CARGO: %d", permFile.id_cargo);
-        for (int i = 0; i < 12; i++){
-            printf("\nPERM ID: %d ENABLED: %d", i+1, permFile.enable[i]);
-        }
+        n_perms++;
+        permFile = realloc(permFile, sizeof(permissionFileStruct)*(*n_perms)+1);
     }
-
+  
     fclose(file);
+    return permFile;
 }
-
-
-
