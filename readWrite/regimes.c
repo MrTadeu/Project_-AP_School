@@ -44,7 +44,7 @@ regimeStruct *readBinRegimes(){
     regimeStruct *regimes = malloc(sizeof(regimeStruct));
     FILE *file = fopen("data/bin/regimes.bin","rb");
     if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printf("\n\n\tImpossivel abrir Ficheiro regimes.bin \n\n");
         exit(1);
     }
 

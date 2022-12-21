@@ -3,7 +3,8 @@
 #include <string.h>
 #include "../All_functions/structs.h" 
 
-AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas){
+AlunoFileStruct* getTxt(int *n_linhas_lidas){
+    AlunoFileStruct *alunosFile = malloc(sizeof(AlunoFileStruct));
     FILE *file = fopen("data/alunos.txt","r");
     char **filedata = malloc(5*sizeof(char *)), *linhaString = malloc(250);
 
@@ -42,10 +43,6 @@ AlunoFileStruct* getTxt(AlunoFileStruct *alunosFile, int *n_linhas_lidas){
         strcpy(alunosFile[*n_linhas_lidas].course, filedata[4]);
 
         *n_linhas_lidas = *n_linhas_lidas + 1;
-    }
-
-    for (int i = 0; i < *n_linhas_lidas; i++){
-        printf("\nLinha %d: %s\t%s\t%d\t%d\t%s", i+1, alunosFile[i].name, alunosFile[i].regime, alunosFile[i].year, alunosFile[i].id, alunosFile[i].course);
     }
 
     fclose(file);
@@ -104,35 +101,3 @@ void printAlunos(AlunoStruct *alunos, int n_linhas_lidas){
         printf("\n");
     }
 }
-
-
-/* void main(){
-    AlunoFileStruct *alunosFile = malloc(sizeof(AlunoFileStruct));
-    AlunoStruct *alunos;
-    role *roles;
-    courseStruct *courses;
-    int n_linhas_lidas = 0, n_roles = 0, n_courses = 0;
-    alunosFile = getTxt(alunosFile, &n_linhas_lidas);
-
-    roles = getAllRoles(alunosFile, n_linhas_lidas, &n_roles);
-    saveBinRoles(roles, n_roles);
-    readBinRoles();
-
-    courses = getAllCourses(alunosFile, n_linhas_lidas, &n_courses);
-    saveBinCourses(courses, n_courses);
-    readBinCourses();
-
-    alunos = ConvertAluno(alunosFile, n_linhas_lidas, roles, n_roles, courses, n_courses);
-    saveBinAlunos(alunos, n_linhas_lidas);
-    printAlunos(alunos, n_linhas_lidas);
-    for (int i = 0; i < n_courses; i++){
-        printf("%d", n_courses);
-        printf("\nCURSOS ID: %d NAME: %s", courses[i].id, courses[i].name);
-    }
-
-    for (int i = 0; i < n_roles; i++){
-        printf("\nREGIMES ID: %d NAME: %s", roles[i].id, roles[i].name);
-    }
-
-}
- */

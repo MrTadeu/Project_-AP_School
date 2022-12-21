@@ -22,6 +22,7 @@ typedef struct{
     char name;
     hasPermission* permission;
 }cargo;
+
 typedef struct{
     int id;
     char name;
