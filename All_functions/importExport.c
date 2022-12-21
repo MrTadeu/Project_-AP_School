@@ -11,27 +11,35 @@ extern int n_linhas_lidas, n_regimes, n_courses, n_perms;
 
 
 void importExportData(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int op = -1;
     do{
-        /* system("cls"); */
         op = importExportMenu();
         switch (op){
             case 0:
-                /* system("cls"); */
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 break;
             case 1:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 importDataTxtBin();
                 break;
             case 2:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+                /* exportData(); */
+                break;
+            case 3:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 /* exportData(); */
                 break;
             default: 
-                printf("\n[red]Opção inválida![/red]");
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+                printc("\n[red]Opção inválida![/red]\n\n");
         }
     } while (op != 0);
 }
 
 void importDataTxtBin(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     AlunoFileStruct *alunosFile;
     int op = -1;
     printc("********************************************* [blue]Aviso![/blue] **********************************************\n");

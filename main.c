@@ -19,16 +19,20 @@ void main(){
         op = mainMenu();
         switch (op){
             case 0:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+                printc("[lw]A fechar o programa...[/lw]");
                 break;
             case 1:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 /* login(); */
                 break;
             case 2:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 importExportData();
                 break;
-            default: 
+            default:
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 printc("\n[red]Opção inválida![/red]\n\n");
         }
     } while (op != 0);
-    printc("[lw]A fechar o programa...[/lw]");
 }
