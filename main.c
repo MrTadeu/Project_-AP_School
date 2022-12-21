@@ -10,9 +10,13 @@
 AlunoStruct *alunos;
 regimeStruct *regimes;
 courseStruct *courses;
-int n_linhas_lidas = 0, n_regimes = 0, n_courses = 0, n_perms = 0;
+permissionFileStruct *perms_file;
+int n_alunos = 0, n_regimes = 0, n_courses = 0;
+
+void readData();
 
 void main(){
+    readData();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -25,6 +29,7 @@ void main(){
             case 1:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 /* login(); */
+                printAlunos(alunos, n_alunos);
                 break;
             case 2:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -35,4 +40,11 @@ void main(){
                 printc("\n[red]Opção inválida![/red]\n\n");
         }
     } while (op != 0);
+}
+
+void readData(){
+    alunos = readBinAlunos(&n_alunos);
+    regimes = readBinRegimes(&n_regimes);
+    perms_file = readBinPermissions();
+    courses = readBinCourses(&n_courses);  
 }

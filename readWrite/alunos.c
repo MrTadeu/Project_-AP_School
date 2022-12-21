@@ -1,44 +1,66 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../All_functions/structs.h" 
+#include "../All_functions\global.h"
 
-/* AlunoStruct *GetAllAlunos(){
+void printAlunos(AlunoStruct *alunos, int n_alunos){
+    for (int i = 0; i < n_alunos; i++){
+        printf("ID: %d\n", alunos[i].id);
+        printf("Nome: %s\n", alunos[i].name);
+        printf("Ano: %d\n", alunos[i].year);
+        printf("ID Regime: %d\n", alunos[i].id_regime);
+        printf("ID Course: %d\n", alunos[i].id_course);
+        printf("\n");
+    }
+}
+
+void saveBinAlunos(AlunoStruct *alunos, int n_alunos){
+    FILE *file = fopen("data/bin/alunos.bin","ab");
+    if (!file) {
+        printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
+        exit(1);
+    }
+    for (int i = 0; i < n_alunos; i++){
+        fwrite(&alunos[i].id, sizeof(int), 1, file);
+        fwrite(&alunos[i].year, sizeof(int), 1, file);
+        fwrite(&alunos[i].id_regime, sizeof(int), 1, file);
+        fwrite(&alunos[i].id_course, sizeof(int), 1, file);
+
+        size_t nomeLen = strlen(alunos[i].name) + 1;
+        fwrite(&nomeLen, sizeof(size_t), 1, file);
+        fwrite(alunos[i].name, nomeLen, 1, file);
+    }
+    fclose(file);
+}
+
+AlunoStruct *readBinAlunos(int *n_alunos){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct));
+    int i;
     FILE *file = fopen("data/bin/alunos.bin","rb");
     if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro alunos.bin\n\n");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
         exit(1);
     }
 
-    for (int i = 0;; i++){
+    for (i = 0;; i++){
         if(fread(&alunos[i].id, sizeof(int), 1, file) != 1) break;
-        fread(&alunos[i].ano, sizeof(int), 1, file);
+        fread(&alunos[i].year, sizeof(int), 1, file);
         fread(&alunos[i].id_regime, sizeof(int), 1, file);
         fread(&alunos[i].id_course, sizeof(int), 1, file);
-
+        
         size_t nameLen;
         fread(&nameLen, sizeof(size_t), 1, file);
-        alunos[i].nome = malloc(nameLen);
-        fread(alunos[i].nome, nameLen, 1, file);
+        alunos[i].name = malloc(nameLen);
+        fread(alunos[i].name, nameLen, 1, file);
 
-        size_t emailLen;
-        fread(&emailLen, sizeof(size_t), 1, file);
-        alunos[i].email = malloc(emailLen);
-        fread(alunos[i].email, emailLen, 1, file);
-
-        size_t passwordLen;
-        fread(&passwordLen, sizeof(size_t), 1, file);
-        alunos[i].password = malloc(passwordLen);
-        fread(alunos[i].password, passwordLen, 1, file);
-
-        alunos = realloc(alunos, sizeof(AlunoStruct) * (i + 2));
+        alunos = realloc(alunos, sizeof(AlunoStruct) * (i+2));
     }
+    *n_alunos = i-1;
     fclose(file);
     return alunos;
-} */
+}
 
-AlunoStruct readBinAluno(int id_aluno){
+/* AlunoStruct readBinAluno(int id_aluno){
     AlunoStruct aluno;
 
     FILE *file_alunos = fopen("data/bin/alunos.bin","rb");
@@ -92,4 +114,4 @@ AlunoStruct readBinAluno(int id_aluno){
         }
     }
     fclose(file_alunos);
-}
+} */

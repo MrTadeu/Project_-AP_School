@@ -11,7 +11,7 @@ void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
         exit(1);
     }
 
-    for (int i = 0; i < /* n_regimes alterar */ 2; i++){
+    for (int i = 0; i < n_regimes; i++){
         permFile.id_regime = regimes[i].id;
         printf("\n%dº Regime - %s\n", regimes[i].id, regimes[i].name);
         printf("Tem permissao para ler alunos? (1 - Sim, 0 - Nao): ");
@@ -44,17 +44,17 @@ void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
     fclose(file);
 }
 
-permissionFileStruct* readBinPermissions(int *n_perms){
+permissionFileStruct* readBinPermissions(){
     FILE *file = fopen("data/bin/permission.bin", "rb");
     permissionFileStruct *permFile = malloc(sizeof(permissionFileStruct));
     if (file == NULL){
         printf("\nErro ao abrir o ficheiro permission.bin");
         exit(1);
     }
-
-    while (fread(&permFile[*n_perms], sizeof(permissionFileStruct), 1, file)){
-        *n_perms = *n_perms +1;
-        permFile = realloc(permFile, sizeof(permissionFileStruct)*((*n_perms)+1));
+    int i = 0;
+    while (fread(&permFile[i], sizeof(permissionFileStruct), 1, file)){
+        i++;
+        permFile = realloc(permFile, sizeof(permissionFileStruct)*((i)+1));
     }
     fclose(file);
     return permFile;

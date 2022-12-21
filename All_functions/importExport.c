@@ -7,7 +7,7 @@ extern AlunoFileStruct *alunosFile;
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
-extern int n_linhas_lidas, n_regimes, n_courses, n_perms;
+extern int n_alunos, n_regimes, n_courses;
 
 
 void importExportData(){
@@ -25,11 +25,11 @@ void importExportData(){
                 break;
             case 2:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                /* exportData(); */
+                /* exportDataBinTxt(); */
                 break;
             case 3:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                /* exportData(); */
+                /* exportDataBinCsv(); */
                 break;
             default: 
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -57,29 +57,28 @@ void importDataTxtBin(){
         remove("data/bin/alunos.bin");
         remove("data/bin/permission.bin");
 
-        //LIMPAR n_linhas_lidas, n_regimes, n_courses, n_perms
-        n_linhas_lidas = 0;
+        //LIMPAR n_alunos, n_regimes, n_courses
+        n_alunos = 0;
         n_regimes = 0;
         n_courses = 0;
-        n_perms = 0;
 
         //LER TXT ALUNOS
-        alunosFile = getTxt(&n_linhas_lidas);
+        alunosFile = getTxt(&n_alunos);
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS REGIMES SEM REPETIÇÕES E GUARDAR EM regimes
-        regimes = getAllRegimes(alunosFile, n_linhas_lidas, &n_regimes);
+        regimes = getAllRegimes(alunosFile, n_alunos, &n_regimes);
         //GUARDAR REGIMES EM BINARIO
         saveBinRegimes(regimes, n_regimes);
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS CURSOS SEM REPETIÇÕES E GUARDAR EM courses
-        courses = getAllCourses(alunosFile, n_linhas_lidas, &n_courses);
+        courses = getAllCourses(alunosFile, n_alunos, &n_courses);
         //GUARDAR CURSOS EM BINARIO
         saveBinCourses(courses, n_courses);
 
         //LER ARRAY alunosFile, regimes, courses E GUARDAR NO FORMATO DE AlunoStruct
-        alunos = ConvertAluno(alunosFile, n_linhas_lidas, regimes, n_regimes, courses, n_courses);
+        alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
-        saveBinAlunos(alunos, n_linhas_lidas);
+        saveBinAlunos(alunos, n_alunos);
 
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
         saveAndSetPermissionsBinByTxt(regimes, n_regimes);

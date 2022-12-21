@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../All_functions/structs.h" 
+#include "../All_functions\global.h"
 
-courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_linhas_lidas, int *n_courses){
+courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_alunos, int *n_courses){
     courseStruct *courses = malloc(sizeof(courseStruct));
-    for (int i = 0; i < n_linhas_lidas; i++){
+    for (int i = 0; i < n_alunos; i++){
         int found = 0;
         for (int j = 0; j < *n_courses; j++){
             if (strcmp(alunosFile[i].course, courses[j].name) == 0){
@@ -27,7 +27,7 @@ courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_linhas_lidas, int
 void saveBinCourses(courseStruct *courses, int n_courses){
     FILE *file = fopen("data/bin/courses.bin","ab");
     if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]course.bin[/red]\n\n");
         exit(1);
     }
 
@@ -41,15 +41,16 @@ void saveBinCourses(courseStruct *courses, int n_courses){
     fclose(file);
 }
 
-courseStruct *readBinCourses(){
+courseStruct *readBinCourses(int *n_courses){
     courseStruct *courses = malloc(sizeof(courseStruct));
+    int i;
     FILE *file = fopen("data/bin/courses.bin","rb");
     if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]course.bin[/red]\n\n");
         exit(1);
     }
 
-    for (int i = 0;; i++){
+    for (i = 0;; i++){
         courses = realloc(courses, (i+1)*sizeof(courseStruct));
         if(fread(&courses[i].id, sizeof(int), 1, file) != 1) break;
 
@@ -58,6 +59,7 @@ courseStruct *readBinCourses(){
         courses[i].name = malloc(courseLen);
         fread(courses[i].name, courseLen, 1, file);
     }
+    *n_courses = i-1;
     fclose(file);
     return courses;
 }
