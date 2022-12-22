@@ -16,7 +16,7 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0;
 void readData();
 
 void main(){
-    readData();
+    //readData();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
