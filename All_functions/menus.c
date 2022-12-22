@@ -42,8 +42,60 @@ void loguinMenu(){
     printc("[lw]Password:[/lw ");
 }
 
-//MENU CONSOANTE O TIPO DE UTILIZADOR: login.c
-void MenuMain(){
+//MENU PRINCIPAL: login.c
+void MenuPrincipal(){
+    int opcao, i = 0, list_alunos = 0, export = 1, edit = 1, j=1, diretor=1, menuExames=1, professor=1, aluno=1;
+    printc("**************************************************\n");
+    printc("****************** [blue]Menu Principal[/blue] ****************\n");
+    printc("**************************************************\n");
+    printf("**        %d -> Sair                             **\n", i++);
+    printf("**        %d -> Editar Conta de Utilizador       **\n", i++);
+    if(aluno){
+        printf("**        %d -> Menu Exames                    **\n", i++);
+        printf("**        %d -> Ver Disciplinas                    **\n", i++);
+    }
+    if(professor){
+        printf("**        %d -> Menu Professor                    **\n", i++);
+    }
+    if(diretor){
+        printf("**        %d -> Menu admin                    **\n", i++);
+    }
+
+    printc("**************************************************\n");
+    printc("Qual a opção que pretende?");
+    scanf("%d", &opcao);
+
+    if (opcao == 0){
+        printf("[lw]A fechar o programa...[/lw]");
+    }
+    if (list_alunos == 1){
+        if (opcao == j++){
+            printf("\nListar");
+        }
+    }
+    if (export == 1){
+        if (opcao == j++){
+            printf("\nExportar");
+        }
+    }
+    if (edit == 1){
+        if (opcao == j++){
+            printf("\nEditar");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+void MENUTEST(){
     int opcao, i = 1, list_alunos = 0, export = 1, edit = 1, j=1;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Principal[/blue] ****************\n");
@@ -61,13 +113,23 @@ void MenuMain(){
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
-    return opcao;
+
     if (opcao == 0){
-        printc("[lw]A fechar o programa...[/lw]");
+        printf("[lw]A fechar o programa...[/lw]");
     }
-    else if (opcao == j && list_alunos == 1){
-        /* code */
+    if (list_alunos == 1){
+        if (opcao == j++){
+            printf("\nListar");
+        }
     }
-    
-    
+    if (export == 1){
+        if (opcao == j++){
+            printf("\nExportar");
+        }
+    }
+    if (edit == 1){
+        if (opcao == j++){
+            printf("\nEditar");
+        }
+    }
 }
