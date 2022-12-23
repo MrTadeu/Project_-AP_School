@@ -21,15 +21,15 @@ typedef struct{
 
 typedef struct{
     int id;
-    char *name;
+    char *name; //sigla
     char *AnoDisciplina[3][10];
+    char *IdResponsavel;
 } courseStruct;
 
 typedef struct {
-    char *name;
+    char *name, *Email;
     int id_regime, year, id, id_course;
 } AlunoStruct;
-
 
 typedef struct {
     char *name, *regime, *course;

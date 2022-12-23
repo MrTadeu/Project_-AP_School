@@ -11,7 +11,8 @@ AlunoStruct *alunos;
 regimeStruct *regimes;
 courseStruct *courses;
 permissionFileStruct *perms_file;
-int n_alunos = 0, n_regimes = 0, n_courses = 0;
+disciplinasStruct *disciplinas;
+int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0;
 
 
 void readData();
@@ -48,4 +49,5 @@ void readData(){
     regimes = readBinRegimes(&n_regimes);
     perms_file = readBinPermissions();
     courses = readBinCourses(&n_courses);  
+    disciplinas = readBinDisciplinas(&n_disciplinas);
 }
