@@ -1,5 +1,5 @@
 typedef struct{
-    int lerAluno, escreverAluno, listarAluno, deletarAluno, lerCurso, escreverCurso, listarCurso, deletarCurso, lerRegime, escreverRegime, listarRegime, deletarRegime;
+    int MenuExames, VerDisciplinas, MenuProfessor, MenuAdmin, MenuSalas, CriarExames, InscritosExames, ListarExames, ListarExamesInscritos, EditarExames, ExportarExames, InscreverExames, CriarSalas, ListarSalas, EditarSalas, RemoverSalas, CriarProfessor, ListarProfessor, EditarProfessor, RemoverProfessor;
 } PermissionsType;
 
 typedef struct{    
