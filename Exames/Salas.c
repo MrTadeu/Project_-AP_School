@@ -1,18 +1,17 @@
+// Created by: Benno Verificar se está a funcionar corretamente com o resto do programa (Externos)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../All_functions/global.h"
-typedef struct {
-    char *nomeSala;
-    int numeroSala;
-    int numeroCadeiras;
-}Sala;
 
 void listarSalas();
-Sala* readSalas(int *n_salas);
+SalaStruct* readSalas(int *n_salas);
+
+extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
+extern int n_salas;
 
 void criarSala(){
-    Sala sala;
+    SalaStruct sala;
     sala.nomeSala = malloc(100);
     printf("**************************************************\n");
     printf("************        [blue]Criar Salas[/blue]       ************\n");
@@ -27,7 +26,7 @@ void criarSala(){
     FILE *arquivo;
     arquivo = fopen("Salas.bin", "ab");
     if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo");
+        printf("Erro ao abrir o arquivo");s
         exit(1);
     }
     size_t nomeSalasize = strlen(sala.nomeSala) + 1;
@@ -40,12 +39,13 @@ void criarSala(){
 }
 
 void listarSalas(){
+    SalaStruct *sala;
     printf("**************************************************\n");
     printf("************       [blue]Lista de Salas[/blue]      ************\n");
     printf("**************************************************\n");
     size_t nomeSalasize;
     int n_salas = 0;
-    Sala *sala = readSalas(&n_salas);
+    //readBinSalas(&n_salas);
     printf("Numero de salas: %d\n", n_salas);
     for(int i = 0; i < n_salas; i++){
         printf("--------------------------------------------\n");
@@ -56,8 +56,8 @@ void listarSalas(){
     }
 }
 
-Sala* readSalas(int *n_salas){
-    Sala *sala = malloc(sizeof(Sala));
+SalaStruct* readBinSalas(int *n_salas){
+    SalaStruct *sala = malloc(sizeof(SalaStruct));
     FILE *arquivo;
     arquivo = fopen("Salas.bin", "rb");
     if(arquivo == NULL){
@@ -72,7 +72,7 @@ Sala* readSalas(int *n_salas){
         fread(&sala[i].numeroSala, sizeof(int), 1, arquivo);
         fread(&sala[i].numeroCadeiras, sizeof(int), 1, arquivo);
         i++;
-        sala = realloc(sala, (i + 1) * sizeof(Sala));
+        sala = realloc(sala, (i + 1) * sizeof(SalaStruct));
     }
     *n_salas = i;
     fclose(arquivo);

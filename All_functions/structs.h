@@ -35,3 +35,9 @@ typedef struct {
     char *name, *regime, *course;
     int year, id;
 } AlunoFileStruct;
+
+typedef struct { //struct para guardar os dados de uma sala
+    char *nomeSala;
+    int numeroSala;
+    int numeroCadeiras;
+}SalaStruct;
