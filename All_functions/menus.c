@@ -52,9 +52,6 @@ void MenuPrincipal(PermissionsType perm){
     if (perm.VerDisciplinas){
         printf("**        %d -> Ver Disciplinas              **\n", i++);
     }
-    if (perm.MenuSalas){
-        printf("**        %d -> Menu Salas                   **\n", i++);
-    }
     if(perm.MenuExames){
         printf("**        %d -> Menu Exames                  **\n", i++);
     }
@@ -69,15 +66,18 @@ void MenuPrincipal(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
+    if (perm.VerDisciplinas){
+        if (opcao == i++){
+            MenuDisciplinas(); // <--- This is the problem
+        }
+    }
     if (perm.MenuExames){
         if (opcao == i++){
             MenuExames();  // <--- This is the problem
         }
     }
-    if (perm.VerDisciplinas){
-        if (opcao == i++){
-            MenuDisciplinas(); // <--- This is the problem
-        }
+    if (opcao == i++){
+        EditarConta(); // <--- This is the problem
     }
     if (perm.MenuAdmin){
         if (opcao == i++){
@@ -127,6 +127,11 @@ void MenuExames(PermissionsType perm){
             criarExame(); // <--- This is the problem
         }
     }
+    if (perm.InscreverExames){
+        if (opcao == i++){
+            inscreverExame(); // <--- This is the problem
+        }
+    }
     if (perm.InscritosExames){
         if (opcao == i++){
             inscritosExame(); // <--- This is the problem
@@ -154,24 +159,52 @@ void MenuExames(PermissionsType perm){
     }
 }
 
-//MENU SALAS: salas.c
-void MenuSalas(PermissionsType perm){
+//MENU EDITAR CONTA: editarconta.c
+void MenuEditarConta(PermissionsType perm){
     int opcao, i = 0;
     printc("**************************************************\n");
-    printc("****************** [blue]Menu Salas[/blue] ****************\n");
+    printc("****************** [blue]Menu Editar Conta[/blue] ****************\n");
+    printc("**************************************************\n");
+    printf("**        %d -> Sair                       **\n", i++);
+    printf("**        %d -> Editar Nome                **\n", i++);
+    printf("**        %d -> Editar Password            **\n", i++);
+    printf("**        %d -> Editar Email               **\n", i++);
+    printc("**************************************************\n");
+    printc("Qual a opção que pretende?");
+    scanf("%d", &opcao);
+    i = 0;
+    if (opcao == i++){
+        printf("[lw]A fechar o programa...[/lw]");
+    }
+    if (opcao == i++){
+        editarNome(); // <--- This is the problem
+    }
+    if (opcao == i++){
+        editarPassword(); // <--- This is the problem
+    }
+    if (opcao == i++){
+        editarEmail(); // <--- This is the problem
+    }
+}
+
+//MENU ADMIN: admin.c
+void MenuAdmin(PermissionsType perm){
+    int opcao, i = 0;
+    printc("**************************************************\n");
+    printc("****************** [blue]Menu Administração[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if (perm.CriarSalas){
-        printf("**        %d -> Criar Salas                     **\n", i++);
+    if(perm.MenuProfessor){
+        printf("**        %d -> Menu Professor               **\n", i++);
     }
-    if (perm.ListarSalas){
-        printf("**        %d -> Listar Salas                    **\n", i++);
+    if (perm.MenuCursos){
+        printf("**        %d -> Menu Cursos                      **\n", i++);
     }
-    if (perm.EditarSalas){
-        printf("**        %d -> Editar Salas                    **\n", i++);
+    if (perm.MenuRegimes){
+        printf("**        %d -> Menu Regimes                     **\n", i++);
     }
-    if (perm.RemoverSalas){
-        printf("**        %d -> Remover Salas                   **\n", i++);
+    if (perm.MenuSalas){
+        printf("**        %d -> Menu Salas                       **\n", i++);
     }
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
@@ -180,24 +213,29 @@ void MenuSalas(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.CriarSalas){
+    if (perm.MenuProfessor){
         if (opcao == i++){
-            criarSala(); // <--- This is the problem
+            MenuProfessor(); // <--- This is the problem
         }
     }
-    if (perm.ListarSalas){
+    if (perm.MenuCursos){
         if (opcao == i++){
-            listarSalas(); // <--- This is the problem
+            MenuCursos(); // <--- This is the problem
         }
     }
-    if (perm.EditarSalas){
+    if (perm.MenuAlunos){
         if (opcao == i++){
-            editarSala(); // <--- This is the problem
+            MenuAlunos(); // <--- This is the problem
         }
     }
-    if (perm.RemoverSalas){
+    if (perm.MenuRegimes){
         if (opcao == i++){
-            removerSalas(); // <--- This is the problem
+            MenuRegimes(); // <--- This is the problem
+        }
+    }
+    if (perm.MenuSalas){
+        if (opcao == i++){
+            MenuSalas(); // <--- This is the problem
         }
     }
 }
@@ -250,56 +288,24 @@ void MenuProfessor(PermissionsType perm){
     }
 }
 
-//MENU EDITAR CONTA: editarconta.c
-void MenuEditarConta(PermissionsType perm){
+//MENU CURSOS: cursos.c // ver melhor
+void MenuCursos(PermissionsType perm){
     int opcao, i = 0;
     printc("**************************************************\n");
-    printc("****************** [blue]Menu Editar Conta[/blue] ****************\n");
-    printc("**************************************************\n");
-    printf("**        %d -> Sair                       **\n", i++);
-    printf("**        %d -> Editar Nome                **\n", i++);
-    printf("**        %d -> Editar Password            **\n", i++);
-    printf("**        %d -> Editar Email               **\n", i++);
-    printc("**************************************************\n");
-    printc("Qual a opção que pretende?");
-    scanf("%d", &opcao);
-    i = 0;
-    if (opcao == i++){
-        printf("[lw]A fechar o programa...[/lw]");
-    }
-    if (opcao == i++){
-        editarNome(); // <--- This is the problem
-    }
-    if (opcao == i++){
-        editarPassword(); // <--- This is the problem
-    }
-    if (opcao == i++){
-        editarEmail(); // <--- This is the problem
-    }
-}
-
-//MENU ADMIN: admin.c
-void MenuAdmin(PermissionsType perm){
-    int opcao, i = 0;
-    printc("**************************************************\n");
-    printc("****************** [blue]Menu Administração[/blue] ****************\n");
+    printc("****************** [blue]Menu Cursos[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if(perm.MenuProfessor){
-        printf("**        %d -> Menu Professor               **\n", i++);
+    if (perm.CriarCursos){
+        printf("**        %d -> Criar Cursos                     **\n", i++);
     }
-
-    if (perm.MenuContas){
-        printf("**        %d -> Menu Contas                      **\n", i++);
+    if (perm.ListarCursos){
+        printf("**        %d -> Listar Cursos                    **\n", i++);
     }
-    if (perm.ListarAdmin){
-        printf("**        %d -> Listar Admin                     **\n", i++);
+    if (perm.EditarCursos){
+        printf("**        %d -> Editar Cursos                    **\n", i++);
     }
-    if (perm.EditarAdmin){
-        printf("**        %d -> Editar Admin                     **\n", i++);
-    }
-    if (perm.RemoverAdmin){
-        printf("**        %d -> Remover Admin                    **\n", i++);
+    if (perm.RemoverCursos){
+        printf("**        %d -> Remover Cursos                   **\n", i++);
     }
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
@@ -308,29 +314,72 @@ void MenuAdmin(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.CriarAdmin){
+    if (perm.CriarCursos){
         if (opcao == i++){
-            criarAdmin(); // <--- This is the problem
+            criarCursos(); // <--- This is the problem
         }
     }
-    if (perm.MenuProfessor){
+    if (perm.ListarCursos){
         if (opcao == i++){
-            MenuProfessor(); // <--- This is the problem
+            listarCursos(); // <--- This is the problem
         }
     }
-    if (perm.ListarAdmin){
+    if (perm.EditarCursos){
         if (opcao == i++){
-            listarAdmin(); // <--- This is the problem
+            editarCursos(); // <--- This is the problem
         }
     }
-    if (perm.EditarAdmin){
+    if (perm.RemoverCursos){
         if (opcao == i++){
-            editarAdmin(); // <--- This is the problem
+            removerCursos(); // <--- This is the problem
         }
     }
-    if (perm.RemoverAdmin){
+}
+
+//MENU SALAS: salas.c
+void MenuSalas(PermissionsType perm){
+    int opcao, i = 0;
+    printc("**************************************************\n");
+    printc("****************** [blue]Menu Salas[/blue] ****************\n");
+    printc("**************************************************\n");
+    printf("**        %d -> Sair                             **\n", i++);
+    if (perm.CriarSalas){
+        printf("**        %d -> Criar Salas                     **\n", i++);
+    }
+    if (perm.ListarSalas){
+        printf("**        %d -> Listar Salas                    **\n", i++);
+    }
+    if (perm.EditarSalas){
+        printf("**        %d -> Editar Salas                    **\n", i++);
+    }
+    if (perm.RemoverSalas){
+        printf("**        %d -> Remover Salas                   **\n", i++);
+    }
+    printc("**************************************************\n");
+    printc("Qual a opção que pretende?");
+    scanf("%d", &opcao);
+
+    if (opcao == 0){
+        printf("[lw]A fechar o programa...[/lw]");
+    }
+    if (perm.CriarSalas){
         if (opcao == i++){
-            removerAdmin(); // <--- This is the problem
+            criarSala(); // <--- This is the problem
+        }
+    }
+    if (perm.ListarSalas){
+        if (opcao == i++){
+            listarSalas(); // <--- This is the problem
+        }
+    }
+    if (perm.EditarSalas){
+        if (opcao == i++){
+            editarSala(); // <--- This is the problem
+        }
+    }
+    if (perm.RemoverSalas){
+        if (opcao == i++){
+            removerSalas(); // <--- This is the problem
         }
     }
 }
