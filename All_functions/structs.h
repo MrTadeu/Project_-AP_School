@@ -14,10 +14,15 @@ typedef struct{
     PermissionsType perm;
 } permissionFileStruct;
 
+typedef struct{
+    int id;
+    char *name;
+} disciplinasStruct;
 
 typedef struct{
     int id;
     char *name;
+    char *AnoDisciplina[3][10];
 } courseStruct;
 
 typedef struct {
