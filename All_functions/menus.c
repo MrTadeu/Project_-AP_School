@@ -41,7 +41,7 @@ void loguinMenu(){
     printc("[lw]Username:[/lw ");
     printc("[lw]Password:[/lw ");
 }
-
+/* 
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(PermissionsType perm){
     int opcao, i = 0;
@@ -383,3 +383,4 @@ void MenuSalas(PermissionsType perm){
         }
     }
 }
+ */
