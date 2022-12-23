@@ -11,7 +11,7 @@ typedef struct {
 void listarSalas();
 Sala* readSalas(int *n_salas);
 
-void main(){
+void criarSala(){
     Sala sala;
     sala.nomeSala = malloc(100);
     printf("**************************************************\n");
@@ -37,7 +37,6 @@ void main(){
     fwrite(&sala.numeroSala, sizeof(int), 1, arquivo);
     fwrite(&sala.numeroCadeiras, sizeof(int), 1, arquivo);
     fclose(arquivo);
-    listarSalas();
 }
 
 void listarSalas(){
