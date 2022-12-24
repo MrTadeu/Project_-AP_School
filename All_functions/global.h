@@ -57,6 +57,7 @@ void listarSalas();
 SalaStruct* readBinSalas(int *n_salas);
 void editarSala();
 
+
 //disciplinas.c
 disciplinasStruct* ReadTxtDisciplinas();
 void SaveTxtDisciplinas();
