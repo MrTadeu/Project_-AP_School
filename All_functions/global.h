@@ -12,10 +12,12 @@ void progress_start(int max, char* fmt);
 void progress_update();
 #endif
 
-//validators.c
-int isdigit_cheker(char *str);
+//utils.c
 char *lowercase(char *str);
 char *uppercase(char *str);
+
+//validators.c
+int isdigit_cheker(char *str);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt(int *n_alunos);
@@ -30,6 +32,7 @@ AlunoStruct *readBinAlunos(int *n_alunos);
 courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_alunos, int *n_courses);
 void saveBinCourses(courseStruct *courses, int n_courses);
 courseStruct *readBinCourses(int *n_courses);
+courseStruct findCourseId(int id);
 
 //regimes.c
 regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_alunos, int *n_regimes);
