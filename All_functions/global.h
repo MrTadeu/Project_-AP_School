@@ -26,18 +26,18 @@ AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruc
 //alunos.c
 void saveBinAlunos(AlunoStruct *alunos, int n_alunos);
 void printAlunos(AlunoStruct *alunos, int n_alunos);
-AlunoStruct *readBinAlunos();
+AlunoStruct *readBinAlunos(int *n_alunos);
 
 //courses.c
 courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_alunos, int *n_courses);
 void saveBinCourses(courseStruct *courses, int n_courses);
-courseStruct *readBinCourses();
+courseStruct *readBinCourses(int *n_courses);
 courseStruct findCourseId(int id);
 
 //regimes.c
 regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_alunos, int *n_regimes);
 void saveBinRegimes(regimeStruct *regimes, int n_regimes);
-regimeStruct *readBinRegimes();
+regimeStruct *readBinRegimes(int *n_regimes);
 
 //permissions.c
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);
@@ -55,16 +55,15 @@ void importDataTxtBin();
 void criarSalas();
 void listarSalas();
 SalaStruct* readBinSalas(int *n_salas);
-int ChekeIFsalaExist(char *nomeSala, int nSala);
 void editarSala();
 void removerSalas();
 
 //disciplinas.c
-/* disciplinasStruct* ReadTxtDisciplinas();
+disciplinasStruct* ReadTxtDisciplinas();
 void SaveTxtDisciplinas();
 void SaveBinDisciplinas();
 void ListarDisciplinas();
 void MenuEditarAdicionarRemoverDisciplinas();
 void CriarDisciplina();
 void RemoverDisciplina();
-void EditarDisciplina(); */
+void EditarDisciplina();

@@ -48,28 +48,27 @@ void saveBinCourses(courseStruct *courses, int n_courses){
     fclose(file);
 }
 
-courseStruct *readBinCourses(){
+courseStruct *readBinCourses(int *n_courses){
     courseStruct *courses = malloc(sizeof(courseStruct));
     int i;
     FILE *file = fopen("data/bin/courses.bin","rb");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]course.bin[/red]\n\n");
-        return NULL;
+        exit(1);
     }
-    else{
-        for (i = 0;; i++){
-            courses = realloc(courses, (i+1)*sizeof(courseStruct));
-            if(fread(&courses[i].id, sizeof(int), 1, file) != 1) break;
 
-            size_t courseLen;
-            fread(&courseLen, sizeof(size_t), 1, file);
-            courses[i].name = malloc(courseLen);
-            fread(courses[i].name, courseLen, 1, file);
-        }
-        n_courses = i-1;
-        fclose(file);
-        return courses;
+    for (i = 0;; i++){
+        courses = realloc(courses, (i+1)*sizeof(courseStruct));
+        if(fread(&courses[i].id, sizeof(int), 1, file) != 1) break;
+
+        size_t courseLen;
+        fread(&courseLen, sizeof(size_t), 1, file);
+        courses[i].name = malloc(courseLen);
+        fread(courses[i].name, courseLen, 1, file);
     }
+    *n_courses = i-1;
+    fclose(file);
+    return courses;
 }
 
 courseStruct findCourseId(int id){

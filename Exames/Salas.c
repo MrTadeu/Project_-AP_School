@@ -4,6 +4,9 @@
 #include <string.h>
 #include "../All_functions/global.h"
 
+void listarSalas();
+SalaStruct* readBinSalas(int *n_salas);
+int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
 extern int n_salas;

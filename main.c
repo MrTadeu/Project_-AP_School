@@ -19,7 +19,7 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0;
 void readData();
 
 void main(){
-    /* readData(); */
+    readData();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -44,19 +44,19 @@ void main(){
         }
     } while (op != 0);
     //Testes
-    /* ReadTxtDisciplinas();
+    ReadTxtDisciplinas();
     SaveTxtDisciplinas();
     MenuEditarAdicionarRemoverDisciplinas();
     CriarDisciplinas();
-    RemoverDisciplinas(); */
+    RemoverDisciplinas();
 
 }
 
 void readData(){
-    alunos = readBinAlunos();
-    regimes = readBinRegimes();
+    alunos = readBinAlunos(&n_alunos);
+    regimes = readBinRegimes(&n_regimes);
     perms_file = readBinPermissions();
-    courses = readBinCourses();  
-    /* disciplinas = ReadTxtDisciplinas(&n_disciplinas);
-    salas = readBinSalas(&n_salas); */
+    courses = readBinCourses(&n_courses);  
+    disciplinas = ReadTxtDisciplinas(&n_disciplinas);
+    salas = readBinSalas(&n_salas);
 }
