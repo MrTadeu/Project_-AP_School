@@ -47,3 +47,8 @@ int importExportMenu();
 //importExport.c
 void importExportData();
 void importDataTxtBin();
+
+//salas.c
+void criarSalas();
+void listarSalas();
+SalaStruct* readBinSalas(int *n_salas);

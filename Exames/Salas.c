@@ -11,30 +11,30 @@ extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar 
 extern int n_salas;
 
 void criarSala(){
-    SalaStruct sala;
-    sala.nomeSala = malloc(100);
+    SalaStruct salatemp;
+    salatemp.nomeSala = malloc(100);
     printf("**************************************************\n");
     printf("************        [blue]Criar Salas[/blue]       ************\n");
     printf("**************************************************\n");
     printf("Qual o nome da sala? ");
-    scanf("%s", sala.nomeSala); //[^\n]
-    sala.nomeSala = realloc(sala.nomeSala, strlen(sala.nomeSala) + 1);
+    scanf("%s", salatemp.nomeSala); //[^\n]
+    salatemp.nomeSala = realloc(salatemp.nomeSala, strlen(salatemp.nomeSala) + 1);
     printf("Qual o numero da sala? ");
-    scanf("%d", &sala.numeroSala);
+    scanf("%d", &salatemp.numeroSala);
     printf("Qual o numero de cadeiras? ");
-    scanf("%d", &sala.numeroCadeiras);
+    scanf("%d", &salatemp.numeroCadeiras);
     FILE *arquivo;
     arquivo = fopen("Salas.bin", "ab");
     if(arquivo == NULL){
         printf("Erro ao abrir o arquivo");
         exit(1);
     }
-    size_t nomeSalasize = strlen(sala.nomeSala) + 1;
+    size_t nomeSalasize = strlen(salatemp.nomeSala) + 1;
     printf("%d", nomeSalasize);
     fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
-    fwrite(sala.nomeSala, nomeSalasize, 1, arquivo);
-    fwrite(&sala.numeroSala, sizeof(int), 1, arquivo);
-    fwrite(&sala.numeroCadeiras, sizeof(int), 1, arquivo);
+    fwrite(salatemp.nomeSala, nomeSalasize, 1, arquivo);
+    fwrite(&salatemp.numeroSala, sizeof(int), 1, arquivo);
+    fwrite(&salatemp.numeroCadeiras, sizeof(int), 1, arquivo);
     fclose(arquivo);
 }
 
@@ -45,7 +45,7 @@ void listarSalas(){
     printf("**************************************************\n");
     size_t nomeSalasize;
     int n_salas = 0;
-    //readBinSalas(&n_salas);
+    //sala = readBinSalas(&n_salas);
     printf("Numero de salas: %d\n", n_salas);
     for(int i = 0; i < n_salas; i++){
         printf("--------------------------------------------\n");
