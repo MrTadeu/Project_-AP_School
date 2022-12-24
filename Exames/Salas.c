@@ -26,7 +26,6 @@ void criarSala(){ // #VALIDAR
         scanf("%d", &salatemp.numeroSala);
         if(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1){
             printc("[red]Sala já existe[/red]\n");
-        
         }
     }while(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1);
     
