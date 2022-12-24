@@ -10,7 +10,7 @@ void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
         printf("\nErro ao abrir o ficheiro permission.bin");
         exit(1);
     }
-
+    
     for (int i = 0; i < n_regimes; i++){
         permFile.id_regime = regimes[i].id;
         printf("\n%dº Regime - %s\n", regimes[i].id, regimes[i].name);
