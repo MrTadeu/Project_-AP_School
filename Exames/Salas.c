@@ -6,6 +6,7 @@
 
 void listarSalas();
 SalaStruct* readBinSalas(int *n_salas);
+int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
 extern int n_salas;
@@ -16,16 +17,19 @@ void criarSala(){ // #VALIDAR
     printf("**************************************************\n");
     printc("************        [blue]Criar Salas[/blue]       ************\n");
     printf("**************************************************\n");
-    printf("Qual o nome da sala? ");
-    scanf(" %[^\n]", salatemp.nomeSala);
-    uppercase(salatemp.nomeSala);
-    salatemp.nomeSala = realloc(salatemp.nomeSala, strlen(salatemp.nomeSala) + 1);
-    printf("Qual o numero da sala? ");
-    scanf("%d", &salatemp.numeroSala);
-    if(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1){
-        printf("Sala já existe\n");
-        return;
-    }
+    do{
+        printf("Qual o nome da sala? ");
+        scanf(" %[^\n]", salatemp.nomeSala);
+        uppercase(salatemp.nomeSala);
+        salatemp.nomeSala = realloc(salatemp.nomeSala, strlen(salatemp.nomeSala) + 1);
+        printf("Qual o numero da sala? ");
+        scanf("%d", &salatemp.numeroSala);
+        if(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1){
+            printc("[red]Sala já existe[/red]\n");
+        
+        }
+    }while(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1);
+    
     printf("Qual o numero de cadeiras? ");
     scanf("%d", &salatemp.numeroCadeiras);
     FILE *arquivo;
@@ -128,7 +132,7 @@ void editarSala(){ // #VALIDAR
         exit(1);
     }
     for(int i = 0; i < n_salas; i++){
-        size_t nomeSalasize = strlen(sala[i].nomeSala) + 1;
+        size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
         fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
         fwrite(salas[i].nomeSala, nomeSalasize, 1, arquivo);
         fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
