@@ -3,6 +3,13 @@
 #include <string.h>
 #include "../All_functions\global.h"
 
+extern AlunoFileStruct *alunosFile;
+extern AlunoStruct *alunos;
+extern regimeStruct *regimes;
+extern courseStruct *courses;
+extern int n_alunos, n_regimes, n_courses;
+
+
 courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_alunos, int *n_courses){
     courseStruct *courses = malloc(sizeof(courseStruct));
     for (int i = 0; i < n_alunos; i++){
@@ -62,4 +69,15 @@ courseStruct *readBinCourses(int *n_courses){
     *n_courses = i-1;
     fclose(file);
     return courses;
+}
+
+courseStruct findCourseId(int id){
+    for (int i = 0; i < n_courses; i++){
+        if (courses[i].id == id){
+            return courses[i];
+        }
+    }
+    courseStruct course;
+    course.id = -1;
+    return course;
 }

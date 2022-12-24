@@ -60,6 +60,12 @@ AlunoStruct *readBinAlunos(int *n_alunos){
     return alunos;
 }
 
+
+
+void login(){
+    
+}
+
 /* AlunoStruct readBinAluno(int id_aluno){
     AlunoStruct aluno;
 
