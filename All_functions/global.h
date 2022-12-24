@@ -53,3 +53,13 @@ void criarSalas();
 void listarSalas();
 SalaStruct* readBinSalas(int *n_salas);
 void editarSala();
+
+//disciplinas.c
+disciplinasStruct* ReadTxtDisciplinas(int *n_disciplinas);
+void SavetxtDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas);
+void SaveBinDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas);
+void ListarDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas);
+void MenuEditarAdicionarRemoverDisciplinas(disciplinasStruct *disciplinas, int *n_disciplinas);
+void criarDisciplina(disciplinasStruct *disciplinas, int *n_disciplinas);
+void Removerdisciplina(disciplinasStruct *disciplinas, int *n_disciplinas);
+void EditarDisciplina(disciplinasStruct *disciplinas, int *n_disciplinas);
