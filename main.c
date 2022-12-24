@@ -19,7 +19,7 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0;
 void readData();
 
 void main(){
-    //readData();
+    readData();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -50,6 +50,6 @@ void readData(){
     regimes = readBinRegimes(&n_regimes);
     perms_file = readBinPermissions();
     courses = readBinCourses(&n_courses);  
-    disciplinas = readBinDisciplinas(&n_disciplinas);
+    //disciplinas = readBinDisciplinas(&n_disciplinas);
     salas = readBinSalas(&n_salas);
 }
