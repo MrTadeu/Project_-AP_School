@@ -47,8 +47,8 @@ void main(){
     ReadTxtDisciplinas();
     SaveTxtDisciplinas();
     MenuEditarAdicionarRemoverDisciplinas();
-    CriarDisciplinas();
-    RemoverDisciplinas();
+    CriarDisciplina();
+    RemoverDisciplina();
 
 }
 
