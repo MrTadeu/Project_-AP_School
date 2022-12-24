@@ -43,6 +43,7 @@ permissionFileStruct* readBinPermissions();
 //menus.c
 int mainMenu();
 int importExportMenu();
+void MenuEditarAdicionarRemoverDisciplinas();
 
 //importExport.c
 void importExportData();
