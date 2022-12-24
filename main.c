@@ -43,6 +43,13 @@ void main(){
                 printc("\n[red]Opção inválida![/red]\n\n");
         }
     } while (op != 0);
+    //Testes
+    ReadTxtDisciplinas();
+    SaveTxtDisciplinas();
+    MenuEditarAdicionarRemoverDisciplinas();
+    CriarDisciplinas();
+    RemoverDisciplinas();
+
 }
 
 void readData(){

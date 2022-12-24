@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../All_functions\global.h"
+//GLOBAL VARIABLES
+extern disciplinasStruct *disciplinas;
+extern int n_disciplinas;
 
-disciplinasStruct* ReadTxtDisciplinas(int *n_disciplinas)
+disciplinasStruct* ReadTxtDisciplinas()
 {
     disciplinasStruct* disciplinas = malloc(sizeof(disciplinasStruct));
     int i;
@@ -19,20 +22,13 @@ disciplinasStruct* ReadTxtDisciplinas(int *n_disciplinas)
         disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));
         fscanf(disciplinasTxt, "%d", &disciplinas[i].id);
         fscanf(disciplinasTxt, "%s", disciplinas[i].name);
-        *n_disciplinas = *n_disciplinas + 1;
+        n_disciplinas = n_disciplinas + 1;
     }
     fclose(disciplinasTxt);
-
-
-    for(int j=0;j<n_disciplinas;j++)
-    {
-        printf("%d", disciplinas[j].id);
-        printf("%s", disciplinas[j].name);
-    }
     return disciplinas;
 }
 
-void SavetxtDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas)
+void SavetxtDisciplinas()
 {
     FILE *disciplinasTxt = fopen("data/txt/disciplinas.txt","w");
     if (!disciplinasTxt) {
@@ -46,7 +42,7 @@ void SavetxtDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas)
         fprintf(disciplinasTxt, "%d %s", disciplinas[i].id, disciplinas[i].name);
     }
 }
-void SaveBinDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas)
+void SaveBinDisciplinas()
 {
     FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","ab");
     if (!disciplinasBin) {
@@ -63,7 +59,7 @@ void SaveBinDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas)
     fclose(disciplinasBin);
 }
 
-void ListarDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas)
+void ListarDisciplinas()
 {
     printf("Disciplinas --> ");
     for(int i=0;i<n_disciplinas;i++)
@@ -75,7 +71,7 @@ void ListarDisciplinas(disciplinasStruct *disciplinas, int n_disciplinas)
     printf("\n\n");
 }
 
-void MenuEditarAdicionarRemoverDisciplinas(disciplinasStruct *disciplinas, int *n_disciplinas)
+void MenuEditarAdicionarRemoverDisciplinas()
 {
     int opcao;
     do
@@ -89,13 +85,13 @@ void MenuEditarAdicionarRemoverDisciplinas(disciplinasStruct *disciplinas, int *
     switch (opcao)
     {
     case 1:
-        criarDisciplina(disciplinas, n_disciplinas);
+        CriarDisciplina();
         break;
     case 2:
-        RemoverDisciplina(disciplinas, n_disciplinas);
+        RemoverDisciplina();
         break;
     case 3:
-        EditarDisciplina(disciplinas, n_disciplinas);
+        EditarDisciplina();
         break;
     case 4:
         break;
@@ -106,62 +102,62 @@ void MenuEditarAdicionarRemoverDisciplinas(disciplinasStruct *disciplinas, int *
     } while (opcao != 4);
 }
 
-void criarDisciplina(disciplinasStruct *disciplinas, int *n_disciplinas)
-{
+void criarDisciplina()
+{   
     int id;
     char name[50];
+    printc("\n\n\tInsira os dados da disciplina: ");
     printc("\n\n\tID: ");
     scanf("%d", &id);
     printc("\n\tNome: ");
     scanf("%s", name);
-    disciplinas[*n_disciplinas].id = id;
-    strcpy(disciplinas[*n_disciplinas].name, name);
-    *n_disciplinas = *n_disciplinas + 1;
-    SavetxtDisciplinas(disciplinas, *n_disciplinas);
-    SaveBinDisciplinas(disciplinas, *n_disciplinas);
+    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas + 1));
+    disciplinas[n_disciplinas].id = id;
+    strcpy(disciplinas[n_disciplinas].name, name);
+    n_disciplinas++;
+    SavetxtDisciplinas();
+    SaveBinDisciplinas();
 }
 
-void Removerdisciplina(disciplinasStruct *disciplinas, int *n_disciplinas)
+void Removerdisciplina()
 {
     int id;
-    void ListarDisciplinas(disciplinas, n_disciplinas);
-    printc("\n\n\tInsira o ID da disciplina que quer apagar: ");
+    void ListarDisciplinas();
+    printc("\n\n\t[green]Insira o ID da disciplina que quer apagar: [/green]");
     scanf("%d", &id);
-    for (int i = 0; i < *n_disciplinas; i++)
+    for (int i = 0; i < n_disciplinas; i++)
     {
         if (disciplinas[i].id == id)
         {
-            for (int j = i; j < *n_disciplinas; j++)
+            for (int j = i; j < n_disciplinas; j++)
             {
-                disciplinas[j] = disciplinas[j + 1];
+                disciplinas[j] = disciplinas[j+1];
             }
-            *n_disciplinas = *n_disciplinas - 1;
+            n_disciplinas--;
             break;
         }
     }
-    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (*n_disciplinas));   
-    SavetxtDisciplinas(disciplinas, *n_disciplinas);
-    SaveBinDisciplinas(disciplinas, *n_disciplinas);
+    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas));   
+    SavetxtDisciplinas();
+    SaveBinDisciplinas();
 }
 
-void EditarDisciplina(disciplinasStruct *disciplinas, int *n_disciplinas)
+void EditarNomeDisciplina()
 {
     int id;
-    void ListarDisciplinas(disciplinas, n_disciplinas);
-    printc("\n\n\tInsira o ID da disciplina que quer editar: ");
+    void ListarDisciplinas();
+    printc("\n\n\t[green]Insira o ID da disciplina que quer editar:[/green] ");
     scanf("%d", &id);
-    for (int i = 0; i < *n_disciplinas; i++)
+    for (int i = 0; i < n_disciplinas; i++)
     {
         if (disciplinas[i].id == id)
         {
-            printc("\n\n\tNovo ID: ");
-            scanf("%d", &disciplinas[i].id);
             printc("\n\tNovo Nome: ");
             scanf("%s", disciplinas[i].name);
             break;
         }
     }
-    SavetxtDisciplinas(disciplinas, *n_disciplinas);
-    SaveBinDisciplinas(disciplinas, *n_disciplinas);
+    SavetxtDisciplinas();
+    SaveBinDisciplinas();
 }
     
