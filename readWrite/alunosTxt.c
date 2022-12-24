@@ -60,12 +60,13 @@ AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruc
         strcat(email, "@estgv.ipv.pt");
         //password example: pv25207ee
         strcat(password, "pv");
-        strcat(password, alunos[i].id);
-        strcat(password, (findCourseId(alunos[i].id_course)).name);
-
+        itoa(alunos[i].id, password, 10);
+        strcat(password, *uppercase((findCourseId(alunos[i].id_course)).name));
 
         alunos[i].email = malloc((strlen(email)+1));
+        alunos[i].password = malloc((strlen(password)+1));
         strcpy(alunos[i].email, email);
+        strcpy(alunos[i].password, password);
 
 
 
