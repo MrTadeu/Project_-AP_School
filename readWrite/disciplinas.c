@@ -1,4 +1,4 @@
-/* #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../All_functions\global.h"
@@ -75,8 +75,6 @@ void ListarDisciplinas()
 void MenuEditarAdicionarRemoverDisciplinas()
 {
     int opcao;
-    do
-    {
     printc("\n\n\t[green]1[/green] - Adicionar Disciplina");
     printc("\n\t[green]2[/green] - Remover Disciplina");
     printc("\n\t[green]3[/green] - Editar Disciplina");
@@ -95,12 +93,12 @@ void MenuEditarAdicionarRemoverDisciplinas()
         EditarDisciplina();
         break;
     case 4:
+        // <--- This is the problem (por funcao do menu anterior)
         break;
     default:
         printc("\n\n\tOpcao Invalida");
         break;
     }
-    } while (opcao != 4);
 }
 
 void criarDisciplina()
@@ -112,10 +110,11 @@ void criarDisciplina()
     scanf("%d", &id);
     printc("\n\tNome: ");
     scanf("%s", name);
-    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas + 1));
-    disciplinas[n_disciplinas].id = id;
-    strcpy(disciplinas[n_disciplinas].name, name);
     n_disciplinas++;
+    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * n_disciplinas);
+    disciplinas[n_disciplinas-1].id = id;
+    strcpy(disciplinas[n_disciplinas-1].name, name);
+    
     SavetxtDisciplinas();
     SaveBinDisciplinas();
 }
@@ -161,4 +160,3 @@ void EditarNomeDisciplina()
     SavetxtDisciplinas();
     SaveBinDisciplinas();
 }
-     */
