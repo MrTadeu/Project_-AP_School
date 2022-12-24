@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../All_functions/structs.h"
+#include "../All_functions/global.h"
 
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
     FILE *file = fopen("data/bin/permission.bin", "ab");
@@ -77,14 +77,17 @@ permissionFileStruct* readBinPermissions(){
     FILE *file = fopen("data/bin/permission.bin", "rb");
     permissionFileStruct *permFile = malloc(sizeof(permissionFileStruct));
     if (file == NULL){
-        printf("\nErro ao abrir o ficheiro permission.bin");
-        exit(1);
+        printc("\nErro ao abrir o ficheiro [red]permission.bin[/red]");
+        return NULL;
     }
-    int i = 0;
-    while (fread(&permFile[i], sizeof(permissionFileStruct), 1, file)){
-        i++;
-        permFile = realloc(permFile, sizeof(permissionFileStruct)*((i)+1));
+    else{
+        int i = 0;
+        while (fread(&permFile[i], sizeof(permissionFileStruct), 1, file)){
+            i++;
+            permFile = realloc(permFile, sizeof(permissionFileStruct)*((i)+1));
+        }
+        fclose(file);
+        return permFile;
     }
-    fclose(file);
-    return permFile;
+    
 }
