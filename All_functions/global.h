@@ -52,3 +52,4 @@ void importDataTxtBin();
 void criarSalas();
 void listarSalas();
 SalaStruct* readBinSalas(int *n_salas);
+void editarSala();

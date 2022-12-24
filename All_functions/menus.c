@@ -364,22 +364,22 @@ void MenuSalas(PermissionsType perm){
     }
     if (perm.CriarSalas){
         if (opcao == i++){
-            criarSala(); // <--- This is the problem
+            criarSala();
         }
     }
     if (perm.ListarSalas){
         if (opcao == i++){
-            listarSalas(); // <--- This is the problem
+            listarSalas();
         }
     }
     if (perm.EditarSalas){
         if (opcao == i++){
-            editarSala(); // <--- This is the problem
+            editarSala(); 
         }
     }
     if (perm.RemoverSalas){
         if (opcao == i++){
-            removerSalas(); // <--- This is the problem
+            removerSalas();
         }
     }
 }
