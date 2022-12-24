@@ -58,7 +58,7 @@ SalaStruct* readBinSalas(int *n_salas);
 void editarSala();
 void removerSalas();
 
-//disciplinas.c
+/* //disciplinas.c
 disciplinasStruct* ReadTxtDisciplinas();
 void SaveTxtDisciplinas();
 void SaveBinDisciplinas();
@@ -66,4 +66,4 @@ void ListarDisciplinas();
 void MenuEditarAdicionarRemoverDisciplinas();
 void CriarDisciplina();
 void RemoverDisciplina();
-void EditarDisciplina();
+void EditarDisciplina(); */

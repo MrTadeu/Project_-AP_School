@@ -19,7 +19,8 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0;
 void readData();
 
 void main(){
-    readData();
+    printc("[blue]Bem-vindo ao programa de gestão de horários da Escola Superior de Tecnologia e Gestão de Leiria.[/blue]\n\n");
+    //readData();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -31,7 +32,6 @@ void main(){
                 break;
             case 1:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                /* login(); */
                 printAlunos(alunos, n_alunos);
                 break;
             case 2:
@@ -44,11 +44,11 @@ void main(){
         }
     } while (op != 0);
     //Testes
-    ReadTxtDisciplinas();
+/*     ReadTxtDisciplinas();
     SaveTxtDisciplinas();
     MenuEditarAdicionarRemoverDisciplinas();
     CriarDisciplinas();
-    RemoverDisciplinas();
+    RemoverDisciplinas(); */
 
 }
 
@@ -57,6 +57,6 @@ void readData(){
     regimes = readBinRegimes(&n_regimes);
     perms_file = readBinPermissions();
     courses = readBinCourses(&n_courses);  
-    disciplinas = ReadTxtDisciplinas(&n_disciplinas);
-    salas = readBinSalas(&n_salas);
+    /* disciplinas = ReadTxtDisciplinas(&n_disciplinas); */
+    salas = readBinSalas(&n_salas); 
 }

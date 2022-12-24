@@ -1,7 +1,8 @@
-#include <stdio.h>
+/* #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../All_functions\global.h"
+
 //GLOBAL VARIABLES
 extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
@@ -160,4 +161,4 @@ void EditarNomeDisciplina()
     SavetxtDisciplinas();
     SaveBinDisciplinas();
 }
-    
+     */
