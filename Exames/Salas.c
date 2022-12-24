@@ -81,8 +81,8 @@ SalaStruct* readBinSalas(int *n_salas){
     FILE *arquivo;
     arquivo = fopen("../data/Exames/Salas.bin", "rb");
     if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo");
-        exit(1);
+        printc("\n\n\tErro ao abrir o arquivo [red]Salas.bin[/red]\n\n");
+        return NULL;
     }
     size_t nomeSalasize;
     int i = 0;

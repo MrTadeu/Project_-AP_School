@@ -19,8 +19,7 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0;
 void readData();
 
 void main(){
-    printc("[blue]Bem-vindo ao programa de gestão de horários da Escola Superior de Tecnologia e Gestão de Leiria.[/blue]\n\n");
-    //readData();
+    readData();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -44,11 +43,13 @@ void main(){
         }
     } while (op != 0);
     //Testes
-/*     ReadTxtDisciplinas();
+    /*
+    ReadTxtDisciplinas();
     SaveTxtDisciplinas();
     MenuEditarAdicionarRemoverDisciplinas();
     CriarDisciplinas();
-    RemoverDisciplinas(); */
+    RemoverDisciplinas();
+    */
 
 }
 

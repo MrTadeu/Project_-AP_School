@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../All_functions/structs.h"
+#include "../All_functions/global.h"
 
 regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_alunos, int *n_regimes){
     regimeStruct *regimes = malloc(sizeof(regimeStruct));
@@ -45,22 +45,23 @@ regimeStruct *readBinRegimes(int *n_regimes){
     int i;
     FILE *file = fopen("data/bin/regimes.bin","rb");
     if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro regimes.bin \n\n");
-        exit(1);
+        printc("\n\n\tImpossivel abrir Ficheiro [red]regimes.bin[/red] \n\n");
+        return NULL;
     }
+    else{
+        for (i = 0;; i++){
+            regimes = realloc(regimes, (i+1)*sizeof(regimeStruct));
+            if(fread(&regimes[i].id, sizeof(int), 1, file) != 1) break;
 
-    for (i = 0;; i++){
-        regimes = realloc(regimes, (i+1)*sizeof(regimeStruct));
-        if(fread(&regimes[i].id, sizeof(int), 1, file) != 1) break;
-
-        size_t regimeLen;
-        fread(&regimeLen, sizeof(size_t), 1, file);
-        regimes[i].name = malloc(regimeLen);
-        fread(regimes[i].name, regimeLen, 1, file);
-    }
-    *n_regimes = i-1;
-    fclose(file);
-    return regimes;
+            size_t regimeLen;
+            fread(&regimeLen, sizeof(size_t), 1, file);
+            regimes[i].name = malloc(regimeLen);
+            fread(regimes[i].name, regimeLen, 1, file);
+        }
+        *n_regimes = i-1;
+        fclose(file);
+        return regimes;
+    }   
 }
 
 
