@@ -17,7 +17,6 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0;
 
 
 void readData();
-void readBinSalas();
 
 void main(){
     //readData();
