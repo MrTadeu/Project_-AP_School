@@ -39,25 +39,32 @@ AlunoStruct *readBinAlunos(int *n_alunos){
     FILE *file = fopen("data/bin/alunos.bin","rb");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
-        exit(1);
+        return NULL;
     }
+    else{
+        for (i = 0;; i++){
+            if(fread(&alunos[i].id, sizeof(int), 1, file) != 1) break;
+            fread(&alunos[i].year, sizeof(int), 1, file);
+            fread(&alunos[i].id_regime, sizeof(int), 1, file);
+            fread(&alunos[i].id_course, sizeof(int), 1, file);
+            
+            size_t nameLen;
+            fread(&nameLen, sizeof(size_t), 1, file);
+            alunos[i].name = malloc(nameLen);
+            fread(alunos[i].name, nameLen, 1, file);
 
-    for (i = 0;; i++){
-        if(fread(&alunos[i].id, sizeof(int), 1, file) != 1) break;
-        fread(&alunos[i].year, sizeof(int), 1, file);
-        fread(&alunos[i].id_regime, sizeof(int), 1, file);
-        fread(&alunos[i].id_course, sizeof(int), 1, file);
-        
-        size_t nameLen;
-        fread(&nameLen, sizeof(size_t), 1, file);
-        alunos[i].name = malloc(nameLen);
-        fread(alunos[i].name, nameLen, 1, file);
-
-        alunos = realloc(alunos, sizeof(AlunoStruct) * (i+2));
+            alunos = realloc(alunos, sizeof(AlunoStruct) * (i+2));
+        }
+        *n_alunos = i-1;
+        fclose(file);
+        return alunos;
     }
-    *n_alunos = i-1;
-    fclose(file);
-    return alunos;
+}
+
+
+
+void login(){
+    
 }
 
 /* AlunoStruct readBinAluno(int id_aluno){

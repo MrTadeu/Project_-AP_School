@@ -31,7 +31,6 @@ void main(){
                 break;
             case 1:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                /* login(); */
                 printAlunos(alunos, n_alunos);
                 break;
             case 2:
@@ -58,5 +57,6 @@ void readData(){
     perms_file = readBinPermissions();
     courses = readBinCourses(&n_courses);  
     disciplinas = ReadTxtDisciplinas(&n_disciplinas);
-    salas = readBinSalas(&n_salas);
+    salas = readBinSalas(&n_salas); 
 }
+

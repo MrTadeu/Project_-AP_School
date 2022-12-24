@@ -53,6 +53,25 @@ AlunoFileStruct* getTxt(int *n_alunos){
 AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruct *regimes, int n_regimes, courseStruct *courses, int n_courses){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct)*n_alunos);
     for (int i = 0; i < n_alunos; i++){
+        /* char *email = malloc(100), *password = malloc(100);
+        //email example: pv25207@estgv.ipv.pt
+        strcat(email, "pv");
+        char* id = malloc(10);
+        itoa(alunos[i].id, id, 10);
+        strcat(email, id);
+        strcat(email, "@estgv.ipv.pt");
+        //password example: pv25207ee
+        strcat(password, "pv");
+        itoa(alunos[i].id, password, 10);
+        strcat(password, uppercase((findCourseId(alunos[i].id_course)).name));
+
+        alunos[i].email = malloc((strlen(email)+1));
+        alunos[i].password = malloc((strlen(password)+1));
+        strcpy(alunos[i].email, email);
+        strcpy(alunos[i].password, password); */
+
+
+
         alunos[i].name = malloc((strlen(alunosFile[i].name)+1));
         strcpy(alunos[i].name, alunosFile[i].name);
         alunos[i].year = alunosFile[i].year;

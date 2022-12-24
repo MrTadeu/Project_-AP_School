@@ -27,7 +27,7 @@ typedef struct{
 } courseStruct;
 
 typedef struct {
-    char *name, *Email;
+    char *name, *email, *password;
     int id_regime, year, id, id_course;
 } AlunoStruct;
 
