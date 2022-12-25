@@ -41,8 +41,43 @@ void loguinMenu(){
     printc("[lw]Username:[/lw ");
     printc("[lw]Password:[/lw ");
 }
+void MenuAdminCursos()
+{   
+    do
+    {
+    int opcao;
+    printc("\n\n\t  [green]Menu Cursos[/green]");
+    printc("\n\n\t[green]1[/green] - Listar Cursos");
+    printc("\n\n\t[green]2[/green] - Listar Cursos e Disciplinas");
+    printc("\n\t[green]3[/green] - Editar Cursos");
+    printc("\n\t[green]4[/green] - Menu Disciplinas");
+    printc("\n\t[green]5[/green] - Voltar");
+    printc("\n\n\tOpcao: ");
+    scanf("%d", &opcao);
+    switch (opcao)
+    {
+    case 1:
+        ListarCursos();
+        break;
+    case 2:
+        ListarCursosdisciplinas();
+        break;
+    case 3:
+        EditarCursos();
+        break;
+    case 4:
+        // <--- This is the problem (por funcao do menu anterior)
+        break;
+    default:
+        printc("\n\n\t[red]Opcao Invalida[/red]");
+        break;
+    }
+    } while (1);
+}
 void MenuAdminDisciplinas()
 {
+    do
+    {
     int opcao;
     printc("\n\n\t  [green]Menu Disciplinas[/green]");
     printc("\n\n\t[green]1[/green] - Listar Disciplinas");
@@ -59,15 +94,18 @@ void MenuAdminDisciplinas()
         MenuAdminEditarAdicionarRemoverDisciplinas();
         break;
     case 3:
-        // <--- This is the problem (por funcao do menu anterior)
+        MenuAdminCursos();
         break;
     default:
-        printc("\n\n\tOpcao Invalida");
+        printc("\n\n\t[red]Opcao Invalida[/red]");
         break;
     }
+    }while (1);
 }
 void MenuAdminEditarAdicionarRemoverDisciplinas()
 {
+    do
+    {
     int opcao;
     printc("\n\n\t[green]1[/green] - Adicionar Disciplina");
     printc("\n\t[green]2[/green] - Remover Disciplina");
@@ -90,10 +128,12 @@ void MenuAdminEditarAdicionarRemoverDisciplinas()
         MenuDisciplinas();
         break;
     default:
-        printc("\n\n\tOpcao Invalida");
+        printc("\n\n\t[red]Opcao Invalida[/red]");
         break;
     }
+    }while (1);   
 }
+
 /* 
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(PermissionsType perm){

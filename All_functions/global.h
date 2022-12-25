@@ -61,7 +61,8 @@ void editarSala();
 void removerSalas();
 
 //disciplinas.c
-void MenuDisciplinas(); 
+void MenuAdminCursos();
+void MenuAdminDisciplinas(); 
 disciplinasStruct* ReadTxtDisciplinas();
 void SaveTxtDisciplinas();
 void SaveBinDisciplinas();
@@ -71,6 +72,8 @@ void CriarDisciplina();
 void RemoverDisciplina();
 void EditarDisciplina();
 void InitCursos();
-void SaveTxtCursosDisciplina();
-void SaveBinCursosDisciplina(); 
-void ListarCursosDisciplina();
+void SaveTxtCursos();
+void SaveBinCursos(); 
+void ListarCursosDisciplinas();
+void ListarCursos();
+void EditarCursos();

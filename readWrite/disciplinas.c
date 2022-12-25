@@ -267,7 +267,7 @@ void SaveBinCursosDisciplina()
     }
 }
 
-void ListarCursosDisciplina()
+void ListarCursosDisciplinas()
 {
     for(int i=0; i<n_courses; i++)
     {
@@ -279,13 +279,74 @@ void ListarCursosDisciplina()
             {
                 if(k == 5)
                     printf("\n");
-                printf("%s ", courses[i].AnoDisciplina[j][k]);
+                printf("%s\t", courses[i].AnoDisciplina[j][k]);
 
             }
             printf("\n\n");
         }
         printf("\n\n");
-        printf("ID do diretor deste curso: %s\n", courses[i].IdResponsavel);
+        printf("Diretor: %d\n", courses[i].IdResponsavel);
         printf("\n\n");
     }
+}
+
+void ListarCursos()
+{
+    for(int i=0; i<n_courses; i++)
+    {
+        printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
+        printftf("ID Diretor de curso: %d\n", courses[i].IdResponsavel);
+    }
+}
+
+void EditarCursos()
+{
+    int id;
+    char op;
+    printc("[green]Cursos existentes:[/green]");
+    ListarCursos();
+    printc("[green]Disciplinas existentes:[/green]");
+    ListarDisciplinas();
+    printc("\n\n\t[green]Insira o ID do curso que quer editar:[/green] ");
+    scanf("%d", &id);
+    for (int i = 0; i < n_courses; i++)
+    {
+        if (courses[i].id == id)
+        {
+            printc("\n[green]Curso encontrado -->[/green] ");
+            printf("Curso %d: %s\n", courses[i].id,  courses[i].name);
+
+            printftf("Alterar nome? (S/N");
+            scanf("%c", &op);
+            if(op == 'S' || op == 's')
+            {
+            printf("Insira o novo nome do curso: ");
+            scanf("%s", courses[i].name);
+            saveBinCourses(courses , n_courses);
+            }
+            printf("Alterar disciplinas? (S/N");
+            scanf("%c", &op);
+            if(op == 'S' || op == 's')
+            {
+            for(int j=0; j<3; j++)
+            {
+                printf("Insira as siglas das 10 disciplinas do %d ano : ", j+1);
+                for(int k=0; k<10; k++)
+                {
+                    scanf("%s", courses[i].AnoDisciplina[j][k]);
+                }
+            }
+            }
+            printf("Alterar diretor? (S/N");
+            scanf("%c", &op);
+            if(op == 'S' || op == 's')
+            {
+            printf("Insira o ID do novo diretor deste curso: ");
+            printf("\nID: ");
+            scanf("%d", courses[i].IdResponsavel);
+            }
+        }
+    }
+    SaveTxtCursosDisciplina();
+    SaveBinCursosDisciplina();
 }
