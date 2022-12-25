@@ -43,6 +43,7 @@ void main(){
         }
     } while (op != 0);
     //Testes
+    MenuDisciplinas();    
     ReadTxtDisciplinas();
     SaveTxtDisciplinas();
     MenuEditarAdicionarRemoverDisciplinas();

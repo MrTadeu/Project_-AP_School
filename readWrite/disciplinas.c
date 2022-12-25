@@ -7,6 +7,33 @@
 extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
 
+void MenuDisciplinas()
+{
+    int opcao;
+    printc("\n\n\t  [green]Menu Disciplinas[/green]");
+    printc("\n\n\t[green]1[/green] - Listar Disciplinas");
+    printc("\n\t[green]2[/green] - Editar/Adicionar/Remover Disciplinas");
+    printc("\n\t[green]3[/green] - Voltar");
+    printc("\n\n\tOpcao: ");
+    scanf("%d", &opcao);
+    switch (opcao)
+    {
+    case 1:
+        ListarDisciplinas();
+        break;
+    case 2:
+        MenuEditarAdicionarRemoverDisciplinas();
+        break;
+    case 3:
+        // <--- This is the problem (por funcao do menu anterior)
+        break;
+    default:
+        printc("\n\n\tOpcao Invalida");
+        break;
+    }
+}
+
+
 disciplinasStruct* ReadTxtDisciplinas()
 {
     disciplinasStruct* disciplinas = malloc(sizeof(disciplinasStruct));
@@ -93,7 +120,7 @@ void MenuEditarAdicionarRemoverDisciplinas()
         EditarDisciplina();
         break;
     case 4:
-        // <--- This is the problem (por funcao do menu anterior)
+        MenuDisciplinas();
         break;
     default:
         printc("\n\n\tOpcao Invalida");

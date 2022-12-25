@@ -60,6 +60,7 @@ void editarSala();
 void removerSalas();
 
 //disciplinas.c
+void MenuDisciplinas(); 
 disciplinasStruct* ReadTxtDisciplinas();
 void SaveTxtDisciplinas();
 void SaveBinDisciplinas();
