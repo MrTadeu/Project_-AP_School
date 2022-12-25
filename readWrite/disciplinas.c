@@ -5,9 +5,10 @@
 
 //GLOBAL VARIABLES
 extern disciplinasStruct *disciplinas;
-extern int n_disciplinas;
+extern courseStruct *courses;
+extern int n_disciplinas, n_courses;
 
-void MenuDisciplinas()
+/* void MenuAdminDisciplinas()
 {
     int opcao;
     printc("\n\n\t  [green]Menu Disciplinas[/green]");
@@ -22,7 +23,7 @@ void MenuDisciplinas()
         ListarDisciplinas();
         break;
     case 2:
-        MenuEditarAdicionarRemoverDisciplinas();
+        MenuAdminEditarAdicionarRemoverDisciplinas();
         break;
     case 3:
         // <--- This is the problem (por funcao do menu anterior)
@@ -31,8 +32,7 @@ void MenuDisciplinas()
         printc("\n\n\tOpcao Invalida");
         break;
     }
-}
-
+} */
 
 disciplinasStruct* ReadTxtDisciplinas()
 {
@@ -67,12 +67,15 @@ void SavetxtDisciplinas()
     {
         if(feof(disciplinasTxt))
             break;
-        fprintf(disciplinasTxt, "%d %s", disciplinas[i].id, disciplinas[i].name);
+        fprintf(&disciplinas[i].id, sizeof(int), 1, disciplinasTxt);
+        size_t disciplinasLen = strlen(disciplinas[i].name) + 1;
+        fprintf(&disciplinasLen, sizeof(size_t), 1, disciplinasTxt);
+        fprintf(disciplinas[i].name, disciplinasLen, 1, disciplinasTxt);
     }
 }
 void SaveBinDisciplinas()
 {
-    FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","ab");
+    FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","wb");
     if (!disciplinasBin) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]disciplinas.bin[/red]\n\n");
         exit(1);
@@ -99,7 +102,7 @@ void ListarDisciplinas()
     printf("\n\n");
 }
 
-void MenuEditarAdicionarRemoverDisciplinas()
+/* void MenuAdminEditarAdicionarRemoverDisciplinas()
 {
     int opcao;
     printc("\n\n\t[green]1[/green] - Adicionar Disciplina");
@@ -126,7 +129,7 @@ void MenuEditarAdicionarRemoverDisciplinas()
         printc("\n\n\tOpcao Invalida");
         break;
     }
-}
+} */
 
 void criarDisciplina()
 {   
@@ -186,4 +189,103 @@ void EditarNomeDisciplina()
     }
     SavetxtDisciplinas();
     SaveBinDisciplinas();
+}
+//________CURSOS_____CURSOS______CURSOS______CURSOS______CURSOS_______CURSOS_______CURSOS_________
+
+void InitCursos() {
+    for(int i=0; i<n_courses; i++)
+    {   ListarDisciplinas(disciplinas, n_disciplinas);
+        printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
+        for(int j=0; j<3; j++)
+        {
+            printf("Insira as siglas das 10 disciplinas do %d ano : ", j+1);
+            for(int k=0; k<10; k++)
+            {
+                scanf("%s", courses[i].AnoDisciplina[j][k]);
+            }
+        }
+        printf("\n\n");
+        printf("Insira o ID do diretor deste curso: ");
+        printf("\nID: ");
+        scanf("%s", courses[i].IdResponsavel);
+    }
+    SaveTxtCursosDisciplina();
+    SaveBinCursosDisciplina();
+}
+void SaveTxtCursosDisciplina()
+{
+    FILE *CursoDisciplinaTxt = fopen("data/txt/cursos.txt","w");
+    if (CursoDisciplinaTxt == NULL) {
+        printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.txt[/red]\n\n");
+        exit(1);
+    }
+    for (int i = 0; i < n_courses; i++)
+    {
+        if(feof(CursoDisciplinaTxt))
+            break;
+        fprintf(CursoDisciplinaTxt, "%d", courses[i].id);
+        size_t CursoNameLen = strlen(courses[i].name) + 1;
+        fprintf(CursoDisciplinaTxt, "%d", CursoNameLen);
+        fprintf(CursoDisciplinaTxt, "%s", courses[i].name);
+        for(int j=0; j<3; j++)
+        {
+            for(int k=0; k<10; k++)
+            {   fprintf(CursoDisciplinaTxt, "%d", j);   //ano
+                size_t DisciplinaNameLen = strlen(courses[i].AnoDisciplina[j][k]) + 1;
+                fprintf(CursoDisciplinaTxt, "%d", DisciplinaNameLen);
+                fprintf(CursoDisciplinaTxt, "%s", courses[i].AnoDisciplina[j][k]);
+            }
+        }
+    }
+}
+
+void SaveBinCursosDisciplina()
+{
+    FILE *CursoDisciplinaBin = fopen("data/txt/cursos.txt","wb");
+    if (CursoDisciplinaBin == NULL) {
+        printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.txt[/red]\n\n");
+        exit(1);
+    }
+    for (int i = 0; i < n_courses; i++)
+    {
+        if(feof(CursoDisciplinaBin))
+            break;
+        fwrite(courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
+        size_t CursoNameLen = strlen(courses[i].name) + 1;
+        fwrite(CursoNameLen, sizeof(size_t), 1, CursoDisciplinaBin);
+        fwrite(courses[i].name, CursoNameLen, 1, CursoDisciplinaBin);
+        for(int j=0; j<3; j++)
+        {
+            for(int k=0; k<10; k++)
+            {
+                fwrite(j, sizeof(int), 1, CursoDisciplinaBin);   //ano  
+                size_t DisciplinaNameLen = strlen(courses[i].AnoDisciplina[j][k]) + 1;
+                fwrite(DisciplinaNameLen, sizeof(size_t), 1, CursoDisciplinaBin);
+                fwrite(courses[i].AnoDisciplina[j][k], DisciplinaNameLen, 1, CursoDisciplinaBin);
+            }
+        }
+    }
+}
+
+void ListarCursosDisciplina()
+{
+    for(int i=0; i<n_courses; i++)
+    {
+        printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
+        for(int j=0; j<3; j++)
+        {
+            printf("Disciplinas do %d ano : ", j+1);
+            for(int k=0; k<10; k++)
+            {
+                if(k == 5)
+                    printf("\n");
+                printf("%s ", courses[i].AnoDisciplina[j][k]);
+
+            }
+            printf("\n\n");
+        }
+        printf("\n\n");
+        printf("ID do diretor deste curso: %s\n", courses[i].IdResponsavel);
+        printf("\n\n");
+    }
 }

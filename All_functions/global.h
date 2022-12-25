@@ -46,7 +46,8 @@ permissionFileStruct* readBinPermissions();
 //menus.c
 int mainMenu();
 int importExportMenu();
-void MenuEditarAdicionarRemoverDisciplinas();
+void MenuAdminDisciplinas();
+void MenuAdminEditarAdicionarRemoverDisciplinas();
 
 //importExport.c
 void importExportData();
@@ -69,3 +70,7 @@ void MenuEditarAdicionarRemoverDisciplinas();
 void CriarDisciplina();
 void RemoverDisciplina();
 void EditarDisciplina();
+void InitCursos();
+void SaveTxtCursosDisciplina();
+void SaveBinCursosDisciplina(); 
+void ListarCursosDisciplina();

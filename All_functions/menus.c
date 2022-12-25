@@ -41,6 +41,59 @@ void loguinMenu(){
     printc("[lw]Username:[/lw ");
     printc("[lw]Password:[/lw ");
 }
+void MenuAdminDisciplinas()
+{
+    int opcao;
+    printc("\n\n\t  [green]Menu Disciplinas[/green]");
+    printc("\n\n\t[green]1[/green] - Listar Disciplinas");
+    printc("\n\t[green]2[/green] - Editar/Adicionar/Remover Disciplinas");
+    printc("\n\t[green]3[/green] - Voltar");
+    printc("\n\n\tOpcao: ");
+    scanf("%d", &opcao);
+    switch (opcao)
+    {
+    case 1:
+        ListarDisciplinas();
+        break;
+    case 2:
+        MenuAdminEditarAdicionarRemoverDisciplinas();
+        break;
+    case 3:
+        // <--- This is the problem (por funcao do menu anterior)
+        break;
+    default:
+        printc("\n\n\tOpcao Invalida");
+        break;
+    }
+}
+void MenuAdminEditarAdicionarRemoverDisciplinas()
+{
+    int opcao;
+    printc("\n\n\t[green]1[/green] - Adicionar Disciplina");
+    printc("\n\t[green]2[/green] - Remover Disciplina");
+    printc("\n\t[green]3[/green] - Editar Disciplina");
+    printc("\n\t[green]4[/green] - Voltar");
+    printc("\n\n\tOpcao: ");
+    scanf("%d", &opcao);
+    switch (opcao)
+    {
+    case 1:
+        CriarDisciplina();
+        break;
+    case 2:
+        RemoverDisciplina();
+        break;
+    case 3:
+        EditarDisciplina();
+        break;
+    case 4:
+        MenuDisciplinas();
+        break;
+    default:
+        printc("\n\n\tOpcao Invalida");
+        break;
+    }
+}
 /* 
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(PermissionsType perm){
