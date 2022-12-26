@@ -139,6 +139,8 @@ void editarSala(){ // #VALIDAR
         fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
         fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, arquivo);
     }
+    free(nomeSala);
+    free(salas);
     fclose(arquivo);
 }
 
@@ -178,5 +180,7 @@ void removerSalas(){ // #VALIDAR
         fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
         fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, arquivo);
     }
+    free(nomeSala);
+    free(salas);
     fclose(arquivo);
 }
