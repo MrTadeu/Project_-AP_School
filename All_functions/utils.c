@@ -21,6 +21,14 @@ char *uppercase(char *str){
     return str;
 }
 
+char *capitalize(char *str){
+    int i;
+    lowercase(str);
+    str[0] = toupper(str[0]);
+    return str;
+}
+
+
 int isdigit_cheker(char *str){
     int i;
     for(i = 0; i < strlen(str); i++){
