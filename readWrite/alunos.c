@@ -4,16 +4,18 @@
 #include "../All_functions\global.h"
 
 void printAlunos(AlunoStruct *alunos, int n_alunos){
-    for (int i = 0; i < n_alunos; i++){
-        printf("ID: %d\n", alunos[i].id);
-        printf("Nome: %s\n", alunos[i].name);
-        printf("Ano: %d\n", alunos[i].year);
-        printf("ID Regime: %d\n", alunos[i].id_regime);
-        printf("ID Course: %d\n", alunos[i].id_course);
+    for (int i = 0; i < 10; i++){
+        printf("I: %d\n", i);
+        printf("ID: %d", alunos[i].id);
+        printf("Nome: %s", alunos[i].name);
+        printf("Ano: %d", alunos[i].year);
+        printf("ID Regime: %d", alunos[i].id_regime);
+        printf("ID Course: %d", alunos[i].id_course);
         printf("Email: %s\n", alunos[i].email);
         printf("Password: %s\n", alunos[i].password);
         printf("\n");
     }
+    printf("N_Alunos: %d\n", n_alunos);
 }
 
 void saveBinAlunos(AlunoStruct *alunos, int n_alunos){

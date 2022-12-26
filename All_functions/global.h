@@ -16,6 +16,7 @@ void progress_update();
 char *lowercase(char *str);
 char *uppercase(char *str);
 int isdigit_cheker(char *str);
+int generate_unique_numbers(int *numbers, int size);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt(int *n_alunos);

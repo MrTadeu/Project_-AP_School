@@ -1999,3 +1999,5 @@ Amanda Mendes	normal	3	3820	CONT
 Caua Martins	normal	2	5727	EA
 Joao Gabriel Ferreira	normal	2	3068	CONT
 Luiza Ribeiro	normal	2	4449	GI
+
+

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <limits.h>
+#include <time.h>
 #include "../All_functions/global.h" 
 
 
@@ -34,6 +36,9 @@ AlunoFileStruct* getTxt(int *n_alunos){
             //nome
             alunosFile[*n_alunos].name = malloc((strlen(filedata[0])+1));
             strcpy(alunosFile[*n_alunos].name, filedata[0]);
+            if(isspace(alunosFile[*n_alunos].name[0])){
+                alunosFile[*n_alunos].name = &alunosFile[*n_alunos].name[1];
+            }
             //REGIME
             alunosFile[*n_alunos].regime = malloc((strlen(filedata[1])+1));
             strcpy(alunosFile[*n_alunos].regime, lowercase(filedata[1]));
@@ -50,7 +55,7 @@ AlunoFileStruct* getTxt(int *n_alunos){
         }
     }
 
-    int flag = 0;
+    int flag = 0, gerar = 0;
     for(int i = 0; i < *n_alunos; i++){
         for(int j = i+1; j < *n_alunos; j++){
             if(alunosFile[i].id == alunosFile[j].id){
@@ -64,9 +69,56 @@ AlunoFileStruct* getTxt(int *n_alunos){
     }
     fclose(file);
     if(flag == 1){
-        printc("\n\n");
-        *n_alunos = 0;
-        return NULL;
+        printc("\n\nQuer gerar novos números para os alunos? ([green]1[/green]/[red]0[/red]) ");
+        scanf("%d", &gerar);
+        printf("hii34%d",*n_alunos);
+        if(gerar == 1){
+            int *numbers = malloc(*n_alunos * sizeof(int));
+            for (size_t i = 0; i < *n_alunos; i++){
+                numbers[i] = alunosFile[i].id;
+            }
+            
+
+            for (int i = 0; i < *n_alunos; i++) {
+                numbers[i] = generate_unique_numbers(numbers, i);
+            }
+
+
+            for (size_t i = 0; i < *n_alunos; i++){
+                alunosFile[i].id = numbers[i];
+                printf("\t%d\n", numbers[i]);
+            }
+            printf("hii4");
+
+
+
+
+        int flag = 0, gerar = 0;
+        for(int i = 0; i < *n_alunos; i++){
+            for(int j = i+1; j < *n_alunos; j++){
+                if(alunosFile[i].id == alunosFile[j].id){
+                    if(flag == 0){
+                        printc("\n[red]ERRO[/red] - Os seguintes alunos têm o mesmo núasdadsasdadsadsmero:");
+                        flag = 1;
+                    }
+                    printc("\n[red]ERRO[/red] - ID:%d O aluno [yellow]%s[/yellow] tem o mesmo número que o aluno [yellow]%s[/yellow]", alunosFile[i].id, alunosFile[i].name, alunosFile[j].name);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+        }
+        else{
+            printc("\n\n");
+            *n_alunos = 0;
+            return NULL;
+        }
     }
     return alunosFile;
 }
@@ -109,9 +161,6 @@ AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruc
         strcat(password, alunosFile[i].course);
         alunos[i].password = malloc((strlen(password)+1));
         strcpy(alunos[i].password, password);
-
-        printf("\nEmail: %s\n", alunos[i].email);
-        printf("Password: %s\n", alunos[i].password);
     }
     return alunos;
 }
