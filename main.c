@@ -42,13 +42,6 @@ void main(){
                 printc("\n[red]Opção inválida![/red]\n\n");
         }
     } while (op != 0);
-    //Testes
-    /* MenuDisciplinas();    
-    ReadTxtDisciplinas();
-    SaveTxtDisciplinas();
-    MenuEditarAdicionarRemoverDisciplinas();
-    CriarDisciplina();
-    RemoverDisciplina();*/
 }
 
 void readData(){
@@ -56,7 +49,7 @@ void readData(){
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
     courses = readBinCourses();  
-    /* disciplinas = ReadTxtDisciplinas(&n_disciplinas); */
+    disciplinas = ReadTxtDisciplinas();
     salas = readBinSalas(&n_salas); 
 }
 
