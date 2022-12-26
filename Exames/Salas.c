@@ -44,6 +44,8 @@ void criarSala(){ // #VALIDAR
     fwrite(&salatemp.numeroSala, sizeof(int), 1, arquivo);
     fwrite(&salatemp.numeroCadeiras, sizeof(int), 1, arquivo);
     fclose(arquivo);
+    free(salatemp.nomeSala);
+    free(salatemp.numeroSala);
 }
 
 int ChekeIFsalaExist(char *nomeSala, int nSala){
