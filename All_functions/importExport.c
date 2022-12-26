@@ -64,6 +64,9 @@ void importDataTxtBin(){
 
         //LER TXT ALUNOS
         alunosFile = getTxt(&n_alunos);
+        if(alunosFile == NULL){
+            return;
+        }
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS REGIMES SEM REPETIÇÕES E GUARDAR EM regimes
         regimes = getAllRegimes(alunosFile, n_alunos, &n_regimes);

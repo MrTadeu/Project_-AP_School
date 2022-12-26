@@ -10,6 +10,8 @@ void printAlunos(AlunoStruct *alunos, int n_alunos){
         printf("Ano: %d\n", alunos[i].year);
         printf("ID Regime: %d\n", alunos[i].id_regime);
         printf("ID Course: %d\n", alunos[i].id_course);
+        printf("Email: %s\n", alunos[i].email);
+        printf("Password: %s\n", alunos[i].password);
         printf("\n");
     }
 }
@@ -29,6 +31,14 @@ void saveBinAlunos(AlunoStruct *alunos, int n_alunos){
         size_t nomeLen = strlen(alunos[i].name) + 1;
         fwrite(&nomeLen, sizeof(size_t), 1, file);
         fwrite(alunos[i].name, nomeLen, 1, file);
+
+        size_t emailLen = strlen(alunos[i].email) + 1;
+        fwrite(&emailLen, sizeof(size_t), 1, file);
+        fwrite(alunos[i].email, emailLen, 1, file);
+
+        size_t passLen = strlen(alunos[i].password) + 1;
+        fwrite(&passLen, sizeof(size_t), 1, file);
+        fwrite(alunos[i].password, passLen, 1, file);
     }
     fclose(file);
 }
@@ -52,6 +62,16 @@ AlunoStruct *readBinAlunos(int *n_alunos){
             fread(&nameLen, sizeof(size_t), 1, file);
             alunos[i].name = malloc(nameLen);
             fread(alunos[i].name, nameLen, 1, file);
+
+            size_t emailLen;
+            fread(&emailLen, sizeof(size_t), 1, file);
+            alunos[i].email = malloc(emailLen);
+            fread(alunos[i].email, emailLen, 1, file);
+
+            size_t passLen;
+            fread(&passLen, sizeof(size_t), 1, file);
+            alunos[i].password = malloc(passLen);
+            fread(alunos[i].password, passLen, 1, file);
 
             alunos = realloc(alunos, sizeof(AlunoStruct) * (i+2));
         }

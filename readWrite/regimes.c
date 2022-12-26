@@ -27,7 +27,7 @@ regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_alunos, int *n_re
 void saveBinRegimes(regimeStruct *regimes, int n_regimes){
     FILE *file = fopen("data/bin/regimes.bin","ab");
     if (!file) {
-        printf("\n\n\tImpossivel abrir Ficheiro \n\n");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]regimes.bin[/red]\n\n");
         exit(1);
     }
 

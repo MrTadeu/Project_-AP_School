@@ -35,7 +35,7 @@ int importExportMenu(){
 }
 
 //MENU LOGIN_Principal: login.c
-void loguinMenu(){
+/* void loguinMenu(){
     printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw\n");
     printc("[lw]Por favor, faça o login para continuar![/lw\n");
     printc("[lw]Username:[/lw ");
@@ -132,7 +132,7 @@ void MenuAdminEditarAdicionarRemoverDisciplinas()
         break;
     }
     }while (1);   
-}
+} */
 
 /* 
 //MENU PRINCIPAL: login.c

@@ -15,8 +15,6 @@ void progress_update();
 //utils.c
 char *lowercase(char *str);
 char *uppercase(char *str);
-
-//validators.c
 int isdigit_cheker(char *str);
 
 //alunosTxt.c
@@ -61,7 +59,7 @@ void editarSala();
 void removerSalas();
 
 //disciplinas.c
-void MenuAdminCursos();
+/* void MenuAdminCursos();
 void MenuAdminDisciplinas(); 
 disciplinasStruct* ReadTxtDisciplinas();
 void SaveTxtDisciplinas();
@@ -77,3 +75,4 @@ void SaveBinCursos();
 void ListarCursosDisciplinas();
 void ListarCursos();
 void EditarCursos();
+ */

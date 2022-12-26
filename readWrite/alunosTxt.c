@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "../All_functions/global.h" 
 
 
@@ -29,49 +30,50 @@ AlunoFileStruct* getTxt(int *n_alunos){
         }
         alunosFile = realloc(alunosFile, ((*n_alunos)+1)*sizeof(AlunoFileStruct));
 
-        //nome
-        alunosFile[*n_alunos].name = malloc((strlen(filedata[0])+1));
-        strcpy(alunosFile[*n_alunos].name, filedata[0]);
-        //REGIME
-        alunosFile[*n_alunos].regime = malloc((strlen(filedata[1])+1));
-        strcpy(alunosFile[*n_alunos].regime, filedata[1]);
-        //Year
-        alunosFile[*n_alunos].year = atoi(filedata[2]);
-        //ID / Número
-        alunosFile[*n_alunos].id = atoi(filedata[3]);
-        //Course 
-        alunosFile[*n_alunos].course = malloc((strlen(filedata[4])+1));
-        strcpy(alunosFile[*n_alunos].course, filedata[4]);
+        if(strcmp(filedata[0] , "NOME") != 0 && strcmp(filedata[1] , "REGIME") != 0 && strcmp(filedata[2] , "ANO") != 0 && strcmp(filedata[3] , "NÚMERO") != 0 && strcmp(filedata[4] , "CURSO") != 0){
+            //nome
+            alunosFile[*n_alunos].name = malloc((strlen(filedata[0])+1));
+            strcpy(alunosFile[*n_alunos].name, filedata[0]);
+            //REGIME
+            alunosFile[*n_alunos].regime = malloc((strlen(filedata[1])+1));
+            strcpy(alunosFile[*n_alunos].regime, lowercase(filedata[1]));
+            alunosFile[*n_alunos].regime[0] = toupper(alunosFile[*n_alunos].regime[0]);
+            //Year
+            alunosFile[*n_alunos].year = atoi(filedata[2]);
+            //ID / Número
+            alunosFile[*n_alunos].id = atoi(filedata[3]);
+            //Course 
+            alunosFile[*n_alunos].course = malloc((strlen(filedata[4])+1));
+            strcpy(alunosFile[*n_alunos].course, uppercase(filedata[4]));
 
-        *n_alunos = *n_alunos + 1;
+            *n_alunos = *n_alunos + 1;
+        }
     }
 
+    int flag = 0;
+    for(int i = 0; i < *n_alunos; i++){
+        for(int j = i+1; j < *n_alunos; j++){
+            if(alunosFile[i].id == alunosFile[j].id){
+                if(flag == 0){
+                    printc("\n[red]ERRO[/red] - Os seguintes alunos têm o mesmo número:");
+                    flag = 1;
+                }
+                printc("\n[red]ERRO[/red] - ID:%d O aluno [yellow]%s[/yellow] tem o mesmo número que o aluno [yellow]%s[/yellow]", alunosFile[i].id, alunosFile[i].name, alunosFile[j].name);
+            }
+        }
+    }
     fclose(file);
+    if(flag == 1){
+        printc("\n\n");
+        *n_alunos = 0;
+        return NULL;
+    }
     return alunosFile;
 }
 
 AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruct *regimes, int n_regimes, courseStruct *courses, int n_courses){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct)*n_alunos);
     for (int i = 0; i < n_alunos; i++){
-        /* char *email = malloc(100), *password = malloc(100);
-        //email example: pv25207@estgv.ipv.pt
-        strcat(email, "pv");
-        char* id = malloc(10);
-        itoa(alunos[i].id, id, 10);
-        strcat(email, id);
-        strcat(email, "@estgv.ipv.pt");
-        //password example: pv25207ee
-        strcat(password, "pv");
-        itoa(alunos[i].id, password, 10);
-        strcat(password, uppercase((findCourseId(alunos[i].id_course)).name));
-
-        alunos[i].email = malloc((strlen(email)+1));
-        alunos[i].password = malloc((strlen(password)+1));
-        strcpy(alunos[i].email, email);
-        strcpy(alunos[i].password, password); */
-
-
-
         alunos[i].name = malloc((strlen(alunosFile[i].name)+1));
         strcpy(alunos[i].name, alunosFile[i].name);
         alunos[i].year = alunosFile[i].year;
@@ -88,6 +90,28 @@ AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruc
                 break;
             }
         }
+
+        char *email = malloc(/* strlen("pv") + 10 + strlen("@estgv.ipv.pt") +  */1000), *password = malloc(100);
+        //email example: pv25207@estgv.ipv.pt
+        email[0] = '\0';
+        strcat(email, "pv");
+        char* id = malloc(10);
+        itoa(alunosFile[i].id, id, 10);
+        strcat(email, id);
+        strcat(email, "@estgv.ipv.pt");
+        alunos[i].email = malloc((strlen(email)+1));
+        strcpy(alunos[i].email, email);
+
+        //password example: pv25207EE
+        password[0] = '\0';
+        strcat(password, "pv");
+        strcat(password, id);
+        strcat(password, alunosFile[i].course);
+        alunos[i].password = malloc((strlen(password)+1));
+        strcpy(alunos[i].password, password);
+
+        printf("\nEmail: %s\n", alunos[i].email);
+        printf("Password: %s\n", alunos[i].password);
     }
     return alunos;
 }

@@ -7,7 +7,7 @@ void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
     FILE *file = fopen("data/bin/permission.bin", "ab");
     permissionFileStruct permFile;
     if (file == NULL){
-        printf("\nErro ao abrir o ficheiro permission.bin");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]permission.bin[/red]\n\n");
         exit(1);
     }
     
@@ -77,7 +77,7 @@ permissionFileStruct* readBinPermissions(){
     FILE *file = fopen("data/bin/permission.bin", "rb");
     permissionFileStruct *permFile = malloc(sizeof(permissionFileStruct));
     if (file == NULL){
-        printc("\n\n\tErro ao abrir o ficheiro [red]permission.bin[/red]\n\n");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]permission.bin[/red]\n\n");
         return NULL;
     }
     else{

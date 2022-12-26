@@ -43,12 +43,12 @@ void main(){
         }
     } while (op != 0);
     //Testes
-    MenuDisciplinas();    
+    /* MenuDisciplinas();    
     ReadTxtDisciplinas();
     SaveTxtDisciplinas();
     MenuEditarAdicionarRemoverDisciplinas();
     CriarDisciplina();
-    RemoverDisciplina();
+    RemoverDisciplina(); */
 
 }
 
@@ -57,7 +57,7 @@ void readData(){
     regimes = readBinRegimes(&n_regimes);
     perms_file = readBinPermissions();
     courses = readBinCourses(&n_courses);  
-    disciplinas = ReadTxtDisciplinas(&n_disciplinas);
+    /* disciplinas = ReadTxtDisciplinas(&n_disciplinas); */
     salas = readBinSalas(&n_salas); 
 }
 
