@@ -31,7 +31,7 @@ void main(){
                 break;
             case 1:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                printAlunos(alunos, n_alunos);
+                printAlunos();
                 break;
             case 2:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -52,10 +52,10 @@ void main(){
 }
 
 void readData(){
-    alunos = readBinAlunos(&n_alunos);
-    regimes = readBinRegimes(&n_regimes);
+    alunos = readBinAlunos();
+    regimes = readBinRegimes();
     perms_file = readBinPermissions();
-    courses = readBinCourses(&n_courses);  
+    courses = readBinCourses();  
     /* disciplinas = ReadTxtDisciplinas(&n_disciplinas); */
     salas = readBinSalas(&n_salas); 
 }

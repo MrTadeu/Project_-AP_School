@@ -3,7 +3,6 @@
 #include <string.h>
 #include "global.h"
 
-extern AlunoFileStruct *alunosFile;
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
@@ -69,19 +68,19 @@ void importDataTxtBin(){
         }
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS REGIMES SEM REPETIÇÕES E GUARDAR EM regimes
-        regimes = getAllRegimes(alunosFile, n_alunos, &n_regimes);
+        regimes = getAllRegimes(alunosFile);
         //GUARDAR REGIMES EM BINARIO
-        saveBinRegimes(regimes, n_regimes);
+        saveBinRegimes();
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS CURSOS SEM REPETIÇÕES E GUARDAR EM courses
-        courses = getAllCourses(alunosFile, n_alunos, &n_courses);
+        courses = getAllCourses(alunosFile);
         //GUARDAR CURSOS EM BINARIO
-        saveBinCourses(courses, n_courses);
+        saveBinCourses();
 
         //LER ARRAY alunosFile, regimes, courses E GUARDAR NO FORMATO DE AlunoStruct
         alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
-        saveBinAlunos(alunos, n_alunos);
+        saveBinAlunos();
 
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
         /* saveAndSetPermissionsBinByTxt(regimes, n_regimes); */

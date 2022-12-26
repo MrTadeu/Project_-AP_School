@@ -41,8 +41,7 @@ AlunoFileStruct* getTxt(int *n_alunos){
             }
             //REGIME
             alunosFile[*n_alunos].regime = malloc((strlen(filedata[1])+1));
-            strcpy(alunosFile[*n_alunos].regime, lowercase(filedata[1]));
-            alunosFile[*n_alunos].regime[0] = toupper(alunosFile[*n_alunos].regime[0]);
+            strcpy(alunosFile[*n_alunos].regime, capitalize(filedata[1]));
             //Year
             alunosFile[*n_alunos].year = atoi(filedata[2]);
             //ID / Número
@@ -67,55 +66,23 @@ AlunoFileStruct* getTxt(int *n_alunos){
             }
         }
     }
+    
     fclose(file);
     if(flag == 1){
         printc("\n\nQuer gerar novos números para os alunos? ([green]1[/green]/[red]0[/red]) ");
         scanf("%d", &gerar);
-        printf("hii34%d",*n_alunos);
         if(gerar == 1){
             int *numbers = malloc(*n_alunos * sizeof(int));
             for (size_t i = 0; i < *n_alunos; i++){
                 numbers[i] = alunosFile[i].id;
             }
-            
-
-            for (int i = 0; i < *n_alunos; i++) {
-                numbers[i] = generate_unique_numbers(numbers, i);
-            }
-
-
+            generate_unique_numbers(numbers, *n_alunos);
             for (size_t i = 0; i < *n_alunos; i++){
                 alunosFile[i].id = numbers[i];
-                printf("\t%d\n", numbers[i]);
             }
-            printf("hii4");
-
-
-
-
-        int flag = 0, gerar = 0;
-        for(int i = 0; i < *n_alunos; i++){
-            for(int j = i+1; j < *n_alunos; j++){
-                if(alunosFile[i].id == alunosFile[j].id){
-                    if(flag == 0){
-                        printc("\n[red]ERRO[/red] - Os seguintes alunos têm o mesmo núasdadsasdadsadsmero:");
-                        flag = 1;
-                    }
-                    printc("\n[red]ERRO[/red] - ID:%d O aluno [yellow]%s[/yellow] tem o mesmo número que o aluno [yellow]%s[/yellow]", alunosFile[i].id, alunosFile[i].name, alunosFile[j].name);
-                }
-            }
-        }
-
-
-
-
-
-
-
-
         }
         else{
-            printc("\n\n");
+            printc("[red]Não foi Introduzido qualquer dado![/red]\n\n");
             *n_alunos = 0;
             return NULL;
         }

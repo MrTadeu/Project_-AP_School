@@ -41,10 +41,10 @@ int isdigit_cheker(char *str){
     }
 }
 
-int generate_unique_numbers(int *numbers, int size) {
+/* int generate_unique_numbers(int *numbers, int size) {
   // seed the random number generator
   srand(time(NULL));
-  int max = 100000, min = 1000;
+  int max = 100000000, min = 1000;
 
   int unique = 0;  // flag to store whether a unique number has been found
   int number;      // declare the number variable
@@ -62,4 +62,28 @@ int generate_unique_numbers(int *numbers, int size) {
   }
 
   return number;  // return the unique number
+} */
+
+void generate_unique_numbers(int *array, int length) {
+  // Create a set to store the unique values
+  int max = 150000, min = 1000;
+  int unique_values[150000 - 1000 + 1] = {0}; //<-- MAX AND MIN NEED TO BE THE SAME AS ^^ 
+
+  // Loop through the array and check for duplicates
+  for (int i = 0; i < length; i++) {
+    if (unique_values[array[i] - min] == 1) {
+      // Generate a new unique number and replace the duplicate
+      int new_number;
+      do {
+        new_number = rand() % (max - min + 1) + min;
+      } while (unique_values[new_number - min] == 1);
+      array[i] = new_number;
+
+      // Mark the new number as seen
+      unique_values[new_number - min] = 1;
+    } else {
+      // Mark the current number as seen
+      unique_values[array[i] - min] = 1;
+    }
+  }
 }

@@ -3,28 +3,33 @@
 #include <string.h>
 #include "../All_functions/global.h"
 
-regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_alunos, int *n_regimes){
+extern AlunoStruct *alunos;
+extern regimeStruct *regimes;
+extern courseStruct *courses;
+extern int n_alunos, n_regimes, n_courses;
+
+regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile){
     regimeStruct *regimes = malloc(sizeof(regimeStruct));
     for (int i = 0; i < n_alunos; i++){
         int found = 0;
-        for (int j = 0; j < *n_regimes; j++){
+        for (int j = 0; j < n_regimes; j++){
             if (strcmp(alunosFile[i].regime, regimes[j].name) == 0){
                 found = 1;
                 break;
             }
         }
         if (!found){
-            regimes = realloc(regimes, ((*n_regimes)+1)*sizeof(regimeStruct));
-            regimes[*n_regimes].id = *n_regimes+1;
-            regimes[*n_regimes].name = malloc((strlen(alunosFile[i].regime)+1));
-            strcpy(regimes[*n_regimes].name, alunosFile[i].regime);
-            *n_regimes=*n_regimes+1;
+            regimes = realloc(regimes, (n_regimes+1)*sizeof(regimeStruct));
+            regimes[n_regimes].id = n_regimes+1;
+            regimes[n_regimes].name = malloc((strlen(alunosFile[i].regime)+1));
+            strcpy(regimes[n_regimes].name, alunosFile[i].regime);
+            n_regimes = n_regimes+1;
         }
     }
     return regimes;
 }
 
-void saveBinRegimes(regimeStruct *regimes, int n_regimes){
+void saveBinRegimes(){
     FILE *file = fopen("data/bin/regimes.bin","ab");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]regimes.bin[/red]\n\n");
@@ -40,7 +45,7 @@ void saveBinRegimes(regimeStruct *regimes, int n_regimes){
     fclose(file);
 }
 
-regimeStruct *readBinRegimes(int *n_regimes){
+regimeStruct *readBinRegimes(){
     regimeStruct *regimes = malloc(sizeof(regimeStruct));
     int i;
     FILE *file = fopen("data/bin/regimes.bin","rb");
@@ -58,7 +63,7 @@ regimeStruct *readBinRegimes(int *n_regimes){
             regimes[i].name = malloc(regimeLen);
             fread(regimes[i].name, regimeLen, 1, file);
         }
-        *n_regimes = i-1;
+        n_regimes = i-1;
         fclose(file);
         return regimes;
     }   

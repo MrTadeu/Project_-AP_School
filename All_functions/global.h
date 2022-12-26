@@ -16,27 +16,28 @@ void progress_update();
 char *lowercase(char *str);
 char *uppercase(char *str);
 int isdigit_cheker(char *str);
-int generate_unique_numbers(int *numbers, int size);
+void generate_unique_numbers(int *array, int length);
+char *capitalize(char *str);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt(int *n_alunos);
 AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruct *regimes, int n_regimes, courseStruct *courses, int n_courses);
 
 //alunos.c
-void saveBinAlunos(AlunoStruct *alunos, int n_alunos);
-void printAlunos(AlunoStruct *alunos, int n_alunos);
-AlunoStruct *readBinAlunos(int *n_alunos);
+void saveBinAlunos();
+void printAlunos();
+AlunoStruct *readBinAlunos();
 
 //courses.c
-courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_alunos, int *n_courses);
-void saveBinCourses(courseStruct *courses, int n_courses);
-courseStruct *readBinCourses(int *n_courses);
+courseStruct *getAllCourses(AlunoFileStruct *alunosFile);
+void saveBinCourses();
+courseStruct *readBinCourses();
 courseStruct findCourseId(int id);
 
 //regimes.c
-regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile, int n_alunos, int *n_regimes);
-void saveBinRegimes(regimeStruct *regimes, int n_regimes);
-regimeStruct *readBinRegimes(int *n_regimes);
+regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile);
+void saveBinRegimes();
+regimeStruct *readBinRegimes();
 
 //permissions.c
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);

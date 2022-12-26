@@ -3,35 +3,34 @@
 #include <string.h>
 #include "../All_functions\global.h"
 
-extern AlunoFileStruct *alunosFile;
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
 extern int n_alunos, n_regimes, n_courses;
 
 
-courseStruct *getAllCourses(AlunoFileStruct *alunosFile, int n_alunos, int *n_courses){
+courseStruct *getAllCourses(AlunoFileStruct *alunosFile){
     courseStruct *courses = malloc(sizeof(courseStruct));
     for (int i = 0; i < n_alunos; i++){
         int found = 0;
-        for (int j = 0; j < *n_courses; j++){
+        for (int j = 0; j < n_courses; j++){
             if (strcmp(alunosFile[i].course, courses[j].name) == 0){
                 found = 1;
                 break;
             }
         }
         if (!found){
-            courses = realloc(courses, ((*n_courses)+1)*sizeof(courseStruct));
-            courses[*n_courses].id = *n_courses+1;
-            courses[*n_courses].name = malloc((strlen(alunosFile[i].course)+1));
-            strcpy(courses[*n_courses].name, alunosFile[i].course);
-            *n_courses=*n_courses+1;
+            courses = realloc(courses, ((n_courses)+1)*sizeof(courseStruct));
+            courses[n_courses].id = n_courses+1;
+            courses[n_courses].name = malloc((strlen(alunosFile[i].course)+1));
+            strcpy(courses[n_courses].name, alunosFile[i].course);
+            n_courses = n_courses+1;
         }
     } 
     return courses;
 }
 
-void saveBinCourses(courseStruct *courses, int n_courses){
+void saveBinCourses(){
     FILE *file = fopen("data/bin/courses.bin","ab");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]course.bin[/red]\n\n");
@@ -48,7 +47,7 @@ void saveBinCourses(courseStruct *courses, int n_courses){
     fclose(file);
 }
 
-courseStruct *readBinCourses(int *n_courses){
+courseStruct *readBinCourses(){
     courseStruct *courses = malloc(sizeof(courseStruct));
     int i;
     FILE *file = fopen("data/bin/courses.bin","rb");
@@ -66,7 +65,7 @@ courseStruct *readBinCourses(int *n_courses){
             courses[i].name = malloc(courseLen);
             fread(courses[i].name, courseLen, 1, file);
         }
-        *n_courses = i-1;
+        n_courses = i-1;
         fclose(file);
         return courses;
     }

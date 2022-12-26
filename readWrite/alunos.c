@@ -3,22 +3,29 @@
 #include <string.h>
 #include "../All_functions\global.h"
 
-void printAlunos(AlunoStruct *alunos, int n_alunos){
-    for (int i = 0; i < 10; i++){
-        printf("I: %d\n", i);
-        printf("ID: %d", alunos[i].id);
-        printf("Nome: %s", alunos[i].name);
-        printf("Ano: %d", alunos[i].year);
-        printf("ID Regime: %d", alunos[i].id_regime);
-        printf("ID Course: %d", alunos[i].id_course);
-        printf("Email: %s\n", alunos[i].email);
-        printf("Password: %s\n", alunos[i].password);
-        printf("\n");
+extern AlunoStruct *alunos;
+extern regimeStruct *regimes;
+extern courseStruct *courses;
+extern int n_alunos, n_regimes, n_courses;
+
+void printAlunos(){
+    for (int i = 0; i < n_alunos; i++){
+        printf("\nI: %d", i);
+        printf(" ID: %d", alunos[i].id);
+        printf(" Nome: %s", alunos[i].name);
+        printf(" Ano: %d", alunos[i].year);
+        printf(" ID Regime: %d", alunos[i].id_regime);
+        printf(" ID Course: %d", alunos[i].id_course);
+        printf(" Email: %s", alunos[i].email);
+        printf(" Password: %s", alunos[i].password);
     }
-    printf("N_Alunos: %d\n", n_alunos);
+    printc("\n\n[lw]Pressione enter para continuar[/lw]\n");  
+    getchar();
+    getchar();
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
 }
 
-void saveBinAlunos(AlunoStruct *alunos, int n_alunos){
+void saveBinAlunos(){
     FILE *file = fopen("data/bin/alunos.bin","ab");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
@@ -45,7 +52,7 @@ void saveBinAlunos(AlunoStruct *alunos, int n_alunos){
     fclose(file);
 }
 
-AlunoStruct *readBinAlunos(int *n_alunos){
+AlunoStruct *readBinAlunos(){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct));
     int i;
     FILE *file = fopen("data/bin/alunos.bin","rb");
@@ -77,7 +84,7 @@ AlunoStruct *readBinAlunos(int *n_alunos){
 
             alunos = realloc(alunos, sizeof(AlunoStruct) * (i+2));
         }
-        *n_alunos = i-1;
+        n_alunos = i-1;
         fclose(file);
         return alunos;
     }
