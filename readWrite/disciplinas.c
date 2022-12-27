@@ -278,6 +278,51 @@ void ListarCursos()
     }
 }
 
+void CriarCurso()
+{
+    n_courses++;
+    char TmpNameCurso[15], TmpNameDisciplina[15], TmpIdDiretor[15];
+    printc("\n\n\t[green]Insira o nome do curso:[/green] ");
+    scanf("%s", TmpNameCurso);
+    if(CheckIFCursoExisteNome(TmpNameCurso) != -1){
+        printc("\n\n\t[red]Este curso ja existe[/red]\n\n");
+        do{
+            printf("\n\nInsira o novo nome do curso: ");
+            scanf("%s", TmpNameCurso);
+        } while (CheckIFCursoExiste(TmpNameCurso) != -1); 
+    }
+    courses = (courseStruct*) realloc(courses, (n_courses) * sizeof(courseStruct*));
+    courses[n_courses-1].id = n_courses;
+    courses[n_courses-1].name = malloc(strlen(TmpNameCurso + 1));
+    uppercase(TmpNameCurso);
+    strcpy(courses[n_courses-1].name, TmpNameCurso);
+    for(int i=0; i<3; i++)
+    {   
+        printc("\n\n\t[green]Insira o nome da disciplina do %d ano:[/green] ", i+1);
+        for(int j=0; j<10; j++)
+        {
+            printf("Disciplina %d: ", j+1);
+            scanf("%s", TmpNameDisciplina);
+            courses[n_courses-1].AnoDisciplina[i][j] = malloc(strlen(TmpNameDisciplina + 1));
+            uppercase(TmpNameDisciplina);
+            strcpy(courses[n_courses-1].AnoDisciplina[i][j], TmpNameDisciplina);
+        }
+    }
+    
+    printc("\n\n\t[green]Insira o ID do diretor de curso:[/green] ");
+    scanf("%d", &TmpIdDiretor);
+    if(CheckIFProfessorExiste(TmpIdDiretor) == -1){
+        printc("\n\n\t[red]Esta pessoa nao existe[/red]\n\n");
+        do{
+            printf("\n\nInsira o novo ID do diretor: ");
+            scanf("%d", &TmpIdDiretor);
+        } while (CheckIFProfessorExiste(TmpIdDiretor) == -1); 
+    }
+    courses[n_courses-1].IdResponsavel = TmpIdDiretor;
+    SaveBinCursosDisciplina();
+    SaveBinCursos();
+}
+
 void EditarCursos()
 {
     int id;
@@ -310,7 +355,7 @@ void EditarCursos()
                     } while (CheckIFCursoExisteNome(TmpNameCurso) != -1); 
                 }
                 strcpy(courses[CheckIFCursoExiste(id)].name, TmpNameCurso);
-                saveBinCourses(courses , n_courses);
+                saveBinCourses();
             }
             printf("\n\nAlterar disciplinas? (S/N");
             scanf("%c", &op);
@@ -355,7 +400,6 @@ void EditarCursos()
                     } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
                 }
                 courses[CheckIFCursoExiste(id)].IdResponsavel = TmpIdDiretor;
-                SaveTxtCursosDisciplina();
                 SaveBinCursosDisciplina();
             }
         }
