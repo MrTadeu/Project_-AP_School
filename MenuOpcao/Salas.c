@@ -45,7 +45,6 @@ void criarSala(){ // #VALIDAR
     fwrite(&salatemp.numeroCadeiras, sizeof(int), 1, arquivo);
     fclose(arquivo);
     free(salatemp.nomeSala);
-    free(salatemp.numeroSala);
     readBinSalas();
 }
 
