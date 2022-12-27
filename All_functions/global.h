@@ -69,7 +69,7 @@ void SaveBinDisciplinas();
 //cursosdisciplinas.c
 void InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
 void ReadBinCursosDisciplina();
-void SaveBinCursos(); 
+void SaveBinCursosDisciplina();
 
 
 

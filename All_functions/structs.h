@@ -23,7 +23,7 @@ typedef struct{
     int id;
     char *name;
     char *AnoDisciplina[3][10];
-    char *IdResponsavel;
+    int IdResponsavel;
 } courseStruct;
 
 typedef struct {

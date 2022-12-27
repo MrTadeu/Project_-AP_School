@@ -11,7 +11,8 @@ extern int n_disciplinas, n_courses, n_alunos;
 
 
 void InitCursos() { //Apenas usado pela primeira vez
-    char TmpNameDisciplina[15], TmpIdDiretor[15];
+    char TmpNameDisciplina[15];
+    int  TmpIdDiretor;
     for(int i=0; i<n_courses; i++)
     {   ListarDisciplinas();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
@@ -38,12 +39,12 @@ void InitCursos() { //Apenas usado pela primeira vez
         printf("Insira o ID do diretor deste curso: ");
         printf("\nID: ");
         scanf("%d", &TmpIdDiretor);
-        if(CheckIFProfessorExiste(TmpIdDiretor) == -1){
+        if(CheckIFPessoaExiste(TmpIdDiretor) == -1){
             printc("\n\n\t[red]Esta pessoa nao existe[/red]\n\n");
             do{
-                printf("\n\nInsira o novo ID do diretor: ");
+                printf("\n\nInsira o ID do diretor: ");
                 scanf("%d", &TmpIdDiretor);
-            } while (CheckIFProfessorExiste(TmpIdDiretor) == -1); 
+            } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
         }
         courses[i].IdResponsavel = TmpIdDiretor;
     }
@@ -61,20 +62,20 @@ void SaveBinCursosDisciplina()
     {
         if(feof(CursoDisciplinaBin))
             break;
-        fwrite(courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
+        fwrite(&courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
         size_t CursoLen = strlen(courses[i].name) + 1;
-        fwrite(CursoLen, sizeof(size_t), 1, CursoDisciplinaBin);
+        fwrite(&CursoLen, sizeof(size_t), 1, CursoDisciplinaBin);
         fwrite(courses[i].name, CursoLen, 1, CursoDisciplinaBin);
         for(int j=0; j<3; j++)
         {
             for(int k=0; k<10; k++)
             {
                 size_t DisciplinaLen = strlen(courses[i].AnoDisciplina[j][k]) + 1;
-                fwrite(DisciplinaLen, sizeof(size_t), 1, CursoDisciplinaBin);
+                fwrite(&DisciplinaLen, sizeof(size_t), 1, CursoDisciplinaBin);
                 fwrite(courses[i].AnoDisciplina[j][k], DisciplinaLen, 1, CursoDisciplinaBin);
             }
         }
-        fwrite(courses[i].IdResponsavel, sizeof(int), 1, CursoDisciplinaBin);
+        fwrite(&courses[i].IdResponsavel, sizeof(int), 1, CursoDisciplinaBin);
     }
 }
 

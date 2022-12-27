@@ -31,7 +31,6 @@ void criarProfessor(){
         printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
         exit(1);
     }
-    fwrite(n_professores, sizeof(int), 1, file);
     size_t nomeProfessorsize = strlen(professortemp.nomeProfessor) + 1; // +1 para guardar o \0
     fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
     fwrite(professortemp.nomeProfessor, nomeProfessorsize, 1, file);
