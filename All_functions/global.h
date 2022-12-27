@@ -46,6 +46,7 @@ permissionFileStruct* readBinPermissions();
 //menus.c
 int mainMenu();
 int importExportMenu();
+void MenuAdminCursos();
 void MenuAdminDisciplinas();
 void MenuAdminEditarAdicionarRemoverDisciplinas();
 
@@ -61,20 +62,27 @@ void editarSala();
 void removerSalas();
 
 //disciplinas.c
-/* void MenuAdminCursos();
-void MenuAdminDisciplinas(); 
 disciplinasStruct* ReadTxtDisciplinas();
-void SaveTxtDisciplinas();
+void ReadBinDisciplinas();//Apenas necessario primeira vez(ja vamos ter o ficheiro que podemos binario)
 void SaveBinDisciplinas();
 void ListarDisciplinas();
-void MenuEditarAdicionarRemoverDisciplinas();
 void CriarDisciplina();
 void RemoverDisciplina();
 void EditarDisciplina();
-void InitCursos();
-void SaveTxtCursos();
+
+//DiscCursos.c
+void InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
+void ReadBinCursosDisciplina();
 void SaveBinCursos(); 
 void ListarCursosDisciplinas();
 void ListarCursos();
 void EditarCursos();
- */
+
+//DiscChecker.c
+int CheckIFDisciplinaExiste(int id);
+int CheckIFDisciplinaExisteNome(char *name);
+int CheckIFCursoExiste(int id);
+int CheckIFCursoExisteNome(char *name);
+int CheckIFPessoaExiste(int id);
+
+

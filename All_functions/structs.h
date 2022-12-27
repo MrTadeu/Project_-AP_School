@@ -21,7 +21,7 @@ typedef struct{
 
 typedef struct{
     int id;
-    char *name; //sigla
+    char *name;
     char *AnoDisciplina[3][10];
     char *IdResponsavel;
 } courseStruct;
