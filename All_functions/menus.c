@@ -41,98 +41,6 @@ int importExportMenu(){
     printc("[lw]Username:[/lw ");
     printc("[lw]Password:[/lw ");
 }
-void MenuAdminCursos()
-{   
-    do
-    {
-    int opcao;
-    printc("\n\n\t  [green]Menu Cursos[/green]");
-    printc("\n\n\t[green]1[/green] - Listar Cursos");
-    printc("\n\n\t[green]2[/green] - Listar Cursos e Disciplinas");
-    printc("\n\t[green]3[/green] - Editar Cursos");
-    printc("\n\t[green]4[/green] - Menu Disciplinas");
-    printc("\n\t[green]5[/green] - Voltar");
-    printc("\n\n\tOpcao: ");
-    scanf("%d", &opcao);
-    switch (opcao)
-    {
-    case 1:
-        ListarCursos();
-        break;
-    case 2:
-        ListarCursosdisciplinas();
-        break;
-    case 3:
-        EditarCursos();
-        break;
-    case 4:
-        // <--- This is the problem (por funcao do menu anterior)
-        break;
-    default:
-        printc("\n\n\t[red]Opcao Invalida[/red]");
-        break;
-    }
-    } while (1);
-}
-void MenuAdminDisciplinas()
-{
-    do
-    {
-    int opcao;
-    printc("\n\n\t  [green]Menu Disciplinas[/green]");
-    printc("\n\n\t[green]1[/green] - Listar Disciplinas");
-    printc("\n\t[green]2[/green] - Editar/Adicionar/Remover Disciplinas");
-    printc("\n\t[green]3[/green] - Voltar");
-    printc("\n\n\tOpcao: ");
-    scanf("%d", &opcao);
-    switch (opcao)
-    {
-    case 1:
-        ListarDisciplinas();
-        break;
-    case 2:
-        MenuAdminEditarAdicionarRemoverDisciplinas();
-        break;
-    case 3:
-        MenuAdminCursos();
-        break;
-    default:
-        printc("\n\n\t[red]Opcao Invalida[/red]");
-        break;
-    }
-    }while (1);
-}
-void MenuAdminEditarAdicionarRemoverDisciplinas()
-{
-    do
-    {
-    int opcao;
-    printc("\n\n\t[green]1[/green] - Adicionar Disciplina");
-    printc("\n\t[green]2[/green] - Remover Disciplina");
-    printc("\n\t[green]3[/green] - Editar Disciplina");
-    printc("\n\t[green]4[/green] - Voltar");
-    printc("\n\n\tOpcao: ");
-    scanf("%d", &opcao);
-    switch (opcao)
-    {
-    case 1:
-        CriarDisciplina();
-        break;
-    case 2:
-        RemoverDisciplina();
-        break;
-    case 3:
-        EditarDisciplina();
-        break;
-    case 4:
-        MenuDisciplinas();
-        break;
-    default:
-        printc("\n\n\t[red]Opcao Invalida[/red]");
-        break;
-    }
-    }while (1);   
-} */
 
 /* 
 //MENU PRINCIPAL: login.c
@@ -381,7 +289,7 @@ void MenuProfessor(PermissionsType perm){
     }
 }
 
-//MENU CURSOS: cursos.c // ver melhor
+//MENU CURSOS: disciplinas.c (I know, it's not the best name)//copilot text
 void MenuCursos(PermissionsType perm){
     int opcao, i = 0;
     printc("**************************************************\n");
@@ -391,14 +299,20 @@ void MenuCursos(PermissionsType perm){
     if (perm.CriarCursos){
         printf("**        %d -> Criar Cursos                     **\n", i++);
     }
-    if (perm.ListarCursos){
-        printf("**        %d -> Listar Cursos                    **\n", i++);
-    }
     if (perm.EditarCursos){
         printf("**        %d -> Editar Cursos                    **\n", i++);
     }
     if (perm.RemoverCursos){
         printf("**        %d -> Remover Cursos                   **\n", i++);
+    }
+    if (perm.ListarCursos){
+        printf("**        %d -> Listar Cursos                    **\n", i++);
+    }
+        if (perm.ListarCursosDisciplinas){                                         // <--- This is the problem
+        printf("**        %d -> Listar Cursos/Disciplinas        **\n", i++);
+    }
+    if (perm.MenuDisciplinas){
+        printf("**        %d -> Menu Disciplinas                 **\n", i++);
     }
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
@@ -409,25 +323,96 @@ void MenuCursos(PermissionsType perm){
     }
     if (perm.CriarCursos){
         if (opcao == i++){
-            criarCursos(); // <--- This is the problem
+            CriarCurso();
         }
     }
     if (perm.ListarCursos){
         if (opcao == i++){
-            listarCursos(); // <--- This is the problem
+            ListarCursos();
+        }
+    }
+    if (perm.ListarCursosDisciplinas){                          // <--- This is the problem
+        if (opcao == i++){
+            ListarCursosDisciplinas();
         }
     }
     if (perm.EditarCursos){
         if (opcao == i++){
-            editarCursos(); // <--- This is the problem
+            EditarCursos(); 
         }
     }
     if (perm.RemoverCursos){
         if (opcao == i++){
-            removerCursos(); // <--- This is the problem
+            RemoverCursos(); // <--- This is the problem
+        }
+    }
+    if (perm.MenuDisciplinas){
+        if (opcao == i++){
+            MenuDisciplinas();
         }
     }
 }
+
+void MenuDisciplinas()
+{
+    do
+    {
+    int opcao;
+    printc("\n\n\t  [green]Menu Disciplinas[/green]");
+    printc("\n\n\t[green]1[/green] - Listar Disciplinas");
+    printc("\n\t[green]2[/green] - Editar/Adicionar/Remover Disciplinas");
+    printc("\n\t[green]3[/green] - Voltar");
+    printc("\n\n\tOpcao: ");
+    scanf("%d", &opcao);
+    switch (opcao)
+    {
+    case 1:
+        ListarDisciplinas();
+        break;
+    case 2:
+        MenuEditarAdicionarRemoverDisciplinas();
+        break;
+    case 3:
+        MenuCursos(???????);            // <--- This is the problem
+        break;
+    default:
+        printc("\n\n\t[red]Opcao Invalida[/red]");
+        break;
+    }
+    }while (1);
+}
+
+void MenuEditarAdicionarRemoverDisciplinas()
+{
+    do
+    {
+    int opcao;
+    printc("\n\n\t[green]1[/green] - Adicionar Disciplina");
+    printc("\n\t[green]2[/green] - Remover Disciplina");
+    printc("\n\t[green]3[/green] - Editar Disciplina");
+    printc("\n\t[green]4[/green] - Voltar");
+    printc("\n\n\tOpcao: ");
+    scanf("%d", &opcao);
+    switch (opcao)
+    {
+    case 1:
+        CriarDisciplina();
+        break;
+    case 2:
+        RemoverDisciplina();
+        break;
+    case 3:
+        EditarDisciplina();
+        break;
+    case 4:
+        MenuDisciplinas();
+        break;
+    default:
+        printc("\n\n\t[red]Opcao Invalida[/red]");
+        break;
+    }
+    }while (1);   
+} 
 
 //MENU SALAS: salas.c
 void MenuSalas(PermissionsType perm){
