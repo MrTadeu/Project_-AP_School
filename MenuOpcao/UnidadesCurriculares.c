@@ -122,7 +122,7 @@ void CriarCurso()
     if(CheckIFCursoExisteNome(TmpNameCurso) != -1){
         printc("\n\n\t[red]Este curso ja existe[/red]\n\n");
         do{
-            printf("\n\nInsira o novo nome do curso: ");
+            printf("\n\nInsira a sigla do curso: ");
             scanf("%s", TmpNameCurso);
         } while (CheckIFCursoExiste(TmpNameCurso) != -1); 
     }

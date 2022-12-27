@@ -33,8 +33,7 @@ disciplinasStruct* ReadTxtDisciplinas()
     return disciplinas;
 }
 
-void ReadBinDisciplinas()
-{
+void ReadBinDisciplinas(){
     disciplinas = malloc(sizeof(disciplinasStruct));
     int i;
     FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","rb");
@@ -59,8 +58,7 @@ void ReadBinDisciplinas()
     }
 }
 
-void SaveBinDisciplinas()
-{
+void SaveBinDisciplinas(){
     FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","wb");
     if (disciplinasBin == NULL) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]disciplinas.bin[/red]\n\n");

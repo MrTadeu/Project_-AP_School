@@ -46,6 +46,7 @@ void criarSala(){ // #VALIDAR
     fclose(arquivo);
     free(salatemp.nomeSala);
     free(salatemp.numeroSala);
+    readBinSalas();
 }
 
 int ChekeIFsalaExist(char *nomeSala, int nSala){
@@ -142,6 +143,7 @@ void editarSala(){ // #VALIDAR
     free(nomeSala);
     free(salas);
     fclose(arquivo);
+    readBinSalas();
 }
 
 void removerSalas(){ // #VALIDAR
@@ -183,4 +185,5 @@ void removerSalas(){ // #VALIDAR
     free(nomeSala);
     free(salas);
     fclose(arquivo);
+    readBinSalas();
 }
