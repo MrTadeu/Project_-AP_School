@@ -289,7 +289,7 @@ void MenuProfessor(PermissionsType perm){
     }
 }
 
-//MENU CURSOS: disciplinas.c (I know, it's not the best name)//copilot text
+//MENU CURSOS: disciplinas.c && cursosdisciplinas.c && UnidadesCurriculares.c
 void MenuCursos(PermissionsType perm){
     int opcao, i = 0;
     printc("**************************************************\n");
