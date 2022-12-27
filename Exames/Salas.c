@@ -5,7 +5,7 @@
 #include "../All_functions/global.h"
 
 void listarSalas();
-SalaStruct* readBinSalas(int *n_salas);
+SalaStruct* readBinSalas();
 int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
@@ -78,7 +78,7 @@ void listarSalas(){
     }
 }
 
-SalaStruct* readBinSalas(int *n_salas){
+SalaStruct* readBinSalas(){
     SalaStruct *sala = malloc(sizeof(SalaStruct));
     FILE *arquivo;
     arquivo = fopen("../data/Exames/Salas.bin", "rb");
@@ -96,7 +96,7 @@ SalaStruct* readBinSalas(int *n_salas){
         i++;
         sala = realloc(sala, (i + 1) * sizeof(SalaStruct));
     }
-    *n_salas = i;
+    n_salas = i;
     fclose(arquivo);
     return sala;
 }

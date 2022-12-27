@@ -50,6 +50,6 @@ void readData(){
     perms_file = readBinPermissions();
     courses = readBinCourses();  
     disciplinas = ReadTxtDisciplinas();
-    salas = readBinSalas(&n_salas); 
+    salas = readBinSalas(); 
 }
 
