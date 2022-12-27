@@ -57,9 +57,10 @@ void importDataTxtBin();
 //salas.c
 void criarSalas();
 void listarSalas();
-SalaStruct* readBinSalas(int *n_salas);
+SalaStruct* readBinSalas();
 void editarSala();
 void removerSalas();
+int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 //disciplinas.c
 disciplinasStruct* ReadTxtDisciplinas();
