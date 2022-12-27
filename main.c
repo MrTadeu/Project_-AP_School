@@ -13,7 +13,8 @@ courseStruct *courses;
 permissionFileStruct *perms_file;
 disciplinasStruct *disciplinas;
 SalaStruct *salas;
-int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0;
+professorStruct *professores;
+int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, n_professores = 0;
 
 
 void readData();
