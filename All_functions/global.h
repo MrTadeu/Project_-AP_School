@@ -67,7 +67,7 @@ void ReadBinDisciplinas();//Apenas necessario primeira vez(ja vamos ter o fichei
 void SaveBinDisciplinas();
 
 //cursosdisciplinas.c
-void InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
+int InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
 void ReadBinCursosDisciplina();
 void SaveBinCursosDisciplina();
 
@@ -80,6 +80,9 @@ void RemoverDisciplina();
 void EditarDisciplina();
 //--------------------------------------------
 void ListarCursosDisciplinas();
+void RemoverDisciplinaFromCursos();
+void AdicionarDisciplinaToCursos();
+//--------------------------------------------
 void ListarCursos();
 void CriarCurso();
 void EditarCursos();

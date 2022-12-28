@@ -24,7 +24,7 @@ disciplinasStruct* ReadTxtDisciplinas()
         disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));
         fscanf(disciplinasTxt, "%d", &disciplinas[i].id);
         fscanf(disciplinasTxt, "%d",DiscNameLen);
-        disciplinas[i].name = malloc(DiscNameLen);
+        disciplinas[i].name = malloc(DiscNameLen+1);
         fscanf(disciplinasTxt, "%s", disciplinas[i].name);
     }
     n_disciplinas = i - 1;
@@ -42,9 +42,7 @@ void ReadBinDisciplinas(){
         exit(1);
     }
     else{
-        for (i = 0;n_disciplinas; i++){
-            if (feof(disciplinasBin))
-                break;
+        for (i = 0;i < n_disciplinas; i++){
             disciplinas = realloc(disciplinas, (i+1)*sizeof(disciplinasStruct));
             fread(&disciplinas[i].id, sizeof(int), 1, disciplinasBin);
             size_t disciplinasLen;
@@ -53,7 +51,6 @@ void ReadBinDisciplinas(){
             fread(disciplinas[i].name, disciplinasLen, 1, disciplinasBin);
             
         }
-        n_disciplinas = i-1;
         fclose(disciplinasBin);
     }
 }
@@ -69,6 +66,7 @@ void SaveBinDisciplinas(){
         fwrite(&disciplinas[i].id, sizeof(int), 1, disciplinasBin);
         size_t disciplinasLen = strlen(disciplinas[i].name) + 1;
         fwrite(&disciplinasLen, sizeof(size_t), 1, disciplinasBin);
+        uppercase(disciplinas[i].name);
         fwrite(disciplinas[i].name, disciplinasLen, 1, disciplinasBin);
     }
     fclose(disciplinasBin);
