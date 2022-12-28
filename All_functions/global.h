@@ -72,7 +72,6 @@ void ReadBinCursosDisciplina();
 void SaveBinCursosDisciplina();
 
 
-
 //UnidadesCurriculares.c
 void ListarDisciplinas();
 void CriarDisciplina();
@@ -80,8 +79,9 @@ void RemoverDisciplina();
 void EditarDisciplina();
 //--------------------------------------------
 void ListarCursosDisciplinas();
-void RemoverDisciplinaFromCursos();
-void AdicionarDisciplinaToCursos();
+void RemoverDisciplinaFromCursos(char* name);
+void AdicionarDisciplinaToCursos(char* nameCurso, char* nomeDisciplina);
+void EditarDisciplinaFromCursos(char *NameOriginal,char *nameNovo);
 //--------------------------------------------
 void ListarCursos();
 void CriarCurso();

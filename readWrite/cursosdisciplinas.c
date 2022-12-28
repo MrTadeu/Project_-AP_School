@@ -12,10 +12,8 @@ extern int n_disciplinas, n_courses, n_alunos;
 
 int InitCursos() { //Apenas usado pela primeira vez
     for (int i=0;i<n_courses;i++)
-    {
-        courses[i].AnoDisciplina = malloc(sizeof(char*) * 3);
-    }
-    char TmpNameDisciplina[15];
+        courses[i].AnoDisciplina = malloc(3);
+    char *TmpNameDisciplina = malloc(15);
     int  TmpIdDiretor;
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
@@ -25,7 +23,7 @@ int InitCursos() { //Apenas usado pela primeira vez
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
             for(int i=0; i<3; i++)
-                courses[i].AnoDisciplina[i] = malloc(sizeof(char*) * courses[i].num_disciplinas[j]);
+                courses[i].AnoDisciplina[i] = malloc(courses[i].num_disciplinas[j]);
             printf("Insira as siglas das %d disciplinas do %d ano : ", courses[i].num_disciplinas[j], j+1);
             for(int k=0; k<courses[i].num_disciplinas[j]; k++)
             {   
@@ -40,6 +38,8 @@ int InitCursos() { //Apenas usado pela primeira vez
                         uppercase(TmpNameDisciplina);
                     } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
                 }
+                TmpNameDisciplina = realloc(TmpNameDisciplina, strlen(TmpNameDisciplina)+1);
+                courses[i].AnoDisciplina[j][k] = malloc(strlen(TmpNameDisciplina)+1);
                 strcpy(courses[i].AnoDisciplina[j][k], TmpNameDisciplina);
             }
         }

@@ -21,6 +21,27 @@ void readData();
 
 void main(){
     readData();
+    // TESTES
+    //disciplinas
+    ReadTxtDisciplinas();//Apenas necessario primeira vez(ja vamos ter o ficheiro que podemos binario)
+    SaveBinDisciplinas();
+    ReadBinDisciplinas();
+    ListarDisciplinas();
+    //cursosdisciplinas.c
+    ListarCursos();
+    InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
+    SaveBinCursosDisciplina();
+    ReadBinCursosDisciplina();
+    ListarCursosDisciplinas();
+    CriarDisciplina();
+    ListarCursosDisciplinas();
+    RemoverDisciplina();
+    ListarCursosDisciplinas();
+    EditarDisciplina();
+    ListarCursosDisciplinas();
+    // /TESTES
+
+    
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -43,6 +64,7 @@ void main(){
                 printc("\n[red]Opção inválida![/red]\n\n");
         }
     } while (op != 0);
+
 }
 
 void readData(){
