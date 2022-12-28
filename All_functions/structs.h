@@ -22,7 +22,8 @@ typedef struct{
 typedef struct{
     int id;
     char *name;
-    char *AnoDisciplina[3][10];
+    char **AnoDisciplina;
+    int num_disciplinas[3];
     int IdResponsavel;
 } courseStruct;
 
