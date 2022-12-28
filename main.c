@@ -14,6 +14,7 @@ permissionFileStruct *perms_file;
 disciplinasStruct *disciplinas;
 SalaStruct *salas;
 professorStruct *professores;
+AlunoDataStruct aluno;
 int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, n_professores = 0;
 
 
@@ -53,7 +54,14 @@ void main(){
                 break;
             case 1:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                printAlunos();
+                char *username = malloc(120), *password = malloc(50);
+                printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
+                printc("[lw]Por favor, faça o login para continuar![/lw]\n");
+                printc("[lw]Username:[/lw] ");
+                scanf("%s", username);
+                printc("[lw]Password:[/lw] ");
+                scanf("%s", password);
+                login(username, password);
                 break;
             case 2:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);

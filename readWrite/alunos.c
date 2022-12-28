@@ -7,6 +7,7 @@ extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
 extern int n_alunos, n_regimes, n_courses;
+extern AlunoDataStruct aluno;
 
 void printAlunos(){
     for (int i = 0; i < n_alunos; i++){
@@ -92,8 +93,59 @@ AlunoStruct *readBinAlunos(){
 
 
 
-void login(){
-    
+void login(char *email, char *password){
+    int i, flag = 0;
+    for (i = 0; i < n_alunos; i++){
+        if (strcmp(email, alunos[i].email) == 0 && strcmp(password, alunos[i].password) == 0){
+            flag = 1;
+            printc("\n\n\t[green]Login feito com sucesso[/green]\n\n");
+            getchar();
+            getchar();
+            fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+            getUserDataByID(alunos[i].id);
+        }
+    }
+    if(flag == 0){
+        printc("\n\n\t[red]Dados Inválidos.[/red]\n\n");
+        getchar();
+        getchar();
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    }
+}
+
+/* char *name, *email, *password;
+    int id, year;
+    courseStruct course;
+    regimeStruct regime; */
+
+
+void getUserDataByID(int id){
+    int position = 0;
+    for (int i = 0; i < n_alunos; i++){
+        if (id == alunos[i].id){
+            position = i;
+            break;
+        }
+    }
+    aluno.id = id;
+    strcpy(aluno.name, alunos[position].name);
+    strcpy(aluno.email, alunos[position].email);
+    strcpy(aluno.password, alunos[position].password);
+    aluno.year = alunos[position].year;
+    aluno.regime = getRegimeByID(aluno.regime.id);
+    aluno.course = getCourseByID(aluno.course.id);
+}
+
+void printfUserData(){
+    printc("\n\t[green]ID:[/green] %d", aluno.id);
+    printc("\n\n\t[green]Nome:[/green] %s", aluno.name);
+    printc("\n\t[green]Email:[/green] %s", aluno.email);
+    printc("\n\t[green]Password:[/green] %s", aluno.password);
+    printc("\n\t[green]Ano:[/green] %d", aluno.year);
+    printc("\n\t[green]Regime ID:[/green] %s", aluno.regime.id);
+    printc("\n\t[green]Regime:[/green] %s", aluno.regime.name);
+    printc("\n\t[green]Curso ID:[/green] %s", aluno.course.id);
+    printc("\n\t[green]Curso:[/green] %s", aluno.course.name);
 }
 
 /* AlunoStruct readBinAluno(int id_aluno){

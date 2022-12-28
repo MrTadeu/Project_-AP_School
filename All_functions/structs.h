@@ -49,3 +49,11 @@ typedef struct { //struct para guardar os dados de um professor
     char *emailProfessor;
     char *passwordProfessor;
 }professorStruct;
+
+//USER DATA 
+typedef struct {
+    char *name, *email, *password;
+    int id, year;
+    courseStruct course;
+    regimeStruct regime;
+} AlunoDataStruct;

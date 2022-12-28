@@ -71,7 +71,7 @@ courseStruct *readBinCourses(){
     }
 }
 
-courseStruct findCourseId(int id){
+courseStruct getCourseByID(int id){
     for (int i = 0; i < n_courses; i++){
         if (courses[i].id == id){
             return courses[i];

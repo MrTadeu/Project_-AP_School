@@ -69,4 +69,13 @@ regimeStruct *readBinRegimes(){
     }   
 }
 
-
+regimeStruct getRegimeByID(int id){
+    for (int i = 0; i < n_regimes; i++){
+        if (regimes[i].id == id){
+            return regimes[i];
+        }
+    }
+    regimeStruct none;
+    none.id = -1;
+    return none;
+}

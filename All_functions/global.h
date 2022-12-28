@@ -27,17 +27,19 @@ AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruc
 void saveBinAlunos();
 void printAlunos();
 AlunoStruct *readBinAlunos();
+void login(char *email, char *password);
 
 //courses.c
 courseStruct *getAllCourses(AlunoFileStruct *alunosFile);
 void saveBinCourses();
 courseStruct *readBinCourses();
-courseStruct findCourseId(int id);
+courseStruct getCourseByID(int id);
 
 //regimes.c
 regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile);
 void saveBinRegimes();
 regimeStruct *readBinRegimes();
+regimeStruct getRegimeByID(int id);
 
 //permissions.c
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);

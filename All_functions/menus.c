@@ -34,14 +34,6 @@ int importExportMenu(){
     return opcao;
 }
 
-//MENU LOGIN_Principal: login.c
-/* void loguinMenu(){
-    printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw\n");
-    printc("[lw]Por favor, faça o login para continuar![/lw\n");
-    printc("[lw]Username:[/lw ");
-    printc("[lw]Password:[/lw ");
-}
-
 /* 
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(PermissionsType perm){
