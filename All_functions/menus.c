@@ -202,7 +202,7 @@ void MenuAdmin(PermissionsType perm){
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
-
+    int i = 0;
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
@@ -255,7 +255,7 @@ void MenuProfessor(PermissionsType perm){
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
-
+    int i = 0;
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
@@ -309,7 +309,7 @@ void MenuCursos(PermissionsType perm){
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
-
+    int i = 0;
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
