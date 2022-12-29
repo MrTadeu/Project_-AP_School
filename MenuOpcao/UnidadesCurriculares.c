@@ -218,7 +218,7 @@ void CriarCurso()
 void EditarCursos()
 {
     int id, TmpIdDiretor;
-    char op, TmpNameCurso = malloc(15), TmpNameDisciplina = malloc(15);
+    char op, *TmpNameCurso = malloc(15), *TmpNameDisciplina = malloc(15);
 
     printc("[green]Cursos existentes:[/green]");
     ListarCursos();

@@ -128,24 +128,30 @@ void getUserDataByID(int id){
         }
     }
     aluno.id = id;
+    aluno.name = malloc(strlen(alunos[position].name)+1);
+    aluno.email = malloc(strlen(alunos[position].email)+1);
+    aluno.password = malloc(strlen(alunos[position].password)+1);
     strcpy(aluno.name, alunos[position].name);
     strcpy(aluno.email, alunos[position].email);
     strcpy(aluno.password, alunos[position].password);
     aluno.year = alunos[position].year;
-    aluno.regime = getRegimeByID(aluno.regime.id);
-    aluno.course = getCourseByID(aluno.course.id);
+    aluno.regime = getRegimeByID(alunos[position].id_regime);
+    aluno.course = getCourseByID(alunos[position].id_course);
+    printfUserData();
 }
 
 void printfUserData(){
     printc("\n\t[green]ID:[/green] %d", aluno.id);
-    printc("\n\n\t[green]Nome:[/green] %s", aluno.name);
+    printc("\n\t[green]Nome:[/green] %s", aluno.name);
     printc("\n\t[green]Email:[/green] %s", aluno.email);
     printc("\n\t[green]Password:[/green] %s", aluno.password);
     printc("\n\t[green]Ano:[/green] %d", aluno.year);
-    printc("\n\t[green]Regime ID:[/green] %s", aluno.regime.id);
+    printc("\n\t[green]Regime ID:[/green] %d", aluno.regime.id);
     printc("\n\t[green]Regime:[/green] %s", aluno.regime.name);
-    printc("\n\t[green]Curso ID:[/green] %s", aluno.course.id);
+    printc("\n\t[green]Curso ID:[/green] %d", aluno.course.id);
     printc("\n\t[green]Curso:[/green] %s", aluno.course.name);
+    getchar();
+    getchar();
 }
 
 /* AlunoStruct readBinAluno(int id_aluno){
