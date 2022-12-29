@@ -95,3 +95,7 @@ int CheckIFDisciplinaExisteNome(char *name);
 int CheckIFCursoExiste(int id);
 int CheckIFCursoExisteNome(char *name);
 int CheckIFPessoaExiste(int id);
+
+//professores.c
+void criarProfessor();
+professorStruct* readBinProfessores();
