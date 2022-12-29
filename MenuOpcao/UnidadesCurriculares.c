@@ -22,7 +22,7 @@ void ListarDisciplinas()
     printf("\n\n");
 }
 
-void criarDisciplina()
+void CriarDisciplina()
 {   
     int id;
     char *nameDisciplina = malloc(10), *nomeCurso = malloc(10), op;
@@ -212,7 +212,6 @@ void CriarCurso()
     }
     courses[n_courses-1].IdResponsavel = TmpIdDiretor;
     SaveBinCursosDisciplina();
-    saveBinCourses();
 }
 
 void EditarCursos()

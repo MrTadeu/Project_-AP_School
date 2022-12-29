@@ -9,24 +9,47 @@ extern courseStruct *courses;
 extern AlunoStruct *alunos;
 extern int n_disciplinas, n_courses, n_alunos;
 
-//readBinCourses
+courseStruct *getAllCourses(AlunoFileStruct *alunosFile){
+    courseStruct *courses = malloc(sizeof(courseStruct));
+    for (int i = 0; i < n_alunos; i++){
+        int found = 0;
+        for (int j = 0; j < n_courses; j++){
+            if (strcmp(alunosFile[i].course, courses[j].name) == 0){
+                found = 1;
+                break;
+            }
+        }
+        if (!found){
+            courses = realloc(courses, ((n_courses)+1)*sizeof(courseStruct));
+            courses[n_courses].id = n_courses+1;
+            courses[n_courses].name = malloc((strlen(alunosFile[i].course)+1));
+            strcpy(courses[n_courses].name, alunosFile[i].course);
+            n_courses = n_courses+1;
+        }
+    } 
+    return courses;
+}
 
 int InitCursos() { //Apenas usado pela primeira vez
 
 /* 
 PERMITIR CRIAR DISCIPLINAS
-PERMITIR CRIAR DIRETOR DE CURSO OU SELECIONAR UM JA EXISTENTE CRIAR CURSO TMB
+PERMITIR CRIAR DIRETOR DE CURSO OU SELECIONAR UM JA EXISTENTE CRIAR CURSO TMB --> This is a problem
 
 */
 
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
     char *TmpNameDisciplina = malloc(15);
-    int  TmpIdDiretor;
+    int  TmpIdDiretor, Criardisc;
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
+        printc("\t[yellow]Se nao existir a disciplina que pretende, crie-a primeiro[/yellow]\n");
+        printf("1 --> Criar disciplina");
+        scanf("%d",&Criardisc);
+        if(Criardisc == 1)
+            CriarDisciplina();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
-
         for(int j=0; j<3; j++){   
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
