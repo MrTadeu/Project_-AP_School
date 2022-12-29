@@ -71,3 +71,62 @@ void listarProfessor(){
     }
 }
 
+void editarProfessor(){
+    printf("**************************************************\n");
+    printc("************        [blue]Professores[/blue]       ************\n");
+    printf("**************************************************\n");
+    int idProfessor;
+    printf("Qual o ID do professor que deseja editar? ");
+    scanf("%d", &idProfessor);
+    for (int i = 0; i < n_professores; i++){
+        if (idProfessor == professores[i].IDProfessor){
+            printf("Qual o novo nome do professor? ");
+            scanf(" %[^\n]", professores[i].nomeProfessor);
+            FILE *file;
+            file = fopen("../data/Exames/Professores.bin", "wb");
+            if(file == NULL){
+                printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
+                exit(1);
+            }
+            for (int i = 0; i < n_professores; i++){
+                fwrite(&n_professores, sizeof(int), 1, file);
+                size_t nomeProfessorsize = strlen(professores[i].nomeProfessor) + 1; // +1 para guardar o \0
+                fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
+                fwrite(professores[i].nomeProfessor, nomeProfessorsize, 1, file);
+            }
+            fclose(file);
+            readBinProfessores();
+        }
+    }
+}
+
+void removerProfessor(){
+    printf("**************************************************\n");
+    printc("************        [blue]Professores[/blue]       ************\n");
+    printf("**************************************************\n");
+    int idProfessor;
+    printf("Qual o ID do professor que deseja remover? ");
+    scanf("%d", &idProfessor);
+    for (int i = 0; i < n_professores; i++){
+        if (idProfessor == professores[i].IDProfessor){
+            for (int j = i; j < n_professores; j++){
+                professores[j] = professores[j+1];
+            }
+            n_professores--;
+            FILE *file;
+            file = fopen("../data/Exames/Professores.bin", "wb");
+            if(file == NULL){
+                printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
+                exit(1);
+            }
+            for (int i = 0; i < n_professores; i++){
+                fwrite(&n_professores, sizeof(int), 1, file);
+                size_t nomeProfessorsize = strlen(professores[i].nomeProfessor) + 1; // +1 para guardar o \0
+                fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
+                fwrite(professores[i].nomeProfessor, nomeProfessorsize, 1, file);
+            }
+            fclose(file);
+            readBinProfessores();
+        }
+    }
+}
