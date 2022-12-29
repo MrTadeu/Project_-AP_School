@@ -8,49 +8,25 @@ extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
 
 
-disciplinasStruct* ReadTxtDisciplinas()
-{
-    disciplinasStruct* disciplinas = malloc(sizeof(disciplinasStruct));
-    int i, DiscNameLen;
-    FILE *disciplinasTxt = fopen("disciplinas.txt", "r");
-    if (disciplinasTxt == NULL)
-    {
-        printc("\n\n\tImpossivel abrir Ficheiro [red]Disciplinas.txt[/red]\n\n");
-        exit(1);
-    }
-    for (i = 0 ;; i++)
-    {   if (feof(disciplinasTxt))
-            break;
-        disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));
-        fscanf(disciplinasTxt, "%d", &disciplinas[i].id);
-        fscanf(disciplinasTxt, "%d",DiscNameLen);
-        disciplinas[i].name = malloc(DiscNameLen+1);
-        fscanf(disciplinasTxt, "%s", disciplinas[i].name);
-    }
-    n_disciplinas = i - 1;
-    fclose(disciplinasTxt);
-    SaveBinDisciplinas();
-    return disciplinas;
-}
-
 void ReadBinDisciplinas(){
     disciplinas = malloc(sizeof(disciplinasStruct));
     int i;
     FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","rb");
     if (disciplinasBin == NULL) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]disciplinas.bin[/red]\n\n");
-        exit(1);
     }
     else{
-        for (i = 0;i < n_disciplinas; i++){
-            disciplinas = realloc(disciplinas, (i+1)*sizeof(disciplinasStruct));
-            fread(&disciplinas[i].id, sizeof(int), 1, disciplinasBin);
+        for (i = 0;; i++){
+            disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));
+            if(fread(&disciplinas[i].id, sizeof(int), 1, disciplinasBin) != 1) 
+                break;
             size_t disciplinasLen;
             fread(&disciplinasLen, sizeof(size_t), 1, disciplinasBin);
             disciplinas[i].name = malloc(disciplinasLen);
             fread(disciplinas[i].name, disciplinasLen, 1, disciplinasBin);
-            
         }
+        n_disciplinas = i;
+
         fclose(disciplinasBin);
     }
 }

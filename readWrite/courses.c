@@ -79,5 +79,7 @@ courseStruct getCourseByID(int id){
     }
     courseStruct course;
     course.id = -1;
+    course.name = malloc(12);
+    strcpy(course.name, "Não existe!");
     return course;
 }

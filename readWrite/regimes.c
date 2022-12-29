@@ -77,5 +77,7 @@ regimeStruct getRegimeByID(int id){
     }
     regimeStruct none;
     none.id = -1;
+    none.name = malloc(12);
+    strcpy(none.name, "Não existe!");
     return none;
 }

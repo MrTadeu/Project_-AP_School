@@ -28,6 +28,8 @@ void saveBinAlunos();
 void printAlunos();
 AlunoStruct *readBinAlunos();
 void login(char *email, char *password);
+void getUserDataByID(int id);
+void printfUserData();
 
 //courses.c
 courseStruct *getAllCourses(AlunoFileStruct *alunosFile);

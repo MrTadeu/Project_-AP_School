@@ -9,8 +9,16 @@ extern courseStruct *courses;
 extern AlunoStruct *alunos;
 extern int n_disciplinas, n_courses, n_alunos;
 
+//readBinCourses
 
 int InitCursos() { //Apenas usado pela primeira vez
+
+/* 
+PERMITIR CRIAR DISCIPLINAS
+PERMITIR CRIAR DIRETOR DE CURSO OU SELECIONAR UM JA EXISTENTE CRIAR CURSO TMB
+
+*/
+
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
     char *TmpNameDisciplina = malloc(15);

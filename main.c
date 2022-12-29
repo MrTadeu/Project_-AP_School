@@ -22,26 +22,6 @@ void readData();
 
 void main(){
     readData();
-    // TESTES
-    //disciplinas
-    ReadTxtDisciplinas();//Apenas necessario primeira vez(ja vamos ter o ficheiro que podemos binario)
-    SaveBinDisciplinas();
-    ReadBinDisciplinas();
-    ListarDisciplinas();
-    //cursosdisciplinas.c
-    ListarCursos();
-    InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
-    SaveBinCursosDisciplina();
-    ReadBinCursosDisciplina();
-    ListarCursosDisciplinas();
-    CriarDisciplina();
-    ListarCursosDisciplinas();
-    RemoverDisciplina();
-    ListarCursosDisciplinas();
-    EditarDisciplina();
-    ListarCursosDisciplinas();
-    // /TESTES
-
     
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
@@ -57,7 +37,7 @@ void main(){
                 char *username = malloc(120), *password = malloc(50);
                 printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
                 printc("[lw]Por favor, faça o login para continuar![/lw]\n");
-                printc("[lw]Username:[/lw] ");
+                printc("[lw]Email:[/lw] ");
                 scanf("%s", username);
                 printc("[lw]Password:[/lw] ");
                 scanf("%s", password);
@@ -80,7 +60,7 @@ void readData(){
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
     courses = readBinCourses();  
-    disciplinas = ReadTxtDisciplinas();
+    ReadBinDisciplinas();
     salas = readBinSalas(); 
 }
 
