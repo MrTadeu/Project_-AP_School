@@ -46,9 +46,11 @@ regimeStruct getRegimeByID(int id);
 //permissions.c
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);
 permissionFileStruct* readBinPermissions();
+PermissionsType getPermissionsByID(int id);
 
 //menus.c
 int mainMenu();
+void MenuPrincipal();
 int importExportMenu();
 void MenuDisciplinas();
 void MenuEditarAdicionarRemoverDisciplinas();

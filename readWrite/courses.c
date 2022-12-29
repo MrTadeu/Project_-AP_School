@@ -71,15 +71,3 @@ courseStruct *readBinCourses(){
     }
 }
 
-courseStruct getCourseByID(int id){
-    for (int i = 0; i < n_courses; i++){
-        if (courses[i].id == id){
-            return courses[i];
-        }
-    }
-    courseStruct course;
-    course.id = -1;
-    course.name = malloc(12);
-    strcpy(course.name, "Não existe!");
-    return course;
-}

@@ -8,7 +8,8 @@ extern regimeStruct *regimes;
 extern courseStruct *courses;
 extern int n_alunos, n_regimes, n_courses;
 extern AlunoDataStruct aluno;
-exten PermissionsType perm
+extern permissionFileStruct *perms_file;
+
 void printAlunos(){
     for (int i = 0; i < n_alunos; i++){
         printf("\nI: %d", i);
@@ -103,7 +104,7 @@ void login(char *email, char *password){
             getchar();
             fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
             getUserDataByID(alunos[i].id);
-            MenuPrincipal(PermissionsType perm);
+            MenuPrincipal();
         }
     }
     if(flag == 0){
@@ -137,6 +138,7 @@ void getUserDataByID(int id){
     strcpy(aluno.password, alunos[position].password);
     aluno.year = alunos[position].year;
     aluno.regime = getRegimeByID(alunos[position].id_regime);
+    aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
     aluno.course = getCourseByID(alunos[position].id_course);
     printfUserData();
 }
@@ -149,6 +151,9 @@ void printfUserData(){
     printc("\n\t[green]Ano:[/green] %d", aluno.year);
     printc("\n\t[green]Regime ID:[/green] %d", aluno.regime.id);
     printc("\n\t[green]Regime:[/green] %s", aluno.regime.name);
+    printc("\n\t[green]Permissão CriarCursos:[/green] %d", aluno.regime.perm.CriarCursos);
+    printc("\n\t[green]Permissão CriarExames:[/green] %d", aluno.regime.perm.CriarExames);
+    printc("\n\t[green]Permissão CriarProfessor:[/green] %d", aluno.regime.perm.CriarProfessor);
     printc("\n\t[green]Curso ID:[/green] %d", aluno.course.id);
     printc("\n\t[green]Curso:[/green] %s", aluno.course.name);
     getchar();

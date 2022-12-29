@@ -3,6 +3,8 @@
 #include <string.h>
 #include  "global.h"
 
+extern AlunoDataStruct aluno;
+
 //MENU PRINCIPAL: main.c
 int mainMenu(){
     int opcao;
@@ -42,14 +44,14 @@ void MenuPrincipal(){
     printc("****************** [blue]Menu Principal[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if (perm.VerDisciplinas){
+    if (aluno.regime.perm.VerDisciplinas){
         printf("**        %d -> Ver Disciplinas              **\n", i++);
     }
-    if(perm.MenuExames){
+    if(aluno.regime.perm.MenuExames){
         printf("**        %d -> Menu Exames                  **\n", i++);
     }
     printf("**        %d -> Editar Conta de Utilizador       **\n", i++);
-    if(perm.MenuAdmin){
+    if(aluno.regime.perm.MenuAdmin){
         printf("**        %d -> Menu admin                   **\n", i++);
     }
     printc("**************************************************\n");
@@ -59,53 +61,53 @@ void MenuPrincipal(){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.VerDisciplinas){
+    if (aluno.regime.perm.VerDisciplinas){
         if (opcao == i++){
             MenuDisciplinas(); // <--- This is the problem
         }
     }
-    if (perm.MenuExames){
+    if (aluno.regime.perm.MenuExames){
         if (opcao == i++){
-            MenuExames();  // <--- This is the problem
+             //MenuExames();  // <--- This is the problem
         }
     }
     if (opcao == i++){
-        EditarConta(); // <--- This is the problem
+        //EditarConta(); // <--- This is the problem
     }
-    if (perm.MenuAdmin){
+    if (aluno.regime.perm.MenuAdmin){
         if (opcao == i++){
-            MenuAdmin(); // <--- This is the problem
+            //MenuAdmin(); // <--- This is the problem
         }
     }
     
 }
 /*
 //MENU EXAMES: exames.c
-void MenuExames(PermissionsType perm){
+void MenuExames(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Exames[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if (perm.CriarExames){
+    if (aluno.regime.perm.CriarExames){
         printf("**        %d -> Criar Exames                     **\n", i++); // Não esquecer de verificar se o aluno já está inscrito no exame e se Não se deve permitir marcar exames de um mesmo ano curricular com uma diferença de dias inferior a 3 dias e a data não pode ser num fim de semana ou feriado. FAZER A SELEÇÃO DE SALAS E DATA/HORA QUE OCORRERÁ.
     }
-    if (perm.InscreverExames){
+    if (aluno.regime.perm.InscreverExames){
         printf("**        %d -> Inscrever em Exames              **\n", i++); // Não esquecer de verificar se o aluno já está inscrito no exame e se Não se deve permitir marcar exames de um mesmo ano curricular com uma diferença de dias inferior a 3 dias e a data não pode ser num fim de semana ou feriado.
     }
-    if (perm.InscritosExames){
+    if (aluno.regime.perm.InscritosExames){
         printf("**        %d -> Inscritos em Exames              **\n", i++);
     }
-    if (perm.ListarExames){
+    if (aluno.regime.perm.ListarExames){
         printf("**        %d -> Listar Exames                    **\n", i++);
     }
-    if (perm.ListarExamesInscritos){
+    if (aluno.regime.perm.ListarExamesInscritos){
         printf("**        %d -> Listar Exames Inscritos          **\n", i++);
     }
-    if (perm.EditarExames){
+    if (aluno.regime.perm.EditarExames){
         printf("**        %d -> Editar Exames                    **\n", i++);
     }
-    if (perm.ExportarExames){
+    if (aluno.regime.perm.ExportarExames){
         printf("**        %d -> Exportar Exames                  **\n", i++);
     }
     printc("**************************************************\n");
@@ -115,37 +117,37 @@ void MenuExames(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.CriarExames){
+    if (aluno.regime.perm.CriarExames){
         if (opcao == i++){
             criarExame(); // <--- This is the problem
         }
     }
-    if (perm.InscreverExames){
+    if (aluno.regime.perm.InscreverExames){
         if (opcao == i++){
             inscreverExame(); // <--- This is the problem
         }
     }
-    if (perm.InscritosExames){
+    if (aluno.regime.perm.InscritosExames){
         if (opcao == i++){
             inscritosExame(); // <--- This is the problem
         }
     }
-    if (perm.ListarExames){
+    if (aluno.regime.perm.ListarExames){
         if (opcao == i++){
             listarExames(); // <--- This is the problem
         }
     }
-    if (perm.ListarExamesInscritos){
+    if (aluno.regime.perm.ListarExamesInscritos){
         if (opcao == i++){
             listarExamesInscritos(); // <--- This is the problem
         }
     }
-    if (perm.EditarExames){
+    if (aluno.regime.perm.EditarExames){
         if (opcao == i++){
             editarExame(); // <--- This is the problem
         }
     }
-    if (perm.ExportarExames){
+    if (aluno.regime.perm.ExportarExames){
         if (opcao == i++){
             exportarExames(); // <--- This is the problem
         }
@@ -153,7 +155,7 @@ void MenuExames(PermissionsType perm){
 }
 
 //MENU EDITAR CONTA: editarconta.c
-void MenuEditarConta(PermissionsType perm){
+void MenuEditarConta(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Editar Conta[/blue] ****************\n");
@@ -181,22 +183,22 @@ void MenuEditarConta(PermissionsType perm){
 }
 
 //MENU ADMIN: admin.c
-void MenuAdmin(PermissionsType perm){
+void MenuAdmin(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Administração[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if(perm.MenuProfessor){
+    if(aluno.regime.perm.MenuProfessor){
         printf("**        %d -> Menu Professor               **\n", i++);
     }
-    if (perm.MenuCursos){
+    if (aluno.regime.perm.MenuCursos){
         printf("**        %d -> Menu Cursos                      **\n", i++);
     }
-    if (perm.MenuRegimes){
+    if (aluno.regime.perm.MenuRegimes){
         printf("**        %d -> Menu Regimes                     **\n", i++);
     }
-    if (perm.MenuSalas){
+    if (aluno.regime.perm.MenuSalas){
         printf("**        %d -> Menu Salas                       **\n", i++);
     }
     printc("**************************************************\n");
@@ -206,27 +208,27 @@ void MenuAdmin(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.MenuProfessor){
+    if (aluno.regime.perm.MenuProfessor){
         if (opcao == i++){
             MenuProfessor(); // <--- This is the problem
         }
     }
-    if (perm.MenuCursos){
+    if (aluno.regime.perm.MenuCursos){
         if (opcao == i++){
             MenuCursos(); // <--- This is the problem
         }
     }
-    if (perm.MenuAlunos){
+    if (aluno.regime.perm.MenuAlunos){
         if (opcao == i++){
             MenuAlunos(); // <--- This is the problem
         }
     }
-    if (perm.MenuRegimes){
+    if (aluno.regime.perm.MenuRegimes){
         if (opcao == i++){
             MenuRegimes(); // <--- This is the problem
         }
     }
-    if (perm.MenuSalas){
+    if (aluno.regime.perm.MenuSalas){
         if (opcao == i++){
             MenuSalas(); // <--- This is the problem
         }
@@ -234,22 +236,22 @@ void MenuAdmin(PermissionsType perm){
 }
 
 //MENU PROFESSOR: professor.c
-void MenuProfessor(PermissionsType perm){
+void MenuProfessor(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Professor[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if (perm.CriarProfessor){
+    if (aluno.regime.perm.CriarProfessor){
         printf("**        %d -> Criar Professor                  **\n", i++);
     }
-    if (perm.ListarProfessor){
+    if (aluno.regime.perm.ListarProfessor){
         printf("**        %d -> Listar Professor                 **\n", i++);
     }
-    if (perm.EditarProfessor){
+    if (aluno.regime.perm.EditarProfessor){
         printf("**        %d -> Editar Professor                 **\n", i++);
     }
-    if (perm.RemoverProfessor){
+    if (aluno.regime.perm.RemoverProfessor){
         printf("**        %d -> Remover Professor                **\n", i++);
     }
     printc("**************************************************\n");
@@ -259,22 +261,22 @@ void MenuProfessor(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.CriarProfessor){
+    if (aluno.regime.perm.CriarProfessor){
         if (opcao == i++){
             criarProfessor(); 
         }
     }
-    if (perm.ListarProfessor){
+    if (aluno.regime.perm.ListarProfessor){
         if (opcao == i++){
             listarProfessor(); 
         }
     }
-    if (perm.EditarProfessor){
+    if (aluno.regime.perm.EditarProfessor){
         if (opcao == i++){
             editarProfessor();
         }
     }
-    if (perm.RemoverProfessor){
+    if (aluno.regime.perm.RemoverProfessor){
         if (opcao == i++){
             removerProfessor();
         }
@@ -282,28 +284,28 @@ void MenuProfessor(PermissionsType perm){
 }
 
 //MENU CURSOS: disciplinas.c && cursosdisciplinas.c && UnidadesCurriculares.c
-void MenuCursos(PermissionsType perm){
+void MenuCursos(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Cursos[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if (perm.CriarCursos){
+    if (aluno.regime.perm.CriarCursos){
         printf("**        %d -> Criar Cursos                     **\n", i++);
     }
-    if (perm.EditarCursos){
+    if (aluno.regime.perm.EditarCursos){
         printf("**        %d -> Editar Cursos                    **\n", i++);
     }
-    if (perm.RemoverCursos){
+    if (aluno.regime.perm.RemoverCursos){
         printf("**        %d -> Remover Cursos                   **\n", i++);
     }
-    if (perm.ListarCursos){
+    if (aluno.regime.perm.ListarCursos){
         printf("**        %d -> Listar Cursos                    **\n", i++);
     }
-        if (perm.ListarCursosDisciplinas){                                         // <--- This is the problem
+        if (aluno.regime.perm.ListarCursosDisciplinas){                                         // <--- This is the problem
         printf("**        %d -> Listar Cursos/Disciplinas        **\n", i++);
     }
-    if (perm.MenuDisciplinas){
+    if (aluno.regime.perm.MenuDisciplinas){
         printf("**        %d -> Menu Disciplinas                 **\n", i++);
     }
     printc("**************************************************\n");
@@ -313,32 +315,32 @@ void MenuCursos(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.CriarCursos){
+    if (aluno.regime.perm.CriarCursos){
         if (opcao == i++){
             CriarCurso();
         }
     }
-    if (perm.ListarCursos){
+    if (aluno.regime.perm.ListarCursos){
         if (opcao == i++){
             ListarCursos();
         }
     }
-    if (perm.ListarCursosDisciplinas){                          // <--- This is the problem
+    if (aluno.regime.perm.ListarCursosDisciplinas){                          // <--- This is the problem
         if (opcao == i++){
             ListarCursosDisciplinas();
         }
     }
-    if (perm.EditarCursos){
+    if (aluno.regime.perm.EditarCursos){
         if (opcao == i++){
             EditarCursos(); 
         }
     }
-    if (perm.RemoverCursos){
+    if (aluno.regime.perm.RemoverCursos){
         if (opcao == i++){
             RemoverCursos(); // <--- This is the problem
         }
     }
-    if (perm.MenuDisciplinas){
+    if (aluno.regime.perm.MenuDisciplinas){
         if (opcao == i++){
             MenuDisciplinas();
         }
@@ -407,22 +409,22 @@ void MenuEditarAdicionarRemoverDisciplinas()
 } 
 
 //MENU SALAS: salas.c
-void MenuSalas(PermissionsType perm){
+void MenuSalas(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Salas[/blue] ****************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
-    if (perm.CriarSalas){
+    if (aluno.regime.perm.CriarSalas){
         printf("**        %d -> Criar Salas                     **\n", i++);
     }
-    if (perm.ListarSalas){
+    if (aluno.regime.perm.ListarSalas){
         printf("**        %d -> Listar Salas                    **\n", i++);
     }
-    if (perm.EditarSalas){
+    if (aluno.regime.perm.EditarSalas){
         printf("**        %d -> Editar Salas                    **\n", i++);
     }
-    if (perm.RemoverSalas){
+    if (aluno.regime.perm.RemoverSalas){
         printf("**        %d -> Remover Salas                   **\n", i++);
     }
     printc("**************************************************\n");
@@ -432,22 +434,22 @@ void MenuSalas(PermissionsType perm){
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
-    if (perm.CriarSalas){
+    if (aluno.regime.perm.CriarSalas){
         if (opcao == i++){
             criarSala();
         }
     }
-    if (perm.ListarSalas){
+    if (aluno.regime.perm.ListarSalas){
         if (opcao == i++){
             listarSalas();
         }
     }
-    if (perm.EditarSalas){
+    if (aluno.regime.perm.EditarSalas){
         if (opcao == i++){
             editarSala(); 
         }
     }
-    if (perm.RemoverSalas){
+    if (aluno.regime.perm.RemoverSalas){
         if (opcao == i++){
             removerSalas();
         }

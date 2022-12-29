@@ -3,6 +3,8 @@
 #include <string.h>
 #include "../All_functions/global.h"
 
+extern permissionFileStruct *perms_file;
+
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
     FILE *file = fopen("data/bin/permission.bin", "ab");
     permissionFileStruct permFile;
@@ -89,4 +91,12 @@ permissionFileStruct* readBinPermissions(){
         fclose(file);
         return permFile;
     }
+}
+
+PermissionsType getPermissionsByID(int id){
+    int i = 0;
+    while (perms_file[i].id_regime != id){
+        i++;
+    }
+    return perms_file[i].perm;
 }

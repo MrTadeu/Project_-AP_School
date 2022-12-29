@@ -86,6 +86,6 @@ void importDataTxtBin(){
         
 
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
-        /* saveAndSetPermissionsBinByTxt(regimes, n_regimes); */
+        saveAndSetPermissionsBinByTxt(regimes, n_regimes);
     }
 }
