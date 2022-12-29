@@ -101,3 +101,6 @@ int CheckIFPessoaExiste(int id);
 //professores.c
 void criarProfessor();
 professorStruct* readBinProfessores();
+void listarProfessor();
+void editarProfessor();
+void removerProfessor();
