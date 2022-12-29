@@ -34,9 +34,9 @@ int importExportMenu(){
     return opcao;
 }
 
-/* 
+ 
 //MENU PRINCIPAL: login.c
-void MenuPrincipal(PermissionsType perm){
+void MenuPrincipal(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Principal[/blue] ****************\n");
@@ -79,7 +79,7 @@ void MenuPrincipal(PermissionsType perm){
     }
     
 }
-
+/*
 //MENU EXAMES: exames.c
 void MenuExames(PermissionsType perm){
     int opcao, i = 0;

@@ -8,7 +8,7 @@ extern regimeStruct *regimes;
 extern courseStruct *courses;
 extern int n_alunos, n_regimes, n_courses;
 extern AlunoDataStruct aluno;
-
+exten PermissionsType perm
 void printAlunos(){
     for (int i = 0; i < n_alunos; i++){
         printf("\nI: %d", i);
@@ -103,6 +103,7 @@ void login(char *email, char *password){
             getchar();
             fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
             getUserDataByID(alunos[i].id);
+            MenuPrincipal(PermissionsType perm);
         }
     }
     if(flag == 0){
