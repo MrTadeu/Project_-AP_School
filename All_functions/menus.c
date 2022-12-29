@@ -261,22 +261,22 @@ void MenuProfessor(PermissionsType perm){
     }
     if (perm.CriarProfessor){
         if (opcao == i++){
-            criarProfessor(); // <--- This is the problem
+            criarProfessor(); 
         }
     }
     if (perm.ListarProfessor){
         if (opcao == i++){
-            listarProfessor(); // <--- This is the problem
+            listarProfessor(); 
         }
     }
     if (perm.EditarProfessor){
         if (opcao == i++){
-            editarProfessor(); // <--- This is the problem
+            editarProfessor();
         }
     }
     if (perm.RemoverProfessor){
         if (opcao == i++){
-            removerProfessor(); // <--- This is the problem
+            removerProfessor();
         }
     }
 }
