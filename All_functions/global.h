@@ -32,7 +32,7 @@ void getUserDataByID(int id);
 void printfUserData();
 
 //courses.c
-courseStruct *getAllCourses(AlunoFileStruct *alunosFile);
+void getAllCourses(AlunoFileStruct *alunosFile);
 void saveBinCourses();
 courseStruct *readBinCourses();
 courseStruct getCourseByID(int id);

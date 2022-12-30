@@ -7,6 +7,27 @@
 extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
 
+void InitDisciplinas()
+{
+    char* TmpNameDisciplina = malloc(15); 
+    disciplinas = malloc(sizeof(disciplinasStruct));
+    int parar;
+    for(int i=0; ;i++)
+    {
+        printf("\nPara parar escreva 0 para cntinuar escreva 1");
+        scanf("%d", &parar);
+        if(parar == 0)
+            break;
+        disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));    
+        printf("\nEscreve o nome da disciplina");
+        scanf("%d", TmpNameDisciplina);
+        TmpNameDisciplina = realloc(TmpNameDisciplina, strlen(TmpNameDisciplina)+1);
+        disciplinas[i].name = malloc(strlen(TmpNameDisciplina)+1);
+        strcpy(disciplinas[i].name, TmpNameDisciplina); 
+        disciplinas[i].id = i+1;
+    }
+    SaveBinDisciplinas();
+}
 
 void ReadBinDisciplinas(){
     disciplinas = malloc(sizeof(disciplinasStruct));

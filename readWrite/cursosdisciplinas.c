@@ -9,7 +9,7 @@ extern courseStruct *courses;
 extern AlunoStruct *alunos;
 extern int n_disciplinas, n_courses, n_alunos;
 
-courseStruct *getAllCourses(AlunoFileStruct *alunosFile){
+void getAllCourses(AlunoFileStruct *alunosFile){
     courseStruct *courses = malloc(sizeof(courseStruct));
     for (int i = 0; i < n_alunos; i++){
         int found = 0;
@@ -24,19 +24,13 @@ courseStruct *getAllCourses(AlunoFileStruct *alunosFile){
             courses[n_courses].id = n_courses+1;
             courses[n_courses].name = malloc((strlen(alunosFile[i].course)+1));
             strcpy(courses[n_courses].name, alunosFile[i].course);
-            n_courses = n_courses+1;
+            n_courses++;
         }
     } 
-    return courses;
+    SaveBinCursosDisciplina();
 }
 
 int InitCursos() { //Apenas usado pela primeira vez
-
-/* 
-PERMITIR CRIAR DISCIPLINAS
-PERMITIR CRIAR DIRETOR DE CURSO OU SELECIONAR UM JA EXISTENTE CRIAR CURSO TMB --> This is a problem
-
-*/
 
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
@@ -44,17 +38,11 @@ PERMITIR CRIAR DIRETOR DE CURSO OU SELECIONAR UM JA EXISTENTE CRIAR CURSO TMB --
     int  TmpIdDiretor, Criardisc;
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
-        printc("\t[yellow]Se nao existir a disciplina que pretende, crie-a primeiro[/yellow]\n");
-        printf("1 --> Criar disciplina");
-        scanf("%d",&Criardisc);
-        if(Criardisc == 1)
-            CriarDisciplina();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
         for(int j=0; j<3; j++){   
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
-            for(int i=0; i<3; i++)
-                courses[i].AnoDisciplina[i] = malloc(courses[i].num_disciplinas[j]);
+            courses[i].AnoDisciplina[j] = malloc(courses[i].num_disciplinas[j]);
             printf("Insira as siglas das %d disciplinas do %d ano : ", courses[i].num_disciplinas[j], j+1);
             for(int k=0; k<courses[i].num_disciplinas[j]; k++)
             {   
@@ -85,7 +73,15 @@ PERMITIR CRIAR DIRETOR DE CURSO OU SELECIONAR UM JA EXISTENTE CRIAR CURSO TMB --
                 scanf("%d", &TmpIdDiretor);
             } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
         }
-        courses[i].IdResponsavel = TmpIdDiretor;
+        /* if(alunos[CheckIFPessoaExiste(TmpIdDiretor)].id_regime???????????){
+            printc("\n\n\t[red]Esta pessoa nao e um professor[/red]\n\n");
+            do{
+                printf("\n\nInsira o ID do diretor deste curso: ");
+                scanf("%d", &TmpIdDiretor);
+            } while (alunos[CheckIFPessoaExiste(TmpIdDiretor)].id_regime???????);  
+        }
+        else
+        courses[i].IdResponsavel = TmpIdDiretor;*/  //--> This is a problem
     }
     SaveBinCursosDisciplina();
 }
@@ -114,6 +110,7 @@ void SaveBinCursosDisciplina()
         }
         fwrite(&courses[i].IdResponsavel, sizeof(int), 1, CursoDisciplinaBin);
     }
+    fclose(CursoDisciplinaBin);
 }
 
 
