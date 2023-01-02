@@ -10,7 +10,7 @@ extern AlunoStruct *alunos;
 extern int n_disciplinas, n_courses, n_alunos;
 
 void getAllCourses(AlunoFileStruct *alunosFile){
-    courseStruct *courses = malloc(sizeof(courseStruct));
+    courses = malloc(sizeof(courseStruct));
     for (int i = 0; i < n_alunos; i++){
         int found = 0;
         for (int j = 0; j < n_courses; j++){
@@ -35,7 +35,7 @@ int InitCursos() { //Apenas usado pela primeira vez
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
     char *TmpNameDisciplina = malloc(15);
-    int  TmpIdDiretor, Criardisc;
+    int  TmpIdDiretor;
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
@@ -62,26 +62,16 @@ int InitCursos() { //Apenas usado pela primeira vez
                 strcpy(courses[i].AnoDisciplina[j][k], TmpNameDisciplina);
             }
         }
-        printf("\n\n");
-        printf("Insira o ID do diretor deste curso: ");
-        printf("\nID: ");
+        printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
         scanf("%d", &TmpIdDiretor);
-        if(CheckIFPessoaExiste(TmpIdDiretor) == -1){
-            printc("\n\n\t[red]Esta pessoa nao existe[/red]\n\n");
+        if(CheckIFProfessor(TmpIdDiretor) == -1){
+            printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
             do{
-                printf("\n\nInsira o ID do diretor: ");
+                printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
                 scanf("%d", &TmpIdDiretor);
-            } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
+            } while (CheckIFProfessor(TmpIdDiretor) == -1); 
         }
-        /* if(alunos[CheckIFPessoaExiste(TmpIdDiretor)].id_regime???????????){
-            printc("\n\n\t[red]Esta pessoa nao e um professor[/red]\n\n");
-            do{
-                printf("\n\nInsira o ID do diretor deste curso: ");
-                scanf("%d", &TmpIdDiretor);
-            } while (alunos[CheckIFPessoaExiste(TmpIdDiretor)].id_regime???????);  
-        }
-        else
-        courses[i].IdResponsavel = TmpIdDiretor;*/  //--> This is a problem
+    courses[n_courses-1].IdDiretor = TmpIdDiretor;
     }
     SaveBinCursosDisciplina();
 }

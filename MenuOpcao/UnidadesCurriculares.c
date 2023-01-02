@@ -102,7 +102,6 @@ void Removerdisciplina()
     disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas));   
     SaveBinDisciplinas();
     RemoverDisciplinaFromCursos(nameCurso);
-    free(nameCurso);
 }
 
 void EditarDisciplina()
@@ -134,7 +133,6 @@ void EditarDisciplina()
         }
     }
     SaveBinDisciplinas();
-    free(TmpDiscName);
 }
 
 //________CURSOS_____CURSOS______CURSOS______CURSOS______CURSOS_______CURSOS_______CURSOS_________
@@ -220,7 +218,7 @@ void CriarCurso()
     printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
     scanf("%d", &TmpIdDiretor);
     if(CheckIFProfessor(TmpIdDiretor) == -1){
-        printc("\n\n\t[red]Esta pessoa não é profesor[/red]\n\n");
+        printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
         do{
             printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
             scanf("%d", &TmpIdDiretor);
@@ -304,18 +302,16 @@ void EditarCursos()
     scanf("%c", &op);
     if(op == 'S' || op == 's')
     {
-        printf("Insira o ID do novo diretor deste curso: ");
-        printf("\nID: ");
+        printc("\n\n\t[green]Insira o ID do novo diretor deste curso:[/green] ");
         scanf("%d", &TmpIdDiretor);
         if(CheckIFProfessor(TmpIdDiretor) == -1){
-            printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
+            printc("\n\n\t[red]Esta pessoa não é profesor[/red]\n\n");
             do{
-                printf("\n\nInsira o ID de um professor para ser o diretor deste curso: ");
+                printf("\n\nInsira o ID do um professor para ser o novo diretor deste curso: ");
                 scanf("%d", &TmpIdDiretor);
-            } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
+            }while (CheckIFProfessor(TmpIdDiretor) == -1); 
         }
-        courses[CheckIFCursoExiste(id)].IdDiretor = TmpIdDiretor;
-        
+    courses[CheckIFCursoExiste(id)].IdDiretor = TmpIdDiretor;
     }
     printc("\n\n\t[green]Curso editado com sucesso[/green]\n\n");
     SaveBinCursosDisciplina();
