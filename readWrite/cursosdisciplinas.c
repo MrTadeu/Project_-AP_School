@@ -93,6 +93,7 @@ void SaveBinCursosDisciplina()
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.txt[/red]\n\n");
         exit(1);
     }
+    fwrite(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
     for (int i = 0; i < n_courses; i++)
     {
         fwrite(&courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
@@ -108,7 +109,7 @@ void SaveBinCursosDisciplina()
                 fwrite(courses[i].AnoDisciplina[j][k], DisciplinaLen, 1, CursoDisciplinaBin);
             }
         }
-        fwrite(&courses[i].IdResponsavel, sizeof(int), 1, CursoDisciplinaBin);
+        fwrite(&courses[i].IdDiretor, sizeof(int), 1, CursoDisciplinaBin);
     }
     fclose(CursoDisciplinaBin);
 }
@@ -121,6 +122,7 @@ void ReadBinCursosDisciplina()
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursosdisciplina.txt[/red]\n\n");
         exit(1);
     }
+    fread(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
     for (int i = 0; i < n_courses; i++){
         fread(&courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
         size_t CursoLen;
@@ -135,7 +137,7 @@ void ReadBinCursosDisciplina()
                 fread(courses[i].AnoDisciplina[j][k], DisciplinaName, 1, CursoDisciplinaBin);
             }
         }
-        fread(&courses[i].IdResponsavel, sizeof(int), 1, CursoDisciplinaBin);
+        fread(&courses[i].IdDiretor, sizeof(int), 1, CursoDisciplinaBin);
     }
     fclose(CursoDisciplinaBin);
 }

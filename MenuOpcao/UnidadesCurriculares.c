@@ -7,7 +7,9 @@
 extern disciplinasStruct *disciplinas;
 extern courseStruct *courses;
 extern AlunoStruct *alunos;
-extern int n_disciplinas, n_courses, n_alunos;
+extern AlunoDataStruct aluno;
+extern professorStruct *professores;
+extern int n_disciplinas, n_courses, n_alunos, n_professores;
 
 
 void ListarDisciplinas()
@@ -20,6 +22,19 @@ void ListarDisciplinas()
             printf("\n");
     }
     printf("\n\n");
+}
+
+void ListarPropriasDisciplinas()
+{
+    for(int i = 0; i<3; i++)
+    {
+        printf("Ano %d: ", i+1);
+        for(int j = 0; j<aluno.course.num_disciplinas[i]; j++)
+        {
+            printf("%s\n", aluno.course.AnoDisciplina[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 void CriarDisciplina()
@@ -87,6 +102,7 @@ void Removerdisciplina()
     disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas));   
     SaveBinDisciplinas();
     RemoverDisciplinaFromCursos(nameCurso);
+    free(nameCurso);
 }
 
 void EditarDisciplina()
@@ -118,7 +134,7 @@ void EditarDisciplina()
         }
     }
     SaveBinDisciplinas();
-    
+    free(TmpDiscName);
 }
 
 //________CURSOS_____CURSOS______CURSOS______CURSOS______CURSOS_______CURSOS_______CURSOS_________
@@ -128,7 +144,7 @@ void ListarCursos()
     for(int i=0; i<n_courses; i++)
     {
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
-        printf("ID Diretor de curso: %d\n", courses[i].IdResponsavel);
+        printf("ID Diretor de curso: %d\n", courses[i].IdDiretor);
     }
 }
 
@@ -148,7 +164,7 @@ void ListarCursosDisciplinas()
             }
             printf("\n\n");
         }
-        printf("Diretor: %d\n", courses[i].IdResponsavel);
+        printf("Diretor: %d\n", courses[i].IdDiretor);
         printf("\n\n");
     }
 }
@@ -201,16 +217,16 @@ void CriarCurso()
         }
     }
     
-    printc("\n\n\t[green]Insira o ID do diretor de curso:[/green] ");
+    printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
     scanf("%d", &TmpIdDiretor);
-    if(CheckIFPessoaExiste(TmpIdDiretor) == -1){
-        printc("\n\n\t[red]Esta pessoa nao existe[/red]\n\n");
+    if(CheckIFProfessor(TmpIdDiretor) == -1){
+        printc("\n\n\t[red]Esta pessoa não é profesor[/red]\n\n");
         do{
-            printf("\n\nInsira o novo ID do diretor: ");
+            printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
             scanf("%d", &TmpIdDiretor);
-        } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
+        } while (CheckIFProfessor(TmpIdDiretor) == -1); 
     }
-    courses[n_courses-1].IdResponsavel = TmpIdDiretor;
+    courses[n_courses-1].IdDiretor = TmpIdDiretor;
     SaveBinCursosDisciplina();
 }
 
@@ -223,89 +239,93 @@ void EditarCursos()
     ListarCursos();
     printc("\n\n\t[green]Insira o ID do curso que quer editar:[/green] ");
     scanf("%d", &id);
-    for (int i = 0; i < n_courses; i++)
-    {
-        if (CheckIFCursoExiste(id) == -1)
-            printc("\n\n\t[red]Curso nao existe[/red]\n\n");
-        else
+    if (CheckIFCursoExiste(id) == -1){
+        do
         {
-            printc("\n[green]Curso encontrado -->[/green] ");
-            printf("Curso %d: %s\n", courses[CheckIFCursoExiste(id)].id,  courses[CheckIFCursoExiste(id)].name);
-            printf("Alterar nome? (S/N");
-            scanf("%c", &op);
-            if(op == 'S' || op == 's')
-            {
+            printc("\n\n\t[red]Curso nao existe[/red]\n\n");
+            printc("\n\n\tInsira o ID do curso que quer editar: ");
+            scanf("%d", &id);
+        } while (CheckIFCursoExiste(id) == -1);
+    }
+    printc("\n[green]Curso encontrado -->[/green] ");
+    printf("Curso %d: %s\n", courses[CheckIFCursoExiste(id)].id,  courses[CheckIFCursoExiste(id)].name);
+    printf("Alterar nome? (S/N");
+    scanf("%c", &op);
+    if(op == 'S' || op == 's')
+    {
+        printf("\n\nInsira o novo nome do curso: ");
+        scanf("%s", TmpNameCurso);
+        uppercase(TmpNameCurso);
+        if(CheckIFCursoExisteNome(TmpNameCurso) != -1){
+            printc("\n\n\t[red]Curso ja existe[/red]\n\n");
+            do{
                 printf("\n\nInsira o novo nome do curso: ");
                 scanf("%s", TmpNameCurso);
                 uppercase(TmpNameCurso);
-                if(CheckIFCursoExisteNome(TmpNameCurso) != -1){
-                    printc("\n\n\t[red]Curso ja existe[/red]\n\n");
-                    do{
-                        printf("\n\nInsira o novo nome do curso: ");
-                        scanf("%s", TmpNameCurso);
-                        uppercase(TmpNameCurso);
-                    } while (CheckIFCursoExisteNome(TmpNameCurso) != -1); 
-                }
-                TmpNameCurso = realloc(TmpNameCurso, strlen(TmpNameCurso) + 1);
-                courses[CheckIFCursoExiste(id)].name = malloc(strlen(TmpNameCurso) + 1);
-                strcpy(courses[CheckIFCursoExiste(id)].name, TmpNameCurso);
-                saveBinCourses();
-            }
-            printf("\n\nAlterar disciplinas? (S/N");
-            scanf("%c", &op);
-            if(op == 'S' || op == 's')
+            } while (CheckIFCursoExisteNome(TmpNameCurso) != -1); 
+        }
+        TmpNameCurso = realloc(TmpNameCurso, strlen(TmpNameCurso) + 1);
+        courses[CheckIFCursoExiste(id)].name = malloc(strlen(TmpNameCurso) + 1);
+        strcpy(courses[CheckIFCursoExiste(id)].name, TmpNameCurso);
+        saveBinCourses();
+    }
+    printf("\n\nAlterar disciplinas? (S/N");
+    scanf("%c", &op);
+    if(op == 'S' || op == 's')
+    {
+        printc("[green]Disciplinas existentes:[/green]\n");
+        ListarDisciplinas();
+        for(int j=0; j<3; j++)
+        {
+            printc("\n\n\tQuantas disciplinas tem %d  ano do curso?",j+1);
+            scanf("%d", &courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
+            courses[CheckIFCursoExiste(id)].AnoDisciplina[j] = realloc(courses[CheckIFCursoExiste(id)].AnoDisciplina[j], courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
+            printf("Insira as siglas das %d disciplinas do %d ano : ", courses[CheckIFCursoExiste(id)].num_disciplinas[j], j+1);
+            for(int k=0; k<courses[CheckIFCursoExiste(id)].num_disciplinas[j]; k++)
             {
-                printc("[green]Disciplinas existentes:[/green]\n");
-                ListarDisciplinas();
-                for(int j=0; j<3; j++)
-                {
-                    printc("\n\n\tQuantas disciplinas tem %d  ano do curso?",j+1);
-                    scanf("%d", &courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
-                    courses[CheckIFCursoExiste(id)].AnoDisciplina[j] = realloc(courses[CheckIFCursoExiste(id)].AnoDisciplina[j], courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
-                    printf("Insira as siglas das %d disciplinas do %d ano : ", courses[CheckIFCursoExiste(id)].num_disciplinas[j], j+1);
-                    for(int k=0; k<courses[CheckIFCursoExiste(id)].num_disciplinas[j]; k++)
-                    {
-                        printf("Insira nome da disciplina %d: ", k+1);
+                printf("Insira nome da disciplina %d: ", k+1);
+                scanf("%s", TmpNameDisciplina);
+                uppercase(TmpNameDisciplina);
+                if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
+                    printc("\n\n\t[red]Disciplina nao existe[/red]\n\n");
+                    do{
+                        printf("\n\nInsira o novo nome da disciplina: ");
                         scanf("%s", TmpNameDisciplina);
                         uppercase(TmpNameDisciplina);
-                        if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
-                            printc("\n\n\t[red]Disciplina nao existe[/red]\n\n");
-                            do{
-                                printf("\n\nInsira o novo nome da disciplina: ");
-                                scanf("%s", TmpNameDisciplina);
-                                uppercase(TmpNameDisciplina);
-                            } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
-                        }
-                        TmpNameDisciplina = realloc(TmpNameDisciplina, strlen(TmpNameDisciplina)+1);
-                        courses[CheckIFCursoExiste(id)].AnoDisciplina[j][k] = malloc(strlen(TmpNameDisciplina)+1);
-                        strcpy(courses[CheckIFCursoExiste(id)].AnoDisciplina[j][k], TmpNameDisciplina);
-                        SaveBinCursosDisciplina();
-                    }
+                    } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
                 }
-            }
-            printf("\n\nAlterar diretor? (S/N");
-            scanf("%c", &op);
-            if(op == 'S' || op == 's')
-            {
-                printf("Insira o ID do novo diretor deste curso: ");
-                printf("\nID: ");
-                scanf("%d", &TmpIdDiretor);
-                if(CheckIFPessoaExiste(TmpIdDiretor) == -1){
-                    printc("\n\n\t[red]Esta pessoa nao existe[/red]\n\n");
-                    do{
-                        printf("\n\nInsira o novo ID do diretor: ");
-                        scanf("%d", &TmpIdDiretor);
-                    } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
-                }
-                courses[CheckIFCursoExiste(id)].IdResponsavel = TmpIdDiretor;
-                SaveBinCursosDisciplina();
+                TmpNameDisciplina = realloc(TmpNameDisciplina, strlen(TmpNameDisciplina)+1);
+                courses[CheckIFCursoExiste(id)].AnoDisciplina[j][k] = malloc(strlen(TmpNameDisciplina)+1);
+                strcpy(courses[CheckIFCursoExiste(id)].AnoDisciplina[j][k], TmpNameDisciplina);
             }
         }
     }
-} 
+    printf("\n\nAlterar diretor? (S/N");
+    scanf("%c", &op);
+    if(op == 'S' || op == 's')
+    {
+        printf("Insira o ID do novo diretor deste curso: ");
+        printf("\nID: ");
+        scanf("%d", &TmpIdDiretor);
+        if(CheckIFProfessor(TmpIdDiretor) == -1){
+            printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
+            do{
+                printf("\n\nInsira o ID de um professor para ser o diretor deste curso: ");
+                scanf("%d", &TmpIdDiretor);
+            } while (CheckIFPessoaExiste(TmpIdDiretor) == -1); 
+        }
+        courses[CheckIFCursoExiste(id)].IdDiretor = TmpIdDiretor;
+        
+    }
+    printc("\n\n\t[green]Curso editado com sucesso[/green]\n\n");
+    SaveBinCursosDisciplina();
+    if(aluno.course.id == courses[CheckIFCursoExiste(id)].id)
+        aluno.course = courses[CheckIFCursoExiste(id)];   
+}
 
 void RemoverDisciplinaFromCursos(char* name)
 {
+    int aux;
     for(int i=0; i<n_courses; i++){
         for(int j=0; j<3; j++){
             for(int k=0; k<courses[i].num_disciplinas[j]; k++){
@@ -316,15 +336,21 @@ void RemoverDisciplinaFromCursos(char* name)
                     }
                     courses[i].num_disciplinas[j]--;
                     courses[i].AnoDisciplina[j] = realloc(courses[i].AnoDisciplina[j], courses[i].num_disciplinas[j]);
+                    aux = i;
+                    k = courses[i].num_disciplinas[j];
+                    j = 3;
+                    i = n_courses;
                 }
             }
         }
     }
     SaveBinCursosDisciplina();
+    if(aluno.course.id == courses[aux].id)
+        aluno.course = courses[aux];
 }
 void AdicionarDisciplinaToCursos(char* nameCurso, char* nomeDisciplina)
 {
-    int ano;
+    int ano, i;
     for(int i=0; i<n_courses; i++){
         if(strcmp(courses[i].name, nameCurso) == 0){
             printf("A que ano pertence a disciplina? (1, 2 ou 3)");
@@ -333,38 +359,40 @@ void AdicionarDisciplinaToCursos(char* nameCurso, char* nomeDisciplina)
             courses[i].AnoDisciplina[ano] = realloc(courses[i].AnoDisciplina[ano], courses[i].num_disciplinas[ano]);
             courses[i].AnoDisciplina[ano][courses[i].num_disciplinas[ano]-1] = malloc(strlen(nomeDisciplina)+1);
             strcpy(courses[i].AnoDisciplina[ano][courses[i].num_disciplinas[ano]-1], nomeDisciplina);
+            break;
         }
-    SaveBinCursosDisciplina();
     }
+
+    SaveBinCursosDisciplina();
+    if(aluno.course.id == courses[i].id)
+        aluno.course = courses[i];
 }
 
 void EditarDisciplinaFromCursos(char *NameOriginal,char *nameNovo)
 {
-    for (int i = 0; i < n_courses; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            for (int k = 0; k < courses[i].num_disciplinas[j]; k++)
-            {
-                if (strcmp(courses[i].AnoDisciplina[j][k], NameOriginal) == 0)
-                {
+    int aux;
+    for (int i = 0; i < n_courses; i++){
+        for (int j = 0; j < 3; j++){
+            for (int k = 0; k < courses[i].num_disciplinas[j]; k++){
+                if (strcmp(courses[i].AnoDisciplina[j][k], NameOriginal) == 0){
                     strcpy(courses[i].AnoDisciplina[j][k], nameNovo);
-                    return;
+                    aux = i;
+                    k=courses[i].num_disciplinas[j];
+                    j=3;
+                    i=n_courses;
                 }
             }
-        }
-        
+        } 
     }
-    
+    SaveBinCursosDisciplina();
+    if(aluno.course.id == courses[aux].id)
+        aluno.course = courses[aux];   
 }
 
-void ListarPropriasDisciplinas()
-{
-    //  <--This is a problem
-}
 void RemoverCursos()
 {
     //  <--This is a problem    
+    //atulizar strut alunoData do pedro, e remover o curso do aluno que tiver o curso e elimina exames
 }
 
 int CheckIFDisciplinaExiste(int id)
@@ -403,10 +431,10 @@ int CheckIFCursoExisteNome(char *name)
     return -1;
 }
 
-int CheckIFPessoaExiste(int id)
+int CheckIFProfessor(int id)
 {
-    for(int i=0; i<n_alunos; i++){
-        if(alunos[i].id == id)
+    for(int i=0; i<n_professores; i++){
+        if(professores[i].IDProfessor == id)
             return i;
     }
     return -1;

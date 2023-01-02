@@ -68,11 +68,12 @@ void removerSalas();
 int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 //disciplinas.c
-disciplinasStruct* ReadTxtDisciplinas();
+void InitDisciplinas();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
 void ReadBinDisciplinas();//Apenas necessario primeira vez(ja vamos ter o ficheiro que podemos binario)
 void SaveBinDisciplinas();
 
 //cursosdisciplinas.c
+void getAllCourses(AlunoFileStruct *alunosFile);//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
 int InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
 void ReadBinCursosDisciplina();
 void SaveBinCursosDisciplina();
@@ -80,6 +81,7 @@ void SaveBinCursosDisciplina();
 
 //UnidadesCurriculares.c
 void ListarDisciplinas();
+void ListarPropriasDisciplinas();
 void CriarDisciplina();
 void RemoverDisciplina();
 void EditarDisciplina();
@@ -98,7 +100,7 @@ int CheckIFDisciplinaExiste(int id);
 int CheckIFDisciplinaExisteNome(char *name);
 int CheckIFCursoExiste(int id);
 int CheckIFCursoExisteNome(char *name);
-int CheckIFPessoaExiste(int id);
+int CheckIFProfessor(int id);
 
 //professores.c
 void criarProfessor();
