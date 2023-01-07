@@ -106,3 +106,4 @@ void readBinProfessores();
 void listarProfessor();
 void editarProfessor();
 void removerProfessor();
+void saveBinProfessor();

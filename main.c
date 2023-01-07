@@ -40,7 +40,17 @@ void main(){
     } */
 
     readData();
+    listarProfessor();
     criarProfessor();
+    criarProfessor();
+    criarProfessor();
+    criarProfessor();
+    listarProfessor();
+    removerProfessor();
+    listarProfessor();
+    editarProfessor();
+    listarProfessor();
+
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
