@@ -24,13 +24,18 @@ void criarProfessor(){
     scanf(" %[^\n]", professores[n_professores].nomeProfessor);
     professores[n_professores].nomeProfessor = realloc(professores[n_professores].nomeProfessor, (strlen(professores[n_professores].nomeProfessor)+1));
     professores[n_professores].id = id;
+    capitalize(professores[n_professores].nomeProfessor);
 
-    char *email = malloc(strlen("pv") + strlen(professores[n_professores].nomeProfessor) + 10 /* 10 é para o numero id */+ strlen("@estgv.ipv.pt")), *password = malloc(100);
-    //email example: pv25207@estgv.ipv.prof.pt
+    char *email = malloc(strlen("pv") + strlen(professores[n_professores].nomeProfessor) + 100 /* 10 é para o numero id */+ strlen("@estgv.ipv.pt")), *password = malloc(100);
+    //email example: pvjorge25207@estgv.ipv.prof.pt
     strcat(email, "pv");
+    char *nomeProf = malloc(strlen(professores[n_professores].nomeProfessor)+1);
+    strcpy(nomeProf, professores[n_professores].nomeProfessor);
+    printf("\n\t %s", professores[n_professores].nomeProfessor);
+    strcat(email, nomeProf);
+
     char* id_char = malloc(10);
     itoa(id, id_char, 10);
-    strcat(email, professores[n_professores].nomeProfessor);
     strcat(email, id_char);
     strcat(email, "@estgv.ipv.prof.pt");
     professores[n_professores].emailProfessor = malloc((strlen(email)+1));
@@ -41,11 +46,14 @@ void criarProfessor(){
     //password example: pv25207
     professores[n_professores].passwordProfessor = malloc((strlen(password)+1));
     strcpy(professores[n_professores].passwordProfessor, password);
-
+    
     free(email);
-    free(password);
+    /* free(password);
     free(id_char);
+    
+    free(nomeProf); */
     n_professores++;
+    
     saveBinProfessor();
 }
 
@@ -90,7 +98,7 @@ void saveBinProfessor(){
         printc("\n\n\tErro ao abrir o arquivo [red]professores.bin (2)[/red]");
         return;
     }
-    
+    printf("A guardar ficheiro [red]professores.bin[/red]... \n");
     for (int i = 0; i < n_professores; i++){
         fwrite(&professores[i].id, sizeof(int), 1, file);
 
