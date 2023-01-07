@@ -77,7 +77,7 @@ void readData(){
     perms_file = readBinPermissions();
     ReadBinDisciplinas();
     /* ReadBinCursosDisciplina(); */
-    salas = readBinSalas(); 
+    readBinSalas(); 
     readBinProfessores();
 }
 

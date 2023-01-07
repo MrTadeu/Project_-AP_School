@@ -46,7 +46,7 @@ void readBinProfessores(){
     file = fopen("../data/Exames/Professores.bin", "rb");
     if(file == NULL){
         printc("\n\n\tErro ao abrir o arquivo [red]Professor.bin[/red]\n\n");
-        return NULL;
+        return;
     }
     int i = 0;
     while (fread(&n_professores, sizeof(int), 1, file)){

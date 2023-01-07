@@ -4,8 +4,8 @@
 #include <string.h>
 #include "../All_functions/global.h"
 
-void listarSalas();
-SalaStruct* readBinSalas();
+
+
 int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
@@ -84,7 +84,7 @@ void readBinSalas(){
     arquivo = fopen("../data/Exames/Salas.bin", "rb");
     if(arquivo == NULL){
         printc("\n\n\tErro ao abrir o arquivo [red]Salas.bin[/red]\n\n");
-        return NULL;
+        return;
     }
     size_t nomeSalasize;
     int i = 0;
