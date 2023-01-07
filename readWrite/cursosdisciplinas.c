@@ -80,8 +80,8 @@ void SaveBinCursosDisciplina()
 {
     FILE *CursoDisciplinaBin = fopen("data/txt/cursosdisciplina.txt","wb");
     if (CursoDisciplinaBin == NULL) {
-        printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.txt[/red]\n\n");
-        exit(1);
+        printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.bin[/red]\n\n");
+        return;
     }
     fwrite(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
     for (int i = 0; i < n_courses; i++)
