@@ -25,11 +25,12 @@ void criarProfessor(){
     professores[n_professores].nomeProfessor = realloc(professores[n_professores].nomeProfessor, (strlen(professores[n_professores].nomeProfessor)+1));
     professores[n_professores].id = id;
 
-    char *email = malloc(strlen("pv") + 10 + strlen("@estgv.ipv.pt")), *password = malloc(100);
+    char *email = malloc(strlen("pv") + strlen(professores[n_professores].nomeProfessor) + 10 /* 10 é para o numero id */+ strlen("@estgv.ipv.pt")), *password = malloc(100);
     //email example: pv25207@estgv.ipv.prof.pt
     strcat(email, "pv");
     char* id_char = malloc(10);
     itoa(id, id_char, 10);
+    strcat(email, professores[n_professores].nomeProfessor);
     strcat(email, id_char);
     strcat(email, "@estgv.ipv.prof.pt");
     professores[n_professores].emailProfessor = malloc((strlen(email)+1));
