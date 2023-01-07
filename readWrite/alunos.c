@@ -115,12 +115,6 @@ void login(char *email, char *password){
     }
 }
 
-/* char *name, *email, *password;
-    int id, year;
-    courseStruct course;
-    regimeStruct regime; */
-
-
 void getUserDataByID(int id){
     int position = 0;
     for (int i = 0; i < n_alunos; i++){
@@ -143,7 +137,7 @@ void getUserDataByID(int id){
     printfUserData();
 }
 
-void printfUserData(){
+void printfUserData(){//testes
     printc("\n\t[green]ID:[/green] %d", aluno.id);
     printc("\n\t[green]Nome:[/green] %s", aluno.name);
     printc("\n\t[green]Email:[/green] %s", aluno.email);

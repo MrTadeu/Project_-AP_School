@@ -40,6 +40,7 @@ int importExportMenu(){
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(){
     int opcao, i = 0;
+    printf("Bem vindo %s!\n", aluno.name);
     printc("**************************************************\n");
     printc("****************** [blue]Menu Principal[/blue] ****************\n");
     printc("**************************************************\n");
@@ -155,31 +156,18 @@ void MenuExames(){
 }
 
 //MENU EDITAR CONTA: editarconta.c
-void MenuEditarConta(){
-    int opcao, i = 0;
+int MenuEditarConta(){
+    int opcao;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Editar Conta[/blue] ****************\n");
     printc("**************************************************\n");
-    printf("**        %d -> Sair                       **\n", i++);
-    printf("**        %d -> Editar Nome                **\n", i++);
-    printf("**        %d -> Editar Password            **\n", i++);
-    printf("**        %d -> Editar Email               **\n", i++);
+    printf("**        0 -> Sair                       **\n");
+    printf("**        1 -> Editar Nome                **\n");
+    printf("**        2 -> Editar Password            **\n");
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
-    i = 0;
-    if (opcao == i++){
-        printf("[lw]A fechar o programa...[/lw]");
-    }
-    if (opcao == i++){
-        editarNome(); // <--- This is the problem
-    }
-    if (opcao == i++){
-        editarPassword(); // <--- This is the problem
-    }
-    if (opcao == i++){
-        editarEmail(); // <--- This is the problem
-    }
+    return opcao;
 }
 
 //MENU ADMIN: admin.c
