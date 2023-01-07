@@ -60,7 +60,7 @@ void importDataTxtBin();
 //salas.c
 void criarSalas();
 void listarSalas();
-SalaStruct* readBinSalas();
+void readBinSalas();
 void editarSala();
 void removerSalas();
 int ChekeIFsalaExist(char *nomeSala, int nSala);

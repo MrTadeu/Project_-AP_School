@@ -78,7 +78,7 @@ void listarSalas(){
     }
 }
 
-SalaStruct* readBinSalas(){
+void readBinSalas(){
     SalaStruct *sala = malloc(sizeof(SalaStruct));
     FILE *arquivo;
     arquivo = fopen("../data/Exames/Salas.bin", "rb");
@@ -98,7 +98,7 @@ SalaStruct* readBinSalas(){
     }
     n_salas = i;
     fclose(arquivo);
-    return sala;
+
 }
 
 void editarSala(){ // #VALIDAR
