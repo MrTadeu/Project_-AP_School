@@ -108,8 +108,8 @@ void SaveBinCursosDisciplina()
 void ReadBinCursosDisciplina(){
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","rb");
     if (CursoDisciplinaBin == NULL) {
-        printc("\n\n\tImpossivel abrir Ficheiro [red]cursosdisciplina.txt[/red]\n\n");
-        exit(1);
+        printc("\n\n\tImpossivel abrir Ficheiro [red]cursosdisciplina.bin[/red]\n\n");
+        return 0;
     }
     fread(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
     for (int i = 0; i < n_courses; i++){
