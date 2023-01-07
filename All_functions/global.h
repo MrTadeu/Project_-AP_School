@@ -102,7 +102,7 @@ int CheckIFProfessor(int id);
 
 //professores.c
 void criarProfessor();
-professorStruct* readBinProfessores();
+void readBinProfessores();
 void listarProfessor();
 void editarProfessor();
 void removerProfessor();
