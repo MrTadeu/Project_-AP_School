@@ -81,7 +81,7 @@ void MenuPrincipal(){
     }
     
 }
-/*
+/* 
 //MENU EXAMES: exames.c
 void MenuExames(){
     int opcao, i = 0;
