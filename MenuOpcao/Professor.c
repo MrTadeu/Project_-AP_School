@@ -47,10 +47,9 @@ void criarProfessor(){
     professores[n_professores].passwordProfessor = malloc((strlen(password)+1));
     strcpy(professores[n_professores].passwordProfessor, password);
     
-    free(email);
+    /* free(email); */
     free(password);
     free(id_char);
-    
     free(nomeProf);
     n_professores++;
     
@@ -60,7 +59,6 @@ void criarProfessor(){
 void readBinProfessores(){
     professores = malloc(sizeof(professorStruct));
     int i;
-    printf("A ler ficheiro [red]professores.bin[/red]... \n");
     FILE *file = fopen("data/bin/professores.bin","rb");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]professores.bin (1)[/red] \n\n");
