@@ -440,7 +440,7 @@ int CheckIFCursoExisteNome(char *name)
 int CheckIFProfessor(int id)
 {
     for(int i=0; i<n_professores; i++){
-        if(professores[i].IDProfessor == id)
+        if(professores[i].id == id)
             return i;
     }
     return -1;

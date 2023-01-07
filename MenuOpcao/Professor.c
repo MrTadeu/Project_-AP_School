@@ -3,42 +3,46 @@
 #include <string.h>
 #include "../All_functions/global.h"
 
-/* criarProfessor();
-listarProfessor(); 
-editarProfessor(); 
-removerProfessor(); */
 /* typedef struct { //struct para guardar os dados de um professor
     char *nomeProfessor;
-    int IDProfessor;
+    int id;
     char *emailProfessor;
     char *passwordProfessor;
-}professorStruct; */
+}professorStruct;*/
 
 extern professorStruct *professores; //extern para poder usar a variavel global.
 extern int n_professores; 
 
 void criarProfessor(){
-    professorStruct professortemp;
-    professortemp.nomeProfessor = malloc(100);
+    professores = realloc(professores, (n_professores+1)*sizeof(professorStruct));
+    professores[n_professores].nomeProfessor = malloc(100);
+    int id = professores[n_professores - 1].id + 1;
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
     printf("Qual o nome do professor? ");
-    scanf(" %[^\n]", professortemp.nomeProfessor);
-    FILE *file;
-    file = fopen("data/bin/Professores.bin", "ab");
-    if(!file){
-        printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
-        return;
-    }
-    int idprofessor = professores[n_professores].IDProfessor + 1;
-    fwrite(&idprofessor, sizeof(int), 1, file);
-    size_t nomeProfessorsize = strlen(professortemp.nomeProfessor) + 1; // +1 para guardar o '\0'
-    fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
-    fwrite(professortemp.nomeProfessor, nomeProfessorsize, 1, file);
-    fclose(file);
-    free(professortemp.nomeProfessor);
-    readBinProfessores();
+    scanf(" %[^\n]", professores[n_professores].nomeProfessor);
+    professores[n_professores].nomeProfessor = realloc(professores[n_professores].nomeProfessor, (strlen(professores[n_professores].nomeProfessor)+1));
+    professores[n_professores].id = id;
+
+    char *email = malloc(strlen("pv") + 10 + strlen("@estgv.ipv.pt")), *password = malloc(100);
+    //email example: pv25207@estgv.ipv.prof.pt
+    email[0] = '\0';
+    strcat(email, "pv");
+    char* id_char = malloc(10);
+    itoa(id, id_char, 10);
+    strcat(email, id);
+    strcat(email, "@estgv.ipv.prof.pt");
+    professores[n_professores].emailProfessor = malloc((strlen(email)+1));
+    strcpy(professores[n_professores].emailProfessor, email);
+    password[0] = '\0';
+    strcat(password, "pv");
+    strcat(password, id);
+    strcat(password, professores[n_professores].passwordProfessor);
+    professores[n_professores].passwordProfessor = malloc((strlen(password)+1));
+    strcpy(professores[n_professores].passwordProfessor, password);
+
+    saveBinProfessor();
 }
 
 void readBinProfessores(){
@@ -69,7 +73,7 @@ void listarProfessor(){
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
     for (int i = 0; i < n_professores; i++){
-        printf("Nome: %s\n", professores[i].nomeProfessor);
+        printf("ID: %d Nome: %s\n", professores[i].id, professores[i].nomeProfessor);
     }
 }
 
@@ -77,11 +81,11 @@ void editarProfessor(){
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
-    int idProfessor;
+    int id;
     printf("Qual o ID do professor que deseja editar? ");
-    scanf("%d", &idProfessor);
+    scanf("%d", &id);
     for (int i = 0; i < n_professores; i++){
-        if (idProfessor == professores[i].IDProfessor){
+        if (id == professores[i].id){
             printf("Qual o novo nome do professor? ");
             scanf(" %[^\n]", professores[i].nomeProfessor);
             FILE *file;
@@ -106,11 +110,11 @@ void removerProfessor(){
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
-    int idProfessor;
+    int id;
     printf("Qual o ID do professor que deseja remover? ");
-    scanf("%d", &idProfessor);
+    scanf("%d", &id);
     for (int i = 0; i < n_professores; i++){
-        if (idProfessor == professores[i].IDProfessor){
+        if (id == professores[i].id){
             for (int j = i; j < n_professores; j++){
                 professores[j] = professores[j+1];
             }
@@ -122,8 +126,8 @@ void removerProfessor(){
                 return;
             }
             for (int i = 0; i < n_professores; i++){
-                int idprofessor = professores[n_professores].IDProfessor + 1;
-                fwrite(&idprofessor, sizeof(int), 1, file);
+                int id = professores[n_professores].id + 1;
+                fwrite(&id, sizeof(int), 1, file);
                 size_t nomeProfessorsize = strlen(professores[i].nomeProfessor) + 1; // +1 para guardar o \0
                 fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
                 fwrite(professores[i].nomeProfessor, nomeProfessorsize, 1, file);
@@ -142,10 +146,14 @@ void saveBinProfessor(){
         return;
     }
     for (int i = 0; i < n_professores; i++){
-        fwrite(&professores[i].IDProfessor, sizeof(int), 1, file);
+        fwrite(&professores[i].id, sizeof(int), 1, file);
         size_t nomeProfessorsize = strlen(professores[i].nomeProfessor) + 1; // +1 para guardar o \0
         fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
         fwrite(professores[i].nomeProfessor, nomeProfessorsize, 1, file);
+        size_t emailProfessorsize = strlen(professores[i].emailProfessor) + 1; // +1 para guardar o \0
+        fwrite(&emailProfessorsize, sizeof(size_t), 1, file);
+        size_t passwordProfessorsize = strlen(professores[i].passwordProfessor) + 1; // +1 para guardar o \0
+        fwrite(professores[i].passwordProfessor, strlen(professores[i].passwordProfessor) + 1, 1, file);
     }
     fclose(file);
 }
