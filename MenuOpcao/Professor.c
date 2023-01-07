@@ -48,10 +48,10 @@ void criarProfessor(){
     strcpy(professores[n_professores].passwordProfessor, password);
     
     free(email);
-    /* free(password);
+    free(password);
     free(id_char);
     
-    free(nomeProf); */
+    free(nomeProf);
     n_professores++;
     
     saveBinProfessor();
