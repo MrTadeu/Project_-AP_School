@@ -13,6 +13,7 @@
     "string.h": "c",
     "global.h": "c",
     "structs.h": "c",
-    "time.h": "c"
+    "time.h": "c",
+    "windows.h": "c"
   }
 }

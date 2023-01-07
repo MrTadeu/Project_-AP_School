@@ -31,7 +31,6 @@ void getAllCourses(AlunoFileStruct *alunosFile){
 }
 
 int InitCursos() { //Apenas usado pela primeira vez
-
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
     char *TmpNameDisciplina = malloc(15);
