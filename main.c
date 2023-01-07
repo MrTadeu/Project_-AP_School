@@ -20,9 +20,25 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, 
 
 void readData();
 
+/* int firstTime(){
+    FILE *fp = fopen("data/bin/firstTime.bin", "rb");
+    if (fp == NULL){
+        return 1;
+    }
+    fclose(fp);
+    return 0;
+} */
 void main(){
+/*     if (firstTime()){
+        printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
+        printc("[lw]Parece que é a primeira vez que está a usar o programa![/lw]\n");
+        printc("[lw]Por favor, importe os dados do ficheiro de texto![/lw]\n");
+        importExportData();
+    }
+    else{
+        readData();
+    } */
     readData();
-    
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -60,8 +76,8 @@ void readData(){
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
     ReadBinDisciplinas();
-    ReadBinCursosDisciplina(); 
+    /* ReadBinCursosDisciplina(); */
     salas = readBinSalas(); 
-    professores = readBinProfessores();
+    /* professores = readBinProfessores(); */
 }
 
