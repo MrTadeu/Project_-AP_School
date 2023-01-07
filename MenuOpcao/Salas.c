@@ -4,7 +4,14 @@
 #include <string.h>
 #include "../All_functions/global.h"
 
+/* typedef struct { //struct para guardar os dados de uma sala
+    char *nomeSala;
+    int *numeroSala;
+    int *numeroCadeiras;
+}SalaStruct; */
 
+extern SalaStruct *salas;
+extern int n_salas;
 
 int ChekeIFsalaExist(char *nomeSala, int nSala);
 
@@ -12,40 +19,47 @@ extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar 
 extern int n_salas;
 
 void criarSala(){ // #VALIDAR
-    SalaStruct salatemp;
-    salatemp.nomeSala = malloc(100);
+    salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
+    salas[n_salas].nomeSala = malloc(100);
     printf("**************************************************\n");
     printc("************        [blue]Criar Salas[/blue]       ************\n");
     printf("**************************************************\n");
     do{
         printf("Qual o nome da sala? ");
-        scanf(" %[^\n]", salatemp.nomeSala);
-        uppercase(salatemp.nomeSala);
-        salatemp.nomeSala = realloc(salatemp.nomeSala, strlen(salatemp.nomeSala) + 1);
+        scanf(" %[^\n]", salas[n_salas].nomeSala);
+        uppercase(salas[n_salas].nomeSala);
+        salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
         printf("Qual o numero da sala? ");
-        scanf("%d", &salatemp.numeroSala);
-        if(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1){
+        scanf("%d", &salas[n_salas].nomeSala);
+        if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas->numeroSala) == 1){
             printc("[red]Sala já existe[/red]\n");
         }
     }while(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1);
     
     printf("Qual o numero de cadeiras? ");
     scanf("%d", &salatemp.numeroCadeiras);
+
+    n_salas++;
+    saveBinSalas();
+}
+
+void saveBinSalas(){
     FILE *arquivo;
-    arquivo = fopen("../data/Exames/Salas.bin", "ab");
+    arquivo = fopen("../data/MenuOpcao/Salas.bin", "wb");
     if(arquivo == NULL){
         printf("Erro ao abrir o arquivo");
-        exit(1);
+        return;
     }
-    size_t nomeSalasize = strlen(salatemp.nomeSala) + 1;
-    printf("%d", nomeSalasize);
-    fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
-    fwrite(salatemp.nomeSala, nomeSalasize, 1, arquivo);
-    fwrite(&salatemp.numeroSala, sizeof(int), 1, arquivo);
-    fwrite(&salatemp.numeroCadeiras, sizeof(int), 1, arquivo);
+    for(int i = 0; i < n_salas; i++){
+        size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
+        fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
+        fwrite(salas[i].nomeSala, nomeSalasize, 1, arquivo);
+
+        fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
+
+        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, arquivo);
+    }
     fclose(arquivo);
-    free(salatemp.nomeSala);
-    readBinSalas();
 }
 
 int ChekeIFsalaExist(char *nomeSala, int nSala){

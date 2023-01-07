@@ -58,7 +58,7 @@ void importExportData();
 void importDataTxtBin();
 
 //salas.c
-void criarSalas();
+void criarSala();
 void listarSalas();
 void readBinSalas();
 void editarSala();
