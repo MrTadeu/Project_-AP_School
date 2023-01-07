@@ -31,13 +31,13 @@ void criarSala(){ // #VALIDAR
         salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
         printf("Qual o numero da sala? ");
         scanf("%d", &salas[n_salas].nomeSala);
-        if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas->numeroSala) == 1){
+        if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
             printc("[red]Sala já existe[/red]\n");
         }
-    }while(ChekeIFsalaExist(salatemp.nomeSala, salatemp.numeroSala) == 1);
+    }while(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1);
     
     printf("Qual o numero de cadeiras? ");
-    scanf("%d", &salatemp.numeroCadeiras);
+    scanf("%d", &salas[n_salas].numeroCadeiras);
 
     n_salas++;
     saveBinSalas();
