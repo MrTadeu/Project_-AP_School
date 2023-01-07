@@ -193,12 +193,12 @@ void CriarCurso()
     { 
         printc("\n\n\tQuantas disciplinas tem %d  o curso?",i+1);
         scanf("%d", &courses[n_courses-1].num_disciplinas[i]);
-        if(courses[courses-1].num_disciplinas[j] >= n_disciplinas){//==================================================0
+        if(courses[n_courses-1].num_disciplinas[i] >= n_disciplinas){
                 printc("\n\n\t[red]Numero de disciplinas invalido[/red]\n\n");
                 do{
-                    printf("\n\nInsira o numero de disciplinas do %d ano: ", j+1);
-                    scanf("%d", &courses[i].num_disciplinas[j]);
-                }while(courses[i].num_disciplinas[j] >= n_disciplinas);
+                    printf("\n\nInsira o numero de disciplinas do %d ano: ", i+1);
+                    scanf("%d", &courses[n_courses-1].num_disciplinas[i]);
+                }while(courses[n_courses-1].num_disciplinas[i] >= n_disciplinas);
             }
         courses[n_courses-1].AnoDisciplina[i] = malloc(courses[n_courses-1].num_disciplinas[i]);
         printf("Insira as %d disciplinas do %d ano: ", courses[n_courses-1].num_disciplinas[i], i+1);
@@ -237,7 +237,7 @@ void CriarCurso()
 
 void EditarCursos(){
     int id, TmpIdDiretor;
-    char op, *TmpNameCurso = malloc(15), *TmpNameDisciplina = malloc(15);
+    char op, TmpNameCurso[15], *TmpNameDisciplina = malloc(15);
 
     printc("[green]Cursos existentes:[/green]");
     ListarCursos();
@@ -268,7 +268,6 @@ void EditarCursos(){
                 uppercase(TmpNameCurso);
             } while (CheckIFCursoExisteNome(TmpNameCurso) != -1); 
         }
-        TmpNameCurso = realloc(TmpNameCurso, strlen(TmpNameCurso) + 1);
         courses[CheckIFCursoExiste(id)].name = malloc(strlen(TmpNameCurso) + 1);
         strcpy(courses[CheckIFCursoExiste(id)].name, TmpNameCurso);
     }
@@ -282,6 +281,13 @@ void EditarCursos(){
         {
             printc("\n\n\tQuantas disciplinas tem %d  ano do curso?",j+1);
             scanf("%d", &courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
+                    if(courses[CheckIFCursoExiste(id)].num_disciplinas[j] >= n_disciplinas){
+                printc("\n\n\t[red]Numero de disciplinas invalido[/red]\n\n");
+                do{
+                    printf("\n\nInsira o numero de disciplinas do %d ano: ", j+1);
+                    scanf("%d", &courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
+                }while(courses[CheckIFCursoExiste(id)].num_disciplinas[j] >= n_disciplinas);
+            }
             courses[CheckIFCursoExiste(id)].AnoDisciplina[j] = realloc(courses[CheckIFCursoExiste(id)].AnoDisciplina[j], courses[CheckIFCursoExiste(id)].num_disciplinas[j]);
             printf("Insira as siglas das %d disciplinas do %d ano : ", courses[CheckIFCursoExiste(id)].num_disciplinas[j], j+1);
             for(int k=0; k<courses[CheckIFCursoExiste(id)].num_disciplinas[j]; k++)
@@ -297,7 +303,6 @@ void EditarCursos(){
                         uppercase(TmpNameDisciplina);
                     } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
                 }
-                TmpNameDisciplina = realloc(TmpNameDisciplina, strlen(TmpNameDisciplina)+1);
                 courses[CheckIFCursoExiste(id)].AnoDisciplina[j][k] = malloc(strlen(TmpNameDisciplina)+1);
                 strcpy(courses[CheckIFCursoExiste(id)].AnoDisciplina[j][k], TmpNameDisciplina);
             }

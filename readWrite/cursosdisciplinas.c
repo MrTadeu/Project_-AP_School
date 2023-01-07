@@ -39,6 +39,17 @@ int InitCursos() { //Apenas usado pela primeira vez
         ListarDisciplinas();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
         for(int j=0; j<3; j++){   
+            listarProfessor();
+            printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
+            scanf("%d", &TmpIdDiretor);
+            if(CheckIFProfessor(TmpIdDiretor) == -1){
+                printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
+                do{
+                    printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
+                    scanf("%d", &TmpIdDiretor);
+                } while (CheckIFProfessor(TmpIdDiretor) == -1); 
+            }
+            courses[n_courses-1].IdDiretor = TmpIdDiretor;
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
             if(courses[i].num_disciplinas[j] >= n_disciplinas){
@@ -67,38 +78,25 @@ int InitCursos() { //Apenas usado pela primeira vez
                 strcpy(courses[i].AnoDisciplina[j][k], TmpNameDisciplina);
             }
         }
-        printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
-        scanf("%d", &TmpIdDiretor);
-        if(CheckIFProfessor(TmpIdDiretor) == -1){
-            printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
-            do{
-                printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
-                scanf("%d", &TmpIdDiretor);
-            } while (CheckIFProfessor(TmpIdDiretor) == -1); 
-        }
-    courses[n_courses-1].IdDiretor = TmpIdDiretor;
     }
     SaveBinCursosDisciplina();
 }
 
-void SaveBinCursosDisciplina()
-{
+void SaveBinCursosDisciplina(){
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","wb");
     if (!CursoDisciplinaBin) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.bin[/red]\n\n");
         return;
     }
     fwrite(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
-    for (int i = 0; i < n_courses; i++)
-    {
+    for (int i = 0; i < n_courses; i++){
         fwrite(&courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
         size_t CursoLen = strlen(courses[i].name) + 1;
         fwrite(&CursoLen, sizeof(size_t), 1, CursoDisciplinaBin);
         fwrite(courses[i].name, CursoLen, 1, CursoDisciplinaBin);
-        for(int j=0; j<3; j++)
-        {   fwrite(&courses[i].num_disciplinas[j], sizeof(int), 1, CursoDisciplinaBin);
-            for(int k=0;k < courses[i].num_disciplinas[j]; k++)
-            {
+        for(int j=0; j<3; j++){   
+            fwrite(&courses[i].num_disciplinas[j], sizeof(int), 1, CursoDisciplinaBin);
+            for(int k=0;k < courses[i].num_disciplinas[j]; k++){
                 size_t DisciplinaLen = strlen(courses[i].AnoDisciplina[j][k]) + 1;
                 fwrite(&DisciplinaLen, sizeof(size_t), 1, CursoDisciplinaBin);
                 fwrite(courses[i].AnoDisciplina[j][k], DisciplinaLen, 1, CursoDisciplinaBin);
