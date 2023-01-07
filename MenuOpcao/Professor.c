@@ -27,7 +27,6 @@ void criarProfessor(){
 
     char *email = malloc(strlen("pv") + 10 + strlen("@estgv.ipv.pt")), *password = malloc(100);
     //email example: pv25207@estgv.ipv.prof.pt
-    email[0] = '\0';
     strcat(email, "pv");
     char* id_char = malloc(10);
     itoa(id, id_char, 10);
@@ -35,13 +34,15 @@ void criarProfessor(){
     strcat(email, "@estgv.ipv.prof.pt");
     professores[n_professores].emailProfessor = malloc((strlen(email)+1));
     strcpy(professores[n_professores].emailProfessor, email);
-    password[0] = '\0';
+    
     strcat(password, "pv");
     strcat(password, id);
     strcat(password, professores[n_professores].passwordProfessor);
     professores[n_professores].passwordProfessor = malloc((strlen(password)+1));
     strcpy(professores[n_professores].passwordProfessor, password);
-
+    
+    free(email);
+    free(password);
     saveBinProfessor();
 }
 
