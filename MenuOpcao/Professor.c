@@ -46,7 +46,7 @@ professorStruct* readBinProfessores(){
     file = fopen("../data/Exames/Professores.bin", "rb");
     if(file == NULL){
         printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
-        exit(1);
+        return NULL;
     }
     int i = 0;
     while (fread(&n_professores, sizeof(int), 1, file)){
