@@ -59,8 +59,8 @@ void readData(){
     alunos = readBinAlunos();
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
-    courses = readBinCourses();  
     ReadBinDisciplinas();
+    ReadBinCursosDisciplina(); 
     salas = readBinSalas(); 
     professores = readBinProfessores();
 }

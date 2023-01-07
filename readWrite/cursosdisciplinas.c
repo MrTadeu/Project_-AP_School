@@ -105,8 +105,7 @@ void SaveBinCursosDisciplina()
 }
 
 
-void ReadBinCursosDisciplina()
-{
+void ReadBinCursosDisciplina(){
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","rb");
     if (CursoDisciplinaBin == NULL) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursosdisciplina.txt[/red]\n\n");

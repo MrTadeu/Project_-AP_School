@@ -228,8 +228,7 @@ void CriarCurso()
     SaveBinCursosDisciplina();
 }
 
-void EditarCursos()
-{
+void EditarCursos(){
     int id, TmpIdDiretor;
     char op, *TmpNameCurso = malloc(15), *TmpNameDisciplina = malloc(15);
 
@@ -265,7 +264,6 @@ void EditarCursos()
         TmpNameCurso = realloc(TmpNameCurso, strlen(TmpNameCurso) + 1);
         courses[CheckIFCursoExiste(id)].name = malloc(strlen(TmpNameCurso) + 1);
         strcpy(courses[CheckIFCursoExiste(id)].name, TmpNameCurso);
-        saveBinCourses();
     }
     printf("\n\nAlterar disciplinas? (S/N");
     scanf("%c", &op);

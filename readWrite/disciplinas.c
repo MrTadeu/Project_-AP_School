@@ -7,8 +7,7 @@
 extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
 
-void InitDisciplinas()
-{
+void InitDisciplinas(){
     char* TmpNameDisciplina = malloc(15); 
     disciplinas = malloc(sizeof(disciplinasStruct));
     int parar;

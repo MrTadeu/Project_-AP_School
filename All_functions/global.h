@@ -33,8 +33,6 @@ void printfUserData();
 
 //courses.c
 void getAllCourses(AlunoFileStruct *alunosFile);
-void saveBinCourses();
-courseStruct *readBinCourses();
 courseStruct getCourseByID(int id);
 
 //regimes.c

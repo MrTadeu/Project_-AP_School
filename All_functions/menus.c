@@ -63,7 +63,7 @@ void MenuPrincipal(){
     }
     if (aluno.regime.perm.VerDisciplinas){
         if (opcao == i++){
-            MenuDisciplinas(); // <--- This is the problem
+            //MenuDisciplinas(); // <--- This is the problem
         }
     }
     if (aluno.regime.perm.MenuExames){
