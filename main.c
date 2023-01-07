@@ -78,6 +78,6 @@ void readData(){
     ReadBinDisciplinas();
     /* ReadBinCursosDisciplina(); */
     salas = readBinSalas(); 
-    /* professores = readBinProfessores(); */
+    professores = readBinProfessores();
 }
 
