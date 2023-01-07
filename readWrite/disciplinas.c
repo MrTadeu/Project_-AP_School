@@ -8,11 +8,11 @@ extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
 
 void InitDisciplinas(){
-    char* TmpNameDisciplina = malloc(15); 
+    char TmpNameDisciplina[15]; 
     disciplinas = malloc(sizeof(disciplinasStruct));
     int parar = 0;
     for(int i=0; ;i++){
-        disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));    
+        disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (i + 1));            
         printf("\nEscreve o nome da disciplina: ");
         scanf("%s", TmpNameDisciplina);
         disciplinas[i].name = malloc(strlen(TmpNameDisciplina)+1);
@@ -21,6 +21,7 @@ void InitDisciplinas(){
         printc("\nPara parar escreva [red]0[/red] para cntinuar escreva [green]1[/green]: ");
         scanf("%d", &parar);
         if(parar == 0){
+            n_disciplinas = i+1;
             break;
         }
     }
@@ -54,7 +55,7 @@ void SaveBinDisciplinas(){
     FILE *disciplinasBin = fopen("data/bin/disciplinas.bin","wb");
     if (disciplinasBin == NULL) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]disciplinas.bin[/red]\n\n");
-        exit(1);
+        return;
     }
 
     for (int i = 0; i < n_disciplinas; i++){

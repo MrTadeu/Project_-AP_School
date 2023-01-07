@@ -33,7 +33,7 @@ void getAllCourses(AlunoFileStruct *alunosFile){
 int InitCursos() { //Apenas usado pela primeira vez
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
-    char *TmpNameDisciplina = malloc(15);
+    char TmpNameDisciplina[15];
     int  TmpIdDiretor;
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
@@ -41,6 +41,13 @@ int InitCursos() { //Apenas usado pela primeira vez
         for(int j=0; j<3; j++){   
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
+            if(courses[i].num_disciplinas[j] >= n_disciplinas){
+                printc("\n\n\t[red]Numero de disciplinas invalido[/red]\n\n");
+                do{
+                    printf("\n\nInsira o numero de disciplinas do %d ano: ", j+1);
+                    scanf("%d", &courses[i].num_disciplinas[j]);
+                }while(courses[i].num_disciplinas[j] >= n_disciplinas);
+            }
             courses[i].AnoDisciplina[j] = malloc(courses[i].num_disciplinas[j]);
             printf("Insira as siglas das %d disciplinas do %d ano : ", courses[i].num_disciplinas[j], j+1);
             for(int k=0; k<courses[i].num_disciplinas[j]; k++)
@@ -54,9 +61,8 @@ int InitCursos() { //Apenas usado pela primeira vez
                         printf("\n\nInsira a sigla da disciplina: ");
                         scanf("%s", TmpNameDisciplina);
                         uppercase(TmpNameDisciplina);
-                    } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
+                    }while(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
                 }
-                TmpNameDisciplina = realloc(TmpNameDisciplina, strlen(TmpNameDisciplina)+1);
                 courses[i].AnoDisciplina[j][k] = malloc(strlen(TmpNameDisciplina)+1);
                 strcpy(courses[i].AnoDisciplina[j][k], TmpNameDisciplina);
             }
@@ -77,8 +83,8 @@ int InitCursos() { //Apenas usado pela primeira vez
 
 void SaveBinCursosDisciplina()
 {
-    FILE *CursoDisciplinaBin = fopen("data/txt/cursosdisciplina.txt","wb");
-    if (CursoDisciplinaBin == NULL) {
+    FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","wb");
+    if (!CursoDisciplinaBin) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.bin[/red]\n\n");
         return;
     }

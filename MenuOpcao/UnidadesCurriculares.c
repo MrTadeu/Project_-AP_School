@@ -193,6 +193,13 @@ void CriarCurso()
     { 
         printc("\n\n\tQuantas disciplinas tem %d  o curso?",i+1);
         scanf("%d", &courses[n_courses-1].num_disciplinas[i]);
+        if(courses[courses-1].num_disciplinas[j] >= n_disciplinas){//==================================================0
+                printc("\n\n\t[red]Numero de disciplinas invalido[/red]\n\n");
+                do{
+                    printf("\n\nInsira o numero de disciplinas do %d ano: ", j+1);
+                    scanf("%d", &courses[i].num_disciplinas[j]);
+                }while(courses[i].num_disciplinas[j] >= n_disciplinas);
+            }
         courses[n_courses-1].AnoDisciplina[i] = malloc(courses[n_courses-1].num_disciplinas[i]);
         printf("Insira as %d disciplinas do %d ano: ", courses[n_courses-1].num_disciplinas[i], i+1);
         printc("\n\n\t[green]Insira o nome da disciplina do %d ano:[/green] ", i+1);

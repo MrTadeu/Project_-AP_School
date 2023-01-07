@@ -6,7 +6,7 @@
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
-extern int n_alunos, n_regimes, n_courses;
+extern int n_alunos, n_regimes, n_courses, n_disciplinas, n_salas, n_professores;
 
 
 void importExportData(){
@@ -55,11 +55,16 @@ void importDataTxtBin(){
         remove("data/bin/courses.bin");
         remove("data/bin/alunos.bin");
         remove("data/bin/permission.bin");
+        remove("data/bin/disciplinas.bin");
+        remove("data/bin/cursosdisciplinas.bin");
 
         //LIMPAR n_alunos, n_regimes, n_courses
         n_alunos = 0;
         n_regimes = 0;
         n_courses = 0;
+        n_disciplinas = 0;
+        n_salas = 0;
+        n_professores = 0;
 
         //LER TXT ALUNOS
         alunosFile = getTxt(&n_alunos);
@@ -79,7 +84,9 @@ void importDataTxtBin(){
         alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
+        
         InitDisciplinas();
+
         InitCursos();
         
 

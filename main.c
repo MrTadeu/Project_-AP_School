@@ -38,7 +38,9 @@ void main(){
     else{
         readData();
     } */
+
     readData();
+    criarProfessor();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{

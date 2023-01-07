@@ -26,13 +26,14 @@ void criarProfessor(){
     printf("Qual o nome do professor? ");
     scanf(" %[^\n]", professortemp.nomeProfessor);
     FILE *file;
-    file = fopen("../data/Exames/Professores.bin", "ab");
-    if(file == NULL){
+    file = fopen("data/bin/Professores.bin", "ab");
+    if(!file){
         printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
-        exit(1);
+        return;
     }
-    fwrite(&n_professores, sizeof(int), 1, file);
-    size_t nomeProfessorsize = strlen(professortemp.nomeProfessor) + 1; // +1 para guardar o \0
+    int idprofessor = professores[n_professores].IDProfessor + 1;
+    fwrite(&idprofessor, sizeof(int), 1, file);
+    size_t nomeProfessorsize = strlen(professortemp.nomeProfessor) + 1; // +1 para guardar o '\0'
     fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
     fwrite(professortemp.nomeProfessor, nomeProfessorsize, 1, file);
     fclose(file);
@@ -41,9 +42,9 @@ void criarProfessor(){
 }
 
 void readBinProfessores(){
-    professorStruct *professores = malloc(sizeof(professorStruct));
+    professores = malloc(sizeof(professorStruct));
     FILE *file;
-    file = fopen("../data/Exames/Professores.bin", "rb");
+    file = fopen("data/bin/Professores.bin", "rb");
     if(file == NULL){
         printc("\n\n\tErro ao abrir o arquivo [red]Professor.bin[/red]\n\n");
         return;
@@ -60,6 +61,8 @@ void readBinProfessores(){
     n_professores = i;
     fclose(file);
 }
+
+
 
 void listarProfessor(){
     printf("**************************************************\n");
@@ -82,10 +85,10 @@ void editarProfessor(){
             printf("Qual o novo nome do professor? ");
             scanf(" %[^\n]", professores[i].nomeProfessor);
             FILE *file;
-            file = fopen("../data/Exames/Professores.bin", "wb");
+            file = fopen("data/bin/Professores.bin", "wb");
             if(file == NULL){
                 printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
-                exit(1);
+                return;
             }
             for (int i = 0; i < n_professores; i++){
                 fwrite(&n_professores, sizeof(int), 1, file);
@@ -113,13 +116,14 @@ void removerProfessor(){
             }
             n_professores--;
             FILE *file;
-            file = fopen("../data/Exames/Professores.bin", "wb");
+            file = fopen("data/bin/Professores.bin", "wb");
             if(file == NULL){
                 printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
-                exit(1);
+                return;
             }
             for (int i = 0; i < n_professores; i++){
-                fwrite(&n_professores, sizeof(int), 1, file);
+                int idprofessor = professores[n_professores].IDProfessor + 1;
+                fwrite(&idprofessor, sizeof(int), 1, file);
                 size_t nomeProfessorsize = strlen(professores[i].nomeProfessor) + 1; // +1 para guardar o \0
                 fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
                 fwrite(professores[i].nomeProfessor, nomeProfessorsize, 1, file);
@@ -128,4 +132,20 @@ void removerProfessor(){
             readBinProfessores();
         }
     }
+}
+
+void saveBinProfessor(){
+    FILE *file;
+    file = fopen("data/bin/Professores.bin", "wb");
+    if(file == NULL){
+        printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
+        return;
+    }
+    for (int i = 0; i < n_professores; i++){
+        fwrite(&professores[i].IDProfessor, sizeof(int), 1, file);
+        size_t nomeProfessorsize = strlen(professores[i].nomeProfessor) + 1; // +1 para guardar o \0
+        fwrite(&nomeProfessorsize, sizeof(size_t), 1, file);
+        fwrite(professores[i].nomeProfessor, nomeProfessorsize, 1, file);
+    }
+    fclose(file);
 }
