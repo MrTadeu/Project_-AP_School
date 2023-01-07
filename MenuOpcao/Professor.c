@@ -40,12 +40,12 @@ void criarProfessor(){
     readBinProfessores();
 }
 
-professorStruct* readBinProfessores(){
+void readBinProfessores(){
     professorStruct *professores = malloc(sizeof(professorStruct));
     FILE *file;
     file = fopen("../data/Exames/Professores.bin", "rb");
     if(file == NULL){
-        printc("Erro ao abrir o arquivo [red]Professor.bin[/red]");
+        printc("\n\n\tErro ao abrir o arquivo [red]Professor.bin[/red]\n\n");
         return NULL;
     }
     int i = 0;
@@ -59,7 +59,6 @@ professorStruct* readBinProfessores(){
     }
     n_professores = i;
     fclose(file);
-    return professores;
 }
 
 void listarProfessor(){

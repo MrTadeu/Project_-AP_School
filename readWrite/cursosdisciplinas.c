@@ -109,7 +109,7 @@ void ReadBinCursosDisciplina(){
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","rb");
     if (CursoDisciplinaBin == NULL) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursosdisciplina.bin[/red]\n\n");
-        return 0;
+        return;
     }
     fread(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
     for (int i = 0; i < n_courses; i++){
