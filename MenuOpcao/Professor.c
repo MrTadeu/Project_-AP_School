@@ -29,7 +29,10 @@ void criarProfessor(){
     char *email = malloc(strlen("pv") + strlen(professores[n_professores].nomeProfessor) + 100 /* 10 é para o numero id */+ strlen("@estgv.ipv.pt")), *password = malloc(100);
     //email example: pvjorge25207@estgv.ipv.prof.pt
     strcat(email, "pv");
+    /* email = realloc(email, strlen(email)+1); */
+
     char *nomeProf = malloc(strlen(professores[n_professores].nomeProfessor)+1);
+    /* email = realloc(email, strlen(email)+ strlen(professores[n_professores].nomeProfessor) + 1); */
     strcpy(nomeProf, professores[n_professores].nomeProfessor);
     printf("\n\t %s", professores[n_professores].nomeProfessor);
     strcat(email, nomeProf);
