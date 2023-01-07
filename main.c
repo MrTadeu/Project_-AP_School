@@ -40,6 +40,7 @@ void main(){
     } */
 
     readData();
+<<<<<<< Updated upstream
     criarSala();
     criarSala();
     criarSala();
@@ -48,6 +49,8 @@ void main(){
     editarSala();
     removerSalas();
     
+=======
+>>>>>>> Stashed changes
 
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
