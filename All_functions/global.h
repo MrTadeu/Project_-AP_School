@@ -62,7 +62,7 @@ void criarSala();
 void listarSalas();
 void readBinSalas();
 void editarSala();
-void removerSalas();
+void removerSala();
 int ChekeIFsalaExist(char *nomeSala, int nSala);
 void saveBinSalas();
 
