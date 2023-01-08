@@ -39,8 +39,9 @@ void changeName(){
     printc("********************************************* [blue]Editar nome![/blue] **********************************************\n");
     printf("****         Nome: %s          ****\n", aluno.name);
     printf("****         Novo nome: ");
-    scanf("%s", nome);
+    scanf(" %[^\n]", nome);
     strcpy(aluno.name, nome);
+    updateUser();
     saveBinAlunos();
     printf("****         Nome alterado com sucesso!          ****\n");
     printf("***************************************************************************************************\n");
@@ -55,9 +56,28 @@ void changePassword(){
     printf("****         Nova password: ");
     scanf("%s", password);
     strcpy(aluno.password, password);
+    updateUser();
     saveBinAlunos();
     printf("****         Password alterada com sucesso!          ****\n");
     printf("***************************************************************************************************\n");
     getchar();
     getchar();
+}
+
+void updateUser(){
+    int position = 0;
+    for (int i = 0; i < n_alunos; i++){
+        if (aluno.id == alunos[i].id){
+            position = i;
+            break;
+        }
+    }
+    alunos[position].name = malloc(strlen(aluno.name)+1);
+    alunos[position].password = malloc(strlen(aluno.password)+1);
+    strcpy(alunos[position].name, aluno.name);
+    strcpy(aluno.password, alunos[position].password);
+    aluno.year = alunos[position].year;
+    aluno.regime = getRegimeByID(alunos[position].id_regime);
+    aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
+    aluno.course = getCourseByID(alunos[position].id_course);
 }

@@ -116,3 +116,4 @@ void saveBinProfessor();
 void changeName();
 void changePassword();
 void editAccount();
+void updateUser();

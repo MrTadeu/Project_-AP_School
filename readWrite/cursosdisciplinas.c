@@ -158,12 +158,10 @@ void ReadBinCursosDisciplina(){
 
 courseStruct getCourseByID(int id){
     for (int i = 0; i < n_courses; i++){
-        printf("ID: %d nome:%s\n", courses[i].id, courses[i].name);
         if (courses[i].id == id){
             return courses[i];
         }
     }
-    printf("id: %d\n", id);
     courseStruct course;
     course.id = -1;
     course.name = malloc(12);
