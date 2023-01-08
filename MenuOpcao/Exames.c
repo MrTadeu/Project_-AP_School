@@ -108,7 +108,7 @@ void inscreverExame(){
             for (j = 0; j < exame[i].max_inscritos; j++){
                 if (exame[i].ids_inscritos[j] == 0){
                     exame[i].ids_inscritos[j] = aluno.id;
-                    printfc("[green]Inscrito com sucesso![/green]\n");
+                    printc("[green]Inscrito com sucesso![/green]\n");
                     vagaMenos(exame[i].sala);
                     return;
                 }
@@ -162,7 +162,7 @@ void listarInscritos(int id)
 
 void listarExamesdeumAluno(){
     int id_aluno, i, j;
-    listarAlunos(); 
+    listarAluno(); 
     printf("Qual o ID do aluno? ");
     scanf("%d", &id_aluno);
     for (i = 0; i < n_exames; i++){
@@ -185,7 +185,7 @@ void removerIncricao()
             for (j = 0; j < exame[i].max_inscritos; j++){
                 if (exame[i].ids_inscritos[j] == aluno.id){
                     exame[i].ids_inscritos[j] = 0;
-                    printfc("[green]Removido com sucesso![/green]\n");
+                    printc("[green]Removido com sucesso![/green]\n");
                     vagaMais(exame[i].sala);
                     return;
                 }
