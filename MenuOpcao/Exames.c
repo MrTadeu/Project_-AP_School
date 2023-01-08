@@ -14,7 +14,8 @@ typedef struct{
 
 extern Exames* exame;
 extern int n_exames;
-/* exame = malloc(sizeof(Exames)); */
+
+//NUMERO MAXIMO DE INSCRITOS?? NUMERO DE INSCRITOS = NUMERO DE VAGAS NECESSARIAS 
 
 void criarExame(){
     exame = realloc(exame, sizeof(Exames)*(n_exames+1));
