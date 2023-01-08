@@ -103,5 +103,6 @@ void readData(){
     RemoverDisciplina();
     EditarDisciplina();
     CriarCurso(); */
+    /* criarExame(); */
 }
 
