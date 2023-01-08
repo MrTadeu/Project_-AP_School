@@ -77,25 +77,29 @@ void CriarDisciplina()
     }      
 }
 
-void Removerdisciplina()
+void RemoverDisciplina()
 {
-    char nameCurso[10];
-    void ListarDisciplinas();
-    printc("\n\n\t[green]Insira a sigla da disciplina que quer remover: [/green]");
-    scanf("%d", nameCurso);
-    if (CheckIFDisciplinaExisteNome(nameCurso) == -1){
+    char IdDisciplina;
+    ListarDisciplinas();
+    printc("\n\n\t[green]Insira o ID da disciplina que quer remover: [/green]");
+    scanf("%d", &IdDisciplina);
+    if (CheckIFDisciplinaExiste(IdDisciplina) == -1){
         printc("\n\n\t[red]Disciplina nao existe[/red]\n\n");
         do{
-            printf("\n\n\tInsira a sigla da disciplina que quer remover: ");
-            scanf("%d", nameCurso);
-        } while (CheckIFDisciplinaExisteNome(nameCurso) == -1);
+            printf("\n\n\tInsira o ID da disciplina que quer remover: ");
+            scanf("%d", IdDisciplina);
+        } while (CheckIFDisciplinaExiste(IdDisciplina) == -1);
     }
-    for (int i = 0; i < n_disciplinas; i++)
+    for (int i = IdDisciplina-1; i < n_disciplinas+1; i++){
+        disciplinas[i].name = realloc(disciplinas[i].name, strlen(disciplinas[i+1].name)+1);
         strcpy(disciplinas[i].name , disciplinas[i+1].name);
+    }
+    printf("ola");
     n_disciplinas--;
     disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas));   
     SaveBinDisciplinas();
-    RemoverDisciplinaFromCursos(nameCurso);
+    printf("%s", disciplinas[CheckIFDisciplinaExiste(IdDisciplina)].name);
+    RemoverDisciplinaFromCursos(disciplinas[CheckIFDisciplinaExiste(IdDisciplina)].name);
 }
 
 void EditarDisciplina()
@@ -335,7 +339,9 @@ void RemoverDisciplinaFromCursos(char* name)
                         strcpy(courses[i].AnoDisciplina[j][l], courses[i].AnoDisciplina[j][l+1]);
                     }
                     courses[i].num_disciplinas[j]--;
+                    printf("ola3");
                     courses[i].AnoDisciplina[j] = realloc(courses[i].AnoDisciplina[j], courses[i].num_disciplinas[j]);
+                    printf("oLa4");
                     aux = i;
                     k = courses[i].num_disciplinas[j];
                     j = 3;
@@ -355,9 +361,11 @@ void AdicionarDisciplinaToCursos(char* nameCurso, char* nomeDisciplina)
         if(strcmp(courses[i].name, nameCurso) == 0){
             printf("A que ano pertence a disciplina? (1, 2 ou 3)");
             scanf("%d", &ano);
-            courses[i].num_disciplinas[ano]++;
-            courses[i].AnoDisciplina[ano] = realloc(courses[i].AnoDisciplina[ano], courses[i].num_disciplinas[ano]);
-            courses[i].AnoDisciplina[ano][courses[i].num_disciplinas[ano]-1] = malloc(strlen(nomeDisciplina)+1);
+            printf(" %d\n", ano);
+            courses[i].num_disciplinas[ano-1]++;
+            courses[i].AnoDisciplina[ano-1] = (char **)realloc(courses[i].AnoDisciplina[ano-1], courses[i].num_disciplinas[ano-1]);
+            printf("ola");
+            courses[i].AnoDisciplina[ano-1][courses[i].num_disciplinas[ano-1]-1] = malloc(strlen(nomeDisciplina)+1);
             strcpy(courses[i].AnoDisciplina[ano][courses[i].num_disciplinas[ano]-1], nomeDisciplina);
             break;
         }
@@ -398,6 +406,7 @@ void RemoverCursos()
 int CheckIFDisciplinaExiste(int id)
 {
     for(int i=0; i<n_disciplinas; i++){
+        printf("%d" ,disciplinas[i].id);
         if(disciplinas[i].id == id)
             return i;
     }
