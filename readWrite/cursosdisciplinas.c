@@ -88,6 +88,9 @@ int InitCursos() { //Apenas usado pela primeira vez
     }
     ListarCursosDisciplinas();  
     SaveBinCursosDisciplina();
+    ReadBinCursosDisciplina();
+    SaveBinCursosDisciplina();
+    ListarCursosDisciplinas();
 }
 
 void SaveBinCursosDisciplina(){
@@ -111,7 +114,6 @@ void SaveBinCursosDisciplina(){
                 fwrite(courses[i].AnoDisciplina[j][k], DisciplinaLen, 1, CursoDisciplinaBin);
             }
         }
-        printf("ID do diretor: %d\n", courses[i].IdDiretor);
         fwrite(&courses[i].IdDiretor, sizeof(int), 1, CursoDisciplinaBin);
     }
     fclose(CursoDisciplinaBin);
@@ -126,9 +128,10 @@ void ReadBinCursosDisciplina(){
     }
     fread(&n_courses, sizeof(int), 1, CursoDisciplinaBin);    
     courses = malloc(sizeof(courseStruct)*n_courses);
-    for(int i=0; i<n_courses; i++)
-        courses[i].AnoDisciplina = malloc(3);
+        
     for (int i = 0; i < n_courses; i++){
+
+        courses[i].AnoDisciplina = malloc(3);
         fread(&courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
 
         size_t CursoLen;

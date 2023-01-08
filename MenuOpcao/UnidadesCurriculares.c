@@ -150,9 +150,9 @@ void ListarCursosDisciplinas()
             printf("Disciplinas do %d ano : ", j+1);
             for(int k=0; k<courses[i].num_disciplinas[j]; k++)
             {
+                printf("%s\t", courses[i].AnoDisciplina[j][k]);
                 if(k%5 == 0)
                     printf("\n");
-                printf("%s\t", courses[i].AnoDisciplina[j][k]);
             }
             printf("\n\n");
         }

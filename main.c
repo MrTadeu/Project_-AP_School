@@ -103,7 +103,6 @@ void readData(){
     ReadBinCursosDisciplina(); 
     printf("ahhhhhhhhhhhhhhhhhhhhh");
     ListarCursosDisciplinas();
-    ListarCursos();
     readBinSalas();
     readBinProfessores();
 }
