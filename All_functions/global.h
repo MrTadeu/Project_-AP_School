@@ -65,6 +65,7 @@ void MenuDisciplinas();
 void MenuEditarAdicionarRemoverDisciplinas();
 void MenuFilesNovos();
 int menuEditAluno();
+void MenuSalas();
 
 //importExport.c
 void importExportData();

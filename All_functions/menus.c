@@ -112,7 +112,7 @@ void MenuPrincipal(){
         if (aluno.regime.perm.MenuExames){
             if (opcao == i++){
                 printf("Menu Exames");
-                MenuExames(); 
+                //MenuExames(); 
             }
         }
 
@@ -130,7 +130,7 @@ void MenuPrincipal(){
 }
 
 //MENU EXAMES: exames.c
-void MenuExames(){
+/* void MenuExames(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Exames[/blue] ****************\n");
@@ -199,7 +199,7 @@ void MenuExames(){
             exportarExames();
         }
     }
-}
+} */
 
 //MENU EDITAR CONTA: currentUser.c
 int MenuEditarConta(){
@@ -271,7 +271,7 @@ void MenuAdmin(){
         }
         if (aluno.regime.perm.MenuSalas){
             if (opcao == i++){
-                //MenuSalas();
+                MenuSalas();
             }
         }
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -511,52 +511,58 @@ void MenuEditarAdicionarRemoverDisciplinas()
     }
     }while (1);   
 } 
+ */
+
 
 //MENU SALAS: salas.c
 void MenuSalas(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int opcao, i = 0;
-    printc("**************************************************\n");
-    printc("****************** [blue]Menu Salas[/blue] ****************\n");
-    printc("**************************************************\n");
-    printf("**        %d -> Sair                             **\n", i++);
-    if (aluno.regime.perm.CriarSalas){
-        printf("**        %d -> Criar Salas                     **\n", i++);
-    }
-    if (aluno.regime.perm.ListarSalas){
-        printf("**        %d -> Listar Salas                    **\n", i++);
-    }
-    if (aluno.regime.perm.EditarSalas){
-        printf("**        %d -> Editar Salas                    **\n", i++);
-    }
-    if (aluno.regime.perm.RemoverSalas){
-        printf("**        %d -> Remover Salas                   **\n", i++);
-    }
-    printc("**************************************************\n");
-    printc("Qual a opção que pretende?");
-    scanf("%d", &opcao);
+    do{
+        i = 0;
+        printc("**************************************************\n");
+        printc("******************** [blue]Menu Salas[/blue] **************`**\n");
+        printc("**************************************************\n");
+        printf("**        %d -> Sair                            **\n", i++);
+        if (aluno.regime.perm.CriarSalas){
+            printf("**        %d -> Criar Salas                     **\n", i++);
+        }
+        if (aluno.regime.perm.ListarSalas){
+            printf("**        %d -> Listar Salas                    **\n", i++);
+        }
+        if (aluno.regime.perm.EditarSalas){
+            printf("**        %d -> Editar Salas                    **\n", i++);
+        }
+        if (aluno.regime.perm.RemoverSalas){
+            printf("**        %d -> Remover Salas                   **\n", i++);
+        }
+        printc("**************************************************\n");
+        printc("Qual a opção que pretende?");
+        scanf("%d", &opcao);
 
-    if (opcao == 0){
-        printf("[lw]A fechar o programa...[/lw]");
-    }
-    if (aluno.regime.perm.CriarSalas){
-        if (opcao == i++){
-            criarSala();
+        int i = 1;
+
+        if (aluno.regime.perm.CriarSalas){
+            if (opcao == i++){
+                criarSala();
+            }
         }
-    }
-    if (aluno.regime.perm.ListarSalas){
-        if (opcao == i++){
-            listarSalas();
+        if (aluno.regime.perm.ListarSalas){
+            if (opcao == i++){
+                listarSalas();
+            }
         }
-    }
-    if (aluno.regime.perm.EditarSalas){
-        if (opcao == i++){
-            editarSala(); 
+        if (aluno.regime.perm.EditarSalas){
+            if (opcao == i++){
+                editarSala(); 
+            }
         }
-    }
-    if (aluno.regime.perm.RemoverSalas){
-        if (opcao == i++){
-            removerSala();
+        if (aluno.regime.perm.RemoverSalas){
+            if (opcao == i++){
+                removerSala();
+            }
         }
-    }
+
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    } while (opcao != 0);
 }
- */

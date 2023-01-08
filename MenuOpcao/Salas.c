@@ -106,6 +106,7 @@ void saveBinSalas(){
 
 
 void listarSalas(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     printf("**************************************************\n");
     printc("************       [blue]Lista de Salas[/blue]     ************\n");
     printf("**************************************************\n");
@@ -118,6 +119,10 @@ void listarSalas(){
         printf("Numero de cadeiras: %d\n", salas[i].numeroCadeiras);
         printf("--------------------------------------------\n");
     }
+
+    printf("Pressione qualquer tecla para continuar...");
+    getchar();
+    getchar();
 }
 
 void readBinSalas(){
