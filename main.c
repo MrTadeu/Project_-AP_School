@@ -17,8 +17,9 @@ disciplinasStruct *disciplinas;
 SalaStruct *salas;
 professorStruct *professores;
 AlunoDataStruct aluno;
+Exames* exame;
 
-int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, n_professores = 0;
+int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, n_professores = 0, n_exames = 0;
 
 
 void readData();
