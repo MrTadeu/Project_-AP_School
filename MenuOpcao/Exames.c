@@ -53,5 +53,5 @@ void saveBinExames(){
         fwrite(&exame[i].data.hora, sizeof(Exames), 1, fp);
         fwrite(&exame[i].data.minuto, sizeof(Exames), 1, fp);
     }
-    
+    fclose(fp);
 }
