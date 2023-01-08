@@ -28,6 +28,9 @@ void criarProfessor(){
     do{
         printf("Qual o nome do professor? ");
         scanf(" %[^\n]", professores[n_professores].nomeProfessor);
+        if (isdigit_cheker(professores[n_professores].nomeProfessor) == 1){
+            printc("[red]Somente letras e espaços são permitidos[/red]\n");
+        }
     } while (isdigit_cheker(professores[n_professores].nomeProfessor) == 1);
     professores[n_professores].nomeProfessor = realloc(professores[n_professores].nomeProfessor, (strlen(professores[n_professores].nomeProfessor)+1));
     
