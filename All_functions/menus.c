@@ -245,7 +245,7 @@ void MenuAdmin(){
         printc("**************************************************\n");
         printc("Qual a opção que pretende?");
         scanf("%d", &opcao);
-        int i = 0;
+        int i = 1;
 
         if (aluno.regime.perm.MenuAlunos){
             if (opcao == i++){
@@ -279,55 +279,47 @@ void MenuAdmin(){
 }
 
 void MenuAlunos(){
-    int opcao, i = 0;
-    /* printc("**************************************************\n");
-    printc("****************** [blue]Menu Alunos[/blue] ****************\n");
-    printc("**************************************************\n");
-    printf("**        %d -> Sair                             **\n", i++);
-    if (aluno.regime.perm.ListarTodosAlunoAdmin){
-        printf("**        %d -> Listar Todos os Aluno            **\n", i++);
-    }
-    if (aluno.regime.perm.ListarAlunoAdmin){
-        printf("**        %d -> Listar Aluno (ID)                **\n", i++);
-    }
-    if (aluno.regime.perm.CriarAlunoAdmin){
-        printf("**        %d -> Criar Aluno                      **\n", i++);
-    }
-    if (aluno.regime.perm.EditarAlunoAdmin){
-        printf("**        %d -> Editar Aluno                     **\n", i++);
-    }
-    if (aluno.regime.perm.RemoverAlunoAdmin){
-        printf("**        %d -> Remover Aluno                    **\n", i++);
-    }
-    printc("**************************************************\n");
-    printc("Qual a opção que pretende?");
-    scanf("%d", &opcao);
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    int opcao;
+    do{
+        int opcao;
+        printc("**************************************************\n");
+        printc("****************** [blue]Menu Alunos[/blue] ****************\n");
+        printc("**************************************************\n");
+        printf("**        0 -> Sair                             **\n");
+        printf("**        1 -> Listar Todos os Aluno            **\n");
+        printf("**        2 -> Listar Aluno (ID)                **\n");
+        printf("**        3 -> Criar Aluno                      **\n");
+        printf("**        4 -> Editar Aluno                     **\n");
+        printf("**        5 -> Remover Aluno                    **\n");
+        printc("**************************************************\n");
+        printc("Qual a opção que pretende?");
+        scanf("%d", &opcao);
 
-    if (aluno.regime.perm.ListarTodosAlunoAdmin){
-        if (opcao == i++){
-            listarTodosAlunos();
+        switch (opcao){
+            case 0:
+                break;
+            case 1:
+                listarTodosAlunos();
+                break;
+            case 2:
+                listarAluno();
+                break;
+            case 3:
+                criarAluno();
+                break;
+            case 4:
+                alterarAluno();
+                break;
+            case 5:
+                apagarAluno();
+                break;
+            default:
+                printf("\nOpção inválida!\n");
+                break;
         }
-    }
-    if (aluno.regime.perm.ListarAlunoAdmin){
-        if (opcao == i++){
-            listarAlunos();
-        }
-    }
-    if (aluno.regime.perm.CriarAlunoAdmin){
-        if (opcao == i++){
-            criarAluno();
-        }
-    }
-    if (aluno.regime.perm.EditarAlunoAdmin){
-        if (opcao == i++){
-            editarAluno();
-        }
-    }
-    if (aluno.regime.perm.RemoverAlunoAdmin){
-        if (opcao == i++){
-            removerAluno();
-        }
-    } */
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    } while (opcao != 0);
 }
 
 int menuEditAluno(){
@@ -340,6 +332,7 @@ int menuEditAluno(){
     printf("**        %d -> Editar Password                  **\n", i++);
     printf("**        %d -> Editar Regime                    **\n", i++);
     printf("**        %d -> Editar Curso                     **\n", i++);
+    printf("**        %d -> Editar Ano                       **\n", i++);
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);

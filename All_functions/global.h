@@ -32,6 +32,8 @@ AlunoStruct *readBinAlunos();
 void login(char *email, char *password);
 void getUserDataByID(int id);
 void printfUserData();
+int checkIfUserExists(int id);
+int generateUserID();
 
 //courses.c
 void getAllCourses(AlunoFileStruct *alunosFile);
@@ -42,6 +44,8 @@ regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile);
 void saveBinRegimes();
 regimeStruct *readBinRegimes();
 regimeStruct getRegimeByID(int id);
+void listarRegimes();
+int checkIfRegimeExists(int id);
 
 //permissions.c
 void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);
@@ -58,6 +62,7 @@ int importExportMenu();
 void MenuDisciplinas();
 void MenuEditarAdicionarRemoverDisciplinas();
 void MenuFilesNovos();
+int menuEditAluno();
 
 //importExport.c
 void importExportData();
@@ -129,3 +134,10 @@ bool folderExists();
 
 //main.c
 void readData();
+
+//admin.c
+void listarTodosAlunos();
+void listarAluno();
+void criarAluno();
+void alterarAluno();
+void apagarAluno();

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../All_functions\global.h"
 
 extern AlunoStruct *alunos;
@@ -127,6 +128,15 @@ int checkIfUserExists(int id){
         }
     }
     return 0;
+}
+
+int generateUserID(){
+    int id = 0;
+    srand(time(NULL));
+    do{
+        id = rand() % 100000;
+    }while(checkIfUserExists(id) == 1);
+    return id;
 }
 
 void printfUserData(){//testes

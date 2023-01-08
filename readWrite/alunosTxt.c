@@ -110,7 +110,7 @@ AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruc
             }
         }
 
-        char *email = malloc(/* strlen("pv") + 10 + strlen("@estgv.ipv.pt") +  */1000), *password = malloc(100);
+        char *email = malloc(120), *password = malloc(100);
         //email example: pv25207@estgv.ipv.pt
         email[0] = '\0';
         strcat(email, "pv");

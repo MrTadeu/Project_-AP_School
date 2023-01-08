@@ -81,3 +81,19 @@ regimeStruct getRegimeByID(int id){
     strcpy(none.name, "Não existe!");
     return none;
 }
+
+void listarRegimes(){
+    printf("Listagem de todos os Regimes:\n");
+    for (int i = 0; i < n_regimes; i++){
+        printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
+    }
+}
+
+int checkIfRegimeExists(int id){
+    for (int i = 0; i < n_regimes; i++){
+        if (regimes[i].id == id){
+            return 1;
+        }
+    }
+    return 0;
+}
