@@ -78,8 +78,6 @@ AlunoStruct *readBinAlunos(){
     }
 }
 
-
-
 void login(char *email, char *password){
     int i, flag = 0;
     for (i = 0; i < n_alunos; i++){
@@ -149,7 +147,7 @@ void getUserDataByIDProf(int id){
     strcpy(aluno.email, professores[position].emailProfessor);
     strcpy(aluno.password, professores[position].passwordProfessor);
     aluno.regime.perm.MenuExames = 1;
-    aluno.regime.perm.VerDisciplinas = 1;
+    aluno.regime.perm.VerDisciplinas = 0;
     aluno.regime.perm.MenuProfessor = 1;
     aluno.regime.perm.MenuAdmin = 1;
     aluno.regime.perm.MenuSalas = 1;
