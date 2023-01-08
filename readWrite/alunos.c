@@ -99,7 +99,7 @@ void login(char *email, char *password){
             printc("\n\n\t[green]Login feito com sucesso[/green]\n\n");
             getchar();
             getchar();
-            getUserDataByID(alunos[i].id);
+            getUserDataByIDProf(professores[i].id);
             MenuPrincipal();
         }
     }
@@ -148,8 +148,33 @@ void getUserDataByIDProf(int id){
     strcpy(aluno.name, professores[position].nomeProfessor);
     strcpy(aluno.email, professores[position].emailProfessor);
     strcpy(aluno.password, professores[position].passwordProfessor);
-    /* aluno.regime = getRegimeByID(professores[position].id_regime); */
-    aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
+    aluno.regime.perm.MenuExames = 1;
+    aluno.regime.perm.VerDisciplinas = 1;
+    aluno.regime.perm.MenuProfessor = 1;
+    aluno.regime.perm.MenuAdmin = 1;
+    aluno.regime.perm.MenuSalas = 1;
+    aluno.regime.perm.CriarExames = 1;
+    aluno.regime.perm.InscritosExames = 1;
+    aluno.regime.perm.ListarExames = 1;
+    aluno.regime.perm.ListarExamesInscritos = 1;
+    aluno.regime.perm.EditarExames = 1;
+    aluno.regime.perm.ExportarExames = 1;
+    aluno.regime.perm.InscreverExames = 1;
+    aluno.regime.perm.CriarSalas = 1;
+    aluno.regime.perm.ListarSalas = 1;
+    aluno.regime.perm.EditarSalas = 1;
+    aluno.regime.perm.RemoverSalas = 1;
+    aluno.regime.perm.CriarProfessor = 1;
+    aluno.regime.perm.ListarProfessor = 1;
+    aluno.regime.perm.EditarProfessor = 1;
+    aluno.regime.perm.RemoverProfessor = 1;
+    aluno.regime.perm.MenuCursos = 1;
+    aluno.regime.perm.MenuAlunos = 1;
+    aluno.regime.perm.MenuRegimes = 1;
+    aluno.regime.perm.CriarCursos = 1;
+    aluno.regime.perm.ListarCursos = 1;
+    aluno.regime.perm.EditarCursos = 1;
+    aluno.regime.perm.RemoverCursos = 1;
 }
 
 int checkIfUserExists(int id){
