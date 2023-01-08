@@ -330,6 +330,22 @@ void MenuAlunos(){
     } */
 }
 
+int menuEditAluno(){
+    int opcao, i = 0;
+    printc("**************************************************\n");
+    printc("****************** [blue]Menu Editar Aluno[/blue] ****************\n");
+    printc("**************************************************\n");
+    printf("**        %d -> Sair                             **\n", i++);
+    printf("**        %d -> Editar Nome                      **\n", i++);
+    printf("**        %d -> Editar Password                  **\n", i++);
+    printf("**        %d -> Editar Regime                    **\n", i++);
+    printf("**        %d -> Editar Curso                     **\n", i++);
+    printc("**************************************************\n");
+    printc("Qual a opção que pretende?");
+    scanf("%d", &opcao);
+    return opcao;
+}
+
 /*
 //MENU PROFESSOR: professor.c
 void MenuProfessor(){

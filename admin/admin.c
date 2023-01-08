@@ -37,12 +37,16 @@ void MenuAdmin(){
 void listarTodosAlunos(){
     printf("Listagem de todos os alunos:\n");
     for (int i = 0; i < n_alunos; i++){
-        printf(" ID: %d", alunos[i].id);
-        printf(" Nome: %s", alunos[i].name);
-        printf(" Ano: %d", alunos[i].year);
-        printf(" ID Regime: %d", alunos[i].id_regime);
-        printf(" ID Course: %d", alunos[i].id_course);
-        printf(" Email: %s\n", alunos[i].email);
+        courseStruct courseAluno = getCourseByID(alunos[i].id_course);
+        regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime);        
+        printf("ID: %d", alunos[i].id);
+        printf("Nome: %s", alunos[i].name);
+        printf("Ano: %d", alunos[i].year);
+        printf("ID Regime: %d", alunos[i].id_regime);
+        printf("Nome Regime: %s", regimeAluno.name);
+        printf("ID Course: %d", alunos[i].id_course);
+        printf("Nome Curso: %s", courseAluno.name);
+        printf("Email: %s\n", alunos[i].email);
     }
     printc("\n\n[lw]Pressione enter para continuar[/lw]\n");  
     getchar();
@@ -55,13 +59,55 @@ void listarAluno(){
     scanf("%d", &id);
     for (int i = 0; i < n_alunos; i++){
         if (alunos[i].id == id){
-            printf(" ID: %d", alunos[i].id);
-            printf(" Nome: %s", alunos[i].name);
-            printf(" Ano: %d", alunos[i].year);
-            printf(" ID Regime: %d", alunos[i].id_regime);
-            printf(" ID Course: %d", alunos[i].id_course);
-            printf(" Email: %s\n", alunos[i].email);
+            courseStruct courseAluno = getCourseByID(alunos[i].id_course);
+            regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime);           
+            printf("\nID: %d", alunos[i].id);
+            printf("\nNome: %s", alunos[i].name);
+            printf("\nEmail: %s", alunos[i].email);
+            printf("\nAno: %d", alunos[i].year);
+            printf("\nID Regime: %d", alunos[i].id_regime);
+            printf("\nNome Regime: %s", regimeAluno.name);
+            printf("\nID Curso: %d", alunos[i].id_course);
+            printf("\nNome Curso: %s", courseAluno.name);
             break;
         }
     }
+    printc("\n\n[lw]Pressione enter para continuar[/lw]\n");  
+    getchar();
+    getchar();
+}
+
+void alterarAluno(){
+    listarTodosAlunos();
+    int flag = 0, id;
+    do{
+        if(flag == 1)
+            printf("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("Por favor Introduza o ID do aluno que pretende editar: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (checkIfUserExists(id) == 0);
+
+
+
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    int opcao, i = 1;
+    do{
+        opcao = menuEditAluno();
+
+        switch (opcao){
+        case 1:
+            /* code */
+            break;
+        
+        default:
+            break;
+        }
+        
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    } while (opcao != 0);
+
+
+
 }

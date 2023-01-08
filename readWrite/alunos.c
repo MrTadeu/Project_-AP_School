@@ -120,6 +120,15 @@ void getUserDataByID(int id){
     aluno.course = getCourseByID(alunos[position].id_course);
 }
 
+int checkIfUserExists(int id){
+    for (int i = 0; i < n_alunos; i++){
+        if (id == alunos[i].id){
+            return 1;            
+        }
+    }
+    return 0;
+}
+
 void printfUserData(){//testes
     printc("\n\t[green]ID:[/green] %d", aluno.id);
     printc("\n\t[green]Nome:[/green] %s", aluno.name);
