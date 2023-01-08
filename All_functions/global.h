@@ -95,7 +95,6 @@ void EditarDisciplina();
 //--------------------------------------------
 void ListarCursosDisciplinas();
 void RemoverDisciplinaFromCursos(char* name);
-void AdicionarDisciplinaToCursos(char* nameCurso, char* nomeDisciplina);
 void EditarDisciplinaFromCursos(char *NameOriginal,char *nameNovo);
 //--------------------------------------------
 void ListarCursos();

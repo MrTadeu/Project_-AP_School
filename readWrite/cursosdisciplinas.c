@@ -86,13 +86,8 @@ int InitCursos() { //Apenas usado pela primeira vez
             }
         }
     }
-    ListarCursosDisciplinas();  
     SaveBinCursosDisciplina();
-    ReadBinCursosDisciplina();
-    SaveBinCursosDisciplina();
-    ListarCursosDisciplinas();
 }
-
 void SaveBinCursosDisciplina(){
 
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","wb");
