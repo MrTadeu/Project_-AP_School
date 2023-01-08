@@ -33,10 +33,11 @@ void main(){
             int i, mul = 10;
             for(i = 0; i < 100; i++) {
                 Sleep(10);
-                spinner_update("Test [bw][red]%d[/red][/bw]...", i);
+                spinner_update("[white]A entrar em modo Setup[/white] [bw][red]%d[/red][/bw]...", i);
             }
             spinner_done("Done!\n");
             printc("[lg][bg][+][/bg][/lg] Task was successful!\n");
+            getchar();
             Sleep(1000);
             MenuFilesNovos();
         }
@@ -93,7 +94,5 @@ void readData(){
     RemoverDisciplina();
     EditarDisciplina();
     CriarCurso();
-
-    
 }
 
