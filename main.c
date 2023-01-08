@@ -38,15 +38,7 @@ void main(){
     else{
         readData();
     } */
-    listarSalas();
-    criarSala();
-    criarSala();
-    criarSala();
-    criarSala();
-    listarSalas();
-    removerSala();
-    listarSalas();
-    editarSala();
+
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -85,7 +77,7 @@ void readData(){
     perms_file = readBinPermissions();
     ReadBinDisciplinas();
     ReadBinCursosDisciplina();
-    /* readBinSalas(); */
+    readBinSalas();
     readBinProfessores();
 }
 
