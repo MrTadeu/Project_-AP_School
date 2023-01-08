@@ -14,6 +14,7 @@ typedef struct{
 
 extern Exames* exame;
 extern SalaStruct *salas;
+extern AlunoDataStruct aluno;
 extern int n_exames, n_salas;
 
 //NUMERO MAXIMO DE INSCRITOS?? NUMERO DE INSCRITOS = NUMERO DE VAGAS NECESSARIAS 
@@ -91,21 +92,22 @@ void mostrarSalasLivres()
 
 
 void inscreverExame(){
-    int id_aluno, id_exame, i, j;
+    int id_exame, i, j;
     listarExames(); 
     printf("Qual o ID do exame? ");
     scanf("%d", &id_exame);
     for (i = 0; i < n_exames; i++){
         if (exame[i].id == id_exame){
             for (j = 0; j < exame[i].max_inscritos; j++){
-                if (exame[i].ids_inscritos[j] == id_aluno){
+                if (exame[i].ids_inscritos[j] == aluno.id){
                     printf("Já está inscrito neste exame!\n");
+                    
                     return;
                 }
             }
             for (j = 0; j < exame[i].max_inscritos; j++){
                 if (exame[i].ids_inscritos[j] == 0){
-                    exame[i].ids_inscritos[j] = id_aluno;
+                    exame[i].ids_inscritos[j] = aluno.id;
                     printfc("[green]Inscrito com sucesso![/green]\n");
                     vagaMenos(exame[i].sala);
                     return;
@@ -118,6 +120,19 @@ void inscreverExame(){
     printf("Não existe nenhum exame com esse ID!\n");
 }
 
+void contarInscrito(int id)
+{
+    for (int i = 0; i < n_exames; i++)
+    {
+        for(int j = 0; j < exame[i].max_inscritos; j++)
+        {
+            if(exame[i].id == id)
+                exame[i].inscritos++;
+        }
+    }
+    
+}
+
 void removerIncricao()
 {
     int id_aluno, id_exame, i, j;
@@ -127,7 +142,7 @@ void removerIncricao()
     for (i = 0; i < n_exames; i++){
         if (exame[i].id == id_exame){
             for (j = 0; j < exame[i].max_inscritos; j++){
-                if (exame[i].ids_inscritos[j] == id_aluno){
+                if (exame[i].ids_inscritos[j] == aluno.id){
                     exame[i].ids_inscritos[j] = 0;
                     printfc("[green]Removido com sucesso![/green]\n");
                     vagaMais(exame[i].sala);
@@ -139,8 +154,6 @@ void removerIncricao()
         }
     }
     printf("Não existe nenhum exame com esse ID!\n");
-
-
 }
 
 void vagaMais(int salaId) 
@@ -152,7 +165,14 @@ void vagaMais(int salaId)
     }
 }
 
-
+void vagaMenos(int salaId) 
+{
+    for(int i=0;i<n_salas;i++){
+        if(salas[i].id == salaId){
+            salas[i].numeroCadeiras--;
+        }
+    }
+}
 
 void saveBinExames(){
     
@@ -169,6 +189,10 @@ void saveBinExames(){
         fwrite(&exame[i].data.mes, sizeof(Exames), 1, fp);
         fwrite(&exame[i].data.hora, sizeof(Exames), 1, fp);
         fwrite(&exame[i].data.minuto, sizeof(Exames), 1, fp);
+        fwrite(&exame[i].max_inscritos, sizeof(Exames), 1, fp);
+        for(int j=0;j<exame[i].max_inscritos;j++)
+        fwrite(&exame[i].ids_inscritos[j], sizeof(Exames), 1, fp);
+
     }
     fclose(fp);
 }
@@ -190,6 +214,9 @@ void readBinExames()
         fread(&exame[i].data.mes, sizeof(Exames), 1, fp);
         fread(&exame[i].data.hora, sizeof(Exames), 1, fp);
         fread(&exame[i].data.minuto, sizeof(Exames), 1, fp);
+        fread(&exame[i].max_inscritos, sizeof(Exames), 1, fp);
+        for(int j=0;j<exame[i].max_inscritos;j++)
+        fread(&exame[i].ids_inscritos[j], sizeof(Exames), 1, fp);
     }
     n_exames = i;
 }
