@@ -84,9 +84,9 @@ void importDataTxtBin(){
         alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
-        
-        ReadBinDisciplinas();
+
         getAllCourses(alunosFile);
+        criardisciplinas();
         InitCursos();
         
 

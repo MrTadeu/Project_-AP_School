@@ -14,11 +14,11 @@ extern int n_disciplinas, n_courses, n_alunos, n_professores;
 
 void ListarDisciplinas()
 {
-    printf("Disciplinas --> ");
+    printf("Disciplinas --> \n");
     for(int i=0;i<n_disciplinas;i++)
     {
        printc("\t[green]%d[/green] - %s", disciplinas[i].id, disciplinas[i].name);
-        if(i==5 || i==10 || i==15 || i==20 || i==25 || i==30)
+        if(i%5 == 0 && i != 0)
             printf("\n");
     }
     printf("\n\n");
@@ -39,11 +39,9 @@ void ListarPropriasDisciplinas()
 
 void CriarDisciplina()
 {   
-    int id;
-    char *nameDisciplina = malloc(10), *nomeCurso = malloc(10), op;
+    char nameDisciplina[10], nomeCurso[10], op;
     printc("\n\n\t[green]Insira a sigla da nova disciplina:[/green] ");
     scanf("%s", nameDisciplina);
-    nameDisciplina = realloc(nameDisciplina, strlen(nameDisciplina) + 1);
     uppercase(nameDisciplina);
     if(CheckIFDisciplinaExisteNome(nameDisciplina) != -1){
         printc("\n\n\t[red]Disciplina ja existe[/red]\n\n");
@@ -53,16 +51,15 @@ void CriarDisciplina()
             uppercase(nameDisciplina);
         } while(CheckIFDisciplinaExisteNome(nameDisciplina) != -1);
     }
-    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * n_disciplinas+1);
-    disciplinas[n_disciplinas].id = id;
-    nameDisciplina = realloc(nameDisciplina, strlen(nameDisciplina)+1);
+    disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas+1));
+    disciplinas[n_disciplinas].id = n_disciplinas+1;
     disciplinas[n_disciplinas].name = malloc(strlen(nameDisciplina)+1);
     strcpy(disciplinas[n_disciplinas].name, nameDisciplina); 
     n_disciplinas++;
+    ListarDisciplinas();
     SaveBinDisciplinas();
-
     printf("Pretende adicionar a disciplina a algum curso? (s/n)");
-    scanf("%c", &op);
+    scanf(" %c", &op);
     if(op == 'S' || op == 's')
     {
         printf("Qual o nome curso que pretende adicionar a disciplina?");
@@ -76,11 +73,8 @@ void CriarDisciplina()
                 uppercase(nomeCurso);
             } while(CheckIFCursoExisteNome(nomeCurso) == -1);
         }   
-        nomeCurso = realloc(nomeCurso, strlen(nomeCurso) + 1);
         AdicionarDisciplinaToCursos(nomeCurso, nameDisciplina);
-    }
-    free(nomeCurso);
-    free(nameDisciplina);        
+    }      
 }
 
 void Removerdisciplina()
@@ -154,9 +148,9 @@ void ListarCursosDisciplinas()
         for(int j=0; j<3; j++)
         {
             printf("Disciplinas do %d ano : ", j+1);
-            for(int k=0; k<10; k++)
+            for(int k=0; k<courses[i].num_disciplinas[j]; k++)
             {
-                if(k == 5)
+                if(k%5 == 0)
                     printf("\n");
                 printf("%s\t", courses[i].AnoDisciplina[j][k]);
             }
@@ -413,6 +407,9 @@ int CheckIFDisciplinaExiste(int id)
 int CheckIFDisciplinaExisteNome(char *name)
 {
     for(int i=0; i<n_disciplinas; i++){
+        printf("%s\n", name);
+        printf("o");
+        printf("%s", disciplinas[i].name);
         if(strcmp(disciplinas[i].name, name) == 0)
             return i;
     }

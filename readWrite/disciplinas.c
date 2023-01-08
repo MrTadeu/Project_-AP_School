@@ -8,7 +8,7 @@ extern disciplinasStruct *disciplinas;
 extern int n_disciplinas;
 
 
-/* void InitDisciplinas(){
+/* void Disciplinas(){
     char TmpNameDisciplina[15]; 
     disciplinas = malloc(sizeof(disciplinasStruct));
     int parar = 0;
@@ -29,7 +29,7 @@ extern int n_disciplinas;
     SaveBinDisciplinas();
 } */
 
-void ReadTxtDisciplinas()
+/* void ReadTxtDisciplinas()
 {	
     FILE *disciplinasTxt = fopen("data/bin/disciplinas.txt","r");
     if(disciplinasTxt == NULL){
@@ -49,7 +49,7 @@ void ReadTxtDisciplinas()
         fclose(disciplinasTxt);
     }
     SaveBinDisciplinas();
-}
+} */
 
 void ReadBinDisciplinas(){
     disciplinas = malloc(sizeof(disciplinasStruct));
@@ -71,6 +71,36 @@ void ReadBinDisciplinas(){
         n_disciplinas = i;
 
         fclose(disciplinasBin);
+    }
+}
+
+void criardisciplinas()
+{
+    //printc("[green]Criar Disciplinas[/green]");
+    printf("\nQuantas disciplinas quer criar? ");
+    int n;
+    scanf("%d", &n);
+    for(int i=0; i<n; i++)
+    {
+        char nameDisciplina[10], op;
+        printc("\n\n\t[green]Insira a sigla da nova disciplina:[/green] ");
+        scanf("%s", nameDisciplina);
+        uppercase(nameDisciplina);
+        if(CheckIFDisciplinaExisteNome(nameDisciplina) != -1){
+            printc("\n\n\t[red]Disciplina ja existe[/red]\n\n");
+            do{
+                printf("\n\tSigla: ");
+                scanf("%s", nameDisciplina);
+                uppercase(nameDisciplina);
+            } while(CheckIFDisciplinaExisteNome(nameDisciplina) != -1);
+        }
+        disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) * (n_disciplinas+1));
+        disciplinas[n_disciplinas].id = n_disciplinas+1;
+        disciplinas[n_disciplinas].name = malloc(strlen(nameDisciplina)+1);
+        strcpy(disciplinas[n_disciplinas].name, nameDisciplina); 
+        n_disciplinas++;
+        ListarDisciplinas();
+        SaveBinDisciplinas();
     }
 }
 
