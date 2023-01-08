@@ -14,7 +14,7 @@ void importExportData(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int op = -1;
     do{
-        op = MenuEditarConta();
+        //op = MenuEditarConta();
         switch (op){
             case 0:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);

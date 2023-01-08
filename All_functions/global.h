@@ -107,3 +107,7 @@ void listarProfessor();
 void editarProfessor();
 void removerProfessor();
 void saveBinProfessor();
+
+//currentUser.c
+void changeName();
+void changePassword();

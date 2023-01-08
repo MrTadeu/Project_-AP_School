@@ -41,6 +41,9 @@ void main(){
 
     readData();
 
+    changeName();
+    changePassword();
+
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
