@@ -26,9 +26,7 @@ void readData();
 
 void main(){
     if (folderExists("data/bin")) { //Pasta bin existe!
-
         if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
-            
             printc("[red]Error[/red] Ficheiros não existem.\n\n");
             int i, mul = 10;
             for(i = 0; i < 100; i++) {

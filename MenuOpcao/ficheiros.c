@@ -19,11 +19,13 @@ bool fileExists(const char* path) {
   return false;
 }
 
-bool fileExistAll(){
+int fileExistAll(){
   if(fileExists("data/bin/alunos.bin") && fileExists("data/bin/cursosdisciplina.bin") && fileExists("data/bin/disciplinas.bin") && fileExists("data/bin/permission.bin") && fileExists("data/bin/professores.bin") && fileExists("data/bin/regimes.bin") && fileExists("data/bin/salas.bin")){
-    return true;
+    return 1;
   }
-  return false;
+  else{
+    return 0;
+  }
 }
 
 /* void firsttime(){
