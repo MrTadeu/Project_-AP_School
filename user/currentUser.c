@@ -10,7 +10,7 @@ extern int n_alunos, n_regimes, n_courses;
 extern AlunoDataStruct aluno;
 extern permissionFileStruct *perms_file;
 
-void importExportData(){
+void editAccount(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int op = -1;
     do{

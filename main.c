@@ -39,16 +39,6 @@ void main(){
         readData();
     } */
 
-    readData();
-    criarSala();
-    criarSala();
-    criarSala();
-    criarSala();
-    listarSalas();
-    editarSala();
-    removerSalas();
-    
-
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{

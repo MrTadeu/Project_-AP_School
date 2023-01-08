@@ -39,6 +39,8 @@ int importExportMenu(){
  
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(){
+    changeName();
+    changePassword();
     int opcao, i = 0;
     printf("Bem vindo %s!\n", aluno.name);
     printc("**************************************************\n");

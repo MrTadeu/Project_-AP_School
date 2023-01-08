@@ -111,3 +111,4 @@ void saveBinProfessor();
 //currentUser.c
 void changeName();
 void changePassword();
+void editAccount();
