@@ -1,4 +1,5 @@
 #include "structs.h"
+#include <stdbool.h>
 
 //colorprint.c
 #ifndef CJAG_COLORPRINT
@@ -54,6 +55,7 @@ void MenuPrincipal();
 int importExportMenu();
 void MenuDisciplinas();
 void MenuEditarAdicionarRemoverDisciplinas();
+void MenuFilesNovos();
 
 //importExport.c
 void importExportData();
@@ -118,3 +120,11 @@ void changeName();
 void changePassword();
 void editAccount();
 void updateUser();
+
+
+//ficheiros.c
+bool fileExistAll();
+bool folderExists();
+
+//main.c
+void readData();

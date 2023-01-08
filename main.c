@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <locale.h>
-#include <stdbool.h>
 #include <sys/stat.h>
+#include <windows.h>
+
 #include "All_functions\global.h"
 
 
@@ -21,48 +22,32 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, 
 
 
 void readData();
-bool folderExists();
 
 
 void main(){
-    if (folderExists("data/bin")) {
-      /* printc("Pasta [green]bin[/green] existe!"); */
-    } else {
-      /* printc("[red]Error[/red] Pasta [yellow]bin[/yellow] NAO existe."); */
-      mkdir("data/bin"); //Não funciona no linux (algumas dunções do folderExists())
-    }
-/*     if (firstTime()){
-        printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
-        printc("[lw]Parece que é a primeira vez que está a usar o programa![/lw]\n");
-        printc("[lw]Por favor, importe os dados do ficheiro de texto![/lw]\n");
-        importExportData();
-    }
-    else{
-        readData();
-    } */
-         readData();
+    if (folderExists("data/bin")) { //Pasta bin existe!
 
-   /* listarSalas();
-    criarSala();
-    criarSala();
-    criarSala();
-    criarSala();
-    listarSalas();
-    removerSala();
-    listarSalas();
-    editarSala();
-    listarSalas(); 
+        if (fileExistAll() == 0){
+            
+            printc("[red]Error[/red] Ficheiros não existem.\n [white]A entrar em modo Setup[/white]...\n");
+            int i, mul = 10;
+            for(i = 0; i < 100; i++) {
+                Sleep(10);
+                spinner_update("Test [bw][red]%d[/red][/bw]...", i);
+            }
+            spinner_done("Done!\n");
+            printc("[lg][bg][+][/bg][/lg] Task was successful!\n");
+            Sleep(1000);
+            MenuFilesNovos();
+        }
+    }else { //Pasta bin existe!
+        mkdir("data/bin"); //Não funciona no linux (algumas dunções do folderExists())
+        printc("[red]Error[/red] Pastas não existem.\n [white]A entrar em modo Setup[/white]...\n");
+        Sleep(1000);
+        MenuFilesNovos();
+    }
     readData();
-    listarProfessor();
-    criarProfessor();
-    criarProfessor();
-    criarProfessor();
-    criarProfessor();
-    listarProfessor();
-    removerProfessor();
-    listarProfessor();
-    editarProfessor();
-    listarProfessor();*/
+
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -103,12 +88,5 @@ void readData(){
     ReadBinCursosDisciplina(); 
     readBinSalas();
     readBinProfessores();
-    printf("olaaaaaaaaaaaaaaaaa");
-    /* CriarDisciplina(); */
-    RemoverDisciplina();
-    EditarDisciplina();
-    CriarCurso();
-
-    
 }
 

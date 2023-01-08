@@ -5,6 +5,44 @@
 
 extern AlunoDataStruct aluno;
 
+//Menu Folder Novos: Ficheiros.c
+void MenuFilesNovos(){
+  int opcao;
+  do{
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    printf("***************************************************************\n");
+    printc("************            [blue]Menu Files[/blue]                 ************\n");
+    printf("***************************************************************\n");
+    printf("************        0 -> Voltar                    ************\n");
+    printf("************        1 -> Continuar                 ************\n");
+    printf("************        2 -> importar dados alunos txt ************\n");
+    printf("***************************************************************\n");
+    printf("Opcao: ");
+    scanf("%d", &opcao);
+    switch (opcao){
+      case 0:
+        break;
+      case 1:
+        printc("Deseja continuar com os dados [red]Corrompidos[/red]? [[red]0[/red]/[green]1[/green]] ");
+        scanf("%d", &opcao);
+        if (opcao == 1){
+          readData();
+          opcao = 0;
+        }
+        else{
+          MenuFilesNovos();
+        }
+        break;
+      case 2:
+        importExportData();
+        break;
+      default:
+        printf("Opcao invalida!\n");
+        break;
+    }
+    }while (opcao != 0);
+}
+
 //MENU PRINCIPAL: main.c
 int mainMenu(){
     int opcao;
