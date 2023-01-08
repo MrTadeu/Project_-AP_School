@@ -546,7 +546,7 @@ void MenuSalas(){
     }
     if (aluno.regime.perm.RemoverSalas){
         if (opcao == i++){
-            removerSalas();
+            removerSala();
         }
     }
 }
