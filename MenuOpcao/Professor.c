@@ -14,6 +14,7 @@ extern professorStruct *professores; //extern para poder usar a variavel global.
 extern int n_professores; 
 
 void criarProfessor(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     professores = realloc(professores, (n_professores+1)*sizeof(professorStruct));
     professores[n_professores].nomeProfessor = malloc(100);
     int id = professores[n_professores - 1].id + 1;
@@ -129,6 +130,7 @@ void saveBinProfessor(){
 }
 
 void listarProfessor(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
@@ -137,9 +139,14 @@ void listarProfessor(){
     for (int i = 0; i < n_professores; i++){
         printf("ID: %d Nome: %s\n", professores[i].id, professores[i].nomeProfessor);
     }
+
+    printf("Pressione [red]ENTER[/red] para continuar...");
+    getchar();
+    getchar();
 }
 
 void editarProfessor(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
@@ -155,7 +162,7 @@ void editarProfessor(){
                 if (isdigit_cheker(professores[i].nomeProfessor) == 1){
                     printc("[red]Somente letras e espaços são permitidos[/red]\n");
                 }
-            } while (isdigit_cheker(professores[i].emailProfessor) == 1);
+            } while (isdigit_cheker(professores[i].nomeProfessor) == 1);
             saveBinProfessor();
             readBinProfessores();
         }
@@ -163,6 +170,7 @@ void editarProfessor(){
 }
 
 void removerProfessor(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");

@@ -14,6 +14,7 @@ extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar 
 extern int n_salas;
 
 void criarSala(){ // #VALIDAR
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
     int id = salas[n_salas-1].id + 1;
@@ -155,6 +156,7 @@ void readBinSalas(){
 }
 
 void editarSala(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
 
@@ -205,6 +207,7 @@ void editarSala(){
 }
 
 void removerSala(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     listarSalas();
     printf("**************************************************\n");
     printc("************       [blue]Remover Salas[/blue]      ************\n");
