@@ -66,7 +66,7 @@ void criarSala(){ // #VALIDAR
             printc("[red]Somente numeros são permitidos[/red]\n");
         }
     } while (isletter_cheker(numeroCadeirasStringImput) == 1);
-    salas[n_salas].numeroSala = atoi(numeroCadeirasStringImput);
+    salas[n_salas].numeroCadeiras = atoi(numeroCadeirasStringImput);
 
     printf("Sala criada com sucesso! ID: %d\n", salas[n_salas].id);
     n_salas++;
@@ -200,6 +200,7 @@ void editarSala(){
 }
 
 void removerSala(){
+    listarSalas();
     printf("**************************************************\n");
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
