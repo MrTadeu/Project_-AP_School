@@ -15,6 +15,7 @@ disciplinasStruct *disciplinas;
 SalaStruct *salas;
 professorStruct *professores;
 AlunoDataStruct aluno;
+
 int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, n_professores = 0;
 
 
@@ -29,7 +30,6 @@ void readData();
     return 0;
 } */
 void main(){
-    
 /*     if (firstTime()){
         printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
         printc("[lw]Parece que é a primeira vez que está a usar o programa![/lw]\n");
@@ -39,8 +39,9 @@ void main(){
     else{
         readData();
     } */
-/*     readData();
-    listarSalas();
+         readData();
+
+   /* listarSalas();
     criarSala();
     criarSala();
     criarSala();
@@ -49,7 +50,7 @@ void main(){
     removerSala();
     listarSalas();
     editarSala();
-    listarSalas(); */
+    listarSalas(); 
     readData();
     listarProfessor();
     criarProfessor();
@@ -60,7 +61,7 @@ void main(){
     removerProfessor();
     listarProfessor();
     editarProfessor();
-    listarProfessor();
+    listarProfessor();*/
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -97,8 +98,12 @@ void readData(){
     alunos = readBinAlunos();
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
-    ReadBinDisciplinas();
-    ReadBinCursosDisciplina();
+    ReadBinDisciplinas();   
+    ListarDisciplinas();
+    ReadBinCursosDisciplina(); 
+    printf("ahhhhhhhhhhhhhhhhhhhhh");
+    ListarCursosDisciplinas();
+    ListarCursos();
     readBinSalas();
     readBinProfessores();
 }

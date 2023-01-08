@@ -6,6 +6,7 @@
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
+extern AlunoFileStruct *alunosFile; 
 extern int n_alunos, n_regimes, n_courses, n_disciplinas, n_salas, n_professores;
 
 
@@ -55,7 +56,7 @@ void importDataTxtBin(){
         remove("data/bin/courses.bin");
         remove("data/bin/alunos.bin");
         remove("data/bin/permission.bin");
-        remove("data/bin/disciplinas.bin");
+        /* remove("data/bin/disciplinas.bin"); */
         remove("data/bin/cursosdisciplinas.bin");
 
         //LIMPAR n_alunos, n_regimes, n_courses
@@ -78,15 +79,14 @@ void importDataTxtBin(){
         saveBinRegimes();
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS CURSOS SEM REPETIÇÕES E GUARDAR EM courses
-        getAllCourses(alunosFile);
 
         //LER ARRAY alunosFile, regimes, courses E GUARDAR NO FORMATO DE AlunoStruct
+        getAllCourses(alunosFile);
         alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
-        
-        ReadTxtDisciplinas();
 
+        criardisciplinas();
         InitCursos();
         
 

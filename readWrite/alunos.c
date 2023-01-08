@@ -123,6 +123,7 @@ void getUserDataByID(int id){
             break;
         }
     }
+    printf("ola");
     aluno.id = id;
     aluno.name = malloc(strlen(alunos[position].name)+1);
     aluno.email = malloc(strlen(alunos[position].email)+1);
@@ -133,7 +134,9 @@ void getUserDataByID(int id){
     aluno.year = alunos[position].year;
     aluno.regime = getRegimeByID(alunos[position].id_regime);
     aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
+    printf("ola");
     aluno.course = getCourseByID(alunos[position].id_course);
+    printf("ola");
     printfUserData();
 }
 

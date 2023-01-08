@@ -59,7 +59,7 @@ int isletter_cheker(char *str){
     }
 }
 
-void ValidarZeroUm(int *num){
+void ValidarZeroUm(int num){
     if(num == 1 || num == 0){
         return;
     }

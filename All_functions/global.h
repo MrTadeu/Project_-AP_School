@@ -81,6 +81,7 @@ void SaveBinCursosDisciplina();
 
 
 //UnidadesCurriculares.c
+void criardisciplinas();
 void ListarDisciplinas();
 void ListarPropriasDisciplinas();
 void CriarDisciplina();
