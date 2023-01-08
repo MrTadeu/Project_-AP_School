@@ -42,6 +42,7 @@ typedef struct { //struct para guardar os dados de uma sala
     int numeroSala;
     int numeroCadeiras;
     int id;
+    int ocupada;
 }SalaStruct;
 
 typedef struct { //struct para guardar os dados de um professor
@@ -65,6 +66,6 @@ typedef struct{
 }tempoExames;
 
 typedef struct{
-    int disciplina, professor, sala, regime, id;
+    int max_inscritos, *ids_inscritos, disciplina, professor, sala, regime, id, curso;
     tempoExames data;
 }Exames;

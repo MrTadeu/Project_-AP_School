@@ -98,10 +98,10 @@ void readData(){
     ReadBinCursosDisciplina(); 
     readBinSalas();
     readBinProfessores();
-    printf("olaaaaaaaaaaaaaaaaa");
-    /* CriarDisciplina(); */
-    RemoverDisciplina();
-    EditarDisciplina();
-    CriarCurso();
+    for(int i=0; i<10; i++){
+        criarSala();
+    }
+    readBinSalas();
+    listarSalas();
 }
 

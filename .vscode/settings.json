@@ -17,6 +17,7 @@
     "windows.h": "c",
     "stat.h": "c",
     "stdbool.h": "c",
-    "locale.h": "c"
+    "locale.h": "c",
+    "*.x": "c"
   }
 }
