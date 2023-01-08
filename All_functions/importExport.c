@@ -85,7 +85,7 @@ void importDataTxtBin(){
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
         
-        InitDisciplinas();
+        ReadTxtDisciplinas();
 
         InitCursos();
         

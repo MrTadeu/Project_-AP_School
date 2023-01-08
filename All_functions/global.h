@@ -66,9 +66,10 @@ void removerSalas();
 int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 //disciplinas.c
-void InitDisciplinas();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
+/* void InitDisciplinas(); *///Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
 void ReadBinDisciplinas();//Apenas necessario primeira vez(ja vamos ter o ficheiro que podemos binario)
 void SaveBinDisciplinas();
+void ReadTxtDisciplinas();
 
 //cursosdisciplinas.c
 void getAllCourses(AlunoFileStruct *alunosFile);//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
