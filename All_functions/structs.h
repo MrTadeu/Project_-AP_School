@@ -58,3 +58,13 @@ typedef struct {
     courseStruct course;
     regimeStruct regime;
 } AlunoDataStruct;
+
+//EXAMES
+typedef struct{
+    int dia, mes, hora, minuto;
+}tempoExames;
+
+typedef struct{
+    int disciplina, professor, sala, regime, id;
+    tempoExames data;
+}Exames;
