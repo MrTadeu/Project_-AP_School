@@ -3,6 +3,7 @@
 #include <time.h>
 #include <locale.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 #include "All_functions\global.h"
 
 
@@ -22,19 +23,13 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, 
 void readData();
 bool folderExists();
 
-/* int firstTime(){
-    FILE *fp = fopen("data/bin/firstTime.bin", "rb");
-    if (fp == NULL){
-        return 1;
-    }
-    fclose(fp);
-    return 0;
-} */
+
 void main(){
     if (folderExists("data/bin")) {
-      printf("Folder exists!");
+      /* printc("Pasta [green]bin[/green] existe!"); */
     } else {
-      printf("Folder does not exist.");
+      /* printc("[red]Error[/red] Pasta [yellow]bin[/yellow] NAO existe."); */
+      mkdir("data/bin"); //Não funciona no linux (algumas dunções do folderExists())
     }
 /*     if (firstTime()){
         printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");

@@ -10,6 +10,10 @@ bool folderExists(const char* path) {
   return false;
 }
 
+void MenuFolderNovos(){
+  
+}
+
 void firsttime(){
     
 }

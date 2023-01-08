@@ -16,6 +16,7 @@
     "time.h": "c",
     "windows.h": "c",
     "stat.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "locale.h": "c"
   }
 }
