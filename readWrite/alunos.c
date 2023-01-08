@@ -10,22 +10,6 @@ extern int n_alunos, n_regimes, n_courses;
 extern AlunoDataStruct aluno;
 extern permissionFileStruct *perms_file;
 
-void printAlunos(){
-    for (int i = 0; i < n_alunos; i++){
-        printf("\nI: %d", i);
-        printf(" ID: %d", alunos[i].id);
-        printf(" Nome: %s", alunos[i].name);
-        printf(" Ano: %d", alunos[i].year);
-        printf(" ID Regime: %d", alunos[i].id_regime);
-        printf(" ID Course: %d", alunos[i].id_course);
-        printf(" Email: %s", alunos[i].email);
-        printf(" Password: %s", alunos[i].password);
-    }
-    printc("\n\n[lw]Pressione enter para continuar[/lw]\n");  
-    getchar();
-    getchar();
-    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-}
 
 void saveBinAlunos(){
     FILE *file = fopen("data/bin/alunos.bin","wb");
@@ -105,7 +89,6 @@ void login(char *email, char *password){
             fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
             getUserDataByID(alunos[i].id);
             MenuPrincipal();
-            /* return; */
         }
     }
     if(flag == 0){
