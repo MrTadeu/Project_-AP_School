@@ -28,6 +28,7 @@ void criarProfessor(){
 
     char *email = malloc(strlen("pv") + strlen(professores[n_professores].nomeProfessor) + 10 /* 10 é para o numero id */+ strlen("@estgv.ipv.pt") + 1 /* para o \0 */), *password = malloc(100);
     //email example: pvjorge25207@estgv.ipv.prof.pt
+    email[0] = '\0';
     strcat(email, "pv");
 
     char *nomeProf = malloc(strlen(professores[n_professores].nomeProfessor)+1);
@@ -42,14 +43,15 @@ void criarProfessor(){
     professores[n_professores].emailProfessor = malloc((strlen(email)+1));
     strcpy(professores[n_professores].emailProfessor, email);
     
-
+    password[0] = '\0';
     strcat(password, "pv");
     strcat(password, id_char);
     //password example: pv25207
     professores[n_professores].passwordProfessor = malloc((strlen(password)+1));
     strcpy(professores[n_professores].passwordProfessor, password);
     
-    /* free(email); */
+    free(email);
+    printc("\n\t[green]Professor criado com sucesso![/green]\n");
     free(password);
     free(id_char);
     free(nomeProf);
@@ -162,3 +164,4 @@ void removerProfessor(){
         }
     }
 }
+
