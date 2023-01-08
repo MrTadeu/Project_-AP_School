@@ -133,7 +133,7 @@ void MenuPrincipal(){
 }
 
 //MENU EXAMES: exames.c
-/* void MenuExames(){
+void MenuExames(){
     int opcao, i = 0;
     printc("**************************************************\n");
     printc("****************** [blue]Menu Exames[/blue] ****************\n");
@@ -163,7 +163,7 @@ void MenuPrincipal(){
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
-
+    i = 1;
     if (opcao == 0){
         printf("[lw]A fechar o programa...[/lw]");
     }
@@ -179,7 +179,7 @@ void MenuPrincipal(){
     }
     if (aluno.regime.perm.InscritosExames){
         if (opcao == i++){
-            listarInscritos(int id);
+            listarInscritos(1);
         }
     }
     if (aluno.regime.perm.ListarExames){
@@ -203,7 +203,7 @@ void MenuPrincipal(){
         }
     }
 }
- */
+
 //MENU EDITAR CONTA: currentUser.c
 int MenuEditarConta(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);

@@ -69,6 +69,7 @@ void MenuFilesNovos();
 int menuEditAluno();
 void MenuSalas();
 void MenuProfessor();
+void MenuExames();
 
 //importExport.c
 void importExportData();
