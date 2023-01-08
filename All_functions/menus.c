@@ -35,7 +35,7 @@ void MenuFilesNovos(){
         }
         break;
       case 2:
-        importExportData();
+        importDataTxtBin();
         break;
       default:
         printf("Opcao invalida!\n");
