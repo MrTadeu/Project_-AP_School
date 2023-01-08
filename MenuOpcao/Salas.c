@@ -21,6 +21,7 @@ extern int n_salas;
 void criarSala(){ // #VALIDAR
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
+    int id = salas[n_salas - 1].id + 1;
     printf("**************************************************\n");
     printc("************        [blue]Criar Salas[/blue]       ************\n");
     printf("**************************************************\n");
@@ -29,6 +30,7 @@ void criarSala(){ // #VALIDAR
         scanf(" %[^\n]", salas[n_salas].nomeSala);
         uppercase(salas[n_salas].nomeSala);
         salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
+        salas[n_salas].id = id;
         printf("Qual o numero da sala? ");
         scanf("%d", &salas[n_salas].nomeSala);
         if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
@@ -44,22 +46,24 @@ void criarSala(){ // #VALIDAR
 }
 
 void saveBinSalas(){
-    FILE *arquivo;
-    arquivo = fopen("../data/MenuOpcao/Salas.bin", "wb");
-    if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo");
+    FILE *file;
+    file = fopen("../data/MenuOpcao/Salas.bin", "wb");
+    if(file == NULL){
+        printf("Erro ao abrir o file");
         return;
     }
     for(int i = 0; i < n_salas; i++){
+        fwrite(&salas[i].id, sizeof(int), 1, file);
+
         size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
-        fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
-        fwrite(salas[i].nomeSala, nomeSalasize, 1, arquivo);
+        fwrite(&nomeSalasize, sizeof(size_t), 1, file);
+        fwrite(salas[i].nomeSala, nomeSalasize, 1, file);
 
-        fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
+        fwrite(&salas[i].numeroSala, sizeof(int), 1, file);
 
-        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, arquivo);
+        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
     }
-    fclose(arquivo);
+    fclose(file);
 }
 
 int ChekeIFsalaExist(char *nomeSala, int nSala){
@@ -94,24 +98,24 @@ void listarSalas(){
 
 void readBinSalas(){
     SalaStruct *sala = malloc(sizeof(SalaStruct));
-    FILE *arquivo;
-    arquivo = fopen("../data/Exames/Salas.bin", "rb");
-    if(arquivo == NULL){
-        printc("\n\n\tErro ao abrir o arquivo [red]Salas.bin[/red]\n\n");
+    FILE *file;
+    file = fopen("../data/MenuOpcao/Salas.bin", "rb");
+    if(file == NULL){
+        printc("\n\n\tErro ao abrir o file [red]Salas.bin[/red]\n\n");
         return;
     }
     size_t nomeSalasize;
     int i = 0;
-    while(fread(&nomeSalasize, sizeof(size_t), 1, arquivo)){
+    while(fread(&nomeSalasize, sizeof(size_t), 1, file)){
         sala[i].nomeSala = malloc(nomeSalasize);
-        fread(sala[i].nomeSala, nomeSalasize, 1, arquivo);
-        fread(&sala[i].numeroSala, sizeof(int), 1, arquivo);
-        fread(&sala[i].numeroCadeiras, sizeof(int), 1, arquivo);
+        fread(sala[i].nomeSala, nomeSalasize, 1, file);
+        fread(&sala[i].numeroSala, sizeof(int), 1, file);
+        fread(&sala[i].numeroCadeiras, sizeof(int), 1, file);
         i++;
         sala = realloc(sala, (i + 1) * sizeof(SalaStruct));
     }
     n_salas = i;
-    fclose(arquivo);
+    fclose(file);
 
 }
 
@@ -140,22 +144,22 @@ void editarSala(){ // #VALIDAR
             scanf("%d", &salas[i].numeroCadeiras);
         }
     }
-    FILE *arquivo;
-    arquivo = fopen("../data/Exames/Salas.bin", "wb");
-    if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo");
+    FILE *file;
+    file = fopen("../data/MenuOpcao/Salas.bin", "wb");
+    if(file == NULL){
+        printf("Erro ao abrir o file");
         exit(1);
     }
     for(int i = 0; i < n_salas; i++){
         size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
-        fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
-        fwrite(salas[i].nomeSala, nomeSalasize, 1, arquivo);
-        fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
-        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, arquivo);
+        fwrite(&nomeSalasize, sizeof(size_t), 1, file);
+        fwrite(salas[i].nomeSala, nomeSalasize, 1, file);
+        fwrite(&salas[i].numeroSala, sizeof(int), 1, file);
+        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
     }
     free(nomeSala);
     free(salas);
-    fclose(arquivo);
+    fclose(file);
     readBinSalas();
 }
 
@@ -182,21 +186,21 @@ void removerSalas(){ // #VALIDAR
             n_salas--;
         }
     }
-    FILE *arquivo;
-    arquivo = fopen("../data/Exames/Salas.bin", "wb");
-    if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo");
+    FILE *file;
+    file = fopen("../data/MenuOpcao/Salas.bin", "wb");
+    if(file == NULL){
+        printf("Erro ao abrir o file");
         exit(1);
     }
     for(int i = 0; i < n_salas; i++){
         size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
-        fwrite(&nomeSalasize, sizeof(size_t), 1, arquivo);
-        fwrite(salas[i].nomeSala, nomeSalasize, 1, arquivo);
-        fwrite(&salas[i].numeroSala, sizeof(int), 1, arquivo);
-        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, arquivo);
+        fwrite(&nomeSalasize, sizeof(size_t), 1, file);
+        fwrite(salas[i].nomeSala, nomeSalasize, 1, file);
+        fwrite(&salas[i].numeroSala, sizeof(int), 1, file);
+        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
     }
     free(nomeSala);
     free(salas);
-    fclose(arquivo);
+    fclose(file);
     readBinSalas();
 }
