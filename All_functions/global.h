@@ -32,7 +32,7 @@ void getUserDataByID(int id);
 void printfUserData();
 
 //courses.c
-void getAllCourses(AlunoFileStruct *alunosFile);
+/* void getAllCourses(AlunoFileStruct *alunosFile); */
 courseStruct getCourseByID(int id);
 
 //regimes.c

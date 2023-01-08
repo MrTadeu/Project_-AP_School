@@ -27,7 +27,7 @@ void getAllCourses(AlunoFileStruct *alunosFile){
             n_courses++;
         }
     } 
-    SaveBinCursosDisciplina();
+    /* SaveBinCursosDisciplina(); */
 }
 
 int InitCursos() { //Apenas usado pela primeira vez

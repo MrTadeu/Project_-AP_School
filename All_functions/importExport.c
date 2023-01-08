@@ -9,6 +9,39 @@ extern courseStruct *courses;
 extern int n_alunos, n_regimes, n_courses, n_disciplinas, n_salas, n_professores;
 
 
+/* #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "../All_functions\global.h"
+
+extern AlunoStruct *alunos;
+extern regimeStruct *regimes;
+extern courseStruct *courses;
+extern int n_alunos, n_regimes, n_courses; */
+
+
+void saveBinCourses(){
+    FILE *file = fopen("data/bin/courses.bin","ab");
+    if (!file) {
+        printc("\n\n\tImpossivel abrir Ficheiro [red]course.bin[/red]\n\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < n_courses; i++){
+        fwrite(&courses[i].id, sizeof(int), 1, file);
+
+        size_t courseLen = strlen(courses[i].name) + 1;
+        fwrite(&courseLen, sizeof(size_t), 1, file);
+        fwrite(courses[i].name, courseLen, 1, file);
+    }
+    fclose(file);
+}
+
+
+
+
+
+
 void importExportData(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int op = -1;
@@ -76,21 +109,25 @@ void importDataTxtBin(){
         regimes = getAllRegimes(alunosFile);
         //GUARDAR REGIMES EM BINARIO
         saveBinRegimes();
-
         //LER ARRAY alunosFile E BUSCAR TODOS OS CURSOS SEM REPETIÇÕES E GUARDAR EM courses
         getAllCourses(alunosFile);
+        
+        saveBinCourses();
 
         //LER ARRAY alunosFile, regimes, courses E GUARDAR NO FORMATO DE AlunoStruct
         alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
         
-        ReadTxtDisciplinas();
+        /* ReadTxtDisciplinas();
 
-        InitCursos();
+        InitCursos(); */
         
 
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
         saveAndSetPermissionsBinByTxt(regimes, n_regimes);
     }
 }
+
+
+
