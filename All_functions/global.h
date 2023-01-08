@@ -124,7 +124,7 @@ void updateUser();
 
 
 //ficheiros.c
-bool fileExistAll();
+int fileExistAll();
 bool folderExists();
 
 //main.c
