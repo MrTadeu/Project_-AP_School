@@ -29,7 +29,7 @@ typedef struct{
 
 typedef struct {
     char *name, *email, *password;
-    int id_regime, year, id, id_course;
+    int id_regime, year, id, id_course, *exames;
 } AlunoStruct;
 
 typedef struct {
@@ -67,6 +67,6 @@ typedef struct{
 }tempoExames;
 
 typedef struct{
-    int max_inscritos, *ids_inscritos, disciplina, professor, sala, regime, id, curso;
+    int max_inscritos, *ids_inscritos, disciplina, professor, sala, regime, id, curso, inscritos;
     tempoExames data;
 }Exames;
