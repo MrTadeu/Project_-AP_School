@@ -149,7 +149,7 @@ void editarProfessor(){
             do{ // IMPLEMENTADO RECENTEMENTE
                 printf("Qual o novo nome do professor? ");
                 scanf(" %[^\n]", professores[i].nomeProfessor);
-            } while (isdigit_checker(professores[i].emailProfessor) == 0);
+            } while (isdigit_cheker(professores[i].emailProfessor) == 0);
             saveBinProfessor();
             readBinProfessores();
         }

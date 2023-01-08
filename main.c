@@ -38,7 +38,7 @@ void main(){
     else{
         readData();
     } */
-    readData();
+/*     readData();
     listarSalas();
     criarSala();
     criarSala();
@@ -48,8 +48,8 @@ void main(){
     removerSala();
     listarSalas();
     editarSala();
-    listarSalas();
-/*     readData();
+    listarSalas(); */
+    readData();
     listarProfessor();
     criarProfessor();
     criarProfessor();
@@ -59,7 +59,7 @@ void main(){
     removerProfessor();
     listarProfessor();
     editarProfessor();
-    listarProfessor(); */
+    listarProfessor();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
