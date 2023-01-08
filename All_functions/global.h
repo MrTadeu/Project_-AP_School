@@ -18,6 +18,7 @@ char *uppercase(char *str);
 int isdigit_cheker(char *str);
 void generate_unique_numbers(int *array, int length);
 char *capitalize(char *str);
+int isletter_cheker(char *str);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt(int *n_alunos);

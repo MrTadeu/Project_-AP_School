@@ -30,14 +30,32 @@ char *capitalize(char *str){
 
 
 int isdigit_cheker(char *str){
-    int i;
+    int i, flag = 0;
     for(i = 0; i < strlen(str); i++){
         if(isdigit(str[i])){
-            return 1;
+          flag = 1;
         }
-        else{
-            return 0;
+    }
+    if (flag == 1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int isletter_cheker(char *str){
+    int i, flag = 0;
+    for(i = 0; i < strlen(str); i++){
+        if(isalpha(str[i])){
+          flag = 1;
         }
+    }
+    if (flag == 1){
+        return 1;
+    }
+    else{
+        return 0;
     }
 }
 

@@ -45,11 +45,11 @@ void criarSala(){ // #VALIDAR
             
             printf("Qual o numero da sala? ");
             scanf("%s", numeroSalaStringImput);
-            if (isdigit_cheker(numeroSalaStringImput) == 0){
+            if (isletter_cheker(numeroSalaStringImput) == 1){
                 printc("[red]Somente numeros são permitidos[/red]\n");
             }
             
-        } while(isdigit_cheker(numeroSalaStringImput) == 0);
+        } while(isletter_cheker(numeroSalaStringImput) == 1);
         salas[n_salas].numeroSala = atoi(numeroSalaStringImput);
 
         if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
@@ -62,10 +62,10 @@ void criarSala(){ // #VALIDAR
     do{
         printf("Qual o numero de cadeiras? ");
         scanf("%s", numeroCadeirasStringImput);
-        if (isdigit_cheker(numeroCadeirasStringImput) == 0){
+        if (isletter_cheker(numeroCadeirasStringImput) == 1){
             printc("[red]Somente numeros são permitidos[/red]\n");
         }
-    } while (isdigit_cheker(numeroCadeirasStringImput) == 0);
+    } while (isletter_cheker(numeroCadeirasStringImput) == 1);
     salas[n_salas].numeroSala = atoi(numeroCadeirasStringImput);
 
     printf("Sala criada com sucesso! ID: %d\n", salas[n_salas].id);
@@ -148,7 +148,9 @@ void readBinSalas(){
     }
 }
 
-void editarSala(){ 
+void editarSala(){
+    char numeroCadeirasStringImput[1000];
+    char numeroSalaStringImput[1000];
     printf("**************************************************\n");
     printc("************       [blue]Editar Salas[/blue]       ************\n");
     printf("**************************************************\n");
@@ -156,13 +158,33 @@ void editarSala(){
     printf("Qual ID da sala que deseja editar? ");
     scanf("%d", &id);
     for(int i = 0; i < n_salas; i++){
-        if(salas[i].id == id){  
-            printf("Qual o novo nome da sala? ");
-            scanf("%s", salas[i].nomeSala);
-            printf("Qual o novo numero da sala? ");
-            scanf("%d", &salas[i].numeroSala);
-            printf("Qual o novo numero de cadeiras? ");
-            scanf("%d", &salas[i].numeroCadeiras);
+        if(salas[i].id == id){
+            do{
+                do{
+                    printf("Qual o novo nome da sala? ");
+                    scanf("%s", salas[i].nomeSala);
+                } while (isdigit_cheker(salas[i].nomeSala) == 1);
+                do{
+                    printf("Qual o novo numero da sala? ");
+                    scanf("%s", numeroSalaStringImput);
+                    if (isletter_cheker(numeroSalaStringImput) == 1){
+                        printc("[red]Somente numeros são permitidos[/red]\n");
+                    }
+                } while (isletter_cheker(numeroSalaStringImput) == 1);
+                if (ChekeIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1){
+                    printc("[red]Sala ja existe[/red]\n");
+                }
+            }while (ChekeIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1);
+            salas[i].numeroSala = atoi(numeroSalaStringImput);
+            do{
+                printf("Qual o novo numero de cadeiras? ");
+                scanf("%s", numeroCadeirasStringImput);
+                if (isletter_cheker(numeroCadeirasStringImput) == 1){
+                    printc("[red]Somente numeros são permitidos[/red]\n");
+                }
+            } while (isletter_cheker(numeroCadeirasStringImput) == 1);
+            salas[i].numeroCadeiras = atoi(numeroCadeirasStringImput);
+
             saveBinSalas();
             readBinSalas();
         }
