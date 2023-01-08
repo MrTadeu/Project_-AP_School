@@ -152,7 +152,10 @@ void editarProfessor(){
             do{ // IMPLEMENTADO RECENTEMENTE
                 printf("Qual o novo nome do professor? ");
                 scanf(" %[^\n]", professores[i].nomeProfessor);
-            } while (isdigit_cheker(professores[i].emailProfessor) == 0);
+                if (isdigit_cheker(professores[i].nomeProfessor) == 1){
+                    printc("[red]Somente letras e espaços são permitidos[/red]\n");
+                }
+            } while (isdigit_cheker(professores[i].emailProfessor) == 1);
             saveBinProfessor();
             readBinProfessores();
         }
