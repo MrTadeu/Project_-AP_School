@@ -20,7 +20,7 @@ bool fileExists(const char* path) {
 }
 
 bool fileExistAll(){
-  if(fileExists("data/bin/alunos.bin") && fileExists("data/bin/courses.bin") && fileExists("data/bin/disciplinas.bin") && fileExists("data/bin/perms_file.bin") && fileExists("data/bin/professores.bin") && fileExists("data/bin/regimes.bin") && fileExists("data/bin/salas.bin")){
+  if(fileExists("data/bin/alunos.bin") && fileExists("data/bin/cursosdisciplina.bin") && fileExists("data/bin/disciplinas.bin") && fileExists("data/bin/permission.bin") && fileExists("data/bin/professores.bin") && fileExists("data/bin/regimes.bin") && fileExists("data/bin/salas.bin")){
     return true;
   }
   return false;
