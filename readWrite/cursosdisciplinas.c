@@ -45,7 +45,6 @@ int InitCursos() { //Apenas usado pela primeira vez
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
-        for(int j=0; j<3; j++){ 
             listarProfessor();
             printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
             scanf("%d", &TmpIdDiretor);
@@ -56,7 +55,8 @@ int InitCursos() { //Apenas usado pela primeira vez
                     scanf("%d", &TmpIdDiretor);
                 } while (CheckIFProfessor(TmpIdDiretor) == -1); 
             }
-            courses[n_courses-1].IdDiretor = TmpIdDiretor;
+            courses[i].IdDiretor = TmpIdDiretor;
+        for(int j=0; j<3; j++){ 
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
             if(courses[i].num_disciplinas[j] >= n_disciplinas){
@@ -86,6 +86,7 @@ int InitCursos() { //Apenas usado pela primeira vez
             }
         }
     }
+    ListarCursosDisciplinas();  
     SaveBinCursosDisciplina();
 }
 
@@ -110,6 +111,7 @@ void SaveBinCursosDisciplina(){
                 fwrite(courses[i].AnoDisciplina[j][k], DisciplinaLen, 1, CursoDisciplinaBin);
             }
         }
+        printf("ID do diretor: %d\n", courses[i].IdDiretor);
         fwrite(&courses[i].IdDiretor, sizeof(int), 1, CursoDisciplinaBin);
     }
     fclose(CursoDisciplinaBin);
@@ -117,35 +119,27 @@ void SaveBinCursosDisciplina(){
 
 
 void ReadBinCursosDisciplina(){
-    int aux;
-    courses = malloc(sizeof(courseStruct));
-    for(int i=0; i<n_courses; i++)
-        courses[i].AnoDisciplina = malloc(3);
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","rb");
     if (CursoDisciplinaBin == NULL) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursosdisciplina.bin[/red]\n\n");
         return;
     }
-    printf("ola");
-    fread(&n_courses, sizeof(int), 1, CursoDisciplinaBin);
+    fread(&n_courses, sizeof(int), 1, CursoDisciplinaBin);    
+    courses = malloc(sizeof(courseStruct)*n_courses);
+    for(int i=0; i<n_courses; i++)
+        courses[i].AnoDisciplina = malloc(3);
     for (int i = 0; i < n_courses; i++){
-        courses = realloc(courses, sizeof(courseStruct) *(i+1));
-        printf("n courses:%d i= %d", n_courses,i);
-        
         fread(&courses[i].id, sizeof(int), 1, CursoDisciplinaBin);
-        printf("ola2");
 
         size_t CursoLen;
         fread(&CursoLen, sizeof(size_t), 1, CursoDisciplinaBin);
         courses[i].name = malloc(CursoLen);
         fread(courses[i].name, CursoLen, 1, CursoDisciplinaBin);
-        printf("ola3");
 
         for(int j=0; j<3; j++)
         {   fread(&courses[i].num_disciplinas[j], sizeof(int), 1, CursoDisciplinaBin); 
             courses[i].AnoDisciplina[j] = malloc(courses[i].num_disciplinas[j]);
-            printf("0oal");
-            for(int k=0; k<aux; k++)
+            for(int k=0; k<courses[i].num_disciplinas[j]; k++)
             {
                 size_t DisciplinaName;
                 fread(&DisciplinaName, sizeof(size_t), 1, CursoDisciplinaBin);
@@ -161,10 +155,12 @@ void ReadBinCursosDisciplina(){
 
 courseStruct getCourseByID(int id){
     for (int i = 0; i < n_courses; i++){
+        printf("ID: %d nome:%s\n", courses[i].id, courses[i].name);
         if (courses[i].id == id){
             return courses[i];
         }
     }
+    printf("id: %d\n", id);
     courseStruct course;
     course.id = -1;
     course.name = malloc(12);

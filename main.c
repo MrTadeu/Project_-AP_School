@@ -99,9 +99,11 @@ void readData(){
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
     ReadBinDisciplinas();   
-/*     ListarDisciplinas();
+    ListarDisciplinas();
     ReadBinCursosDisciplina(); 
-    printf("ahhhhhhhhhhhhhhhhhhhhh"); */
+    printf("ahhhhhhhhhhhhhhhhhhhhh");
+    ListarCursosDisciplinas();
+    ListarCursos();
     readBinSalas();
     readBinProfessores();
 }

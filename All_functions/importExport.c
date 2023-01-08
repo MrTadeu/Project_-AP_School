@@ -81,11 +81,11 @@ void importDataTxtBin(){
         //LER ARRAY alunosFile E BUSCAR TODOS OS CURSOS SEM REPETIÇÕES E GUARDAR EM courses
 
         //LER ARRAY alunosFile, regimes, courses E GUARDAR NO FORMATO DE AlunoStruct
+        getAllCourses(alunosFile);
         alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
 
-        getAllCourses(alunosFile);
         criardisciplinas();
         InitCursos();
         

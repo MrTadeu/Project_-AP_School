@@ -407,9 +407,6 @@ int CheckIFDisciplinaExiste(int id)
 int CheckIFDisciplinaExisteNome(char *name)
 {
     for(int i=0; i<n_disciplinas; i++){
-        printf("%s\n", name);
-        printf("o");
-        printf("%s", disciplinas[i].name);
         if(strcmp(disciplinas[i].name, name) == 0)
             return i;
     }
