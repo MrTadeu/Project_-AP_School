@@ -43,6 +43,7 @@ void main(){
     }else { //Pasta bin existe!
         mkdir("data/bin"); //Não funciona no linux (algumas dunções do folderExists())
         printc("[red]Error[/red] Pastas não existem.\n\n");
+        
         int i, mul = 10;
         for(i = 0; i < 100; i++) { // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
             Sleep(10);
