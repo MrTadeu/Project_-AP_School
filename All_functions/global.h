@@ -56,6 +56,7 @@ permissionFileStruct* readBinPermissions();
 PermissionsType getPermissionsByID(int id);
 
 //menus.c
+void MenuCursos();
 int mainMenu();
 void MenuAlunos();
 void MenuAdmin();

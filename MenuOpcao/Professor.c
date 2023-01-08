@@ -130,7 +130,6 @@ void saveBinProfessor(){
 }
 
 void listarProfessor(){
-    
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
@@ -139,10 +138,6 @@ void listarProfessor(){
     for (int i = 0; i < n_professores; i++){
         printf("ID: %d Nome: %s\n", professores[i].id, professores[i].nomeProfessor);
     }
-
-    printf("Pressione [red]ENTER[/red] para continuar...");
-    getchar();
-    getchar();
 }
 
 void editarProfessor(){
