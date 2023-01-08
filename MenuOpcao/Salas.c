@@ -110,6 +110,7 @@ void listarSalas(){
     printc("************       [blue]Lista de Salas[/blue]     ************\n");
     printf("**************************************************\n");
     printf("Numero de salas: %d\n", n_salas);
+    
     for(int i = 0; i < n_salas; i++){
         printf("-------------------ID: %d -----------------------\n", salas[i].id);
         printf("Nome da sala: %s\n", salas[i].nomeSala);
@@ -151,9 +152,11 @@ void readBinSalas(){
 void editarSala(){
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
+
     printf("**************************************************\n");
     printc("************       [blue]Editar Salas[/blue]       ************\n");
     printf("**************************************************\n");
+
     int id;
     printf("Qual ID da sala que deseja editar? ");
     scanf("%d", &id);
@@ -164,6 +167,7 @@ void editarSala(){
                     printf("Qual o novo nome da sala? ");
                     scanf("%s", salas[i].nomeSala);
                 } while (isdigit_cheker(salas[i].nomeSala) == 1);
+
                 do{
                     printf("Qual o novo numero da sala? ");
                     scanf("%s", numeroSalaStringImput);
@@ -171,11 +175,14 @@ void editarSala(){
                         printc("[red]Somente numeros são permitidos[/red]\n");
                     }
                 } while (isletter_cheker(numeroSalaStringImput) == 1);
+
                 if (ChekeIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1){
                     printc("[red]Sala ja existe[/red]\n");
                 }
+
             }while (ChekeIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1);
             salas[i].numeroSala = atoi(numeroSalaStringImput);
+
             do{
                 printf("Qual o novo numero de cadeiras? ");
                 scanf("%s", numeroCadeirasStringImput);
@@ -196,6 +203,7 @@ void removerSala(){
     printf("**************************************************\n");
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
+
     int id;
     printf("Qual ID da sala que deseja editar? ");
     scanf("%d", &id);

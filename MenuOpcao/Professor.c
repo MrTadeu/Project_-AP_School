@@ -25,8 +25,10 @@ void criarProfessor(){
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
-    printf("Qual o nome do professor? ");
-    scanf(" %[^\n]", professores[n_professores].nomeProfessor);
+    do{
+        printf("Qual o nome do professor? ");
+        scanf(" %[^\n]", professores[n_professores].nomeProfessor);
+    } while (isdigit_cheker(professores[n_professores].nomeProfessor) == 1);
     professores[n_professores].nomeProfessor = realloc(professores[n_professores].nomeProfessor, (strlen(professores[n_professores].nomeProfessor)+1));
     
     capitalize(professores[n_professores].nomeProfessor);
@@ -94,7 +96,7 @@ void readBinProfessores(){
         }
         n_professores = i;
         fclose(file);
-    }   
+    }
 }
 
 void saveBinProfessor(){
@@ -127,6 +129,7 @@ void listarProfessor(){
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
+
     printc("Numero de professores: [red]%d[/red]\n", n_professores);
     for (int i = 0; i < n_professores; i++){
         printf("ID: %d Nome: %s\n", professores[i].id, professores[i].nomeProfessor);
@@ -137,13 +140,16 @@ void editarProfessor(){
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
+
     int id;
     printf("Qual o ID do professor que deseja editar? ");
     scanf("%d", &id);
     for (int i = 0; i < n_professores; i++){
         if (id == professores[i].id){
-            printf("Qual o novo nome do professor? ");
-            scanf(" %[^\n]", professores[i].nomeProfessor);
+            do{ // IMPLEMENTADO RECENTEMENTE
+                printf("Qual o novo nome do professor? ");
+                scanf(" %[^\n]", professores[i].nomeProfessor);
+            } while (isdigit_checker(professores[i].emailProfessor) == 0);
             saveBinProfessor();
             readBinProfessores();
         }
@@ -154,6 +160,7 @@ void removerProfessor(){
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
+
     int id;
     printf("Qual o ID do professor que deseja remover? ");
     scanf("%d", &id);
