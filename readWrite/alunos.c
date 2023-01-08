@@ -7,9 +7,10 @@
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
-extern int n_alunos, n_regimes, n_courses;
+extern int n_alunos, n_regimes, n_courses, n_professores;
 extern AlunoDataStruct aluno;
 extern permissionFileStruct *perms_file;
+extern professorStruct *professores;
 
 
 void saveBinAlunos(){
@@ -92,6 +93,17 @@ void login(char *email, char *password){
             MenuPrincipal();
         }
     }
+    for (int i = 0; i < n_professores; i++){
+        if (strcmp(email, professores[i].emailProfessor) == 0 && strcmp(password, professores[i].passwordProfessor) == 0){
+            flag = 1;
+            printc("\n\n\t[green]Login feito com sucesso[/green]\n\n");
+            getchar();
+            getchar();
+            getUserDataByID(alunos[i].id);
+            MenuPrincipal();
+        }
+    }
+    
     if(flag == 0){
         printc("\n\n\t[red]Dados Inválidos.[/red]\n\n");
         getchar();
@@ -119,6 +131,25 @@ void getUserDataByID(int id){
     aluno.regime = getRegimeByID(alunos[position].id_regime);
     aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
     aluno.course = getCourseByID(alunos[position].id_course);
+}
+
+void getUserDataByIDProf(int id){
+    int position = 0;
+    for (int i = 0; i < n_professores; i++){
+        if (id == professores[i].id){
+            position = i;
+            break;
+        }
+    }
+    aluno.id = id;
+    aluno.name = malloc(strlen(professores[position].nomeProfessor)+1);
+    aluno.email = malloc(strlen(professores[position].emailProfessor)+1);
+    aluno.password = malloc(strlen(professores[position].passwordProfessor)+1);
+    strcpy(aluno.name, professores[position].nomeProfessor);
+    strcpy(aluno.email, professores[position].emailProfessor);
+    strcpy(aluno.password, professores[position].passwordProfessor);
+    /* aluno.regime = getRegimeByID(professores[position].id_regime); */
+    aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
 }
 
 int checkIfUserExists(int id){
