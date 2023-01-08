@@ -7,18 +7,18 @@ extern AlunoDataStruct aluno;
 
 //Menu Folder Novos: Ficheiros.c
 void MenuFilesNovos(){
-  int opcao;
-  do{
-    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-    printf("***************************************************************\n");
-    printc("************            [blue]Menu Files[/blue]                 ************\n");
-    printf("***************************************************************\n");
-    printf("************        0 -> Voltar                    ************\n");
-    printf("************        1 -> Continuar                 ************\n");
-    printf("************        2 -> importar dados alunos txt ************\n");
-    printf("***************************************************************\n");
-    printf("Opcao: ");
-    scanf("%d", &opcao);
+    int opcao;
+    do{
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+        printf("***************************************************************\n");
+        printc("************            [blue]Menu Files[/blue]                 ************\n");
+        printf("***************************************************************\n");
+        printf("************        0 -> Voltar                    ************\n");
+        printf("************        1 -> Continuar                 ************\n");
+        printf("************        2 -> importar dados alunos txt ************\n");
+        printf("***************************************************************\n");
+        printf("Opcao: ");
+        scanf("%d", &opcao);
     switch (opcao){
       case 0:
         break;
