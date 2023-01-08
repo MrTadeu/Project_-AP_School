@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <locale.h>
-
+#include <stdbool.h>
 #include "All_functions\global.h"
 
 
@@ -20,6 +20,7 @@ int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, 
 
 
 void readData();
+bool folderExists();
 
 /* int firstTime(){
     FILE *fp = fopen("data/bin/firstTime.bin", "rb");
@@ -30,6 +31,11 @@ void readData();
     return 0;
 } */
 void main(){
+    if (folderExists("data/bin")) {
+      printf("Folder exists!");
+    } else {
+      printf("Folder does not exist.");
+    }
 /*     if (firstTime()){
         printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
         printc("[lw]Parece que é a primeira vez que está a usar o programa![/lw]\n");
