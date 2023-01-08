@@ -32,6 +32,7 @@ void criarExame(){
     printf("Para qual disciplina pretende criar um exame? ");
     scanf("%d", &exame[n_exames].disciplina);
 
+    ListarCursos();
     printf("Para que curso estará disponivel? ");
     scanf("%d", &exame[n_exames].curso);
     
@@ -48,6 +49,7 @@ void criarExame(){
     scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
     
     n_exames++;
+    saveBinExames();
 }
 
 void InitExame()

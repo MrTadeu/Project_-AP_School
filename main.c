@@ -26,7 +26,7 @@ void readData();
 
 
 void main(){
-    if (folderExists("data/bin")) { //Pasta bin existe!
+    if (folderExists("data/bin")){ //Pasta bin existe!
         if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
             printc("[red]Error[/red] Ficheiros não existem.\n\n");
 
@@ -94,7 +94,7 @@ void readData(){
     alunos = readBinAlunos();
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
-    ReadBinDisciplinas();   
+    ReadBinDisciplinas();
     ReadBinCursosDisciplina(); 
     readBinSalas();
     readBinProfessores();
@@ -103,6 +103,8 @@ void readData(){
     RemoverDisciplina();
     EditarDisciplina();
     CriarCurso(); */
-    /* criarExame(); */
+    criarExame();
+    criarExame();
+    listarExames();
 }
 
