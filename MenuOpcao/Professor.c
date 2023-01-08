@@ -130,7 +130,7 @@ void saveBinProfessor(){
 }
 
 void listarProfessor(){
-    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");

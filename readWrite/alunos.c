@@ -40,6 +40,33 @@ void saveBinAlunos(){
     fclose(file);
 }
 
+void saveBinAlunosFix(){
+    FILE *file = fopen("data/bin/alunos.bin","wb");
+    if (!file) {
+        printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
+        exit(1);
+    }
+    for (int i = 0; i < n_alunos; i++){
+        fwrite(&alunos[i].id, sizeof(int), 1, file);
+        fwrite(&alunos[i].year, sizeof(int), 1, file);
+        fwrite(&alunos[i].id_regime, sizeof(int), 1, file);
+        fwrite(&alunos[i].id_course, sizeof(int), 1, file);
+
+        size_t nomeLen = strlen(alunos[i].name) + 1;
+        fwrite(&nomeLen, sizeof(size_t), 1, file);
+        fwrite(alunos[i].name, nomeLen, 1, file);
+
+        size_t emailLen = strlen(alunos[i].email) + 1;
+        fwrite(&emailLen, sizeof(size_t), 1, file);
+        fwrite(alunos[i].email, emailLen, 1, file);
+
+        size_t passLen = strlen(alunos[i].password) + 1;
+        fwrite(&passLen, sizeof(size_t), 1, file);
+        fwrite(alunos[i].password, passLen, 1, file);
+    }
+    fclose(file);
+}
+
 AlunoStruct *readBinAlunos(){
     AlunoStruct *alunos = malloc(sizeof(AlunoStruct));
     int i;
@@ -173,6 +200,8 @@ void getUserDataByIDProf(int id){
     aluno.regime.perm.ListarCursos = 1;
     aluno.regime.perm.EditarCursos = 1;
     aluno.regime.perm.RemoverCursos = 1;
+    aluno.regime.perm.ListarCursosDisciplinas = 1;
+    aluno.regime.perm.MenuDisciplinas = 1;
 }
 
 int checkIfUserExists(int id){

@@ -70,6 +70,10 @@ void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
         scanf("%d", &permFile.perm.EditarCursos);
         printf("Tem permissao para Remover Cursos? (1 - Sim, 0 - Nao): ");
         scanf("%d", &permFile.perm.RemoverCursos);
+        printf("Tem permissao para Listar Cursos Disciplinas? (1 - Sim, 0 - Nao): ");
+        scanf("%d", &permFile.perm.ListarCursosDisciplinas);
+        printf("Tem permissao para MenuDisciplinas? (1 - Sim, 0 - Nao): ");
+        scanf("%d", &permFile.perm.MenuDisciplinas);
         fwrite(&permFile, sizeof(permissionFileStruct),1,file);
     }
     fclose(file);

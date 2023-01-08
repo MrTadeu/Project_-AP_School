@@ -378,12 +378,6 @@ void EditarDisciplinaFromCursos(char *NameOriginal,char *nameNovo)
         aluno.course = courses[aux];   
 }
 
-void RemoverCursos()
-{
-    //  <--This is a problem    
-    //atulizar strut alunoData do pedro, e remover o curso do aluno que tiver o curso e elimina exames
-}
-
 int CheckIFDisciplinaExiste(int id)
 {
     for(int i=0; i<n_disciplinas; i++){

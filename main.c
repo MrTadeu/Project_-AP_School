@@ -21,7 +21,6 @@ Exames* exame;
 
 int n_alunos = 0, n_regimes = 0, n_courses = 0, n_disciplinas = 0, n_salas = 0, n_professores = 0, n_exames = 0;
 
-
 void readData();
 
 
@@ -98,10 +97,5 @@ void readData(){
     ReadBinCursosDisciplina(); 
     readBinSalas();
     readBinProfessores();
-    /* printf("olaaaaaaaaaaaaaaaaa");
-    CriarDisciplina();
-    RemoverDisciplina();
-    EditarDisciplina();
-    CriarCurso(); */
 }
 

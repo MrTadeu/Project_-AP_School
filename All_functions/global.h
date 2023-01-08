@@ -36,6 +36,7 @@ void printfUserData();
 int checkIfUserExists(int id);
 int generateUserID();
 void getUserDataByIDProf(int id);
+void saveBinAlunosFix();
 
 //courses.c
 void getAllCourses(AlunoFileStruct *alunosFile);
