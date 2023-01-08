@@ -65,6 +65,6 @@ typedef struct{
 }tempoExames;
 
 typedef struct{
-    int disciplina, professor, sala, regime;
+    int disciplina, professor, sala, regime, id;
     tempoExames data;
 }Exames;
