@@ -1,4 +1,3 @@
-// Created by: Benno Verificar se está a funcionar corretamente com o resto do programa (Externos)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,14 +5,9 @@
 
 /* typedef struct { //struct para guardar os dados de uma sala
     char *nomeSala;
-    int *numeroSala;
-    int *numeroCadeiras;
+    int numeroSala;
+    int numeroCadeiras;
 }SalaStruct; */
-
-extern SalaStruct *salas;
-extern int n_salas;
-
-int ChekeIFsalaExist(char *nomeSala, int nSala);
 
 extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
 extern int n_salas;
@@ -32,7 +26,8 @@ void criarSala(){ // #VALIDAR
         salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
         salas[n_salas].id = id;
         printf("Qual o numero da sala? ");
-        scanf("%d", &salas[n_salas].nomeSala);
+        scanf("%d", &salas[n_salas].numeroSala);
+        printf("numero da sala: %d", salas[n_salas].numeroSala);
         if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
             printc("[red]Sala já existe[/red]\n");
         }
@@ -43,6 +38,15 @@ void criarSala(){ // #VALIDAR
 
     n_salas++;
     saveBinSalas();
+}
+
+int ChekeIFsalaExist(char *nomeSala, int nSala){
+    for(int i = 0; i < n_salas; i++){
+        if(strcmp(salas[i].nomeSala, nomeSala) == 0 && salas[i].numeroSala == nSala){
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void saveBinSalas(){
@@ -66,17 +70,7 @@ void saveBinSalas(){
     fclose(file);
 }
 
-int ChekeIFsalaExist(char *nomeSala, int nSala){
-    //SalaStruct *sala;
-    //int n_salas = 0;
-    //sala = readBinSalas(&n_salas);
-    for(int i = 0; i < n_salas; i++){
-        if(strcmp(salas[i].nomeSala, nomeSala) == 0 && salas[i].numeroSala == nSala){
-            return 1;
-        }
-    }
-    return 0;
-}
+
 
 void listarSalas(){
     printf("**************************************************\n");

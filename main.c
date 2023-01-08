@@ -44,9 +44,9 @@ void main(){
     criarSala();
     criarSala();
     listarSalas();
-    removerSalas();
+    removerSala();
     listarSalas();
-    editarSalas();
+    editarSala();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
