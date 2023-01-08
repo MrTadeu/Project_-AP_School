@@ -29,6 +29,7 @@ void readData();
     return 0;
 } */
 void main(){
+    
 /*     if (firstTime()){
         printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
         printc("[lw]Parece que é a primeira vez que está a usar o programa![/lw]\n");

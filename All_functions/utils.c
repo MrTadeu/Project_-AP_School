@@ -59,6 +59,19 @@ int isletter_cheker(char *str){
     }
 }
 
+void ValidarZeroUm(int *num){
+    if(num == 1 || num == 0){
+        return;
+    }
+    else{
+        while (num != 0 || num != 1){
+            printf("\n[yellow]Escolha uma opção: Não --> 0 Sim --> 1[/yellow]\n");
+            scanf("%d", &num);
+        }
+    return;
+    }
+}
+
 /* int generate_unique_numbers(int *numbers, int size) {
   // seed the random number generator
   srand(time(NULL));
