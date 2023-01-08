@@ -50,6 +50,7 @@ PermissionsType getPermissionsByID(int id);
 
 //menus.c
 int mainMenu();
+void MenuAdmin();
 int MenuEditarConta();
 void MenuPrincipal();
 int importExportMenu();

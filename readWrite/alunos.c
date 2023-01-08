@@ -105,7 +105,7 @@ void login(char *email, char *password){
             fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
             getUserDataByID(alunos[i].id);
             MenuPrincipal();
-            return;
+            /* return; */
         }
     }
     if(flag == 0){
