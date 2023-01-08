@@ -14,7 +14,7 @@ void editAccount(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int op = -1;
     do{
-        //op = MenuEditarConta();
+        op = MenuEditarConta();
         switch (op){
             case 0:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -36,30 +36,32 @@ void editAccount(){
 
 void changeName(){
     char nome[50];
-    printc("********************************************* [blue]Editar nome![/blue] **********************************************\n");
-    printf("****         Nome: %s          ****\n", aluno.name);
-    printf("****         Novo nome: ");
+    printc("****************** [blue]Editar nome![/blue] ******************\n");
+    printf("             Nome: %s\n", aluno.name);
+    printf("             Novo nome: ");
     scanf(" %[^\n]", nome);
+    printc("\n             [green]Nome alterado com sucesso![/green]\n");
+    printf("**************************************************\n");
+    printf("\nPressione [enter] para continuar...");
     strcpy(aluno.name, nome);
     updateUser();
     saveBinAlunos();
-    printf("****         Nome alterado com sucesso!          ****\n");
-    printf("***************************************************************************************************\n");
     getchar();
     getchar();
 }
 
 void changePassword(){
     char password[50];
-    printc("********************************************* [blue]Editar password![/blue] **********************************************\n");
-    printf("****         Password: ********          ****\n");
-    printf("****         Nova password: ");
+    printc("**************** [blue]Editar password![/blue] ****************\n");
+    printf("             Password: *********\n");
+    printf("             Nova password: ");
     scanf("%s", password);
     strcpy(aluno.password, password);
+    printc("\n          [green]Password alterada com sucesso![/green]\n");
+    printf("**************************************************\n");
+    printf("\nPressione [enter] para continuar...");
     updateUser();
     saveBinAlunos();
-    printf("****         Password alterada com sucesso!          ****\n");
-    printf("***************************************************************************************************\n");
     getchar();
     getchar();
 }
@@ -75,7 +77,7 @@ void updateUser(){
     alunos[position].name = malloc(strlen(aluno.name)+1);
     alunos[position].password = malloc(strlen(aluno.password)+1);
     strcpy(alunos[position].name, aluno.name);
-    strcpy(aluno.password, alunos[position].password);
+    strcpy(alunos[position].password, aluno.password);
     aluno.year = alunos[position].year;
     aluno.regime = getRegimeByID(alunos[position].id_regime);
     aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);

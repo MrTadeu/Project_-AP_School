@@ -39,50 +39,60 @@ int importExportMenu(){
  
 //MENU PRINCIPAL: login.c
 void MenuPrincipal(){
-    /* changeName();
-    changePassword(); */
-    int opcao, i = 0;
-    printf("Bem vindo %s!\n", aluno.name);
-    printc("**************************************************\n");
-    printc("****************** [blue]Menu Principal[/blue] ****************\n");
-    printc("**************************************************\n");
-    printf("**        %d -> Sair                             **\n", i++);
-    if (aluno.regime.perm.VerDisciplinas){
-        printf("**        %d -> Ver Disciplinas              **\n", i++);
-    }
-    if(aluno.regime.perm.MenuExames){
-        printf("**        %d -> Menu Exames                  **\n", i++);
-    }
-    printf("**        %d -> Editar Conta de Utilizador       **\n", i++);
-    if(aluno.regime.perm.MenuAdmin){
-        printf("**        %d -> Menu admin                   **\n", i++);
-    }
-    printc("**************************************************\n");
-    printc("Qual a opção que pretende?");
-    scanf("%d", &opcao);
-    i = 0;
-    if (opcao == 0){
-        printf("[lw]A fechar o programa...[/lw]");
-    }
-    if (aluno.regime.perm.VerDisciplinas){
-        if (opcao == i++){
-            //MenuDisciplinas(); // <--- This is the problem
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    int opcao, i = 1;
+    do{
+        i = 0;
+        printf("Bem vindo %s!\n", aluno.name);
+        printc("**************************************************\n");
+        printc("****************** [blue]Menu Principal[/blue] ****************\n");
+        printc("**************************************************\n");
+        printf("**        %d -> Sair                             **\n", i++);
+        if (aluno.regime.perm.VerDisciplinas){
+            printf("**        %d -> Ver Disciplinas                  **\n", i++);
         }
-    }
-    if (aluno.regime.perm.MenuExames){
-        if (opcao == i++){
-             //MenuExames();  // <--- This is the problem
+        if(aluno.regime.perm.MenuExames){
+            printf("**        %d -> Menu Exames                      **\n", i++);
         }
-    }
-    if (opcao == i++){
-        //EditarConta(); // <--- This is the problem
-    }
-    if (aluno.regime.perm.MenuAdmin){
-        if (opcao == i++){
-            //MenuAdmin(); // <--- This is the problem
+        printf("**        %d -> Editar Conta de Utilizador       **\n", i++);
+        if(aluno.regime.perm.MenuAdmin){
+            printf("**        %d -> Menu admin                       **\n", i++);
         }
-    }
-    
+        printc("**************************************************\n");
+        printc("Qual a opção que pretende?");
+        scanf("%d", &opcao);
+        i = 1;
+
+        if (opcao == 0){
+            printc("[lw]A fechar o programa...[/lw]");
+        }
+
+        if (aluno.regime.perm.VerDisciplinas){
+            if (opcao == i++){
+                printf("Menu Disciplinas");
+                //MenuDisciplinas(); // <--- This is the problem
+            }
+        }
+
+        if (aluno.regime.perm.MenuExames){
+            if (opcao == i++){
+                printf("Menu Exames");
+                //MenuExames();  // <--- This is the problem
+            }
+        }
+
+        if (opcao == i++){
+            editAccount();
+        }
+
+        if (aluno.regime.perm.MenuAdmin){
+            if (opcao == i++){
+                printf("Menu Admin");
+                //MenuAdmin(); // <--- This is the problem
+            }
+        }
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    } while (opcao != 0);
 }
 /* 
 //MENU EXAMES: exames.c
@@ -156,22 +166,23 @@ void MenuExames(){
         }
     }
 }
-
-//MENU EDITAR CONTA: editarconta.c
+*/
+//MENU EDITAR CONTA: currentUser.c
 int MenuEditarConta(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int opcao;
     printc("**************************************************\n");
-    printc("****************** [blue]Menu Editar Conta[/blue] ****************\n");
+    printc("**************** [blue]Menu Editar Conta[/blue] ***************\n");
     printc("**************************************************\n");
-    printf("**        0 -> Sair                       **\n");
-    printf("**        1 -> Editar Nome                **\n");
-    printf("**        2 -> Editar Password            **\n");
+    printf("**            0 -> Sair                         **\n");
+    printf("**            1 -> Editar Nome                  **\n");
+    printf("**            2 -> Editar Password              **\n");
     printc("**************************************************\n");
     printc("Qual a opção que pretende?");
     scanf("%d", &opcao);
     return opcao;
 }
-
+/*
 //MENU ADMIN: admin.c
 void MenuAdmin(){
     int opcao, i = 0;

@@ -28,7 +28,7 @@ void printAlunos(){
 }
 
 void saveBinAlunos(){
-    FILE *file = fopen("data/bin/alunos.bin","ab");
+    FILE *file = fopen("data/bin/alunos.bin","wb");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
         exit(1);
@@ -105,6 +105,7 @@ void login(char *email, char *password){
             fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
             getUserDataByID(alunos[i].id);
             MenuPrincipal();
+            return;
         }
     }
     if(flag == 0){
@@ -134,7 +135,6 @@ void getUserDataByID(int id){
     aluno.regime = getRegimeByID(alunos[position].id_regime);
     aluno.regime.perm = getPermissionsByID(alunos[position].id_regime);
     aluno.course = getCourseByID(alunos[position].id_course);
-    printfUserData();
 }
 
 void printfUserData(){//testes
