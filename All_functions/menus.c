@@ -179,7 +179,7 @@ void MenuPrincipal(){
     }
     if (aluno.regime.perm.InscritosExames){
         if (opcao == i++){
-            inscritosExame();
+            listarInscritos(int id);
         }
     }
     if (aluno.regime.perm.ListarExames){
@@ -189,7 +189,7 @@ void MenuPrincipal(){
     }
     if (aluno.regime.perm.ListarExamesInscritos){
         if (opcao == i++){
-            listarExamesInscritos();
+            listarExamesdeumAluno();
         }
     }
     if (aluno.regime.perm.EditarExames){
@@ -202,8 +202,8 @@ void MenuPrincipal(){
             exportarExames();
         }
     }
-} */
-
+}
+ */
 //MENU EDITAR CONTA: currentUser.c
 int MenuEditarConta(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
