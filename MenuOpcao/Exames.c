@@ -15,7 +15,7 @@ typedef struct{
 extern Exames* exame;
 extern SalaStruct *salas;
 extern AlunoDataStruct aluno;
-extern int n_exames, n_salas;
+extern int n_exames, n_salas, n_alunos;
 
 //NUMERO MAXIMO DE INSCRITOS?? NUMERO DE INSCRITOS = NUMERO DE VAGAS NECESSARIAS 
 
@@ -131,6 +131,47 @@ void contarInscrito(int id)
         }
     }
     
+}
+
+void listarInscritos(int id)
+{
+    for (int i = 0; i < n_exames; i++)
+    {
+        for(int j = 0; j < exame[i].max_inscritos; j++)
+        {
+            if(exame[i].id == id)
+            {
+                for(int k = 0; k < exame[i].inscritos;k++)
+                {   
+                    printc("\n\n\t[green]ID dos alunos inscritos: [/green]");
+                    printf("ID: %d",exame[i].ids_inscritos[k]);
+                    for(int l = 0; l<n_alunos;l++)
+                    {
+                        if(exame[i].ids_inscritos[k] == aluno.id)
+                        {
+                            printf("\tNome: %s", aluno.name);
+                            printf("\tCurso: %s", aluno.course);
+                        }
+                    }   
+                }
+            }
+                
+        }
+    }
+}
+
+void listarExamesdeumAluno(){
+    int id_aluno, i, j;
+    listarAlunos(); 
+    printf("Qual o ID do aluno? ");
+    scanf("%d", &id_aluno);
+    for (i = 0; i < n_exames; i++){
+        for (j = 0; j < exame[i].max_inscritos; j++){
+            if (exame[i].ids_inscritos[j] == id_aluno){
+                printf("ID: %d\tDisciplina: %d\tSala: %d\tData: %d\tHora: %d\n",exame[i].id,exame[i].disciplina,exame[i].sala,exame[i].data.dia,exame[i].data.mes,exame[i].data.hora,exame[i].data.minuto);
+            }
+        }
+    }
 }
 
 void removerIncricao()
