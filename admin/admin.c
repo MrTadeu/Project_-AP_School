@@ -16,13 +16,13 @@ void listarTodosAlunos(){
         courseStruct courseAluno = getCourseByID(alunos[i].id_course);
         regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime);        
         printf("ID: %d", alunos[i].id);
-        printf("Nome: %s", alunos[i].name);
-        printf("Ano: %d", alunos[i].year);
-        printf("ID Regime: %d", alunos[i].id_regime);
-        printf("Nome Regime: %s", regimeAluno.name);
-        printf("ID Course: %d", alunos[i].id_course);
-        printf("Nome Curso: %s", courseAluno.name);
-        printf("Email: %s\n", alunos[i].email);
+        printf(" Nome: %s", alunos[i].name);
+        printf(" Ano: %d", alunos[i].year);
+        printf(" ID Regime: %d", alunos[i].id_regime);
+        printf(" Nome Regime: %s", regimeAluno.name);
+        printf(" ID Course: %d", alunos[i].id_course);
+        printf(" Nome Curso: %s", courseAluno.name);
+        printf(" Email: %s\n", alunos[i].email);
     }
     printc("\n\n[lw]Pressione enter para continuar[/lw]\n");  
     getchar();
@@ -35,16 +35,17 @@ void listarAluno(){
         if(flag == 1)
             printc("\n[red]Por favor insira um ID válido![/red]\n");
 
-        printc("Por favor Introduza o ID do aluno que pretende ver:  [red](sair = -1)[red]");
+        printc("Por favor Introduza o ID do aluno que pretende ver:  [red](sair = -1)[/red]\n");
         scanf("%d", &id);
+        if(id == -1)
+            return;
         flag = 1;
-    }while (checkIfUserExists(id) == 0 || id != -1);
+    }while (checkIfUserExists(id) == 0);
 
-    if(id == -1)
-        return;
 
     for (int i = 0; i < n_alunos; i++){
         if (alunos[i].id == id){
+            printf("\nAluno encontrado:\n");
             courseStruct courseAluno = getCourseByID(alunos[i].id_course);
             regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime);           
             printf("\nID: %d", alunos[i].id);
@@ -108,7 +109,7 @@ void alterarAluno(){
                     if(flag == 1)
                         printc("\n[red]Por favor insira um ID válido![/red]\n");
 
-                    printf("Por favor Introduza o ID do regime que pretende editar: ");
+                    printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
                     scanf("%d", &id);
                     flag = 1;
                 }while (checkIfRegimeExists(id) == 0);
@@ -126,7 +127,7 @@ void alterarAluno(){
                     printf("Por favor Introduza o ID do curso que pretende editar: ");
                     scanf("%d", &id);
                     flag = 1;
-                }while (CheckIFCursoExiste(id) != -1);
+                }while (CheckIFCursoExiste(id) == -1);
                 alunos[position].id_course = id;
                 saveBinAlunos();
                 break;
@@ -142,6 +143,7 @@ void alterarAluno(){
                     flag = 1;
 
                 } while (year < 1 || year > 4);
+                alunos[position].year = year;
                 saveBinAlunos();
                 break;
         default:
@@ -166,7 +168,7 @@ void apagarAluno(){
     }while (checkIfUserExists(id) == 0);
 
     int position = 0;
-    for (int i = 0; i < n_alunos; i++){
+    for (int i = 0; i <= n_alunos; i++){
         if (id == alunos[i].id){
             position = i;
             break;
@@ -176,18 +178,17 @@ void apagarAluno(){
     for (int i = position; i < n_alunos; i++){
         alunos[i] = alunos[i+1];
     }
-    alunos = realloc(alunos, (n_alunos-1) * sizeof(AlunoStruct));
+
     n_alunos--;
     saveBinAlunos();
 }
 
 void criarAluno(){
     int flag=0, year, id;
-    alunos = realloc(alunos, (n_alunos+1) * sizeof(AlunoStruct));
-    n_alunos++;
+    alunos = realloc(alunos, (n_alunos+2) * sizeof(AlunoStruct));
 
     alunos[n_alunos].id = generateUserID();
-    
+    alunos[n_alunos].name = malloc(50 * sizeof(char));
     printf("Introduza o nome do aluno: ");
     scanf("%s", alunos[n_alunos].name);
 
@@ -224,7 +225,7 @@ void criarAluno(){
         printf("Por favor Introduza o ID do curso que pretende editar: ");
         scanf("%d", &id);
         flag = 1;
-    }while (CheckIFCursoExiste(id) != -1);
+    }while (CheckIFCursoExiste(id) == -1);
     alunos[n_alunos].id_course = id;
 
     
@@ -247,6 +248,7 @@ void criarAluno(){
     strcat(password, courses[CheckIFCursoExiste(alunos[n_alunos].id_course)].name);
     alunos[n_alunos].password = malloc((strlen(password)+1));
     strcpy(alunos[n_alunos].password, password);
+    n_alunos++;
 
     saveBinAlunos();
 }

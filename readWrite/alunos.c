@@ -18,7 +18,7 @@ void saveBinAlunos(){
         printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
         exit(1);
     }
-    for (int i = 0; i < n_alunos; i++){
+    for (int i = 0; i <= n_alunos; i++){
         fwrite(&alunos[i].id, sizeof(int), 1, file);
         fwrite(&alunos[i].year, sizeof(int), 1, file);
         fwrite(&alunos[i].id_regime, sizeof(int), 1, file);

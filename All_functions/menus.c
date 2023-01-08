@@ -224,7 +224,7 @@ void MenuAdmin(){
     do{
         i = 0;
         printc("**************************************************\n");
-        printc("****************** [blue]Menu Administração[/blue] ****************\n");
+        printc("**************** [blue]Menu Administração[/blue] **************\n");
         printc("**************************************************\n");
         printf("**        %d -> Sair                             **\n", i++);
         if(aluno.regime.perm.MenuAlunos){
@@ -279,12 +279,11 @@ void MenuAdmin(){
 }
 
 void MenuAlunos(){
-    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int opcao;
     do{
-        int opcao;
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
         printc("**************************************************\n");
-        printc("****************** [blue]Menu Alunos[/blue] ****************\n");
+        printc("******************* [blue]Menu Alunos[/blue] *****************\n");
         printc("**************************************************\n");
         printf("**        0 -> Sair                             **\n");
         printf("**        1 -> Listar Todos os Aluno            **\n");
@@ -325,7 +324,7 @@ void MenuAlunos(){
 int menuEditAluno(){
     int opcao, i = 0;
     printc("**************************************************\n");
-    printc("****************** [blue]Menu Editar Aluno[/blue] ****************\n");
+    printc("***************** [blue]Menu Editar Aluno[/blue] ***************\n");
     printc("**************************************************\n");
     printf("**        %d -> Sair                             **\n", i++);
     printf("**        %d -> Editar Nome                      **\n", i++);

@@ -414,9 +414,7 @@ int CheckIFCursoExiste(int id)
 int CheckIFCursoExisteNome(char *name)
 {
     for(int i = 0; i<n_courses-1; i++){
-        printf("%s",name);printf("%s\n",courses[i].name);printf("n_courses: %d\n",n_courses);
         if(strcmp(courses[i].name, name) == 0){
-            printf("ola");
             return i;
         }   
     }
