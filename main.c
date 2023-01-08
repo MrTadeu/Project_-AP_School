@@ -38,7 +38,15 @@ void main(){
     else{
         readData();
     } */
-
+    listarSalas();
+    criarSala();
+    criarSala();
+    criarSala();
+    criarSala();
+    listarSalas();
+    removerSalas();
+    listarSalas();
+    editarSalas();
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{

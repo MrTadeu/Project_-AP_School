@@ -64,6 +64,7 @@ void readBinSalas();
 void editarSala();
 void removerSalas();
 int ChekeIFsalaExist(char *nomeSala, int nSala);
+void saveBinSalas();
 
 //disciplinas.c
 /* void InitDisciplinas(); *///Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)

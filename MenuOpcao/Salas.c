@@ -28,7 +28,7 @@ void criarSala(){ // #VALIDAR
     do{
         printf("Qual o nome da sala? ");
         scanf(" %[^\n]", salas[n_salas].nomeSala);
-        uppercase(salas[n_salas].nomeSala);
+        capitalize(salas[n_salas].nomeSala);
         salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
         salas[n_salas].id = id;
         printf("Qual o numero da sala? ");
@@ -79,16 +79,12 @@ int ChekeIFsalaExist(char *nomeSala, int nSala){
 }
 
 void listarSalas(){
-    //SalaStruct *sala; 
     printf("**************************************************\n");
     printc("************       [blue]Lista de Salas[/blue]      ************\n");
     printf("**************************************************\n");
-    size_t nomeSalasize;
-    //int n_salas = 0;
-    //sala = readBinSalas(&n_salas);
     printf("Numero de salas: %d\n", n_salas);
     for(int i = 0; i < n_salas; i++){
-        printf("--------------------------------------------\n");
+        printf("-------------------ID: -----------------------\n", salas[i].id);
         printf("Nome da sala: %s\n", salas[i].nomeSala);
         printf("Numero da sala: %d\n", salas[i].numeroSala);
         printf("Numero de cadeiras: %d\n", salas[i].numeroCadeiras);
@@ -97,110 +93,73 @@ void listarSalas(){
 }
 
 void readBinSalas(){
-    SalaStruct *sala = malloc(sizeof(SalaStruct));
+    salas = malloc(sizeof(SalaStruct));
+    int i;
     FILE *file;
     file = fopen("../data/MenuOpcao/Salas.bin", "rb");
-    if(file == NULL){
-        printc("\n\n\tErro ao abrir o file [red]Salas.bin[/red]\n\n");
+    if(!file){
+        printc("\n\n\tErro ao abrir o arquivo [red]Salas.bin[/red]\n\n");
         return;
     }
-    size_t nomeSalasize;
-    int i = 0;
-    while(fread(&nomeSalasize, sizeof(size_t), 1, file)){
-        sala[i].nomeSala = malloc(nomeSalasize);
-        fread(sala[i].nomeSala, nomeSalasize, 1, file);
-        fread(&sala[i].numeroSala, sizeof(int), 1, file);
-        fread(&sala[i].numeroCadeiras, sizeof(int), 1, file);
-        i++;
-        sala = realloc(sala, (i + 1) * sizeof(SalaStruct));
+    else{
+        for (i = 0; ; i++){
+            salas = realloc(salas, (i + 1) * sizeof(SalaStruct));
+            if(fread(&salas[i].id, sizeof(int), 1, file) != 1){
+                break;
+            }
+            size_t nomeSalasize;
+            fread(&nomeSalasize, sizeof(size_t), 1, file);
+            salas[i].nomeSala = malloc(nomeSalasize);
+            fread(salas[i].nomeSala, nomeSalasize, 1, file);
+
+            fread(&salas[i].numeroSala, sizeof(int), 1, file);
+
+            fread(&salas[i].numeroCadeiras, sizeof(int), 1, file);
+        }
     }
     n_salas = i;
     fclose(file);
-
 }
 
-void editarSala(){ // #VALIDAR
-    //SalaStruct *sala;
-    //int n_salas = 0;
-    //sala = readBinSalas(&n_salas);
-    int numeroSala;
-    char *nomeSala = malloc(100);
+void editarSala(){ 
     printf("**************************************************\n");
     printc("************       [blue]Editar Salas[/blue]       ************\n");
     printf("**************************************************\n");
-    printf("Qual o nome da sala que deseja editar? ");
-    scanf("%s", nomeSala);
-    uppercase(nomeSala);
-    nomeSala = realloc(nomeSala, strlen(nomeSala) + 1);
-    printf("Qual o numero da sala que deseja editar? ");
-    scanf("%d", &numeroSala);
+    int id;
+    printf("Qual ID da sala que deseja editar? ");
+    scanf("%d", &id);
     for(int i = 0; i < n_salas; i++){
-        if((salas[i].numeroSala == numeroSala) && (strcmp(salas[i].nomeSala, nomeSala) == 0)){  
+        if(salas[i].id == id){  
             printf("Qual o novo nome da sala? ");
             scanf("%s", salas[i].nomeSala);
             printf("Qual o novo numero da sala? ");
             scanf("%d", &salas[i].numeroSala);
             printf("Qual o novo numero de cadeiras? ");
             scanf("%d", &salas[i].numeroCadeiras);
+            saveBinSalas();
+            readBinSalas();
         }
     }
-    FILE *file;
-    file = fopen("../data/MenuOpcao/Salas.bin", "wb");
-    if(file == NULL){
-        printf("Erro ao abrir o file");
-        exit(1);
-    }
-    for(int i = 0; i < n_salas; i++){
-        size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
-        fwrite(&nomeSalasize, sizeof(size_t), 1, file);
-        fwrite(salas[i].nomeSala, nomeSalasize, 1, file);
-        fwrite(&salas[i].numeroSala, sizeof(int), 1, file);
-        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
-    }
-    free(nomeSala);
-    free(salas);
-    fclose(file);
-    readBinSalas();
+    
 }
 
-void removerSalas(){ // #VALIDAR
-    //SalaStruct *sala;
-    //int n_salas = 0;
-    //sala = readBinSalas(&n_salas);
-    int numeroSala;
-    char *nomeSala = malloc(100);
+void removerSala(){
     printf("**************************************************\n");
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
-    printf("Qual o nome da sala que deseja remover? ");
-    scanf("%s", nomeSala);
-    uppercase(nomeSala);
-    nomeSala = realloc(nomeSala, strlen(nomeSala) + 1);
-    printf("Qual o numero da sala que deseja remover? ");
-    scanf("%d", &numeroSala);
+    int id;
+    printf("Qual ID da sala que deseja editar? ");
+    scanf("%d", &id);
     for(int i = 0; i < n_salas; i++){
-        if((salas[i].numeroSala == numeroSala) && (strcmp(salas[i].nomeSala, nomeSala) == 0)){
+        if(salas[i].id == id){
             for(int j = i; j < n_salas; j++){
                 salas[j] = salas[j + 1];
             }
             n_salas--;
+            salas = realloc(salas, n_salas * sizeof(SalaStruct));
+            saveBinSalas();
+            readBinSalas();
         }
     }
-    FILE *file;
-    file = fopen("../data/MenuOpcao/Salas.bin", "wb");
-    if(file == NULL){
-        printf("Erro ao abrir o file");
-        exit(1);
-    }
-    for(int i = 0; i < n_salas; i++){
-        size_t nomeSalasize = strlen(salas[i].nomeSala) + 1;
-        fwrite(&nomeSalasize, sizeof(size_t), 1, file);
-        fwrite(salas[i].nomeSala, nomeSalasize, 1, file);
-        fwrite(&salas[i].numeroSala, sizeof(int), 1, file);
-        fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
-    }
-    free(nomeSala);
-    free(salas);
-    fclose(file);
-    readBinSalas();
+    
 }
