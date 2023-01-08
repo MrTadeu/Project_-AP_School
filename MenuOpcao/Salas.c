@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "../All_functions/global.h"
 
 /* typedef struct { //struct para guardar os dados de uma sala
@@ -16,31 +17,57 @@ void criarSala(){ // #VALIDAR
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
     int id = salas[n_salas-1].id + 1;
-    
     if (n_salas == 0){
         id = 1;
     }
     salas[n_salas].id = id;
 
+    char numeroCadeirasStringImput[1000];
+    char numeroSalaStringImput[1000];
+
     printf("**************************************************\n");
     printc("************        [blue]Criar Salas[/blue]       ************\n");
     printf("**************************************************\n");
     do{
-        printf("Qual o nome da sala? ");
-        scanf(" %[^\n]", salas[n_salas].nomeSala);
+        do{
+            printf("Qual o nome da sala? ");
+            scanf(" %[^\n]", salas[n_salas].nomeSala);
+            if (isdigit_cheker(salas[n_salas].nomeSala) == 1){
+                printc("[red]Somente letras e espaços são permitidos[/red]\n");
+            }
+            
+        } while (isdigit_cheker(salas[n_salas].nomeSala) == 1);
         capitalize(salas[n_salas].nomeSala);
         salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
 
-        printf("Qual o numero da sala? ");
-        scanf("%d", &salas[n_salas].numeroSala);
+        do
+        {
+            
+            printf("Qual o numero da sala? ");
+            scanf("%s", numeroSalaStringImput);
+            if (isdigit_cheker(numeroSalaStringImput) == 0){
+                printc("[red]Somente numeros são permitidos[/red]\n");
+            }
+            
+        } while(isdigit_cheker(numeroSalaStringImput) == 0);
+        salas[n_salas].numeroSala = atoi(numeroSalaStringImput);
 
         if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
             printc("[red]Sala já existe[/red]\n");
         }
     }while(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1);
+
     
-    printf("Qual o numero de cadeiras? ");
-    scanf("%d", &salas[n_salas].numeroCadeiras);
+
+    do{
+        printf("Qual o numero de cadeiras? ");
+        scanf("%s", numeroCadeirasStringImput);
+        if (isdigit_cheker(numeroCadeirasStringImput) == 0){
+            printc("[red]Somente numeros são permitidos[/red]\n");
+        }
+    } while (isdigit_cheker(numeroCadeirasStringImput) == 0);
+    salas[n_salas].numeroSala = atoi(numeroCadeirasStringImput);
+
     printf("Sala criada com sucesso! ID: %d\n", salas[n_salas].id);
     n_salas++;
     saveBinSalas();

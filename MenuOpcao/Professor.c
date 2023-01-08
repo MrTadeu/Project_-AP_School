@@ -17,13 +17,18 @@ void criarProfessor(){
     professores = realloc(professores, (n_professores+1)*sizeof(professorStruct));
     professores[n_professores].nomeProfessor = malloc(100);
     int id = professores[n_professores - 1].id + 1;
+    if (n_professores == 0){
+        id = 1;
+    }
+    professores[n_professores].id = id;
+
     printf("**************************************************\n");
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
     printf("Qual o nome do professor? ");
     scanf(" %[^\n]", professores[n_professores].nomeProfessor);
     professores[n_professores].nomeProfessor = realloc(professores[n_professores].nomeProfessor, (strlen(professores[n_professores].nomeProfessor)+1));
-    professores[n_professores].id = id;
+    
     capitalize(professores[n_professores].nomeProfessor);
 
     char *email = malloc(strlen("pv") + strlen(professores[n_professores].nomeProfessor) + 10 /* 10 é para o numero id */+ strlen("@estgv.ipv.pt") + 1 /* para o \0 */), *password = malloc(100);
