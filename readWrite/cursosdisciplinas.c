@@ -7,7 +7,8 @@
 extern disciplinasStruct *disciplinas;
 extern courseStruct *courses;
 extern AlunoStruct *alunos;
-extern int n_disciplinas, n_courses, n_alunos;
+extern AlunoFileStruct *alunosFile; 
+extern int n_disciplinas, n_courses, n_alunos, n_professores;
 
 void getAllCourses(AlunoFileStruct *alunosFile){
     courses = malloc(sizeof(courseStruct));
@@ -26,11 +27,17 @@ void getAllCourses(AlunoFileStruct *alunosFile){
             strcpy(courses[n_courses].name, alunosFile[i].course);
             n_courses++;
         }
-    } 
+    }
     SaveBinCursosDisciplina();
 }
 
 int InitCursos() { //Apenas usado pela primeira vez
+    readBinProfessores();
+    FILE *professoresbin = fopen("data/bin/professores.bin", "rb");
+    if(n_professores == 0){
+        printc("\n\n\t[red]Não existem professores registados[/red]\n\n");
+        criarProfessor();
+    }
     for (int i=0;i<n_courses;i++)
         courses[i].AnoDisciplina = malloc(3);
     char TmpNameDisciplina[15];
@@ -38,7 +45,7 @@ int InitCursos() { //Apenas usado pela primeira vez
     for(int i=0; i<n_courses; i++){   
         ListarDisciplinas();
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
-        for(int j=0; j<3; j++){   
+        for(int j=0; j<3; j++){ 
             listarProfessor();
             printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
             scanf("%d", &TmpIdDiretor);
@@ -83,6 +90,7 @@ int InitCursos() { //Apenas usado pela primeira vez
 }
 
 void SaveBinCursosDisciplina(){
+
     FILE *CursoDisciplinaBin = fopen("data/bin/cursosdisciplina.bin","wb");
     if (!CursoDisciplinaBin) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]cursos.bin[/red]\n\n");

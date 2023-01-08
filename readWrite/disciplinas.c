@@ -30,18 +30,18 @@ extern int n_disciplinas;
 } */
 
 void ReadTxtDisciplinas()
-{	disciplinas = malloc(sizeof(disciplinasStruct));
-    FILE *disciplinasTxt = fopen("disciplinas.txt","r");
+{	
+    FILE *disciplinasTxt = fopen("data/bin/disciplinas.txt","r");
     if(disciplinasTxt == NULL){
-        printf("\n\n\tImpossivel abrir Ficheiro disciplinas.txt\n\n");
+        printf("\n\n\tImpossivel abrir Ficheiro disciplis.txt\n\n");
         return;
     }
     else{
-        disciplinas = realloc(disciplinas, sizeof(disciplinasStruct) *348);//numero de ddisciplinas
+        disciplinas = malloc(sizeof(disciplinasStruct)*348);
         int i;
         for (i = 0; i < 348; i++){
         	disciplinas[i].name = malloc(15);
-            fgets(disciplinas[i].name, 15, disciplinasTxt);
+            fgets(disciplinas[i].name, 14, disciplinasTxt);
             disciplinas[i].name = realloc(disciplinas[i].name, strlen(disciplinas[i].name)+1);
             disciplinas[i].id = i+1;
         }

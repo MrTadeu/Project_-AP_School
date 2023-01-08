@@ -29,7 +29,6 @@ void readData();
     return 0;
 } */
 void main(){
-    
 /*     if (firstTime()){
         printc("[lw]Bem-vindo ao sistema de gestão de exames![/lw]\n");
         printc("[lw]Parece que é a primeira vez que está a usar o programa![/lw]\n");
@@ -39,8 +38,9 @@ void main(){
     else{
         readData();
     } */
-/*     readData();
-    listarSalas();
+         readData();
+
+   /* listarSalas();
     criarSala();
     criarSala();
     criarSala();
@@ -49,7 +49,7 @@ void main(){
     removerSala();
     listarSalas();
     editarSala();
-    listarSalas(); */
+    listarSalas(); 
     readData();
     listarProfessor();
     criarProfessor();
@@ -60,7 +60,7 @@ void main(){
     removerProfessor();
     listarProfessor();
     editarProfessor();
-    listarProfessor();
+    listarProfessor();*/
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{
@@ -98,7 +98,7 @@ void readData(){
     regimes = readBinRegimes();
     perms_file = readBinPermissions();
     ReadBinDisciplinas();
-    ReadBinCursosDisciplina();
+   // ReadBinCursosDisciplina(); 
     readBinSalas();
     readBinProfessores();
 }

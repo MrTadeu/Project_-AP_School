@@ -17,7 +17,7 @@ void ListarDisciplinas()
     printf("Disciplinas --> ");
     for(int i=0;i<n_disciplinas;i++)
     {
-       printc("\n\t[green]%d[/green] - %s", disciplinas[i].id, disciplinas[i].name);
+       printc("\t[green]%d[/green] - %s", disciplinas[i].id, disciplinas[i].name);
         if(i==5 || i==10 || i==15 || i==20 || i==25 || i==30)
             printf("\n");
     }
