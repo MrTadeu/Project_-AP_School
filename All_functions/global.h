@@ -143,3 +143,19 @@ void listarAluno();
 void criarAluno();
 void alterarAluno();
 void apagarAluno();
+
+//exames.c
+void criarExame();
+void InitExame();
+void listarExames();
+void SalasOcupada();
+void mostrarSalasLivres();
+void inscreverExame();
+void contarInscrito(int id);
+void listarInscritos(int id);
+void listarExamesdeumAluno();
+void removerIncricao();
+void vagaMais(int salaId);
+void vagaMenos(int salaId);
+void saveBinExames();
+void readBinExames();

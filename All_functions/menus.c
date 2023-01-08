@@ -112,7 +112,7 @@ void MenuPrincipal(){
         if (aluno.regime.perm.MenuExames){
             if (opcao == i++){
                 printf("Menu Exames");
-                //MenuExames(); 
+                MenuExames(); 
             }
         }
 
@@ -128,7 +128,7 @@ void MenuPrincipal(){
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     } while (opcao != 0);
 }
-/* 
+
 //MENU EXAMES: exames.c
 void MenuExames(){
     int opcao, i = 0;
@@ -200,7 +200,7 @@ void MenuExames(){
         }
     }
 }
-*/
+
 //MENU EDITAR CONTA: currentUser.c
 int MenuEditarConta(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
