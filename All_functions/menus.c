@@ -248,7 +248,7 @@ void MenuAdmin(){
 
         if (aluno.regime.perm.MenuAlunos){
             if (opcao == i++){
-                //MenuProfessor();
+                MenuAlunos();
             }
         }
 
@@ -287,7 +287,7 @@ void MenuAlunos(){
         printf("**        %d -> Listar Todos os Aluno            **\n", i++);
     }
     if (aluno.regime.perm.ListarAlunoAdmin){
-        printf("**        %d -> Listar Aluno                     **\n", i++);
+        printf("**        %d -> Listar Aluno (ID)                **\n", i++);
     }
     if (aluno.regime.perm.CriarAlunoAdmin){
         printf("**        %d -> Criar Aluno                      **\n", i++);
