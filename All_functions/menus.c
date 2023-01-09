@@ -115,7 +115,7 @@ void MenuPrincipal(){
         if (aluno.regime.perm.MenuExames){
             if (opcao == i++){
                 printf("Menu Exames");
-                //MenuExames(); 
+                MenuExames(); 
             }
         }
 
@@ -134,8 +134,9 @@ void MenuPrincipal(){
 
 //MENU EXAMES: exames.c
 void MenuExames(){
-    int opcao, i = 0;
+    int opcao;
     do{
+        int i = 0;
         printc("**************************************************\n");
         printc("****************** [blue]Menu Exames[/blue] ****************\n");
         printc("**************************************************\n");
