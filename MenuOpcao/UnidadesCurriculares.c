@@ -166,7 +166,9 @@ void ListarCursosDisciplinas()
 void CriarCurso()
 {   
     char TmpNameCurso[15], TmpNameDisciplina[15];
-    int TmpIdDiretor;
+    int TmpIdDiretor;    
+    courses = realloc(courses, (n_courses+1) * sizeof(courseStruct));
+    courses[n_courses].AnoDisciplina = malloc(3);
     printf("**************************************************\n");
     printc("************        [blue]Criar Curso[/blue]       ************\n");
     printf("**************************************************\n");
@@ -181,11 +183,22 @@ void CriarCurso()
             uppercase(TmpNameCurso);
         } while (CheckIFCursoExisteNome(TmpNameCurso) != -1); 
     }
-    courses = realloc(courses, (n_courses+1) * sizeof(courseStruct));
+
     courses[n_courses].id = n_courses;
     courses[n_courses].name = realloc(courses[n_courses-1].name, strlen(TmpNameCurso + 1));
     strcpy(courses[n_courses].name, TmpNameCurso);
-    courses[n_courses].AnoDisciplina = malloc(3);
+    
+    printc("\n\n[green]Insira o ID do diretor deste curso:[/green] ");
+    scanf("%d", &TmpIdDiretor);
+    if(CheckIFProfessor(TmpIdDiretor) == -1){
+        printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
+        do{
+            printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
+            scanf("%d", &TmpIdDiretor);
+        } while (CheckIFProfessor(TmpIdDiretor) == -1); 
+    }
+    courses[n_courses].IdDiretor = TmpIdDiretor;
+
     for(int i=0; i<3; i++)   
     { 
         printc("\nQuantas disciplinas tem %d ano o curso? ",i+1);
@@ -217,17 +230,6 @@ void CriarCurso()
             strcpy(courses[n_courses].AnoDisciplina[i][j], TmpNameDisciplina);
         }
     }
-    
-    printc("\n\n[green]Insira o ID do diretor deste curso:[/green] ");
-    scanf("%d", &TmpIdDiretor);
-    if(CheckIFProfessor(TmpIdDiretor) == -1){
-        printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
-        do{
-            printf("\n\nInsira o ID do um professor para ser o diretor deste curso: ");
-            scanf("%d", &TmpIdDiretor);
-        } while (CheckIFProfessor(TmpIdDiretor) == -1); 
-    }
-    courses[n_courses].IdDiretor = TmpIdDiretor;
     n_courses++;
     SaveBinCursosDisciplina();
     printc("\n\n\t[green]Curso criado com sucesso![/green]");
