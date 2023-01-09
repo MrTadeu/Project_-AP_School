@@ -194,12 +194,12 @@ void MenuExames(){
     }
     if (aluno.regime.perm.EditarExames){
         if (opcao == i++){
-            editarExame();
+            //editarExame();
         }
     }
     if (aluno.regime.perm.ExportarExames){
         if (opcao == i++){
-            exportarExames();
+            //exportarExames();
         }
     }
 }
