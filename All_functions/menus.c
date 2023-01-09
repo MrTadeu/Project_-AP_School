@@ -518,7 +518,7 @@ void MenuSalas(){
     do{
         i = 0;
         printc("**************************************************\n");
-        printc("******************** [blue]Menu Salas[/blue] **************`**\n");
+        printc("******************** [blue]Menu Salas[/blue] *****************\n");
         printc("**************************************************\n");
         printf("**        %d -> Sair                            **\n", i++);
         if (aluno.regime.perm.CriarSalas){
