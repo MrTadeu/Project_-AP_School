@@ -84,13 +84,12 @@ void SalasOcupada()
     }
 }
 
-void mostrarSalasLivres()
-    {
+void mostrarSalasLivres(){
         for(int i = 0; i< n_salas;i++){
             if(salas[i].ocupada == 0)
             printf("ID: %d\tCapacidade: %d",salas[i].id,salas[i].numeroCadeiras);
         }
-    }
+}
 
 
 void inscreverExame(){
@@ -135,8 +134,7 @@ void contarInscrito(int id)
     
 }
 
-void listarInscritos(int id)
-{
+void listarInscritos(int id){
     for (int i = 0; i < n_exames; i++)
     {
         for(int j = 0; j < exame[i].max_inscritos; j++)
@@ -176,8 +174,7 @@ void listarExamesdeumAluno(){
     }
 }
 
-void removerIncricao()
-{
+void removerIncricao(){
     int id_aluno, id_exame, i, j;
     listarExames(); 
     printf("Qual o ID do exame? ");
@@ -199,7 +196,7 @@ void removerIncricao()
     printf("Não existe nenhum exame com esse ID!\n");
 }
 
-void vagaMais(int salaId) 
+void vagaMais(int salaId)
 {
     for(int i=0;i<n_salas;i++){
         if(salas[i].id == salaId){

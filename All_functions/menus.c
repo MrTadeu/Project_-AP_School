@@ -135,73 +135,75 @@ void MenuPrincipal(){
 //MENU EXAMES: exames.c
 void MenuExames(){
     int opcao, i = 0;
-    printc("**************************************************\n");
-    printc("****************** [blue]Menu Exames[/blue] ****************\n");
-    printc("**************************************************\n");
-    printf("**        %d -> Sair                             **\n", i++);
-    if (aluno.regime.perm.CriarExames){
-        printf("**        %d -> Criar Exames                     **\n", i++); // Não esquecer de verificar se o aluno já está inscrito no exame e se Não se deve permitir marcar exames de um mesmo ano curricular com uma diferença de dias inferior a 3 dias e a data não pode ser num fim de semana ou feriado. FAZER A SELEÇÃO DE SALAS E DATA/HORA QUE OCORRERÁ.
-    }
-    if (aluno.regime.perm.InscreverExames){
-        printf("**        %d -> Inscrever em Exames              **\n", i++); // Não esquecer de verificar se o aluno já está inscrito no exame e se Não se deve permitir marcar exames de um mesmo ano curricular com uma diferença de dias inferior a 3 dias e a data não pode ser num fim de semana ou feriado.
-    }
-    if (aluno.regime.perm.InscritosExames){
-        printf("**        %d -> Inscritos em Exames              **\n", i++);
-    }
-    if (aluno.regime.perm.ListarExames){
-        printf("**        %d -> Listar Exames                    **\n", i++);
-    }
-    if (aluno.regime.perm.ListarExamesInscritos){
-        printf("**        %d -> Listar Exames Inscritos          **\n", i++);
-    }
-    if (aluno.regime.perm.EditarExames){
-        printf("**        %d -> Editar Exames                    **\n", i++);
-    }
-    if (aluno.regime.perm.ExportarExames){
-        printf("**        %d -> Exportar Exames                  **\n", i++);
-    }
-    printc("**************************************************\n");
-    printc("Qual a opção que pretende?");
-    scanf("%d", &opcao);
-    i = 1;
-    if (opcao == 0){
-        printf("[lw]A fechar o programa...[/lw]");
-    }
-    if (aluno.regime.perm.CriarExames){
-        if (opcao == i++){
-            criarExame();
+    do{
+        printc("**************************************************\n");
+        printc("****************** [blue]Menu Exames[/blue] ****************\n");
+        printc("**************************************************\n");
+        printf("**        %d -> Sair                             **\n", i++);
+        if (aluno.regime.perm.CriarExames){
+            printf("**        %d -> Criar Exames                     **\n", i++); // Não esquecer de verificar se o aluno já está inscrito no exame e se Não se deve permitir marcar exames de um mesmo ano curricular com uma diferença de dias inferior a 3 dias e a data não pode ser num fim de semana ou feriado. FAZER A SELEÇÃO DE SALAS E DATA/HORA QUE OCORRERÁ.
         }
-    }
-    if (aluno.regime.perm.InscreverExames){
-        if (opcao == i++){
-            inscreverExame();
+        if (aluno.regime.perm.InscreverExames){
+            printf("**        %d -> Inscrever em Exames              **\n", i++); // Não esquecer de verificar se o aluno já está inscrito no exame e se Não se deve permitir marcar exames de um mesmo ano curricular com uma diferença de dias inferior a 3 dias e a data não pode ser num fim de semana ou feriado.
         }
-    }
-    if (aluno.regime.perm.InscritosExames){
-        if (opcao == i++){
-            listarInscritos(1);
+        if (aluno.regime.perm.InscritosExames){
+            printf("**        %d -> Inscritos em Exames              **\n", i++);
         }
-    }
-    if (aluno.regime.perm.ListarExames){
-        if (opcao == i++){
-            listarExames();
+        if (aluno.regime.perm.ListarExames){
+            printf("**        %d -> Listar Exames                    **\n", i++);
         }
-    }
-    if (aluno.regime.perm.ListarExamesInscritos){
-        if (opcao == i++){
-            listarExamesdeumAluno();
+        if (aluno.regime.perm.ListarExamesInscritos){
+            printf("**        %d -> Listar Exames Inscritos          **\n", i++);
         }
-    }
-    if (aluno.regime.perm.EditarExames){
-        if (opcao == i++){
-            //editarExame();
+        if (aluno.regime.perm.EditarExames){
+            printf("**        %d -> Editar Exames                    **\n", i++);
         }
-    }
-    if (aluno.regime.perm.ExportarExames){
-        if (opcao == i++){
-            //exportarExames();
+        if (aluno.regime.perm.ExportarExames){
+            printf("**        %d -> Exportar Exames                  **\n", i++);
         }
-    }
+        printc("**************************************************\n");
+        printc("Qual a opção que pretende?");
+        scanf("%d", &opcao);
+        i = 1;
+        if (opcao == 0){
+            printf("[lw]A fechar o programa...[/lw]");
+        }
+        if (aluno.regime.perm.CriarExames){
+            if (opcao == i++){
+                criarExame();
+            }
+        }
+        if (aluno.regime.perm.InscreverExames){
+            if (opcao == i++){
+                inscreverExame();
+            }
+        }
+        if (aluno.regime.perm.InscritosExames){
+            if (opcao == i++){
+                listarInscritos(1);
+            }
+        }
+        if (aluno.regime.perm.ListarExames){
+            if (opcao == i++){
+                listarExames();
+            }
+        }
+        if (aluno.regime.perm.ListarExamesInscritos){
+            if (opcao == i++){
+                listarExamesdeumAluno();
+            }
+        }
+        if (aluno.regime.perm.EditarExames){
+            if (opcao == i++){
+                //editarExame();
+            }
+        }
+        if (aluno.regime.perm.ExportarExames){
+            if (opcao == i++){
+                //exportarExames();
+            }
+        }
+    }while(opcao != 0);
 }
 
 //MENU EDITAR CONTA: currentUser.c
@@ -446,6 +448,8 @@ void MenuCursos(){
         if (aluno.regime.perm.ListarCursosDisciplinas){
             if (opcao == i++){
                 ListarCursosDisciplinas();
+                getchar();
+                getchar();
             }
         }
         if (aluno.regime.perm.MenuDisciplinas){
