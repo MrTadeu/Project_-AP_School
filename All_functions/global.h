@@ -113,6 +113,7 @@ void ListarCursos();
 void CriarCurso();
 void EditarCursos();
 void RemoverCursos();
+void realocarMatriz(int idCurso);
 //--------------------------------------------
 int CheckIFDisciplinaExiste(int id);
 int CheckIFDisciplinaExisteNome(char *name);

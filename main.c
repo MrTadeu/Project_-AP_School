@@ -25,6 +25,16 @@ void readData();
 
 
 void main(){
+    readData(); 
+    /* importDataTxtBin();  */
+    /* criardisciplinas();   */  
+    EditarCursos();
+    EditarDisciplina();
+    ListarCursosDisciplinas();
+    getchar();
+    getchar();
+
+
     if (folderExists("data/bin")){ //Pasta bin existe!
         if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
             printc("[red]Error[/red] Ficheiros não existem.\n\n");
