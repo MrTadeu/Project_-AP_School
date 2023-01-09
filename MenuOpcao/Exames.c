@@ -218,7 +218,7 @@ void saveBinExames(){
     
     int i;
     FILE *fp;
-    fp = fopen("exames.bin", "wb");  // ID do exame, ID da disciplina, ID da sala, ID do professor, ID do regime, dia, mes, hora, minuto
+    fp = fopen("data/exames.bin", "wb");  // ID do exame, ID da disciplina, ID da sala, ID do professor, ID do regime, dia, mes, hora, minuto
     for (i = 0; i < n_exames; i++){
         fwrite(&exame[i].id, sizeof(Exames), 1, fp);
         fwrite(&exame[i].disciplina, sizeof(Exames), 1, fp);
@@ -242,7 +242,7 @@ void readBinExames()
     exame = malloc(sizeof(Exames));
     int i;
     FILE *fp;
-    fp = fopen("exames.bin", "rb"); 
+    fp = fopen("data/exames.bin", "rb"); 
     for(i=0;;i++){
         if(fread(&exame[i].id, sizeof(Exames), 1, fp) != 1)break;
         exame = realloc(exame, sizeof(Exames)*(i+1));
