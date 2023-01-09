@@ -14,14 +14,12 @@ extern int n_disciplinas, n_courses, n_alunos, n_professores;
 
 void ListarDisciplinas()
 {
-    printf("Disciplinas --> \n");
+    printc("\n[green]Disciplinas:\n\n[/green]");
     for(int i=0;i<n_disciplinas;i++)
     {
-       printc("\t[green]%d[/green] - %s", disciplinas[i].id, disciplinas[i].name);
-        if(i%5 == 0 && i != 0)
-            printf("\n");
+       printc("\t[green]Id:[/green] %d \t[green]Nome:[/green] %s\n", disciplinas[i].id, disciplinas[i].name);
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 void ListarPropriasDisciplinas()
@@ -165,17 +163,16 @@ void ListarCursosDisciplinas()
     }
 }
 
-/* void CriarCurso()
+void CriarCurso()
 {   
     char TmpNameCurso[15], TmpNameDisciplina[15];
     int TmpIdDiretor;
-    n_courses++;
-    printc("\n\n\t[green]Insira o nome do novo curso:[/green] ");
+    printf("**************************************************\n");
+    printc("************        [blue]Criar Curso[/blue]       ************\n");
+    printf("**************************************************\n");
+    printc("\n[green]Nome do novo curso:[/green] ");
     scanf("%s", TmpNameCurso);
     uppercase(TmpNameCurso);
-    printf("ola");
-    printf("%d", CheckIFCursoExisteNome(TmpNameCurso));
-
     if(CheckIFCursoExisteNome(TmpNameCurso) != -1){
         printc("\n\n\t[red]Este curso ja existe[/red]\n\n");
         do{
@@ -184,28 +181,28 @@ void ListarCursosDisciplinas()
             uppercase(TmpNameCurso);
         } while (CheckIFCursoExisteNome(TmpNameCurso) != -1); 
     }
-    courses = realloc(courses, (n_courses) * sizeof(courseStruct));
-    courses[n_courses-1].id = n_courses;
-    courses[n_courses-1].name = realloc(courses[n_courses-1].name, strlen(TmpNameCurso + 1));
-    strcpy(courses[n_courses-1].name, TmpNameCurso);
-    courses[n_courses-1].AnoDisciplina = malloc(3);
+    courses = realloc(courses, (n_courses+1) * sizeof(courseStruct));
+    courses[n_courses].id = n_courses;
+    courses[n_courses].name = realloc(courses[n_courses-1].name, strlen(TmpNameCurso + 1));
+    strcpy(courses[n_courses].name, TmpNameCurso);
+    courses[n_courses].AnoDisciplina = malloc(3);
     for(int i=0; i<3; i++)   
     { 
-        printc("\n\n\tQuantas disciplinas tem %d  o curso?",i+1);
-        scanf("%d", &courses[n_courses-1].num_disciplinas[i]);
-        if(courses[n_courses-1].num_disciplinas[i] >= n_disciplinas){
-                printc("\n\n\t[red]Numero de disciplinas invalido[/red]\n\n");
+        printc("\nQuantas disciplinas tem %d ano o curso? ",i+1);
+        scanf("%d", &courses[n_courses].num_disciplinas[i]);
+        if(courses[n_courses].num_disciplinas[i] >= n_disciplinas){
+                printc("\n\t[red]Numero de disciplinas invalido[/red]\n");
                 do{
-                    printf("\n\nInsira o numero de disciplinas do %d ano: ", i+1);
-                    scanf("%d", &courses[n_courses-1].num_disciplinas[i]);
-                }while(courses[n_courses-1].num_disciplinas[i] >= n_disciplinas);
+                    printf("\nInsira o numero de disciplinas do %d ano: ", i+1);
+                    scanf("%d", &courses[n_courses].num_disciplinas[i]);
+                }while(courses[n_courses].num_disciplinas[i] >= n_disciplinas);
             }
-        courses[n_courses-1].AnoDisciplina[i] = malloc(courses[n_courses-1].num_disciplinas[i]);
-        printf("Insira as %d disciplinas do %d ano: ", courses[n_courses-1].num_disciplinas[i], i+1);
-        printc("\n\n\t[green]Insira o nome da disciplina do %d ano:[/green] ", i+1);
-        for(int j=0; j<courses[n_courses-1].num_disciplinas[i]; j++)
-        {
-            printf("Disciplina %d: ", j+1);
+        courses[n_courses].AnoDisciplina[i] = malloc(courses[n_courses].num_disciplinas[i]);
+        ListarDisciplinas();
+        printc("\n[green]Disciplinas do %d ano:[/green] ", i+1);
+        for(int j=0; j<courses[n_courses].num_disciplinas[i]; j++)
+        {   
+            printf("\n\nNome da disciplina %d: ", j+1);
             scanf("%s", TmpNameDisciplina);
             uppercase(TmpNameDisciplina);
             if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
@@ -216,12 +213,12 @@ void ListarCursosDisciplinas()
                     uppercase(TmpNameDisciplina);
                 } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
             }
-            courses[n_courses-1].AnoDisciplina[i][j] = malloc(strlen(TmpNameDisciplina) + 1);
-            strcpy(courses[n_courses-1].AnoDisciplina[i][j], TmpNameDisciplina);
+            courses[n_courses].AnoDisciplina[i][j] = malloc(strlen(TmpNameDisciplina) + 1);
+            strcpy(courses[n_courses].AnoDisciplina[i][j], TmpNameDisciplina);
         }
     }
     
-    printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
+    printc("\n\n[green]Insira o ID do diretor deste curso:[/green] ");
     scanf("%d", &TmpIdDiretor);
     if(CheckIFProfessor(TmpIdDiretor) == -1){
         printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");
@@ -230,10 +227,12 @@ void ListarCursosDisciplinas()
             scanf("%d", &TmpIdDiretor);
         } while (CheckIFProfessor(TmpIdDiretor) == -1); 
     }
-    courses[n_courses-1].IdDiretor = TmpIdDiretor;
+    courses[n_courses].IdDiretor = TmpIdDiretor;
+    n_courses++;
     SaveBinCursosDisciplina();
+    printc("\n\n\t[green]Curso criado com sucesso![/green]");
 }
- */
+
 void EditarCursos(){
 
     int id, TmpIdDiretor;

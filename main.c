@@ -28,9 +28,7 @@ void main(){
     readData(); 
     /* importDataTxtBin();  */
     /* criardisciplinas();   */  
-    EditarCursos();
-    EditarDisciplina();
-    ListarCursosDisciplinas();
+    CriarCurso();        
     getchar();
     getchar();
 
