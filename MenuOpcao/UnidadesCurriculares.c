@@ -472,7 +472,7 @@ int CheckIFDisciplinaExisteNome(char *name)
 }
 
 int CheckIFCursoExiste(int id)
-{   int flag = 0;
+{
     for(int i = 0; i<n_courses; i++){
         if(courses[i].id == id)
             return i;

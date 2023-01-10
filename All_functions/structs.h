@@ -67,7 +67,7 @@ typedef struct{
 }tempoExames;
 
 typedef struct{
-    int max_inscritos, *ids_inscritos, professor, sala, regime, id, curso, inscritos;
-    char *disciplina;
+    int max_inscritos, *ids_inscritos, professor, salaId, regime, id, curso, inscritos;
+    char *disciplina, *SalaNome;
     tempoExames data;
 }Exames;
