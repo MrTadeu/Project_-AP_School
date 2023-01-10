@@ -52,6 +52,7 @@ int checkIfRegimeExists(int id);
 //permissions.c
 void saveAndSetPermissionsBinByTxt();
 void readBinPermissions();
+void saveBinPermissions();
 PermissionsType getPermissionsByID(int id);
 
 //menus.c
