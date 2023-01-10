@@ -79,21 +79,19 @@ void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
     fclose(file);
 }
 
-permissionFileStruct* readBinPermissions(){
+void readBinPermissions(){
     FILE *file = fopen("data/bin/permission.bin", "rb");
-    permissionFileStruct *permFile = malloc(sizeof(permissionFileStruct));
+    perms_file = malloc(sizeof(permissionFileStruct));
     if (file == NULL){
         printc("\n\n\tImpossivel abrir Ficheiro [red]permission.bin[/red]\n\n");
-        return NULL;
     }
     else{
         int i = 0;
-        while (fread(&permFile[i], sizeof(permissionFileStruct), 1, file)){
+        while (fread(&perms_file[i], sizeof(permissionFileStruct), 1, file)){
             i++;
-            permFile = realloc(permFile, sizeof(permissionFileStruct)*((i)+1));
+            perms_file = realloc(perms_file, sizeof(permissionFileStruct)*((i)+1));
         }
         fclose(file);
-        return permFile;
     }
 }
 

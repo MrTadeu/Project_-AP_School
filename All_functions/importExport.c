@@ -7,7 +7,7 @@ extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
 extern AlunoFileStruct *alunosFile; 
-extern int n_alunos, n_regimes, n_courses, n_disciplinas, n_salas, n_professores;
+extern int n_alunos, n_regimes, n_courses, n_disciplinas, n_salas, n_professores, n_exames;
 
 
 void importExportData(){
@@ -56,7 +56,7 @@ void importDataTxtBin(){
         remove("data/bin/courses.bin");
         remove("data/bin/alunos.bin");
         remove("data/bin/permission.bin");
-        /* remove("data/bin/disciplinas.bin"); */
+        remove("data/bin/disciplinas.bin");
         remove("data/bin/cursosdisciplinas.bin");
 
         //LIMPAR n_alunos, n_regimes, n_courses
@@ -66,6 +66,8 @@ void importDataTxtBin(){
         n_disciplinas = 0;
         n_salas = 0;
         n_professores = 0;
+        n_exames = 0;
+
 
         //LER TXT ALUNOS
         alunosFile = getTxt(&n_alunos);

@@ -25,7 +25,7 @@ void readData();
 
 
 void main(){
-    if (folderExists("data/bin")){ //Pasta bin existe!
+    /* if (folderExists("data/bin")){ //Pasta bin existe!
         if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
             printc("[red]Error[/red] Ficheiros não existem.\n\n");
 
@@ -54,8 +54,9 @@ void main(){
         printf("Enter para continuar...\n");
 
         MenuFilesNovos();
-    }
+    } */
     readData();
+    /* saveBinAlunosFix(); */
 
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
@@ -90,9 +91,9 @@ void main(){
 }
 
 void readData(){
-    alunos = readBinAlunos();
-    regimes = readBinRegimes();
-    perms_file = readBinPermissions();
+    readBinAlunos();
+    readBinRegimes();
+    readBinPermissions();
     ReadBinDisciplinas();
     ReadBinCursosDisciplina(); 
     readBinSalas();

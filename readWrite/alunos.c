@@ -67,13 +67,12 @@ void saveBinAlunosFix(){
     fclose(file);
 }
 
-AlunoStruct *readBinAlunos(){
-    AlunoStruct *alunos = malloc(sizeof(AlunoStruct));
+void readBinAlunos(){
+    alunos = malloc(sizeof(AlunoStruct));
     int i;
     FILE *file = fopen("data/bin/alunos.bin","rb");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
-        return NULL;
     }
     else{
         for (i = 0;; i++){
@@ -101,7 +100,6 @@ AlunoStruct *readBinAlunos(){
         }
         n_alunos = i-1;
         fclose(file);
-        return alunos;
     }
 }
 

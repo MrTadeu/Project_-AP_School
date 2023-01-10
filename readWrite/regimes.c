@@ -45,13 +45,12 @@ void saveBinRegimes(){
     fclose(file);
 }
 
-regimeStruct *readBinRegimes(){
-    regimeStruct *regimes = malloc(sizeof(regimeStruct));
+void readBinRegimes(){
+    regimes = malloc(sizeof(regimeStruct));
     int i;
     FILE *file = fopen("data/bin/regimes.bin","rb");
     if (!file) {
         printc("\n\n\tImpossivel abrir Ficheiro [red]regimes.bin[/red] \n\n");
-        return NULL;
     }
     else{
         for (i = 0;; i++){
@@ -64,9 +63,8 @@ regimeStruct *readBinRegimes(){
             fread(regimes[i].name, regimeLen, 1, file);
         }
         n_regimes = i-1;
-        fclose(file);
-        return regimes;
-    }   
+    }
+    fclose(file);
 }
 
 regimeStruct getRegimeByID(int id){
