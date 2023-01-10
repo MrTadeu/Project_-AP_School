@@ -62,13 +62,13 @@ void readBinRegimes(){
             regimes[i].name = malloc(regimeLen);
             fread(regimes[i].name, regimeLen, 1, file);
         }
-        n_regimes = i-1;
+        n_regimes = i;
     }
     fclose(file);
 }
 
 regimeStruct getRegimeByID(int id){
-    for (int i = 0; i <= n_regimes; i++){
+    for (int i = 0; i < n_regimes; i++){
         if (regimes[i].id == id){
             return regimes[i];
         }
@@ -82,13 +82,13 @@ regimeStruct getRegimeByID(int id){
 
 void listarRegimes(){
     printf("\nListagem de todos os Regimes:\n");
-    for (int i = 0; i <= n_regimes; i++){
+    for (int i = 0; i < n_regimes; i++){
         printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
     }
 }
 
 int checkIfRegimeExists(int id){
-    for (int i = 0; i <= n_regimes; i++){
+    for (int i = 0; i < n_regimes; i++){
         if (regimes[i].id == id){
             return 1;
         }

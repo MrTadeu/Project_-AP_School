@@ -23,8 +23,8 @@ int isletter_cheker(char *str);
 void timeNow();
 
 //alunosTxt.c
-AlunoFileStruct* getTxt(int *n_alunos);
-AlunoStruct *ConvertAluno(AlunoFileStruct *alunosFile, int n_alunos, regimeStruct *regimes, int n_regimes, courseStruct *courses, int n_courses);
+AlunoFileStruct* getTxt();
+void ConvertAluno(AlunoFileStruct *alunosFile);
 
 //alunos.c
 void saveBinAlunos();
@@ -50,7 +50,7 @@ void listarRegimes();
 int checkIfRegimeExists(int id);
 
 //permissions.c
-void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes);
+void saveAndSetPermissionsBinByTxt();
 void readBinPermissions();
 PermissionsType getPermissionsByID(int id);
 

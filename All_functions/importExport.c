@@ -52,12 +52,13 @@ void importDataTxtBin(){
     //#VALIDACAO SE É UM OU ZERO
     if(op == 1){
         //LIMPAR BINARIOS
-        remove("data/bin/regimes.bin");
-        remove("data/bin/courses.bin");
         remove("data/bin/alunos.bin");
-        remove("data/bin/permission.bin");
-        remove("data/bin/disciplinas.bin");
         remove("data/bin/cursosdisciplinas.bin");
+        remove("data/bin/disciplinas.bin");
+        remove("data/bin/permission.bin");
+        remove("data/bin/professores.bin");
+        remove("data/bin/regimes.bin");
+        remove("data/bin/salas.bin");
 
         //LIMPAR n_alunos, n_regimes, n_courses
         n_alunos = 0;
@@ -70,7 +71,7 @@ void importDataTxtBin(){
 
 
         //LER TXT ALUNOS
-        alunosFile = getTxt(&n_alunos);
+        alunosFile = getTxt();
         if(alunosFile == NULL){
             return;
         }
@@ -84,17 +85,15 @@ void importDataTxtBin(){
 
         //LER ARRAY alunosFile, regimes, courses E GUARDAR NO FORMATO DE AlunoStruct
         getAllCourses(alunosFile);
-        alunos = ConvertAluno(alunosFile, n_alunos, regimes, n_regimes, courses, n_courses);
+        ConvertAluno(alunosFile);
         //GUARDAR ALUNOS (AlunoStruct) EM BINARIO
         saveBinAlunos();
 
         criardisciplinas();
         InitCursos();
 
-        InitSalas();
-        InitExame();
 
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
-        saveAndSetPermissionsBinByTxt(regimes, n_regimes);
+        saveAndSetPermissionsBinByTxt();
     }
 }

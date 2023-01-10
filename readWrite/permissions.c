@@ -4,8 +4,10 @@
 #include "../All_functions/global.h"
 
 extern permissionFileStruct *perms_file;
+extern regimeStruct *regimes;
+extern int n_regimes;
 
-void saveAndSetPermissionsBinByTxt(regimeStruct *regimes, int n_regimes){
+void saveAndSetPermissionsBinByTxt(){
     FILE *file = fopen("data/bin/permission.bin", "ab");
     permissionFileStruct permFile;
     if (file == NULL){

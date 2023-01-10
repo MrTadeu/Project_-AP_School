@@ -75,7 +75,7 @@ void readBinProfessores(){
     int i;
     FILE *file = fopen("data/bin/professores.bin","rb");
     if (!file) {
-        printc("\n\n\tImpossivel abrir Ficheiro [red]professores.bin (1)[/red] \n\n");
+        printc("\n\n\tImpossivel abrir Ficheiro [red]professores.bin[/red] \n\n");
         return;
     }
     else{
@@ -107,7 +107,7 @@ void saveBinProfessor(){
     FILE *file;
     file = fopen("data/bin/professores.bin", "wb");
     if(!file){
-        printc("\n\n\tErro ao abrir o arquivo [red]professores.bin (2)[/red]");
+        printc("\n\n\tErro ao abrir o arquivo [red]professores.bin[/red]");
         return;
     }
     printf("A guardar ficheiro [red]professores.bin[/red]... \n");
