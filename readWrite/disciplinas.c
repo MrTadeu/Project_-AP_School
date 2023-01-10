@@ -75,15 +75,19 @@ void ReadBinDisciplinas(){
 }
 
 void criardisciplinas()
-{
-    //printc("[green]Criar Disciplinas[/green]");
-    printf("\nQuantas disciplinas quer criar? ");
-    int n;
-    scanf("%d", &n);
-    for(int i=0; i<n; i++)
-    {
+{   int n = 0;
+    //printc("[green]Criação de Disciplinas[/green]");
+    while(n<6){
+        printf("\nQuantas disciplinas quer criar? (minimo 6 -> 1 por semestre):");
+        scanf("%d", &n);
+        if(n<6)
+            printc("\n[red]Numero de disciplinas invalido[/red]");
+    }
+    for(int i=0; i<n; i++){   
         char nameDisciplina[10], op;
-        printc("\n\n\t[green]Insira a sigla da nova disciplina:[/green] ");
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+        ListarDisciplinas();
+        printc("\n[green]Insira a sigla da nova disciplina:[/green] ");
         scanf("%s", nameDisciplina);
         uppercase(nameDisciplina);
         if(CheckIFDisciplinaExisteNome(nameDisciplina) != -1){
@@ -99,7 +103,6 @@ void criardisciplinas()
         disciplinas[n_disciplinas].name = malloc(strlen(nameDisciplina)+1);
         strcpy(disciplinas[n_disciplinas].name, nameDisciplina); 
         n_disciplinas++;
-        ListarDisciplinas();
         SaveBinDisciplinas();
     }
 }

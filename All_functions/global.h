@@ -76,12 +76,14 @@ void importExportData();
 void importDataTxtBin();
 
 //salas.c
+void InitSalas();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)
+void criarSalainit();//Apenas necessario primeira vez
 void criarSala();
 void listarSalas();
 void readBinSalas();
 void editarSala();
 void removerSala();
-int ChekeIFsalaExist(char *nomeSala, int nSala);
+int CheckIFsalaExist(char *nomeSala, int nSala);
 void saveBinSalas();
 
 //disciplinas.c
@@ -152,7 +154,7 @@ void apagarAluno();
 
 //exames.c
 void criarExame();
-void InitExame();
+void zerarExame();
 void listarExames();
 void SalasOcupada();
 void mostrarSalasLivres();

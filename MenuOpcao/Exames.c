@@ -22,6 +22,8 @@ extern int n_exames, n_salas, n_alunos;
 void criarExame(){
     exame = realloc(exame, sizeof(Exames)*(n_exames+1));
 
+    zerarExame(n_exames);
+    
     printf("Qual é o número máximo de inscritos? ");
     scanf("%d", &exame[n_exames].max_inscritos);
     exame[n_exames].ids_inscritos = malloc(sizeof(int)*exame[n_exames].max_inscritos);
@@ -52,21 +54,18 @@ void criarExame(){
     saveBinExames();
 }
 
-void InitExame()
+void zerarExame(int i)
 {
-    for(int i=0;i<n_exames;i++)
-    {
-        exame[i].max_inscritos = 0;
-        exame[i].disciplina = 0;
-        exame[i].professor = 0;
-        exame[i].sala = 0;
-        exame[i].regime = 0;
-        exame[i].id = 0;
-        exame[i].data.dia = 0;
-        exame[i].data.mes = 0;
-        exame[i].data.hora = 0;
-        exame[i].data.minuto = 0;
-    }
+    exame[i].max_inscritos = 0;
+    exame[i].disciplina = 0;
+    exame[i].professor = 0;
+    exame[i].sala = 0;
+    exame[i].regime = 0;
+    exame[i].id = 0;
+    exame[i].data.dia = 0;
+    exame[i].data.mes = 0;
+    exame[i].data.hora = 0;
+    exame[i].data.minuto = 0;
 }
 
 void listarExames(){
@@ -154,8 +153,7 @@ void listarInscritos(int id){
                         }
                     }   
                 }
-            }
-                
+            }    
         }
     }
 }
@@ -218,7 +216,7 @@ void saveBinExames(){
     
     int i;
     FILE *fp;
-    fp = fopen("data/exames.bin", "wb");  // ID do exame, ID da disciplina, ID da sala, ID do professor, ID do regime, dia, mes, hora, minuto
+    fp = fopen("data/bin/exames.bin", "wb");  // ID do exame, ID da disciplina, ID da sala, ID do professor, ID do regime, dia, mes, hora, minuto
     for (i = 0; i < n_exames; i++){
         fwrite(&exame[i].id, sizeof(Exames), 1, fp);
         fwrite(&exame[i].disciplina, sizeof(Exames), 1, fp);
@@ -242,7 +240,7 @@ void readBinExames()
     exame = malloc(sizeof(Exames));
     int i;
     FILE *fp;
-    fp = fopen("data/exames.bin", "rb"); 
+    fp = fopen("data/bin/exames.bin", "rb"); 
     for(i=0;;i++){
         if(fread(&exame[i].id, sizeof(Exames), 1, fp) != 1)break;
         exame = realloc(exame, sizeof(Exames)*(i+1));

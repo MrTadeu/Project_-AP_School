@@ -43,8 +43,9 @@ int InitCursos() { //Apenas usado pela primeira vez
     char TmpNameDisciplina[15];
     int  TmpIdDiretor;
     for(int i=0; i<n_courses; i++){   
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
         ListarDisciplinas();
-        printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
+        printc("\n[green]Curso: [/green]%s\n",  courses[i].name);
             listarProfessor();
             printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
             scanf("%d", &TmpIdDiretor);
@@ -60,7 +61,8 @@ int InitCursos() { //Apenas usado pela primeira vez
             printf("Insira o numero de disciplinas do %d ano: ", j+1);
             scanf("%d", &courses[i].num_disciplinas[j]);
             if(courses[i].num_disciplinas[j] >= n_disciplinas){
-                printc("\n\n\t[red]Numero de disciplinas invalido[/red]\n\n");
+                printc("\n\n\t[red]Numero de disciplinas invalido  -->  [/red]tem de ser menor do que o número total de disciplinas\n");
+                printf("\\t[red]Numero de disciplinas total: %d[/red]\n\n", n_disciplinas);
                 do{
                     printf("\n\nInsira o numero de disciplinas do %d ano: ", j+1);
                     scanf("%d", &courses[i].num_disciplinas[j]);

@@ -90,7 +90,9 @@ void importDataTxtBin(){
 
         criardisciplinas();
         InitCursos();
-        
+
+        InitSalas();
+        InitExame();
 
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
         saveAndSetPermissionsBinByTxt(regimes, n_regimes);

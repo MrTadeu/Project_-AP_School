@@ -134,9 +134,9 @@ void listarProfessor(){
     printc("************        [blue]Professores[/blue]       ************\n");
     printf("**************************************************\n");
 
-    printc("Numero de professores: [red]%d[/red]\n", n_professores);
+    printc("\tNumero de professores: [red]%d[/red]\n", n_professores);
     for (int i = 0; i < n_professores; i++){
-        printf("ID: %d Nome: %s\n", professores[i].id, professores[i].nomeProfessor);
+        printc("\t[green]ID:[/green] %d [green]Nome:[/green] %s\n", professores[i].id, professores[i].nomeProfessor);
     }
 }
 

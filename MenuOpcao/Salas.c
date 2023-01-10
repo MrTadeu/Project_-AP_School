@@ -13,6 +13,82 @@
 extern SalaStruct *salas; //extern para poder usar a variavel global. Verificar se está a funcionar corretamente com o resto do programa
 extern int n_salas;
 
+void InitSalas(){
+    int n;
+    printf("**************************************************\n");
+    printc("************        [blue]Criar Salas[/blue]       ************\n");
+    printf("**************************************************\n");
+    printf("Quantas salas quer criar? ");
+    scanf("%d", &n);
+    for(int i = 0;i<n;i++){
+        criarSalainit();
+    }
+}
+
+void criarSalainit(){
+    salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
+    salas[n_salas].nomeSala = malloc(100);
+    int id = salas[n_salas-1].id + 1;
+    if (n_salas == 0){
+        id = 1;
+    }
+    salas[n_salas].id = id;
+
+    char numeroCadeirasStringImput[1000];
+    char numeroSalaStringImput[1000];
+    do{
+        do{
+            printf("Qual o nome da sala? ");
+            scanf(" %[^\n]", salas[n_salas].nomeSala);
+            if (isdigit_cheker(salas[n_salas].nomeSala) == 1){
+                printc("[red]Somente letras e espaços são permitidos[/red]\n");
+            }
+            
+        } while (isdigit_cheker(salas[n_salas].nomeSala) == 1);
+        capitalize(salas[n_salas].nomeSala);
+        salas[n_salas].nomeSala = realloc(salas[n_salas].nomeSala, strlen(salas[n_salas].nomeSala) + 1);
+
+        do
+        {
+            
+            printf("Qual o numero da sala? ");
+            scanf("%s", numeroSalaStringImput);
+            if (isletter_cheker(numeroSalaStringImput) == 1){
+                printc("[red]Somente numeros são permitidos[/red]\n");
+            }
+            
+        } while(isletter_cheker(numeroSalaStringImput) == 1);
+        salas[n_salas].numeroSala = atoi(numeroSalaStringImput);
+
+        if(CheckIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
+            printc("[red]Sala já existe[/red]\n");
+        }
+    }while(CheckIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1);
+
+    
+
+    do{
+        printf("Qual o numero de cadeiras? ");
+        scanf("%s", numeroCadeirasStringImput);
+        if (isletter_cheker(numeroCadeirasStringImput) == 1){
+            printc("[red]Somente numeros são permitidos[/red]\n");
+        }
+    } while (isletter_cheker(numeroCadeirasStringImput) == 1);
+    salas[n_salas].numeroCadeiras = atoi(numeroCadeirasStringImput);
+
+    printf("Sala criada com sucesso! ID: %d\n", salas[n_salas].id);
+    n_salas++;
+    saveBinSalas();
+}
+
+int CheckIFsalaExist(char *nomeSala, int nSala){
+    for(int i = 0; i < n_salas; i++){
+        if(strcmp(salas[i].nomeSala, nomeSala) == 0 && salas[i].numeroSala == nSala){
+            return 1;
+        }
+    }
+    return 0;
+}
 void criarSala(){ // #VALIDAR
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
@@ -53,10 +129,10 @@ void criarSala(){ // #VALIDAR
         } while(isletter_cheker(numeroSalaStringImput) == 1);
         salas[n_salas].numeroSala = atoi(numeroSalaStringImput);
 
-        if(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
+        if(CheckIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1){
             printc("[red]Sala já existe[/red]\n");
         }
-    }while(ChekeIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1);
+    }while(CheckIFsalaExist(salas[n_salas].nomeSala, salas[n_salas].numeroSala) == 1);
 
     
 
@@ -72,15 +148,6 @@ void criarSala(){ // #VALIDAR
     printf("Sala criada com sucesso! ID: %d\n", salas[n_salas].id);
     n_salas++;
     saveBinSalas();
-}
-
-int ChekeIFsalaExist(char *nomeSala, int nSala){
-    for(int i = 0; i < n_salas; i++){
-        if(strcmp(salas[i].nomeSala, nomeSala) == 0 && salas[i].numeroSala == nSala){
-            return 1;
-        }
-    }
-    return 0;
 }
 
 void saveBinSalas(){
@@ -183,11 +250,11 @@ void editarSala(){
                     }
                 } while (isletter_cheker(numeroSalaStringImput) == 1);
 
-                if (ChekeIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1){
+                if (CheckIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1){
                     printc("[red]Sala ja existe[/red]\n");
                 }
 
-            }while (ChekeIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1);
+            }while (CheckIFsalaExist(salas[i].nomeSala, atoi(numeroSalaStringImput)) == 1);
             salas[i].numeroSala = atoi(numeroSalaStringImput);
 
             do{
