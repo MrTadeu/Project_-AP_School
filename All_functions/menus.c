@@ -563,3 +563,92 @@ void MenuSalas(){
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     } while (opcao != 0);
 }
+
+
+//MENU REGIMES: regimes.c
+void MenuRegimes(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    int opcao, i = 1;
+    do{
+        i = 0;
+        printc("**************************************************\n");
+        printc("**************** [blue]Menu Regimes[/blue] **************\n");
+        printc("**************************************************\n");
+        printf("**        %d -> Sair                             **\n", i++);
+        if(aluno.regime.perm.MenuAlunos){
+            printf("**        %d -> Listar Regimes                      **\n", i++);
+        }
+        if(aluno.regime.perm.MenuProfessor){
+            printf("**        %d -> Criar Regime                   **\n", i++);
+        }
+        if (aluno.regime.perm.MenuCursos){
+            printf("**        %d -> Editar Regime                      **\n", i++);
+        }
+        if (aluno.regime.perm.MenuRegimes){
+            printf("**        %d -> Remover Regime                    **\n", i++);
+        }
+        printc("**************************************************\n");
+        printc("Qual a opção que pretende?");
+        scanf("%d", &opcao);
+        int i = 1;
+
+        if (aluno.regime.perm.MenuAlunos){
+            if (opcao == i++){
+                listarRegimes();
+            }
+        }
+
+        if (aluno.regime.perm.MenuProfessor){
+            if (opcao == i++){
+                criarRegime();
+            }
+        }
+
+        if (aluno.regime.perm.MenuCursos){
+            if (opcao == i++){
+                editarRegimeMenu();
+            }
+        }
+        if (aluno.regime.perm.MenuRegimes){
+            if (opcao == i++){
+               removerRegime();
+            }
+        }
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    } while (opcao != 0);
+}
+
+void editarRegimeMenu(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    int opcao, i = 1;
+    do{
+        i = 0;
+        printc("**************************************************\n");
+        printc("**************** [blue]Menu Editar Regimes[/blue] **************\n");
+        printc("**************************************************\n");
+        printf("**        %d -> Sair                             **\n", i++);
+        if(aluno.regime.perm.MenuAlunos){
+            printf("**        %d -> Editar Nome Do Regime                    **\n", i++);
+        }
+        if(aluno.regime.perm.MenuProfessor){
+            printf("**        %d -> Editar Permissoes                   **\n", i++);
+        }
+        printc("**************************************************\n");
+        printc("Qual a opção que pretende?");
+        scanf("%d", &opcao);
+        int i = 1;
+
+        if (aluno.regime.perm.MenuAlunos){
+            if (opcao == i++){
+                editarNomeRegime();
+            }
+        }
+
+        if (aluno.regime.perm.MenuProfessor){
+            if (opcao == i++){
+                editarPermissoesRegime();
+            }
+        }
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    } while (opcao != 0);
+}

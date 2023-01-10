@@ -69,6 +69,8 @@ int menuEditAluno();
 void MenuSalas();
 void MenuProfessor();
 void MenuExames();
+void MenuRegimes();
+void editarRegimeMenu();
 
 //importExport.c
 void importExportData();
@@ -167,3 +169,9 @@ void vagaMais(int salaId, char *SalaNome);
 void vagaMenos(int salaId, char *SalaNome);
 void saveBinExames();
 void readBinExames();
+
+//regime.c on MenuOpcao
+void criarRegime();
+void editarNomeRegime();
+void editarPermissoesRegime();
+void removerRegime();
