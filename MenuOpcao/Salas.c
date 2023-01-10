@@ -281,18 +281,30 @@ void removerSala(){
     printf("**************************************************\n");
 
     int id;
-    printf("Qual ID da sala que deseja editar? ");
-    scanf("%d", &id);
-    for(int i = 0; i < n_salas; i++){
-        if(salas[i].id == id){
-            for(int j = i; j < n_salas; j++){
-                salas[j] = salas[j + 1];
-            }
-            n_salas--;
-            salas = realloc(salas, n_salas * sizeof(SalaStruct));
-            saveBinSalas();
-            readBinSalas();
+    SalasOcupada();
+    do{
+        printf("Qual ID da sala que deseja remover? ");
+        scanf("%d", &id);
+        if (CheckIFsalaExist(salas[id].nomeSala, salas[id].numeroSala) == 0){
+            printc("[red]Sala não existe[/red]\n");
         }
-    }
-    
+        else{
+            if(salas[id].ocupada == 1){
+                printc("[red]Sala esta ocupada[/red]\n");
+            }
+            else{
+                for(int i = 0; i < n_salas; i++){
+                    if(salas[i].id == id){
+                        for(int j = i; j < n_salas; j++){
+                        salas[j] = salas[j + 1];
+                    }
+                    n_salas--;
+                    salas = realloc(salas, n_salas * sizeof(SalaStruct));
+                    saveBinSalas();
+                    readBinSalas();
+                    }      
+                }
+            }
+        }
+    }while(salas[id].ocupada == 1);
 }
