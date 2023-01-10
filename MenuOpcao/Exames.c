@@ -23,7 +23,6 @@ extern int n_exames, n_salas, n_alunos, n_courses;
 
 void criarExame(){
     exame = realloc(exame, sizeof(Exames)*(n_exames+1));
-    n_exames++;
     zerarExame(n_exames);
     exame[n_exames].SalaNome = malloc(100);
 
@@ -68,7 +67,6 @@ void criarExame(){
     
     SalasOcupada();
     mostrarSalasLivres();
-    listarSalas();
     printf("Para que sala pretende criar um exame?\n");
     printf("Insira o nome da sala? ");
     scanf("%s", exame[n_exames].SalaNome);
@@ -84,6 +82,7 @@ void criarExame(){
     printf("Qual a hora do exame (formato HH MM)? ");
     scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
     
+    n_exames++;
     saveBinExames();
 }
 
@@ -123,13 +122,9 @@ void listarExames(){
 
 void SalasOcupada()
 {
-    printf("n_exames: %d\n",n_exames);
-    printf("n_salas: %d\n",n_salas);
-    for(int i=0;i<n_exames;i++){
+    for(int i=0;i<n_exames+1;i++){
         for(int j=0;j<n_salas;j++){
-            printf("salaid: %d\t salanumero = %d\t salanome = %s nome sala= %s\n",exame[i].salaId, salas[j].numeroSala, exame[i].SalaNome, salas[j].nomeSala);
         if(exame[i].salaId == salas[j].numeroSala && strcmp(exame[i].SalaNome , salas[j].nomeSala) == 0){
-            printf("%d",salas[j].id);
             salas[j].ocupada = 1;
             salas[j].id_exame = exame[i].id;
         }
@@ -138,7 +133,7 @@ void SalasOcupada()
 }
 
 void mostrarSalasLivres(){
-    printc("[blue] Salas Livres [/blue]\n");
+    printc("[blue]Salas Livres: [/blue]\n");
         for(int i = 0; i< n_salas;i++){
             if(salas[i].ocupada == 0)
             printf("Nome: %s\tID: %d\tCapacidade: %d",salas[i].nomeSala, salas[i].numeroSala, salas[i].numeroCadeiras);

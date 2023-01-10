@@ -168,6 +168,10 @@ void saveBinSalas(){
         fwrite(&salas[i].numeroSala, sizeof(int), 1, file);
 
         fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
+
+        fwrite(&salas[i].ocupada, sizeof(int), 1, file);
+
+        fwrite(&salas[i].id_exame, sizeof(int), 1, file);
     }
     fclose(file);
 }
@@ -217,6 +221,10 @@ void readBinSalas(){
             fread(&salas[i].numeroSala, sizeof(int), 1, file);
 
             fread(&salas[i].numeroCadeiras, sizeof(int), 1, file);
+
+            fread(&salas[i].ocupada, sizeof(int), 1, file);
+
+            fread(&salas[i].id_exame, sizeof(int), 1, file);
         }
         n_salas = i;
         fclose(file);
@@ -280,9 +288,7 @@ void removerSala(){
     printf("**************************************************\n");
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
-
     int id;
-    SalasOcupada();
     mostrarSalasLivres();
     do{
         printf("Qual ID da sala que deseja remover? ");
