@@ -33,7 +33,7 @@ void criarSalainit(){
         id = 1;
     }
     salas[n_salas].id = id;
-
+    salas[n_salas].id_exame = 0;
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
     do{
@@ -98,6 +98,7 @@ void criarSala(){ // #VALIDAR
         id = 1;
     }
     salas[n_salas].id = id;
+    salas[n_salas].id_exame = 0;
 
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
@@ -282,6 +283,7 @@ void removerSala(){
 
     int id;
     SalasOcupada();
+    mostrarSalasLivres();
     do{
         printf("Qual ID da sala que deseja remover? ");
         scanf("%d", &id);

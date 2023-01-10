@@ -23,6 +23,7 @@ extern int n_exames, n_salas, n_alunos, n_courses;
 
 void criarExame(){
     exame = realloc(exame, sizeof(Exames)*(n_exames+1));
+    n_exames++;
     zerarExame(n_exames);
     exame[n_exames].SalaNome = malloc(100);
 
@@ -33,7 +34,8 @@ void criarExame(){
     scanf("%d", &exame[n_exames].max_inscritos);
     exame[n_exames].ids_inscritos = malloc(sizeof(int)*exame[n_exames].max_inscritos);
     for(int i=0;i<exame[n_exames].max_inscritos;i++)
-        exame[n_exames].ids_inscritos[i] = 0;
+        exame[n_exames].ids_inscritos[i] = 1; 
+        
 
     do{
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -64,15 +66,17 @@ void criarExame(){
         }
     }while(CheckIFCursoExiste(exame[n_exames].curso) == -1 || CheckDiscInCurso(exame[n_exames].curso, n_exames) == -1);
     
-    /* SalasOcupada();
-    mostrarSalasLivres(); */
+    SalasOcupada();
+    mostrarSalasLivres();
+    listarSalas();
     printf("Para que sala pretende criar um exame?\n");
     printf("Insira o nome da sala? ");
     scanf("%s", exame[n_exames].SalaNome);
     exame[n_exames].SalaNome = realloc(exame[n_exames].SalaNome, (strlen(exame[n_exames].SalaNome)+1));
+    uppercase(exame[n_exames].SalaNome);
     printf("Insira o número da sala? ");
     scanf("%d", &exame[n_exames].salaId);
-    /* SalasOcupada(); */
+    SalasOcupada();
     
     printf("Qual a data do exame (formato DD MM)? ");
     scanf("%d %d", &exame[n_exames].data.dia, &exame[n_exames].data.mes);
@@ -80,7 +84,6 @@ void criarExame(){
     printf("Qual a hora do exame (formato HH MM)? ");
     scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
     
-    n_exames++;
     saveBinExames();
 }
 
@@ -120,11 +123,17 @@ void listarExames(){
 
 void SalasOcupada()
 {
+    printf("n_exames: %d\n",n_exames);
+    printf("n_salas: %d\n",n_salas);
     for(int i=0;i<n_exames;i++){
         for(int j=0;j<n_salas;j++){
-        if(exame[i].salaId != 0)
-        salas[j].ocupada = 1;
+            printf("salaid: %d\t salanumero = %d\t salanome = %s nome sala= %s\n",exame[i].salaId, salas[j].numeroSala, exame[i].SalaNome, salas[j].nomeSala);
+        if(exame[i].salaId == salas[j].numeroSala && strcmp(exame[i].SalaNome , salas[j].nomeSala) == 0){
+            printf("%d",salas[j].id);
+            salas[j].ocupada = 1;
+            salas[j].id_exame = exame[i].id;
         }
+    }
     }
 }
 
@@ -263,26 +272,31 @@ void saveBinExames(){
     int i;
     FILE *fp;
     fp = fopen("data/bin/exames.bin", "wb");  // ID do exame, ID da disciplina, ID da sala, ID do professor, ID do regime, dia, mes, hora, minuto
+            
+    fwrite(&n_exames, sizeof(int), 1, fp);
+
     for (i = 0; i < n_exames; i++){
-        
+
         fwrite(&exame[i].id, sizeof(int), 1, fp);
+        fwrite(&exame[i].max_inscritos, sizeof(int), 1, fp);
 
         size_t disclen = strlen(exame[i].disciplina)+1;
         fwrite(&disclen, sizeof(size_t), 1, fp);
         fwrite(exame[i].disciplina, disclen ,1, fp);
+        fwrite(&exame[i].curso, sizeof(int), 1, fp);
 
-        fwrite(&exame[i].salaId, sizeof(int), 1, fp);
         size_t salanomelen = strlen(exame[i].SalaNome)+1;
         fwrite(&salanomelen, sizeof(size_t), 1, fp);
         fwrite(exame[i].SalaNome, salanomelen  , 1, fp);
+        fwrite(&exame[i].salaId, sizeof(int), 1, fp);
 
         fwrite(&exame[i].professor, sizeof(int), 1, fp);
         fwrite(&exame[i].regime, sizeof(int), 1, fp);
+
         fwrite(&exame[i].data.dia, sizeof(int), 1, fp);
         fwrite(&exame[i].data.mes, sizeof(int), 1, fp);
         fwrite(&exame[i].data.hora, sizeof(int), 1, fp);
         fwrite(&exame[i].data.minuto, sizeof(int), 1, fp);
-        fwrite(&exame[i].max_inscritos, sizeof(int), 1, fp);
         for(int j=0;j<exame[i].max_inscritos;j++)
         fwrite(&exame[i].ids_inscritos[j], sizeof(int), 1, fp);
 
@@ -296,33 +310,39 @@ void readBinExames()
     int i;
     FILE *fp;
     fp = fopen("data/bin/exames.bin", "rb"); 
-    for(i=0;;i++){
-        if(fread(&exame[i].id, sizeof(int), 1, fp) != 1)
-            break;
 
+    fread(&n_exames, sizeof(int), 1, fp);
+
+    for(i=0;i<n_exames;i++){
         exame = realloc(exame, sizeof(Exames)*(i+1));
 
+        fread(&exame[i].id, sizeof(int), 1, fp);
+        fread(&exame[i].max_inscritos, sizeof(int), 1, fp);
+
         size_t disclen;
-        fwrite(&disclen, sizeof(size_t), 1, fp);
+        fread(&disclen, sizeof(size_t), 1, fp);
         exame[i].disciplina = malloc(disclen);
         fread(exame[i].disciplina, disclen, 1, fp);
-
-        fread(&exame[i].salaId, sizeof(int), 1, fp);
+        fread(&exame[i].curso, sizeof(int), 1, fp);
 
         size_t salanomelen;
-        fwrite(&salanomelen, sizeof(size_t), 1, fp);
+        fread(&salanomelen, sizeof(size_t), 1, fp);
         exame[i].SalaNome = malloc(salanomelen);
         fread(exame[i].SalaNome, salanomelen, 1, fp);
+        fread(&exame[i].salaId, sizeof(int), 1, fp);
 
         fread(&exame[i].professor, sizeof(int), 1, fp);
         fread(&exame[i].regime, sizeof(int), 1, fp);
+
         fread(&exame[i].data.dia, sizeof(int), 1, fp);
         fread(&exame[i].data.mes, sizeof(int), 1, fp);
         fread(&exame[i].data.hora, sizeof(int), 1, fp);
         fread(&exame[i].data.minuto, sizeof(int), 1, fp);
-        fread(&exame[i].max_inscritos, sizeof(int), 1, fp);
-        for(int j=0;j<exame[i].max_inscritos;j++)
-        fread(&exame[i].ids_inscritos[j], sizeof(int), 1, fp);
+
+        exame[i].ids_inscritos = malloc(sizeof(int)*exame[i].max_inscritos);
+        for(int j=0;j<exame[i].max_inscritos;j++) 
+            fread(&exame[i].ids_inscritos[j], sizeof(int), 1, fp);
     }
-    n_exames = i;
+    fclose(fp);
+    SalasOcupada();
 }

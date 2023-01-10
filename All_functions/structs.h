@@ -43,6 +43,7 @@ typedef struct { //struct para guardar os dados de uma sala
     int numeroCadeiras;
     int id;
     int ocupada;
+    int id_exame;
 }SalaStruct;
 
 typedef struct { //struct para guardar os dados de um professor
