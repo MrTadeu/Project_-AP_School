@@ -14,7 +14,9 @@ extern int n_disciplinas, n_courses, n_alunos, n_professores;
 
 void ListarDisciplinas()
 {
-    printc("\n[green]Disciplinas:\n\n[/green]");
+    printf("**************************************************\n");
+    printc("************        [green]Disciplinas[/green]       ************\n");
+    printf("**************************************************\n");
     for(int i=0;i<n_disciplinas;i++)
     {
        printc("\t[green]Id:[/green] %d \t[green]Nome:[/green] %s\n", disciplinas[i].id, disciplinas[i].name);

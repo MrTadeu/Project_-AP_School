@@ -155,6 +155,7 @@ void apagarAluno();
 void criarExame();
 void zerarExame();
 void listarExames();
+int CheckDiscInCurso(int id);
 void SalasOcupada();
 void mostrarSalasLivres();
 void inscreverExame();

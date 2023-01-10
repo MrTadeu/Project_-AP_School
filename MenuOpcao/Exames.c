@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../All_functions/global.h"
+#include <windows.h>
 
 
 /* typedef struct{
@@ -15,28 +16,64 @@ typedef struct{
 extern Exames* exame;
 extern SalaStruct *salas;
 extern AlunoDataStruct aluno;
-extern int n_exames, n_salas, n_alunos;
+extern courseStruct *courses;
+extern int n_exames, n_salas, n_alunos, n_courses;
 
 //NUMERO MAXIMO DE INSCRITOS?? NUMERO DE INSCRITOS = NUMERO DE VAGAS NECESSARIAS 
 
 void criarExame(){
     exame = realloc(exame, sizeof(Exames)*(n_exames+1));
-
     zerarExame(n_exames);
-    
+
+    exame[n_exames].disciplina = malloc(100);
+    exame[n_exames].id = n_exames+1;
+    exame[n_exames].professor = aluno.id;
     printf("Qual é o número máximo de inscritos? ");
     scanf("%d", &exame[n_exames].max_inscritos);
     exame[n_exames].ids_inscritos = malloc(sizeof(int)*exame[n_exames].max_inscritos);
     for(int i=0;i<exame[n_exames].max_inscritos;i++)
         exame[n_exames].ids_inscritos[i] = 0;
 
+    do{
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     ListarDisciplinas();
-    printf("Para qual disciplina pretende criar um exame? ");
-    scanf("%d", &exame[n_exames].disciplina);
+    printf("Para qual disciplina pretende criar um exame? Insira o nome da disciplina:");
+    scanf("%s", exame[n_exames].disciplina);
+    exame[n_exames].disciplina = realloc(exame[n_exames].disciplina, (strlen(exame[n_exames].disciplina)+1));
+    uppercase(exame[n_exames].disciplina);
+    if(CheckIFDisciplinaExisteNome(exame[n_exames].disciplina) == -1){
+        printc("[red]Disciplina não existe![/red]");
+        Sleep(1000);
+    }
+    }while(CheckIFDisciplinaExisteNome(exame[n_exames].disciplina) == -1);
+    /* void criarExame();
+void zerarExame();
+void listarExames();
+int CheckDiscInCurso(int id);
+void SalasOcupada();
+void mostrarSalasLivres();
+void inscreverExame();
+void contarInscrito(int id);
+void listarInscritos(int id);
+void listarExamesdeumAluno();
+void removerIncricao();
+void vagaMais(int salaId);
+void vagaMenos(int salaId);
+void saveBinExames();
+void readBinExames(); */
 
-    ListarCursos();
-    printf("Para que curso estará disponivel? ");
-    scanf("%d", &exame[n_exames].curso);
+
+    do{
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+        ListarCursos();
+        printf("Para que curso estará disponivel? Insira o ID do curso:");
+        scanf("%d", &exame[n_exames].curso);
+        if(CheckIFCursoExiste(exame[n_exames].curso) == -1){
+            printc("[red]Curso não existe![/red]");
+            Sleep(1000);
+        }
+    }while(CheckIFCursoExiste(exame[n_exames].curso) == -1 || CheckDiscInCurso(exame[n_exames].curso) == -1);
+
     
     SalasOcupada();
     mostrarSalasLivres();
@@ -52,6 +89,21 @@ void criarExame(){
     
     n_exames++;
     saveBinExames();
+}
+
+int CheckDiscInCurso(int id)
+{
+    for(int i = 0; i < n_courses; i++){
+        if(courses[i].id == id){
+            for(int j = 0; j < 3; j++){
+                for (int k = 0; k < courses[i].num_disciplinas[j]; k++){
+                    if(strcmp(courses[i].AnoDisciplina[j][k] , exame[id].disciplina))
+                        return 1;
+                }
+            }
+        }
+    }
+    return -1;
 }
 
 void zerarExame(int i)
