@@ -56,7 +56,7 @@ void main(){
         MenuFilesNovos();
     } */
     readData();
-    /* saveBinAlunosFix(); */
+    
 
     int op = -1;
     setlocale(LC_ALL, "Portuguese");

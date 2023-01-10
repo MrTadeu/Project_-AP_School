@@ -185,7 +185,7 @@ void apagarAluno(){
 
 void criarAluno(){
     int flag=0, year, id;
-    alunos = realloc(alunos, (n_alunos+2) * sizeof(AlunoStruct));
+    alunos = realloc(alunos, (n_alunos+1) * sizeof(AlunoStruct));
 
     alunos[n_alunos].id = generateUserID();
     alunos[n_alunos].name = malloc(50 * sizeof(char));

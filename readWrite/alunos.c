@@ -19,33 +19,6 @@ void saveBinAlunos(){
         printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
         exit(1);
     }
-    for (int i = 0; i <= n_alunos; i++){
-        fwrite(&alunos[i].id, sizeof(int), 1, file);
-        fwrite(&alunos[i].year, sizeof(int), 1, file);
-        fwrite(&alunos[i].id_regime, sizeof(int), 1, file);
-        fwrite(&alunos[i].id_course, sizeof(int), 1, file);
-
-        size_t nomeLen = strlen(alunos[i].name) + 1;
-        fwrite(&nomeLen, sizeof(size_t), 1, file);
-        fwrite(alunos[i].name, nomeLen, 1, file);
-
-        size_t emailLen = strlen(alunos[i].email) + 1;
-        fwrite(&emailLen, sizeof(size_t), 1, file);
-        fwrite(alunos[i].email, emailLen, 1, file);
-
-        size_t passLen = strlen(alunos[i].password) + 1;
-        fwrite(&passLen, sizeof(size_t), 1, file);
-        fwrite(alunos[i].password, passLen, 1, file);
-    }
-    fclose(file);
-}
-
-void saveBinAlunosFix(){
-    FILE *file = fopen("data/bin/alunos.bin","wb");
-    if (!file) {
-        printc("\n\n\tImpossivel abrir Ficheiro [red]alunos.bin[/red]\n\n");
-        exit(1);
-    }
     for (int i = 0; i < n_alunos; i++){
         fwrite(&alunos[i].id, sizeof(int), 1, file);
         fwrite(&alunos[i].year, sizeof(int), 1, file);
@@ -98,7 +71,7 @@ void readBinAlunos(){
 
             alunos = realloc(alunos, sizeof(AlunoStruct) * (i+2));
         }
-        n_alunos = i-1;
+        n_alunos = i;
         fclose(file);
     }
 }
