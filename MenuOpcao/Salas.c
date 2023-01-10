@@ -306,5 +306,5 @@ void removerSala(){
                 }
             }
         }
-    }while(salas[id].ocupada == 1);
+    }while(salas[id].ocupada == 1 || CheckIFsalaExist(salas[id].nomeSala, salas[id].numeroSala) == 0);
 }
