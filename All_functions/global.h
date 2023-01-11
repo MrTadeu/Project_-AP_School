@@ -21,7 +21,7 @@ void generate_unique_numbers(int *array, int length);
 char *capitalize(char *str);
 int isletter_cheker(char *str);
 void timeNow();
-void diferencaTempo(int ano, int mes, int dia, int hora, int minuto)
+void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt();
