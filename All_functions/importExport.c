@@ -239,11 +239,11 @@ void exportDataBinCsv(){
     if (fp_aluno == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportAlunos.csv[/red]\n\n");
     }
-    fprintf(fp_aluno, "NOME;REGIME;ANO;NUMERO;CURSO\n");
+    fprintf(fp_aluno, "NOME;REGIME;ANO;NUMERO;CURSO;EMAIL\n");
     for (int i = 0; i < n_alunos; i++){
         courseStruct courseAluno = getCourseByID(alunos[i].id_course);
         regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime); 
-        fprintf(fp_aluno, "%s;%s;%d;%d;%s\n", alunos[i].name, regimeAluno.name, alunos[i].year, alunos[i].id, courseAluno.name);
+        fprintf(fp_aluno, "%s;%s;%d;%d;%s;%s\n", alunos[i].name, regimeAluno.name, alunos[i].year, alunos[i].id, courseAluno.name, alunos[i].email);
     }
     fclose(fp_aluno);
 

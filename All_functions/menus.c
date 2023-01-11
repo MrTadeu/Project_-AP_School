@@ -48,7 +48,7 @@ void MenuFilesNovos(){
 int mainMenu(){
     int opcao;
     printf("**************************************************\n");
-    printf("****************** Menu Principal ****************\n");
+    printc("****************** [green]Menu Principal[/green] ****************\n");
     printf("**************************************************\n");
     printf("**        0 -> Sair                             **\n");
     printf("**        1 -> Login                            **\n");
