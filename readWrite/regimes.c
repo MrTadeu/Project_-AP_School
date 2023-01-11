@@ -100,36 +100,60 @@ void listarRegimesPermissoes(){
     printf("\nListagem de todos os Regimes:\n");
     for (int i = 0; i < n_regimes; i++){
         printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
-        printf("\nPermissoes:");
-        printf("\nTem permissao para Menu Exames - %d", perms_file[i].perm.MenuExames);
-        printf("\nTem permissao para Ver Disciplinas %d", perms_file[i].perm.VerDisciplinas);
-        printf("\nTem permissao para Menu Professor %d", perms_file[i].perm.MenuProfessor);
-        printf("\nTem permissao para Menu Admin %d", perms_file[i].perm.MenuAdmin);
-        printf("\nTem permissao para Menu Salas %d", perms_file[i].perm.MenuSalas);
-        printf("\nTem permissao para Criar Exames %d", perms_file[i].perm.CriarExames);
-        printf("\nTem permissao para Inscritos Exames %d", perms_file[i].perm.InscritosExames);
-        printf("\nTem permissao para Listar Exames %d", perms_file[i].perm.ListarExames);
-        printf("\nTem permissao para Listar Exames Inscritos %d", perms_file[i].perm.ListarExamesInscritos);
-        printf("\nTem permissao para Editar Exames %d", perms_file[i].perm.EditarExames);
-        printf("\nTem permissao para Exportar Exames %d", perms_file[i].perm.ExportarExames);
-        printf("\nTem permissao para Inscrever Exames %d", perms_file[i].perm.InscreverExames);
-        printf("\nTem permissao para Criar Salas %d", perms_file[i].perm.CriarSalas);
-        printf("\nTem permissao para Listar Salas %d", perms_file[i].perm.ListarSalas);
-        printf("\nTem permissao para Editar Salas %d", perms_file[i].perm.EditarSalas);
-        printf("\nTem permissao para Remover Salas %d", perms_file[i].perm.RemoverSalas);
-        printf("\nTem permissao para Criar Professor %d", perms_file[i].perm.CriarProfessor);
-        printf("\nTem permissao para Listar Professor %d", perms_file[i].perm.ListarProfessor);
-        printf("\nTem permissao para Editar Professor %d", perms_file[i].perm.EditarProfessor);
-        printf("\nTem permissao para Remover Professor %d", perms_file[i].perm.RemoverProfessor);
-        printf("\nTem permissao para Menu Cursos %d", perms_file[i].perm.MenuCursos);
-        printf("\nTem permissao para Menu Alunos %d", perms_file[i].perm.MenuAlunos);
-        printf("\nTem permissao para Menu Regimes %d", perms_file[i].perm.MenuRegimes);
-        printf("\nTem permissao para Criar Cursos %d", perms_file[i].perm.CriarCursos);
-        printf("\nTem permissao para Listar Cursos %d", perms_file[i].perm.ListarCursos);
-        printf("\nTem permissao para Editar Cursos %d", perms_file[i].perm.EditarCursos);
-        printf("\nTem permissao para Remover Cursos %d", perms_file[i].perm.RemoverCursos);
-        printf("\nTem permissao para Listar Cursos Disciplinas %d", perms_file[i].perm.ListarCursosDisciplinas);
-        printf("\nTem permissao para MenuDisciplinas %d\n", perms_file[i].perm.MenuDisciplinas);
+        printc("**************************************************\n");
+        printc("****************** [blue]Permissões[/blue] ****************\n");
+        printc("**************************************************\n");
+
+        printc("[blue]Permissoes Exames:[/blue]\n");
+        printc("\t[blue]Criar exames[/blue]: %d\n", perms_file[i].perm.CriarExames);
+        printc("\t[blue]Inscritos exames[/blue]: %d\n", perms_file[i].perm.InscritosExames);
+        printc("\t[blue]Listar exames[/blue]: %d\n", perms_file[i].perm.ListarExames);
+        printc("\t[blue]Listar exames inscritos[/blue]: %d\n", perms_file[i].perm.ListarExamesInscritos);
+        printc("\t[blue]Editar exames[/blue]: %d\n", perms_file[i].perm.EditarExames);
+        printc("\t[blue]Exportar exames[/blue]: %d\n", perms_file[i].perm.ExportarExames);
+        printc("\t[blue]Inscrever em exames[/blue]: %d\n", perms_file[i].perm.InscreverExames);
+        
+        printc("[blue]Permissoes Salas:[/blue]\n");
+        printc("\t[blue]Criar salas[/blue]: %d\n", perms_file[i].perm.CriarSalas);
+        printc("\t[blue]Listar salas[/blue]: %d\n", perms_file[i].perm.ListarSalas);
+        printc("\t[blue]Editar salas[/blue]: %d\n", perms_file[i].perm.EditarSalas);
+        printc("\t[blue]Remover salas[/blue]: %d\n", perms_file[i].perm.RemoverSalas);
+        
+        printc("[blue]Permissoes Professores:[/blue]\n");
+        printc("\t[blue]Criar professores[/blue]: %d\n", perms_file[i].perm.CriarProfessor);
+        printc("\t[blue]Listar professores[/blue]: %d\n", perms_file[i].perm.ListarProfessor);
+        printc("\t[blue]Editar professores[/blue]: %d\n", perms_file[i].perm.EditarProfessor);
+        printc("\t[blue]Remover professores[/blue]: %d\n", perms_file[i].perm.RemoverProfessor);
+       
+        printc("[blue]Permissoes Cursos:[/blue]\n");
+        printc("\t[blue]Criar cursos[/blue]: %d\n", perms_file[i].perm.CriarCursos);
+        printc("\t[blue]Listar cursos[/blue]: %d\n", perms_file[i].perm.ListarCursos);
+        printc("\t[blue]Editar cursos[/blue]: %d\n", perms_file[i].perm.EditarCursos);
+        printc("\t[blue]Remover cursos[/blue]: %d\n", perms_file[i].perm.RemoverCursos);
+       
+        printc("[blue]Permissoes Disciplinas:[/blue]\n");
+        printc("\t[blue]Listar cursos e disciplinas[/blue]: %d\n", perms_file[i].perm.ListarCursosDisciplinas);
+        printc("\t[blue]Criar disciplinas[/blue]: %d\n", perms_file[i].perm.CriarDisciplinas);
+        printc("\t[blue]Listar disciplinas[/blue]: %d\n", perms_file[i].perm.ListarDisciplinas);
+        printc("\t[blue]Editar disciplinas[/blue]: %d\n", perms_file[i].perm.EditarDisciplinas);
+        printc("\t[blue]Remover disciplinas[/blue]: %d\n", perms_file[i].perm.RemoverDisciplinas);
+        printc("\t[blue]Ver disciplinas[/blue]: %d\n", perms_file[i].perm.VerDisciplinas);
+       
+        printc("[blue]Permissoes Alunos:[/blue]\n");
+        printc("\t[blue]Criar alunos[/blue]: %d\n", perms_file[i].perm.CriarAluno);
+        printc("\t[blue]Listar alunos[/blue]: %d\n", perms_file[i].perm.ListarAluno);
+        printc("\t[blue]Listar todos os alunos[/blue]: %d\n", perms_file[i].perm.ListarTodosAlunos);
+        printc("\t[blue]Editar alunos[/blue]: %d\n", perms_file[i].perm.EditarAluno);
+        printc("\t[blue]Remover alunos[/blue]: %d\n", perms_file[i].perm.RemoverAluno);
+
+        printc("[blue]Permissoes Regimes:[/blue]\n");
+        printc("\t[blue]Criar regimes[/blue]: %d\n", perms_file[i].perm.CriarRegimes);
+        printc("\t[blue]Listar regimes[/blue]: %d\n", perms_file[i].perm.ListarRegimes);
+        printc("\t[blue]Listar regimes e permissões[/blue]: %d\n", perms_file[i].perm.ListarRegimesPermissoes);
+        printc("\t[blue]Editar nome dos regimes[/blue]: %d\n", perms_file[i].perm.EditarNomeRegimes);
+        printc("\t[blue]Editar permissões dos regimes[/blue]: %d\n", perms_file[i].perm.EditarPermissoesRegimes);
+        printc("\t[blue]Mover regimes[/blue]: %d\n", perms_file[i].perm.MoverRegimes);
+        printc("\t[blue]Remover regimes[/blue]: %d\n", perms_file[i].perm.RemoverRegimes);
     }
 }
 

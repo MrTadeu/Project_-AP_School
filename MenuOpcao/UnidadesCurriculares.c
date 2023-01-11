@@ -215,19 +215,16 @@ void CriarCurso()
         courses[n_courses].AnoDisciplina[i] = malloc(courses[n_courses].num_disciplinas[i]);
         ListarDisciplinas();
         printc("\n[green]Disciplinas do %d ano:[/green] ", i+1);
-        for(int j=0; j<courses[n_courses].num_disciplinas[i]; j++)
-        {   
-            printf("\n\nNome da disciplina %d: ", j+1);
-            scanf("%s", TmpNameDisciplina);
-            uppercase(TmpNameDisciplina);
-            if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
-                printc("\n\n\t[red]Esta disciplina nao existe[/red]\n\n");
-                do{
-                    printf("\n\nInsira a sigla da disciplina: ");
-                    scanf("%s", TmpNameDisciplina);
-                    uppercase(TmpNameDisciplina);
-                } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
-            }
+        for(int j=0; j<courses[n_courses].num_disciplinas[i]; j++){   
+            do{
+                printf("\n\nInsira a nome da disciplina: ");
+                scanf("%s", TmpNameDisciplina);
+                uppercase(TmpNameDisciplina);
+                
+                if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
+                    printc("\n\n\t[red]Esta disciplina nao existe[/red]\n\n");
+                }
+            } while (CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
             courses[n_courses].AnoDisciplina[i][j] = malloc(strlen(TmpNameDisciplina) + 1);
             strcpy(courses[n_courses].AnoDisciplina[i][j], TmpNameDisciplina);
         }

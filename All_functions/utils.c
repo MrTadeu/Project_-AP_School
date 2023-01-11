@@ -4,8 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-//#include "global.h"
-#include "structs.h"
+#include "global.h"
+//#include "structs.h"
 
 extern TempoAnoAtualDiferenca tempo;
 
@@ -67,7 +67,7 @@ int ValidarZeroUm(){
     int flag = 0, num = -1;
     while (num != 0 || num != 1){
         if(flag == 1){
-            printf("\n[red]Opção inválida, tente novamente: [/red]\n");
+            printc("\n[red]Opção inválida, tente novamente: [/red]\n");
         }
         scanf("%d", &num);
         flag = 1;

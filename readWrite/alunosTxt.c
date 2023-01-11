@@ -100,16 +100,16 @@ void ConvertAluno(AlunoFileStruct *alunosFile){
 
     alunos[0].id = generateUserID();
     alunos[0].name = malloc(50 * sizeof(char));
-    printc("\n\n[red]Introduza o nome do adminstrador: [/red]");
+    printc("\n[red]Introduza o nome do adminstrador: [/red]");
     scanf("%s", alunos[0].name);
     alunos[0].year = 0;
     alunos[0].id_regime = 1;
     alunos[0].id_course = 0;
     alunos[0].email = malloc(120);
     alunos[0].password = malloc(100);
-    printf("\nIntroduza o email do professor: ");
+    printc("\n[red]Introduza o email do adminstrador: [/red]");
     scanf("%s", alunos[0].email);
-    printf("\nIntroduza a password do professor: ");
+    printc("\n[red]Introduza a password do adminstrador: [/red]");
     scanf("%s", alunos[0].password);
     
     alunos[0].email = realloc(alunos[0].email, (strlen(alunos[0].email)+1));

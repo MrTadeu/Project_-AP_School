@@ -69,20 +69,17 @@ int InitCursos() { //Apenas usado pela primeira vez
                 }while(courses[i].num_disciplinas[j] >= n_disciplinas);
             }
             courses[i].AnoDisciplina[j] = malloc(courses[i].num_disciplinas[j]);
-            printf("Insira as siglas das %d disciplinas do %d ano : ", courses[i].num_disciplinas[j], j+1);
+            printc("[green]Insira o nome das %d disciplinas do %d ano [/green]", courses[i].num_disciplinas[j], j+1);
             for(int k=0; k<courses[i].num_disciplinas[j]; k++)
             {   
-                printf("\nDisciplina %d: ", k+1);
-                scanf("%s", TmpNameDisciplina);
-                uppercase(TmpNameDisciplina);
-                if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
-                    printc("\n\n\t[red]Disciplina nao existe[/red]\n\n");
-                    do{
-                        printf("\n\nInsira a sigla da disciplina: ");
-                        scanf("%s", TmpNameDisciplina);
-                        uppercase(TmpNameDisciplina);
-                    }while(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
-                }
+                do{
+                    printf("\n\nInsira a nome da disciplina %d: ", k+1);
+                    scanf("%s", TmpNameDisciplina);
+                    uppercase(TmpNameDisciplina);
+                    if(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1){
+                        printc("\n\n\t[red]Disciplina nao existe[/red]\n\n");
+                    }
+                }while(CheckIFDisciplinaExisteNome(TmpNameDisciplina) == -1); 
                 courses[i].AnoDisciplina[j][k] = malloc(strlen(TmpNameDisciplina)+1);
                 strcpy(courses[i].AnoDisciplina[j][k], TmpNameDisciplina);
             }

@@ -26,38 +26,17 @@ void readData();
 
 
 void main(){
-    /* if (folderExists("data/bin")){ //Pasta bin existe!
+    if (folderExists("data/bin")){ //Pasta bin existe!
         if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
             printc("[red]Error[/red] Ficheiros não existem.\n\n");
-
-            int i, mul = 10;
-            for(i = 0; i < 100; i++) {
-                Sleep(10);
-                spinner_update("[white]A entrar em modo Setup[/white] [bw][red]%d[/red][/bw]...", i);
-            }
-            spinner_done("Done!\n");
-            printc("[lg][bg][+][/bg][/lg] Task was successful!\n");
-            printf("Enter para continuar...\n");
-
             MenuFilesNovos();
         }
     }else { //Pasta bin existe!
         mkdir("data/bin"); //Não funciona no linux (algumas dunções do folderExists())
         printc("[red]Error[/red] Pastas não existem.\n\n");
-        
-        int i, mul = 10;
-        for(i = 0; i < 100; i++) { // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
-            Sleep(10);
-            spinner_update("[white]A entrar em modo Setup[/white] [bw][red]%d[/red][/bw]...", i);
-        }
-        spinner_done("Done!\n");
-        printc("[lg][bg][+][/bg][/lg] Task was successful!\n");
-        printf("Enter para continuar...\n");
-
         MenuFilesNovos();
-    } */
+    }
     readData();
-    
 
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
