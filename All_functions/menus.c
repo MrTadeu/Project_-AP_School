@@ -200,7 +200,7 @@ void MenuExames(){
     do{
         int i = 0;
         printc("**************************************************\n");
-        printc("****************** [blue]Menu Exames[/blue] ****************\n");
+        printc("****************** [blue]Menu Exames[/blue] *******************\n");
         printc("**************************************************\n");
         printf("**        %d -> Sair                             **\n", i++);
         if (aluno.regime.perm.CriarExames){
@@ -387,9 +387,9 @@ void MenuAdmin(){
 }
 
 void MenuAlunos(){
-    int opcao, i = 0;;
+    int opcao, i = 0;
     do{
-        i = 0;
+        i = 1;
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
         printc("**************************************************\n");
         printc("******************* [blue]Menu Alunos[/blue] ******************\n");
@@ -510,11 +510,13 @@ void MenuProfessor(){
         }
         if (aluno.regime.perm.EditarProfessor){
             if (opcao == i++){
+                listarProfessor();
                 editarProfessor();
             }
         }
         if (aluno.regime.perm.RemoverProfessor){
             if (opcao == i++){
+                listarProfessor();
                 removerProfessor();
             }
         }
