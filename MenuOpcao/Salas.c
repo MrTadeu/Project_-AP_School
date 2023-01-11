@@ -93,7 +93,6 @@ void criarSala(){ // #VALIDAR
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
-    int id;
     if (n_salas == 0)
         salas[n_salas].id = 1;
     else
@@ -179,6 +178,7 @@ void saveBinSalas(){
             fwrite(&salas[i].reservas[i].dia, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].hora, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].minuto, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].anoFinal, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].mesFinal, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].diaFinal, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].horaFinal, sizeof(int), 1, file);
@@ -246,6 +246,7 @@ void readBinSalas(){
             fread(&salas[i].reservas[i].dia, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].hora, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].minuto, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].anoFinal, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].mesFinal, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].diaFinal, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].horaFinal, sizeof(int), 1, file);
