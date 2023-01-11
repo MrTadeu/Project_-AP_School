@@ -282,6 +282,7 @@ void editarSala(){
                     scanf("%s", salas[i].nomeSala);
                     salas[i].nomeSala = realloc(salas[i].nomeSala, strlen(salas[i].nomeSala) + 1);
                 } while (isdigit_cheker(salas[i].nomeSala) == 1);
+                capitalize(salas[i].nomeSala);
 
                 do{
                     printf("Qual o novo numero da sala? ");
@@ -321,15 +322,24 @@ void removerSala(){
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
     int id;
+    int posicao;
     //mostrarSalasLivres();
     do{
-        printf("Qual o nome da sala que deseja remover? ");
-        scanf("%s", &id);
-        if (CheckIFsalaExist(salas[id-1].nomeSala, salas[id-1].numeroSala) == 0){
+        printf("Qual o ID que deseja remover? ");
+        scanf("%d", &id);
+        for(int i = 0; i < n_salas; i++){
+            if(salas[i].id == id){
+                posicao = i;
+            }
+        }
+        if (CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            if(salas[id].n_reservas != 0){
+            printf("Ocupada: %d nome: %s numero: %d posicao: %d", salas[posicao].n_reservas,salas[posicao].nomeSala, salas[posicao].numeroSala, posicao);
+            getchar();
+            getchar();
+            if(salas[id].n_reservas == 1){
                 printc("[red]Sala esta ocupada[/red]\n");
             }
             else{
@@ -342,9 +352,11 @@ void removerSala(){
                     salas = realloc(salas, n_salas * sizeof(SalaStruct));
                     saveBinSalas();
                     readBinSalas();
-                    }      
+                    }
                 }
             }
         }
-    }while(salas[id].n_reservas != 0 || CheckIFsalaExist(salas[id].nomeSala, salas[id].numeroSala) == 0);
+
+    }while(salas[posicao].n_reservas == 1 && CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
+    printf("Sala removida com sucesso!\n");
 }
