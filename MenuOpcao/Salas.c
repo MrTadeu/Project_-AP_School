@@ -183,6 +183,7 @@ void saveBinSalas(){
             fwrite(&salas[i].reservas[i].diaFinal, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].horaFinal, sizeof(int), 1, file);
             fwrite(&salas[i].reservas[i].minutoFinal, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].vagas, sizeof(int), 1, file);
             
         }
     }
@@ -249,6 +250,7 @@ void readBinSalas(){
             fread(&salas[i].reservas[i].diaFinal, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].horaFinal, sizeof(int), 1, file);
             fread(&salas[i].reservas[i].minutoFinal, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].vagas, sizeof(int), 1, file);
         }
         }
         n_salas = i;

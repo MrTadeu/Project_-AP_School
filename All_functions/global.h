@@ -20,6 +20,7 @@ int isdigit_cheker(char *str);
 void generate_unique_numbers(int *array, int length);
 char *capitalize(char *str);
 int isletter_cheker(char *str);
+tempoExames dataFinal(tempoExames date, int hours, int minutes);
 /* void timeNow();
 void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
 struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add);
@@ -177,8 +178,8 @@ void contarInscrito(int id);
 void listarInscritos(int id);
 void listarExamesdeumAluno();
 void removerIncricao();
-void vagaMais(int salaId, char *SalaNome);
-void vagaMenos(int salaId, char *SalaNome);
+void vagaMais(int salaId, char *SalaNome, int id);
+void vagaMenos(int salaId, char *SalaNome, int id);
 void saveBinExames();
 void readBinExames();
 

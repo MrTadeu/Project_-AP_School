@@ -87,16 +87,16 @@ void criarExame(){
     }while(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0);
 
     /* mostrarSalasocupada(sala&dia)(); */
-    printf("Qual a data do exame (formato DD MM)? ");
-    scanf("%d %d", &exame[n_exames].data.dia, &exame[n_exames].data.mes);
+    printf("Qual a data do exame (formato DD MM YY)? ");
+    scanf("%d %d", &exame[n_exames].data.dia, &exame[n_exames].data.mes, &exame[n_exames].data.ano);
     /*Checkifreservaexiste*/
 
     /* mostrarSalasocupada(sala&dia&horas&minutos)(); */
     printf("Qual a hora do exame (formato HH MM)? ");
     scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
 
-    printf("Qual a duração máxima do exame (em minutos)? ");
-    scanf("%d", &exame[n_exames].data.duracao);
+    printf("Qual a duração máxima do exame (HH MM)? ");
+    scanf("%d %d", &exame[n_exames].duracao.hora, &exame[n_exames].duracao.minuto);
     /*funcao*/
     /*Checkifreservaexiste*/
 
@@ -138,7 +138,8 @@ void ReservarSala(int N_exames)
             salas[j].reservas[salas[j].n_reservas].dia = exame[N_exames].data.dia;
             salas[j].reservas[salas[j].n_reservas].hora = exame[N_exames].data.hora;
             salas[j].reservas[salas[j].n_reservas].minuto = exame[N_exames].data.minuto;
-            salas[j].reservas[salas[j].n_reservas].mesFinal;  //=funcao final
+            tempoExames date = dataFinal(exame[N_exames].data, exame[N_exames].duracao.hora, exame[N_exames].duracao.minuto);
+            salas[j].reservas[salas[j].n_reservas].mesFinal; 
             salas[j].reservas[salas[j].n_reservas].diaFinal;  //=funcao final
             salas[j].reservas[salas[j].n_reservas].horaFinal; //=funcao final
             salas[j].reservas[salas[j].n_reservas].minutoFinal; //=funcao final
@@ -178,7 +179,7 @@ void inscreverExame(){
                 if (exame[i].ids_inscritos[j] == 0){
                     exame[i].ids_inscritos[j] = aluno.id;
                     printc("[green]Inscrito com sucesso![/green]\n");
-                    vagaMenos(exame[i].SalaNum, exame[i].SalaNome);
+                    vagaMenos(exame[i].SalaNum, exame[i].SalaNome, n_exames+1);
                     return;
                 }
             }
@@ -252,7 +253,7 @@ void removerIncricao(){
                 if (exame[i].ids_inscritos[j] == aluno.id){
                     exame[i].ids_inscritos[j] = 0;
                     printc("[green]Removido com sucesso![/green]\n");
-                    vagaMais(exame[i].SalaNum, exame[i].SalaNome);
+                    vagaMais(exame[i].SalaNum, exame[i].SalaNome, n_exames+1);
                     return;
                 }
             }
@@ -261,29 +262,38 @@ void removerIncricao(){
         }
     }
     printf("Não existe nenhum exame com esse ID!\n");
+    saveBinExames();
 }
 
-void vagaMais(int SalaNum, char* SalaNome)
+void vagaMais(int SalaNum, char* SalaNome, int id)
 {
     for(int i=0;i<n_salas;i++){
         if(salas[i].numeroSala == SalaNum && strcmp(salas[i].nomeSala, SalaNome) == 0){
             for(int j=0;j<salas[i].n_reservas;j++)
                 {
-                    salas[i].reservas[j].vagas++;
-                    return;
+                    if(salas[i].reservas[j].id_exame == id)
+                    {
+                        salas[i].reservas[j].vagas++;
+                        saveBinSalas();
+                        return;
+                    }
                 }
             }
         }
 }
 
-void vagaMenos(int SalaNum, char* SalaNome) 
+void vagaMenos(int SalaNum, char* SalaNome, int id) 
 {
     for(int i=0;i<n_salas;i++){
         if(salas[i].numeroSala == SalaNum && strcmp(salas[i].nomeSala, SalaNome) == 0){
             for(int j=0;j<salas[i].n_reservas;j++)
             {
-                salas[i].reservas[j].vagas--;
-                return;
+                if(salas[i].reservas[j].id_exame == id)
+                {
+                    salas[i].reservas[j].vagas--;
+                    saveBinSalas();
+                    return;
+                }
             }
         }
     }

@@ -68,6 +68,7 @@ typedef struct { //struct para guardar os dados de um professor
     int id, id_regime;
     char *emailProfessor;
     char *passwordProfessor;
+    
 }professorStruct;
 
 //USER DATA 
@@ -80,12 +81,17 @@ typedef struct {
 
 //EXAMES
 typedef struct{
-    int dia, mes, hora, minuto, duracao;
+    int dia, mes, hora, minuto, ano;
 }tempoExames;
+
+typedef struct{
+    int hora, minuto;
+}duracao;
 
 typedef struct{
     int max_inscritos, *ids_inscritos, professor, SalaNum, regime, id, curso, inscritos;
     char *disciplina, *SalaNome;
+    duracao duracao;
     tempoExames data;
 }Exames;
 
@@ -95,10 +101,10 @@ typedef struct{
     int difMes, difDia, difHora, difMinuto;
 }TempoAnoAtualDiferenca;
 
-struct Date {
+typedef struct{
     int year;
     int month;
     int day;
     int hour;
     int minute;
-};
+}Date;
