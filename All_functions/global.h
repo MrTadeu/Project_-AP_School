@@ -177,7 +177,7 @@ void listarExames();
 int CheckDiscInCurso(int id, int n_Exame);
 void ReservarSala(int N_exames, tempoExames dateFinal);
 void RemoverReservaSala(int N_exames);
-int CheckIfDataExisteExame(tempoExames dataInicio, tempoExames dataFinal);
+int CheckIfDataExisteExame(tempoExames dataInicio, tempoExames dataFinal, int *i, int *j);
 void listarSalasReservas();
 void listarReservasIndividuais(char *SalaNome, int SalaNum);
 void inscreverExame();

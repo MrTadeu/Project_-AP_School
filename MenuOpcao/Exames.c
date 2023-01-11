@@ -78,7 +78,7 @@ void criarExame(){
         scanf("%s", exame[n_exames].SalaNome);
         exame[n_exames].SalaNome = realloc(exame[n_exames].SalaNome, (strlen(exame[n_exames].SalaNome)+1));
         uppercase(exame[n_exames].SalaNome);
-        printf("Insira o número da sala? ");
+        printf("Insira o número da sala ");
         scanf("%d", &exame[n_exames].SalaNum);
 
         if(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0){
@@ -87,7 +87,12 @@ void criarExame(){
         }
     }while(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0);
 
-    tempoExames dateFinal;
+    tempoExames dateFinal; 
+    int *x,*y; 
+    x = malloc(sizeof(int));
+    y = malloc(sizeof(int));
+    *x = 0;
+    *y = 0;
     do{
     printf("Qual a data do exame (formato DD MM YY)? ");
     scanf("%d %d %d", &exame[n_exames].data.dia, &exame[n_exames].data.mes, &exame[n_exames].data.ano);
@@ -101,22 +106,25 @@ void criarExame(){
         printc("\n[red]Hora inválida![/red]");
     if(exame[n_exames].data.hora < 0 || exame[n_exames].data.minuto < 0)
         printc("\n[red]Hora inválida![/red]\n");
-    dateFinal = dataFinal(exame[n_exames].data, exame[n_exames].duracao.hora, exame[n_exames].duracao.minuto);
-    CheckIfDataExisteExame(exame[n_exames].data, dateFinal);
-    }while(exame[n_exames].data.dia > 31 || exame[n_exames].data.mes > 12 || exame[n_exames].data.dia < 0 || exame[n_exames].data.mes < 0 || exame[n_exames].data.hora > 23 || exame[n_exames].data.minuto > 59 || exame[n_exames].data.hora < 0 || exame[n_exames].data.minuto < 0 || CheckIfDataExisteExame(exame[n_exames].data, dateFinal) == 0);
 
-    printf("%d/%d", dateFinal.hora, dateFinal.minuto);
-    do{
-    printf("Qual a duração máxima do exame (HH MM)? ");
-    scanf("%d %d", &exame[n_exames].duracao.hora, &exame[n_exames].duracao.minuto);
-    if(exame[n_exames].duracao.hora > 2 && exame[n_exames].duracao.minuto > 59)
-        printc("\n[red]Duração máxima de 3 horas![/red]");
-    if(exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0)
-        printc("\n[red]Duração não pode ser negativa![/red]\n");
-    if(exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0)
-        printc("\n[red]Duração não pode ser 0![/red]\n");
-    Sleep(2000);
-    }while(exame[n_exames].duracao.hora > 2 || exame[n_exames].duracao.minuto > 59 || exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0 || exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0);
+            do{
+        printf("Qual a duração máxima do exame (HH MM)? ");
+        scanf("%d %d", &exame[n_exames].duracao.hora, &exame[n_exames].duracao.minuto);
+        if(exame[n_exames].duracao.hora > 2 && exame[n_exames].duracao.minuto > 59)
+            printc("\n[red]Duração máxima de 3 horas![/red]");
+        if(exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0)
+            printc("\n[red]Duração não pode ser negativa![/red]\n");
+        if(exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0)
+            printc("\n[red]Duração não pode ser 0![/red]\n");
+        Sleep(2000);
+        }while(exame[n_exames].duracao.hora > 2 || exame[n_exames].duracao.minuto > 59 || exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0 || exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0);
+    
+    dateFinal = dataFinal(exame[n_exames].data, exame[n_exames].duracao.hora, exame[n_exames].duracao.minuto);
+    if(CheckIfDataExisteExame(exame[n_exames].data, dateFinal, x, y) == 0){
+        printc("[red]\nO horário está ocupado pelo seguinte exame:[/red]\n");
+        printc("[blue]ID Exame:[/blue] %d   [blue]Data inicial:[/blue] %d/%d/%d   [blue]Hora:[/blue] [%d/%d] - [%d/%d]   [blue]Vagas:[/blue] %d\n",salas[*x].reservas[*y].id_exame,salas[*x].reservas[*y].data.dia,salas[*x].reservas[*y].data.mes,salas[*x].reservas[*y].data.ano,salas[*x].reservas[*y].data.hora,salas[*x].reservas[*y].data.minuto,salas[*x].reservas[*y].dataFinal.hora,salas[*x].reservas[*y].dataFinal.minuto,salas[*x].reservas[*y].vagas);
+    }
+    }while(exame[n_exames].data.dia > 31 || exame[n_exames].data.mes > 12 || exame[n_exames].data.dia < 0 || exame[n_exames].data.mes < 0 || exame[n_exames].data.hora > 23 || exame[n_exames].data.minuto > 59 || exame[n_exames].data.hora < 0 || exame[n_exames].data.minuto < 0 || CheckIfDataExisteExame(exame[n_exames].data, dateFinal, x, y) == 0);
 
 
     ReservarSala(n_exames, dateFinal);
@@ -125,18 +133,13 @@ void criarExame(){
     saveBinExames();
 }
 
-int CheckIfDataExisteExame(tempoExames dataInicio, tempoExames dataFinal)
+int CheckIfDataExisteExame(tempoExames dataInicio, tempoExames dataFinal, int *i , int *j)
 {
-    for(int i = 0; i < n_salas; i++){
-        for(int j = 0;j<salas[i].n_reservas;j++){
-            if(checkIfdataExiste(salas[i].reservas[j].data,salas[i].reservas[j].dataFinal,dataInicio) == 1 && checkIfdataExiste(salas[i].reservas[j].data,salas[i].reservas[j].dataFinal,dataFinal) == 1){
-                printc("[red]O horário está ocupado pelo seguinte exame:[/red]\n");
-                printc("[blue]ID Exame:[/blue] %d   [blue]Data inicial:[/blue] %d/%d/%d   [blue]Hora:[/blue] [%d/%d] - [%d/%d]   [blue]Vagas:[/blue] %d",salas[i].reservas[j].id_exame,salas[i].reservas[j].data.dia,salas[i].reservas[j].data.mes,salas[i].reservas[j].data.ano,salas[i].reservas[j].data.hora,salas[i].reservas[j].data.minuto,salas[i].reservas[j].dataFinal.hora,salas[i].reservas[j].dataFinal.minuto,salas[i].reservas[j].vagas);
-                Sleep(2500);
+    for(*i = 0; *i < n_salas; *i = *i+1){
+        for(*j = 0;*j<salas[*i].n_reservas;*j=*j+1){
+            if(checkIfdataExiste(salas[*i].reservas[*j].data,salas[*i].reservas[*j].dataFinal,dataInicio) == 1 && checkIfdataExiste(salas[*i].reservas[*j].data,salas[*i].reservas[*j].dataFinal,dataFinal) == 1)
                 return 0;
-            }
         }
-    
     }
     return 1;
 }
