@@ -32,7 +32,7 @@ void importExportData(){
                 break;
             case 3:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-                /* exportDataBinCsv(); */
+                exportDataBinCsv();
                 break;
             default: 
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -143,7 +143,7 @@ void exportDataBinTxt(){
                 break;
             }
         }
-        fprintf(fp_cursos, "%d\t%s\t%s\t%s\t%d\n", courses[i].id, courses[i].name, professores[findID].nomeProfessor, professores[findID].emailProfessor);
+        fprintf(fp_cursos, "%d\t%s\t%s\t%s\n", courses[i].id, courses[i].name, professores[findID].nomeProfessor, professores[findID].emailProfessor);
     }
     fclose(fp_cursos);
 
@@ -217,4 +217,8 @@ void exportDataBinTxt(){
         fprintf(fp_professores, "%d\t%s\t%s\n", professores[i].id, professores[i].nomeProfessor, professores[i].emailProfessor);
     }
     fclose(fp_professores);
+}
+
+void exportDataBinCsv(){
+
 }

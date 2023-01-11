@@ -92,6 +92,7 @@ void editarRegimeMenu();
 void importExportData();
 void importDataTxtBin();
 void exportDataBinTxt();
+void exportDataBinCsv();
 
 //salas.c
 void InitSalas();//Apenas necessario primeira vez(apos isso ja temos o ficheiro que podemos binario)

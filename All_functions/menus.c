@@ -233,27 +233,27 @@ void MenuExames(){
         }
         if (aluno.regime.perm.CriarExames){
             if (opcao == i++){
-                //criarExame();
+                criarExame();
             }
         }
         if (aluno.regime.perm.InscreverExames){
             if (opcao == i++){
-                //inscreverExame();
+                inscreverExame();
             }
         }
         if (aluno.regime.perm.InscritosExames){
             if (opcao == i++){
-                //listarInscritos(1);
+                listarInscritos(1);
             }
         }
         if (aluno.regime.perm.ListarExames){
             if (opcao == i++){
-                //listarExames();
+                listarExames();
             }
         }
         if (aluno.regime.perm.ListarExamesInscritos){
             if (opcao == i++){
-                //listarExamesdeumAluno();
+                listarExamesdeumAluno();
             }
         }
         if (aluno.regime.perm.EditarExames){
