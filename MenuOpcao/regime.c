@@ -126,11 +126,15 @@ void editarNomeRegime(){
     do{
         if(flag == 1)
             printc("\n[red]Por favor insira um ID válido![/red]\n");
-
+        
         printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
         scanf("%d", &id);
         flag = 1;
-    }while (checkIfRegimeExists(id) == 0);
+        if (id == 1 || id == 2){
+            printc("\n[red]Não pode editar nome do regime Administrador ou Professor![/red]\n");
+            flag = 0;
+        }
+    }while (checkIfRegimeExists(id) == 0 || id == 1 || id == 2);
 
     int position = 0;
     for (int i = 0; i <= n_regimes; i++){
@@ -157,7 +161,12 @@ void editarPermissoesRegime(){
         printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
         scanf("%d", &id);
         flag = 1;
-    }while (checkIfRegimeExists(id) == 0);
+        if (id == 1 || id == 2){
+            printc("\n[red]Não pode editar as permissões do regime Administrador ou Professor![/red]\n");
+            flag = 0;
+        }
+        
+    }while (checkIfRegimeExists(id) == 0 || id == 1 || id == 2);
 
     int position = 0;
     for (int i = 0; i <= n_regimes; i++){
@@ -272,7 +281,11 @@ void moverRegimes(){
         printf("\n\nPor favor Introduza o ID do regime que pretende mover: ");
         scanf("%d", &id);
         flag = 1;
-    }while (checkIfRegimeExists(id) == 0);
+        if (id == 1 || id == 2){
+            printc("\n[red]Não pode mover regime Administrador ou Professor![/red]\n");
+            flag = 0;
+        }
+    }while (checkIfRegimeExists(id) == 0 || id == 1 || id == 2);
 
     flag = 0;
     do{
@@ -282,7 +295,11 @@ void moverRegimes(){
         printf("\n\nPara onde pretende mover (ID): ");
         scanf("%d", &new_id);
         flag = 1;
-    }while (checkIfRegimeExists(new_id) == 0 || new_id == id);
+        if (new_id == 1 || new_id == 2){
+            printc("\n[red]Não pode editar as permissões do regime Administrador ou Professor![/red]\n");
+            flag = 0;
+        }
+    }while (checkIfRegimeExists(new_id) == 0 || new_id == 1 || new_id == 2);
     masiveRegimeChange(id, new_id);
 }
 
@@ -297,7 +314,11 @@ void removerRegime(){
         printf("\n\nPor favor Introduza o ID do regime que pretende remover: ");
         scanf("%d", &id);
         flag = 1;
-    }while (checkIfRegimeExists(id) == 0);
+        if (id == 1 || id == 2){
+            printc("\n[red]Não pode apagar o regime Administrador ou Professor![/red]\n");
+            flag = 0;
+        }
+    }while (checkIfRegimeExists(id) == 0 || id == 1 || id == 2);
 
     if(checkIfRegimesBeingUsed(id) == 1){
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -316,7 +337,11 @@ void removerRegime(){
                 printf("\n\nPor favor Introduza o ID do regime que pretende mover: ");
                 scanf("%d", &new_id);
                 flag = 1;
-            }while (checkIfRegimeExists(new_id) == 0 || new_id == id);
+                if (new_id == 1 || new_id == 2){
+                    printc("\n[red]Não pode mover para o regime Administrador ou Professor![/red]\n");
+                    flag = 0;
+                }
+            }while (checkIfRegimeExists(new_id) == 0 || new_id == id || new_id == 1 || new_id == 2);
             masiveRegimeChange(id, new_id);
         }
         else{
