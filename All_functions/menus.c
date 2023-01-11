@@ -24,7 +24,7 @@ void MenuFilesNovos(){
         exit(0);
         break;
       case 1:
-        printc("Deseja continuar com os dados [red]Corrompidos[/red]? [[red]0[/red]/[green]1[/green]] ");
+        printc("Deseja continuar com os dados [red]Corrompidos[/red]? ([red]0 - Não[/red]/[green]1 - Sim[/green]) ");
         scanf("%d", &opcao);
         if (opcao == 1){
           readData();

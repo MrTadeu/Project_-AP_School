@@ -92,11 +92,8 @@ void importDataTxtBin(){
         criardisciplinas();
         InitCursos();
 
-        printf("ola");
-        /* criarSala(); */
-        getchar();
-        getchar();
-
+        criarSala();
+        
         //DEFINIR PERMISSÕES DE ACORDO COM OS REGIMES E GUARDAR EM BINARIO
         saveAndSetPermissionsBinByTxt();
     }
