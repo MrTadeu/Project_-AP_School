@@ -65,11 +65,14 @@ int isletter_cheker(char *str){
 
 int ValidarZeroUm(){
     int flag = 0, num = -1;
-    while (num != 0 || num != 1){
+    while (1){
         if(flag == 1){
             printc("\n[red]Opção inválida, tente novamente: [/red]\n");
         }
         scanf("%d", &num);
+        if(num == 0 || num == 1){
+            break;
+        }
         flag = 1;
     }
     return num;
