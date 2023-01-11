@@ -247,8 +247,10 @@ void editarSala(){
         if(salas[i].id == id){
             do{
                 do{
+                    salas[i].nomeSala = malloc(100);
                     printf("Qual o novo nome da sala? ");
                     scanf("%s", salas[i].nomeSala);
+                    salas[i].nomeSala = realloc(salas[i].nomeSala, strlen(salas[i].nomeSala) + 1);
                 } while (isdigit_cheker(salas[i].nomeSala) == 1);
 
                 do{
