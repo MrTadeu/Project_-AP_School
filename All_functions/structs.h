@@ -43,7 +43,11 @@ typedef struct { //struct para guardar os dados de uma reserva
     int ano;
     int hora;
     int minuto;
-    int duracao;
+    int diaFinal; 
+    int mesFinal;
+    int anoFinal;
+    int horaFinal;
+    int minutoFinal;
     int salaReservada;
     int id_exame;
     int id_reserva;
@@ -81,7 +85,7 @@ typedef struct{
 }tempoExames;
 
 typedef struct{
-    int max_inscritos, *ids_inscritos, professor, SalaNum, regime, id, curso, inscritos;
+    int max_inscritos, *ids_inscritos, professor, SalaNum, regime, id, curso, inscritos, regime;
     char *disciplina, *SalaNome;
     tempoExames data;
 }Exames;

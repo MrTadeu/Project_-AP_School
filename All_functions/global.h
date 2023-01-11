@@ -59,6 +59,7 @@ int checkIfRegimeExists(int id);
 int checkIfRegimesBeingUsed(int id);
 void masiveRegimeChange(int id, int new_id);
 void moverRegimes();
+
 //permissions.c
 void saveAndSetPermissionsBinByTxt();
 void readBinPermissions();
@@ -169,7 +170,7 @@ void criarExame();
 void zerarExame();
 void listarExames();
 int CheckDiscInCurso(int id, int n_Exame);
-void ReservarSala();
+void ReservarSala(int N_exames);
 void MostrarSalasLivresParaHorarioEscolhido();
 void inscreverExame();
 void contarInscrito(int id);
