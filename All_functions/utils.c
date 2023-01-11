@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include "../All_functions/global.h"
 
 char *lowercase(char *str){
     int i;
@@ -75,13 +76,28 @@ void ValidarZeroUm(int num){
 void timeNow(){
     time_t now;
     time(&now);
-    struct tm *tempoAgora;
-
     tempoAgora = localtime(&now);
+
     //printf("Current date and time: %04d-%02d-%02d %02d:%02d:%02d\n", tempoAgora->tm_year + 1900, tempoAgora->tm_mon + 1, tempoAgora->tm_mday, tempoAgora->tm_hour, tempoAgora->tm_min, tempoAgora->tm_sec);
 }
 
 
+int diferencaTempo(int ano, int mes, int dia, int hora, int minuto, int segundo){
+    timeNow();
+
+    int anoAtual = tempoAgora->tm_year + 1900;
+    int mesAtual = tempoAgora->tm_mon + 1;
+    int diaAtual = tempoAgora->tm_mday;
+    int horaAtual = tempoAgora->tm_hour;
+    int minutoAtual = tempoAgora->tm_min;
+
+    int difAno = anoAtual - ano;
+    int difMes = mesAtual - mes;
+    int difDia = diaAtual - dia;
+    int difHora = horaAtual - hora;
+    int difMinuto = minutoAtual - minuto;
+    
+}
 /* int generate_unique_numbers(int *numbers, int size) {
   // seed the random number generator
   srand(time(NULL));

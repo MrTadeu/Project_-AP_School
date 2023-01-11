@@ -72,3 +72,11 @@ typedef struct{
     char *disciplina, *SalaNome;
     tempoExames data;
 }Exames;
+
+//dia, mes, hora, minuto //utils.c
+struct tm *tempoAgora;
+
+typedef struct{
+    int id;
+    char *name;
+}TempoAnoAtualDiferenca;
