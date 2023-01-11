@@ -62,6 +62,7 @@ void importDataTxtBin(){
         remove("data/bin/professores.bin");
         remove("data/bin/regimes.bin");
         remove("data/bin/salas.bin");
+        remove("data/bin/exames.bin");
 
         //LIMPAR n_alunos, n_regimes, n_courses
         n_alunos = 0;
