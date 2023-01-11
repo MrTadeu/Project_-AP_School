@@ -22,8 +22,9 @@ char *capitalize(char *str);
 int isletter_cheker(char *str);
 void timeNow();
 void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
-int TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto);
 struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add);
+struct tm TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto);
+int ChackTempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt();

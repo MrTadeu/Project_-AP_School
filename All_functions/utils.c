@@ -102,7 +102,29 @@ struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add)
     return original_time;
 }
 
-int TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto){
+struct tm TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto){
+    struct tm *tempoAgora;
+    timeNow();
+    struct tm start_datetime, end_datetime;
+
+    // Inicio da data
+    start_datetime.tm_year = tempoAgora->tm_year + 1900;
+    start_datetime.tm_mon = mes;  // janeiro
+    start_datetime.tm_mday = dia;
+    start_datetime.tm_hour = hora;
+    start_datetime.tm_min = minuto;
+    start_datetime.tm_sec = tempoAgora->tm_sec;
+
+    // Fim da data
+    end_datetime = add_time(start_datetime, n_TesteTempoMinuto, n_TesteTempoHora);
+
+    time_t start_time = mktime(&start_datetime);
+    time_t end_time = mktime(&end_datetime);
+
+    return end_datetime; 
+}
+
+int ChackTempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto){
     struct tm *tempoAgora;
     timeNow();
     struct tm start_datetime, end_datetime, check_datetime;
