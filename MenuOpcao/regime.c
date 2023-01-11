@@ -214,7 +214,7 @@ void removerRegime(){
                 printf("\n\nPor favor Introduza o ID do regime que pretende mover: ");
                 scanf("%d", &new_id);
                 flag = 1;
-            }while (checkIfRegimeExists(new_id) == 0);
+            }while (checkIfRegimeExists(new_id) == 0 || new_id == id);
             masiveRegimeChange(id, new_id);
         }
         else{
