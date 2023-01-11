@@ -133,3 +133,22 @@ int checkIfRegimeExists(int id){
     }
     return 0;
 }
+
+int checkIfRegimesBeingUsed(int id){
+    for (int i = 0; i < n_alunos; i++){
+        if (alunos[i].id_regime == id){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void masiveRegimeChange(int id, int new_id){
+    for (int i = 0; i < n_alunos; i++){
+        if (alunos[i].id_regime == id){
+            alunos[i].id_regime = new_id;
+        }
+    }
+    saveBinRegimes();
+    updateUser();
+}
