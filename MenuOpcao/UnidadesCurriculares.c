@@ -127,10 +127,17 @@ void EditarDisciplina()
 
 void ListarCursos()
 {
-    for(int i=0; i<n_courses; i++)
-    {
+    
+    for(int i=0; i<n_courses; i++){
+        int findID;
+        for(int j=0; j<n_professores; j++){
+            if(courses[i].IdDiretor == professores[j].id){
+                findID = j;
+                break;
+            }
+        }
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
-        printf("ID Diretor de curso: %d\n", courses[i].IdDiretor);
+        printc("[green]ID[/green]: %d [blue]Diretor[/blue]: %s\n", courses[i].IdDiretor, professores[findID].nomeProfessor);
     }
 }
 
@@ -160,7 +167,14 @@ void ListarCursosDisciplinas()
             }
             printf("\n");
         }
-        printc("[blue]Diretor[/blue]: %d\n", courses[i].IdDiretor);
+        int findID;
+        for(int j=0; j<n_professores; j++){
+            if(courses[i].IdDiretor == professores[j].id){
+                findID = j;
+                break;
+            }
+        }
+        printc("[green]ID[/green]: %d [blue]Diretor[/blue]:  %s \n", courses[i].IdDiretor, professores[findID].nomeProfessor);
         printf("------------------------------------------------------------\n");
     }
 }
