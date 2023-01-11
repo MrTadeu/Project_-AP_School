@@ -38,11 +38,16 @@ typedef struct {
 } AlunoFileStruct;
 
 typedef struct { //struct para guardar os dados de uma reserva
-    int DataInicioReserva; 
-    int DataFimReserva;
+    int dia; 
+    int mes;
+    int ano;
+    int hora;
+    int minuto;
+    int duracao;
     int salaReservada;
     int id_exame;
     int id_reserva;
+    int vagas;
 }Reservas;    
 
 typedef struct { //struct para guardar os dados de uma sala
@@ -52,8 +57,6 @@ typedef struct { //struct para guardar os dados de uma sala
     int id;
     Reservas *reservas;
     int n_reservas;
-    int ocupada;
-    int id_exame;
 }SalaStruct;
 
 typedef struct { //struct para guardar os dados de um professor
@@ -74,7 +77,7 @@ typedef struct {
 
 //EXAMES
 typedef struct{
-    int dia, mes, hora, minuto;
+    int dia, mes, hora, minuto, duracao;
 }tempoExames;
 
 typedef struct{

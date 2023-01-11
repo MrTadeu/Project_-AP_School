@@ -26,28 +26,6 @@ void InitSalas(){
 }
 
 void criarSalainit(){
-
-
-typedef struct { //struct para guardar os dados de uma reserva
-    int DataInicioReserva; 
-    int DataFimReserva;
-    int salaReservada;
-    int id_exame;
-    int id_reserva;
-}Reservas;    
-typedef struct { //struct para guardar os dados de uma sala
-    char *nomeSala;
-    int numeroSala;
-    int numeroCadeiras;
-    int id;
-    Reservas *reservas;
-    int n_reservas;
-    int ocupada;
-    int id_exame;
-}SalaStruct;
-
-
-
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
     
@@ -55,8 +33,6 @@ typedef struct { //struct para guardar os dados de uma sala
         salas[n_salas].id = 1;
     else
         salas[n_salas].id = salas[n_salas-1].id + 1;
-
-    salas[n_salas].id_exame = 0;
 
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
@@ -122,8 +98,7 @@ void criarSala(){ // #VALIDAR
         salas[n_salas].id = 1;
     else
     salas[n_salas].id = salas[n_salas-1].id + 1;
-    salas[n_salas].id_exame = 0;
-    salas[n_salas].ocupada = 0;
+    salas[n_salas].n_reservas = 0;
 
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
@@ -194,9 +169,19 @@ void saveBinSalas(){
 
         fwrite(&salas[i].numeroCadeiras, sizeof(int), 1, file);
 
-        fwrite(&salas[i].ocupada, sizeof(int), 1, file);
+        fwrite(&salas[i].n_reservas, sizeof(int), 1, file);
 
-        fwrite(&salas[i].id_exame, sizeof(int), 1, file);
+        for(int j = 0; j<salas[i].n_reservas; j++){
+            fwrite(&salas[i].reservas[i].salaReservada, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].id_reserva, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].id_exame, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].dia, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].mes, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].ano, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].hora, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].minuto, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[i].duracao, sizeof(int), 1, file);
+        }
     }
     fclose(file);
 }
@@ -247,9 +232,19 @@ void readBinSalas(){
 
             fread(&salas[i].numeroCadeiras, sizeof(int), 1, file);
 
-            fread(&salas[i].ocupada, sizeof(int), 1, file);
-
-            fread(&salas[i].id_exame, sizeof(int), 1, file);
+            fread(&salas[i].n_reservas, sizeof(int), 1, file);
+            salas[i].reservas = malloc(sizeof(Reservas)*salas[i].n_reservas);
+        for(int j = 0; j<salas[i].n_reservas; j++){
+            fread(&salas[i].reservas[i].salaReservada, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].id_reserva, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].id_exame, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].dia, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].mes, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].ano, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].hora, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].minuto, sizeof(int), 1, file);
+            fread(&salas[i].reservas[i].duracao, sizeof(int), 1, file);
+        }
         }
         n_salas = i;
         fclose(file);
@@ -324,7 +319,7 @@ void removerSala(){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            if(salas[id].ocupada == 1){
+            if(salas[id].n_reservas != 0){
                 printc("[red]Sala esta ocupada[/red]\n");
             }
             else{
@@ -341,5 +336,5 @@ void removerSala(){
                 }
             }
         }
-    }while(salas[id].ocupada == 1 || CheckIFsalaExist(salas[id].nomeSala, salas[id].numeroSala) == 0);
+    }while(salas[id].n_reservas != 0 || CheckIFsalaExist(salas[id].nomeSala, salas[id].numeroSala) == 0);
 }
