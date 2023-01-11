@@ -37,11 +37,21 @@ typedef struct {
     int year, id;
 } AlunoFileStruct;
 
+typedef struct { //struct para guardar os dados de uma reserva
+    int DataInicioReserva; 
+    int DataFimReserva;
+    int salaReservada;
+    int id_exame;
+    int id_reserva;
+}Reservas;    
+
 typedef struct { //struct para guardar os dados de uma sala
     char *nomeSala;
     int numeroSala;
     int numeroCadeiras;
     int id;
+    Reservas *reservas;
+    int n_reservas;
     int ocupada;
     int id_exame;
 }SalaStruct;
@@ -68,7 +78,7 @@ typedef struct{
 }tempoExames;
 
 typedef struct{
-    int max_inscritos, *ids_inscritos, professor, salaId, regime, id, curso, inscritos;
+    int max_inscritos, *ids_inscritos, professor, SalaNum, regime, id, curso, inscritos;
     char *disciplina, *SalaNome;
     tempoExames data;
 }Exames;
@@ -76,6 +86,5 @@ typedef struct{
 //dia, mes, hora, minuto //utils.c
 
 typedef struct{
-    int anoAtual, mesAtual, diaAtual, horaAtual, minutoAtual;
-    int difAno, difMes, difDia, difHora, difMinuto;
+    int difMes, difDia, difHora, difMinuto;
 }TempoAnoAtualDiferenca;

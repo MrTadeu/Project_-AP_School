@@ -47,7 +47,7 @@ int InitCursos() { //Apenas usado pela primeira vez
         ListarDisciplinas();
         printc("\n[green]Curso: [/green]%s\n",  courses[i].name);
             listarProfessor();
-            printc("\n\n\t[green]Insira o ID do diretor deste curso:[/green] ");
+            printc("\n\n[green]Insira o ID do diretor deste curso:[/green] ");
             scanf("%d", &TmpIdDiretor);
             if(CheckIFProfessor(TmpIdDiretor) == -1){
                 printc("\n\n\t[red]Esta pessoa não é professor[/red]\n\n");

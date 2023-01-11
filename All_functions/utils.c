@@ -4,7 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#include "../All_functions/global.h"
+//#include "global.h"
+#include "structs.h"
 
 extern TempoAnoAtualDiferenca tempo;
 
@@ -85,25 +86,56 @@ void timeNow(){
     //printf("Current date and time: %04d-%02d-%02d %02d:%02d:%02d\n", tempoAgora->tm_year + 1900, tempoAgora->tm_mon + 1, tempoAgora->tm_mday, tempoAgora->tm_hour, tempoAgora->tm_min, tempoAgora->tm_sec);
 }
 
-void diferencaTempo(int ano, int mes, int dia, int hora, int minuto){
+void diferencaTempo(int mes, int dia, int hora, int minuto){
     struct tm *tempoAgora;
     timeNow();
-    tempo.anoAtual= tempoAgora->tm_year +  1900;
-    tempo.mesAtual = tempoAgora->tm_mon + 1;
-    tempo.diaAtual = tempoAgora->tm_mday;
-    tempo.horaAtual = tempoAgora->tm_hour;
-    tempo.minutoAtual = tempoAgora->tm_min;
-
-    tempo.difAno = tempo.anoAtual - ano;
-    tempo.difMes = tempo.mesAtual - mes;
-    tempo.difDia = tempo.diaAtual - dia;
-    tempo.difHora = tempo.horaAtual - hora;
-    tempo.difMinuto = tempo.minutoAtual - minuto;
+    tempo.difMes = tempoAgora->tm_mon + 1 - mes;
+    tempo.difDia = tempoAgora->tm_mday - dia;
+    tempo.difHora = tempoAgora->tm_hour - hora;
+    tempo.difMinuto = tempoAgora->tm_min;
 }
 
-/* int TempoCerto(int ano, int mes, int dia, int hora, int minuto){
 
-} */
+int TempoCerto(int mes, int dia, int hora, int minuto){
+    struct tm *tempoAgora;
+    timeNow();
+    struct tm start_datetime, end_datetime, check_datetime;
+
+    // Inicio da data
+    start_datetime.tm_year = tempoAgora->tm_year + 1900;
+    start_datetime.tm_mon = 0;  // janeiro
+    start_datetime.tm_mday = 1;
+    start_datetime.tm_hour = 0;
+    start_datetime.tm_min = 0;
+    start_datetime.tm_sec = 0;
+
+    // Fim da data
+    end_datetime.tm_year = tempoAgora->tm_year + 1900;
+    end_datetime.tm_mon = 11;  // dezembro
+    end_datetime.tm_mday = 31;
+    end_datetime.tm_hour = 23;
+    end_datetime.tm_min = 59;
+    end_datetime.tm_sec = 59;
+
+    //Verificar se a data está correta
+    check_datetime.tm_year = tempoAgora->tm_year + 1900;
+    check_datetime.tm_mon = mes;
+    check_datetime.tm_mday = dia;
+    check_datetime.tm_hour = hora;
+    check_datetime.tm_min = minuto;
+    check_datetime.tm_sec = tempoAgora->tm_sec;
+
+    time_t start_time = mktime(&start_datetime);
+    time_t end_time = mktime(&end_datetime);
+    time_t check_time = mktime(&check_datetime);
+
+    if (check_time >= start_time && check_time <= end_time) {
+        return 1; // tempo certo //The date and time is between the start and end datetime.
+    } else {
+        printf("[red]O tempo está incorreto![/red]\n"); // The date and time is NOT between the start and end datetime.
+    }
+    return 0;
+}
 /* int generate_unique_numbers(int *numbers, int size) {
   // seed the random number generator
   srand(time(NULL));

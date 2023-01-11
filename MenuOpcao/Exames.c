@@ -73,7 +73,7 @@ void criarExame(){
     exame[n_exames].SalaNome = realloc(exame[n_exames].SalaNome, (strlen(exame[n_exames].SalaNome)+1));
     uppercase(exame[n_exames].SalaNome);
     printf("Insira o número da sala? ");
-    scanf("%d", &exame[n_exames].salaId);
+    scanf("%d", &exame[n_exames].SalaNum);
     SalasOcupada();
     
     printf("Qual a data do exame (formato DD MM)? ");
@@ -106,7 +106,7 @@ void zerarExame(int i)
     exame[i].max_inscritos = 0;
     exame[i].disciplina = 0;
     exame[i].professor = 0;
-    exame[i].salaId = 0;
+    exame[i].SalaNum = 0;
     exame[i].regime = 0;
     exame[i].id = 0;
     exame[i].data.dia = 0;
@@ -117,26 +117,27 @@ void zerarExame(int i)
 
 void listarExames(){
     for(int i=0;i<n_exames;i++)
-        printf("\n\t[blue]ID:[/blue] %d   [blue]Disciplina:[/blue] %d   [blue]Sala:[/blue] %s%d   [blue]Data:[/blue] %d   [blue]Hora: [/blue]%d\n",exame[i].id,exame[i].disciplina,exame[i].SalaNome,exame[i].salaId ,exame[i].data.dia,exame[i].data.mes,exame[i].data.hora,exame[i].data.minuto);
+        printf("\n\t[blue]ID:[/blue] %d   [blue]Disciplina:[/blue] %d   [blue]Sala:[/blue] %s%d   [blue]Data:[/blue] %d   [blue]Hora: [/blue]%d\n",exame[i].id,exame[i].disciplina,exame[i].SalaNome,exame[i].SalaNum ,exame[i].data.dia,exame[i].data.mes,exame[i].data.hora,exame[i].data.minuto);
 }
 
 void SalasOcupada()
 {
     for(int i=0;i<n_exames+1;i++){
         for(int j=0;j<n_salas;j++){
-        if(exame[i].salaId == salas[j].numeroSala && strcmp(exame[i].SalaNome , salas[j].nomeSala) == 0){
+        if(exame[i].SalaNum == salas[j].numeroSala && strcmp(exame[i].SalaNome , salas[j].nomeSala) == 0){
             salas[j].ocupada = 1;
             salas[j].id_exame = exame[i].id;
         }
+        }
     }
-    }
+    saveBinSalas();
 }
 
 void mostrarSalasLivres(){
     printc("[blue]Salas Livres: [/blue]\n");
         for(int i = 0; i< n_salas;i++){
             if(salas[i].ocupada == 0)
-            printf("Nome: %s\tID: %d\tCapacidade: %d",salas[i].nomeSala, salas[i].numeroSala, salas[i].numeroCadeiras);
+            printc("\t[blue]Nome:[/blue] %s\t[blue]Número:[/blue] %d\t[blue]Capacidade:[/blue] %d\n",salas[i].id,salas[i].nomeSala, salas[i].numeroSala, salas[i].numeroCadeiras);
         }
 }
 
@@ -159,7 +160,7 @@ void inscreverExame(){
                 if (exame[i].ids_inscritos[j] == 0){
                     exame[i].ids_inscritos[j] = aluno.id;
                     printc("[green]Inscrito com sucesso![/green]\n");
-                    vagaMenos(exame[i].salaId, exame[i].SalaNome);
+                    vagaMenos(exame[i].SalaNum, exame[i].SalaNome);
                     return;
                 }
             }
@@ -216,7 +217,7 @@ void listarExamesdeumAluno(){
     for (i = 0; i < n_exames; i++){
         for (j = 0; j < exame[i].max_inscritos; j++){
             if (exame[i].ids_inscritos[j] == id_aluno){
-                printf("\n[blue]ID:[/blue] %d   [blue]Disciplina: [/blue]%d   [blue]Sala:[/blue] %s%d   [blue]Data:[/blue] %d   [blue]Hora:[/blue] %d\n",exame[i].id,exame[i].disciplina,exame[i].SalaNome,exame[i].salaId,exame[i].data.dia,exame[i].data.mes,exame[i].data.hora,exame[i].data.minuto);
+                printf("\n[blue]ID:[/blue] %d   [blue]Disciplina: [/blue]%d   [blue]Sala:[/blue] %s%d   [blue]Data:[/blue] %d   [blue]Hora:[/blue] %d\n",exame[i].id,exame[i].disciplina,exame[i].SalaNome,exame[i].SalaNum,exame[i].data.dia,exame[i].data.mes,exame[i].data.hora,exame[i].data.minuto);
             }
         }
     }
@@ -233,7 +234,7 @@ void removerIncricao(){
                 if (exame[i].ids_inscritos[j] == aluno.id){
                     exame[i].ids_inscritos[j] = 0;
                     printc("[green]Removido com sucesso![/green]\n");
-                    vagaMais(exame[i].salaId, exame[i].SalaNome);
+                    vagaMais(exame[i].SalaNum, exame[i].SalaNome);
                     return;
                 }
             }
@@ -244,19 +245,19 @@ void removerIncricao(){
     printf("Não existe nenhum exame com esse ID!\n");
 }
 
-void vagaMais(int salaId, char* SalaNome)
+void vagaMais(int SalaNum, char* SalaNome)
 {
     for(int i=0;i<n_salas;i++){
-        if(salas[i].numeroSala == salaId && strcmp(salas[i].nomeSala, SalaNome) == 0){
+        if(salas[i].numeroSala == SalaNum && strcmp(salas[i].nomeSala, SalaNome) == 0){
             salas[i].numeroCadeiras++;
         }
     }
 }
 
-void vagaMenos(int salaId, char* SalaNome) 
+void vagaMenos(int SalaNum, char* SalaNome) 
 {
     for(int i=0;i<n_salas;i++){
-        if(salas[i].numeroSala == salaId && strcmp(salas[i].nomeSala, SalaNome) == 0){
+        if(salas[i].numeroSala == SalaNum && strcmp(salas[i].nomeSala, SalaNome) == 0){
             salas[i].numeroCadeiras--;
         }
     }
@@ -283,7 +284,7 @@ void saveBinExames(){
         size_t salanomelen = strlen(exame[i].SalaNome)+1;
         fwrite(&salanomelen, sizeof(size_t), 1, fp);
         fwrite(exame[i].SalaNome, salanomelen  , 1, fp);
-        fwrite(&exame[i].salaId, sizeof(int), 1, fp);
+        fwrite(&exame[i].SalaNum, sizeof(int), 1, fp);
 
         fwrite(&exame[i].professor, sizeof(int), 1, fp);
         fwrite(&exame[i].regime, sizeof(int), 1, fp);
@@ -324,7 +325,7 @@ void readBinExames()
         fread(&salanomelen, sizeof(size_t), 1, fp);
         exame[i].SalaNome = malloc(salanomelen);
         fread(exame[i].SalaNome, salanomelen, 1, fp);
-        fread(&exame[i].salaId, sizeof(int), 1, fp);
+        fread(&exame[i].SalaNum, sizeof(int), 1, fp);
 
         fread(&exame[i].professor, sizeof(int), 1, fp);
         fread(&exame[i].regime, sizeof(int), 1, fp);

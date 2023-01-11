@@ -26,14 +26,38 @@ void InitSalas(){
 }
 
 void criarSalainit(){
+
+
+typedef struct { //struct para guardar os dados de uma reserva
+    int DataInicioReserva; 
+    int DataFimReserva;
+    int salaReservada;
+    int id_exame;
+    int id_reserva;
+}Reservas;    
+typedef struct { //struct para guardar os dados de uma sala
+    char *nomeSala;
+    int numeroSala;
+    int numeroCadeiras;
+    int id;
+    Reservas *reservas;
+    int n_reservas;
+    int ocupada;
+    int id_exame;
+}SalaStruct;
+
+
+
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
-    int id = salas[n_salas-1].id + 1;
-    if (n_salas == 0){
-        id = 1;
-    }
-    salas[n_salas].id = id;
+    
+    if (n_salas == 0)
+        salas[n_salas].id = 1;
+    else
+        salas[n_salas].id = salas[n_salas-1].id + 1;
+
     salas[n_salas].id_exame = 0;
+
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
     do{
@@ -93,12 +117,13 @@ void criarSala(){ // #VALIDAR
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     salas = realloc(salas, (n_salas+1)*sizeof(SalaStruct));
     salas[n_salas].nomeSala = malloc(100);
-    int id = salas[n_salas-1].id + 1;
-    if (n_salas == 0){
-        id = 1;
-    }
-    salas[n_salas].id = id;
+    int id;
+    if (n_salas == 0)
+        salas[n_salas].id = 1;
+    else
+    salas[n_salas].id = salas[n_salas-1].id + 1;
     salas[n_salas].id_exame = 0;
+    salas[n_salas].ocupada = 0;
 
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
@@ -293,9 +318,9 @@ void removerSala(){
     int id;
     mostrarSalasLivres();
     do{
-        printf("Qual ID da sala que deseja remover? ");
-        scanf("%d", &id);
-        if (CheckIFsalaExist(salas[id].nomeSala, salas[id].numeroSala) == 0){
+        printf("Qual o nome da sala que deseja remover? ");
+        scanf("%s", &id);
+        if (CheckIFsalaExist(salas[id-1].nomeSala, salas[id-1].numeroSala) == 0){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
