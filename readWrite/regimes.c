@@ -150,5 +150,6 @@ void masiveRegimeChange(int id, int new_id){
         }
     }
     saveBinRegimes();
+    saveBinAlunos();
     updateUser();
 }

@@ -187,19 +187,45 @@ void editarPermissoesRegime(){
 void removerRegime(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     listarRegimes();
-    int flag = 0, id;
+    int flag = 0, id, new_id;
     do{
         if(flag == 1)
             printc("\n[red]Por favor insira um ID válido![/red]\n");
 
-        printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
+        printf("\n\nPor favor Introduza o ID do regime que pretende remover: ");
         scanf("%d", &id);
         flag = 1;
     }while (checkIfRegimeExists(id) == 0);
 
     if(checkIfRegimesBeingUsed(id) == 1){
-        printc("\n[red]Não é possível remover este regime, pois existem alunos que o estão a usar![/red]\n");
-        return;
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+        printc("\n[red]Não é possível remover este regime, pois existem utilizadores que o estão a usar![/red]\n");
+        printf("\nDeseja mover os utilizadores para outro regime? (1 - Sim, 0 - Nao): ");
+        int op;
+        scanf("%d", &op);
+        if (op == 1){
+            flag = 0;
+            fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+            listarRegimes();
+            do{
+                if(flag == 1)
+                    printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+                printf("\n\nPor favor Introduza o ID do regime que pretende mover: ");
+                scanf("%d", &new_id);
+                flag = 1;
+            }while (checkIfRegimeExists(new_id) == 0);
+            masiveRegimeChange(id, new_id);
+        }
+        else{
+            return;
+        }
     }
 
+    for(int i = id; i < n_regimes; i++){
+        regimes[i] = regimes[i+1];
+    }
+    n_regimes--;
+    regimes = realloc(regimes, n_regimes * sizeof(regimeStruct));
+    saveBinRegimes();
 }
