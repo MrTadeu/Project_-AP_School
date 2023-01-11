@@ -9,8 +9,17 @@ extern courseStruct *courses;
 extern permissionFileStruct *perms_file;
 extern int n_alunos, n_regimes, n_courses;
 
-regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile){
-    regimeStruct *regimes = malloc(sizeof(regimeStruct));
+void getAllRegimes(AlunoFileStruct *alunosFile){
+    regimes = malloc(sizeof(regimeStruct)*3);
+    n_regimes = 2;
+    regimes[0].id = 1;
+    regimes[0].name = malloc(6);
+    strcpy(regimes[0].name, "Admin");
+    regimes[1].id = 2;
+    regimes[1].name = malloc(10);
+    strcpy(regimes[1].name, "Professor");
+
+
     for (int i = 0; i < n_alunos; i++){
         int found = 0;
         for (int j = 0; j < n_regimes; j++){
@@ -24,10 +33,9 @@ regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile){
             regimes[n_regimes].id = n_regimes+1;
             regimes[n_regimes].name = malloc((strlen(alunosFile[i].regime)+1));
             strcpy(regimes[n_regimes].name, alunosFile[i].regime);
-            n_regimes = n_regimes+1;
+            n_regimes++;
         }
     }
-    return regimes;
 }
 
 void saveBinRegimes(){

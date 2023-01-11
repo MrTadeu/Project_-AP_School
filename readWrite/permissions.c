@@ -9,13 +9,79 @@ extern int n_regimes;
 
 void saveAndSetPermissionsBinByTxt(){
     FILE *file = fopen("data/bin/permission.bin", "ab");
-    perms_file = malloc(sizeof(permissionFileStruct));
+    perms_file = malloc(sizeof(permissionFileStruct)*3);
     if (file == NULL){
         printc("\n\n\tImpossivel abrir Ficheiro [red]permission.bin[/red]\n\n");
         exit(1);
     }
-    
-    for (int i = 0; i < n_regimes; i++){
+
+    //ADMIN PERMISSIONS
+    perms_file[0].id_regime = regimes[0].id;
+    perms_file[0].perm.MenuExames = 1;
+    perms_file[0].perm.VerDisciplinas = 1;
+    perms_file[0].perm.MenuProfessor = 1;
+    perms_file[0].perm.MenuAdmin = 1;
+    perms_file[0].perm.MenuSalas = 1;
+    perms_file[0].perm.CriarExames = 1;
+    perms_file[0].perm.InscritosExames = 1;
+    perms_file[0].perm.ListarExames = 1;
+    perms_file[0].perm.ListarExamesInscritos = 1;
+    perms_file[0].perm.EditarExames = 1;
+    perms_file[0].perm.ExportarExames = 1;
+    perms_file[0].perm.InscreverExames = 1;
+    perms_file[0].perm.CriarSalas = 1;
+    perms_file[0].perm.ListarSalas = 1;
+    perms_file[0].perm.EditarSalas = 1;
+    perms_file[0].perm.RemoverSalas = 1;
+    perms_file[0].perm.CriarProfessor = 1;
+    perms_file[0].perm.ListarProfessor = 1;
+    perms_file[0].perm.EditarProfessor = 1;
+    perms_file[0].perm.RemoverProfessor = 1;
+    perms_file[0].perm.MenuCursos = 1;
+    perms_file[0].perm.MenuAlunos = 1;
+    perms_file[0].perm.MenuRegimes = 1;
+    perms_file[0].perm.CriarCursos = 1;
+    perms_file[0].perm.ListarCursos = 1;
+    perms_file[0].perm.EditarCursos = 1;
+    perms_file[0].perm.RemoverCursos = 1;
+    perms_file[0].perm.ListarCursosDisciplinas = 1;
+    perms_file[0].perm.MenuDisciplinas = 1;
+    fwrite(&perms_file[0], sizeof(permissionFileStruct),1,file);
+
+    //ADMIN PERMISSIONS
+    perms_file[1].id_regime = regimes[1].id;
+    perms_file[1].perm.MenuExames = 1;
+    perms_file[1].perm.VerDisciplinas = 1;
+    perms_file[1].perm.MenuProfessor = 1;
+    perms_file[1].perm.MenuAdmin = 1;
+    perms_file[1].perm.MenuSalas = 1;
+    perms_file[1].perm.CriarExames = 1;
+    perms_file[1].perm.InscritosExames = 1;
+    perms_file[1].perm.ListarExames = 1;
+    perms_file[1].perm.ListarExamesInscritos = 1;
+    perms_file[1].perm.EditarExames = 1;
+    perms_file[1].perm.ExportarExames = 1;
+    perms_file[1].perm.InscreverExames = 1;
+    perms_file[1].perm.CriarSalas = 1;
+    perms_file[1].perm.ListarSalas = 1;
+    perms_file[1].perm.EditarSalas = 1;
+    perms_file[1].perm.RemoverSalas = 1;
+    perms_file[1].perm.CriarProfessor = 1;
+    perms_file[1].perm.ListarProfessor = 1;
+    perms_file[1].perm.EditarProfessor = 1;
+    perms_file[1].perm.RemoverProfessor = 1;
+    perms_file[1].perm.MenuCursos = 1;
+    perms_file[1].perm.MenuAlunos = 1;
+    perms_file[1].perm.MenuRegimes = 1;
+    perms_file[1].perm.CriarCursos = 1;
+    perms_file[1].perm.ListarCursos = 1;
+    perms_file[1].perm.EditarCursos = 1;
+    perms_file[1].perm.RemoverCursos = 1;
+    perms_file[1].perm.ListarCursosDisciplinas = 1;
+    perms_file[1].perm.MenuDisciplinas = 1;
+    fwrite(&perms_file[1], sizeof(permissionFileStruct),1,file);
+
+    for (int i = 2; i < n_regimes; i++){
         perms_file = realloc(perms_file, sizeof(permissionFileStruct) * (i + 1));
         perms_file[i].id_regime = regimes[i].id;
         printf("\n%dº Regime - %s\n", regimes[i].id, regimes[i].name);

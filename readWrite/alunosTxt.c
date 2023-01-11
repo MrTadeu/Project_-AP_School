@@ -96,7 +96,99 @@ AlunoFileStruct* getTxt(){
 }
 
 void ConvertAluno(AlunoFileStruct *alunosFile){
-    alunos = malloc(sizeof(AlunoStruct)*n_alunos);
+    alunos = malloc(sizeof(AlunoStruct)*n_alunos*2);
+
+    /* int flag=0, year, id;
+    n_alunos = 1;
+    printf("Introduza o email do adminstrador:");
+
+
+    alunos[0].id = generateUserID();
+    alunos[0].name = malloc(50 * sizeof(char));
+    printf("Introduza o nome do adminstrador: ");
+    scanf("%s", alunos[0].name);
+
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ano válido![/red]\n");
+
+        printf("Introduza o ano do aluno: ");
+        scanf("%d", &year);
+        flag = 1;
+
+    } while (year < 1 || year > 4);
+    flag = 0;
+    alunos[0].year = year;
+
+    listarRegimes();
+
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("Por favor Introduza o ID do regime que pretende editar: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (checkIfRegimeExists(id) == 0);
+    alunos[0].id_regime = id;
+
+    ListarCursos();
+    flag = 0;
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("Por favor Introduza o ID do curso que pretende editar: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (CheckIFCursoExiste(id) == -1);
+    alunos[0].id_course = id;
+
+    
+
+    char *email = malloc(120), *password = malloc(100);
+    //email example: pv25207@estgv.ipv.pt
+    email[0] = '\0';
+    strcat(email, "pv");
+    char* id_char = malloc(10);
+    itoa(alunos[0].id, id_char, 10);
+    strcat(email, id_char);
+    strcat(email, "@estgv.ipv.pt");
+    alunos[0].email = malloc((strlen(email)+1));
+    strcpy(alunos[0].email, email);
+
+    //password example: pv25207EE
+    password[0] = '\0';
+    strcat(password, "pv");
+    strcat(password, id_char);
+    strcat(password, courses[CheckIFCursoExiste(alunos[0].id_course)].name);
+    alunos[0].password = malloc((strlen(password)+1));
+    strcpy(alunos[0].password, password);
+    n_alunos++;
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     for (int i = 0; i < n_alunos; i++){
         alunos[i].name = malloc((strlen(alunosFile[i].name)+1));
         strcpy(alunos[i].name, alunosFile[i].name);

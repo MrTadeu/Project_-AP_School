@@ -49,7 +49,7 @@ void getAllCourses(AlunoFileStruct *alunosFile);
 courseStruct getCourseByID(int id);
 
 //regimes.c
-regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile);
+void getAllRegimes(AlunoFileStruct *alunosFile);
 void saveBinRegimes();
 void readBinRegimes();
 regimeStruct getRegimeByID(int id);

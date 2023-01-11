@@ -77,7 +77,7 @@ void importDataTxtBin(){
         }
 
         //LER ARRAY alunosFile E BUSCAR TODOS OS REGIMES SEM REPETIÇÕES E GUARDAR EM regimes
-        regimes = getAllRegimes(alunosFile);
+        getAllRegimes(alunosFile);
         //GUARDAR REGIMES EM BINARIO
         saveBinRegimes();
 

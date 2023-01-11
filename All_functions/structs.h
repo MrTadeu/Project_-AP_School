@@ -68,7 +68,6 @@ typedef struct { //struct para guardar os dados de um professor
     int id, id_regime;
     char *emailProfessor;
     char *passwordProfessor;
-    
 }professorStruct;
 
 //USER DATA 
