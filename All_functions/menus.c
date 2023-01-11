@@ -630,6 +630,12 @@ void MenuRegimes(){
             }
         }
         
+        if (aluno.regime.perm.MenuCursos){
+            if (opcao == i++){
+                moverRegimes();
+            }
+        }
+
         if (aluno.regime.perm.MenuRegimes){
             if (opcao == i++){
                removerRegime();
