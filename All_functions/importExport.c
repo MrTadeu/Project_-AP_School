@@ -220,5 +220,118 @@ void exportDataBinTxt(){
 }
 
 void exportDataBinCsv(){
+    printc("\n[green]Exportar dados para ficheiro de CSV[/green]\n\n");
 
+    //EXPORTAR ALUNOS
+    FILE *fp_aluno= fopen("ExportAlunos.csv", "w");
+    if (fp_aluno == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportAlunos.csv[/red]\n\n");
+    }
+    fprintf(fp_aluno, "NOME;REGIME;ANO;NÚMERO;CURSO\n");
+    for (int i = 0; i < n_alunos; i++){
+        courseStruct courseAluno = getCourseByID(alunos[i].id_course);
+        regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime); 
+        fprintf(fp_aluno, "%s;%s;%d;%d;%s\n", alunos[i].name, regimeAluno.name, alunos[i].year, alunos[i].id, courseAluno.name);
+    }
+    fclose(fp_aluno);
+
+    //EXPORTAR REGIMES
+    FILE *fp_regimes= fopen("ExportRegimes.csv", "w");
+    if (fp_regimes == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportRegimes.csv[/red]\n\n");
+    }
+    fprintf(fp_regimes, "ID;NOME\n");
+    for (int i = 0; i < n_regimes; i++){
+        fprintf(fp_regimes, "%d;%s\n", regimes[i].id, regimes[i].name);
+    }
+    fclose(fp_regimes);
+
+    //EXPORTAR CURSOS
+    FILE *fp_cursos= fopen("ExportCursos.csv", "w");
+    if (fp_cursos == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportCursos.csv[/red]\n\n");
+    }
+    fprintf(fp_cursos, "ID;NOME;DIRETOR DE CURSO;EMAIL\n");
+    for (int i = 0; i < n_professores; i++){
+        int findID;
+        for(int j=0; j<n_professores; j++){
+            if(courses[i].IdDiretor == professores[j].id){
+                findID = j;
+                break;
+            }
+        }
+        fprintf(fp_cursos, "%d;%s;%s;%s\n", courses[i].id, courses[i].name, professores[findID].nomeProfessor, professores[findID].emailProfessor);
+    }
+    fclose(fp_cursos);
+
+    //EXPORTAR DISCIPLINAS
+    FILE *fp_disciplinas= fopen("ExportDisciplinas.csv", "w");
+    if (fp_disciplinas == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportDisciplinas.csv[/red]\n\n");
+    }
+    fprintf(fp_disciplinas, "ID;NOME\n");
+    for (int i = 0; i < n_disciplinas; i++){
+        fprintf(fp_disciplinas, "%d;%s\n", disciplinas[i].id, disciplinas[i].name);
+    }
+    fclose(fp_disciplinas);
+
+
+    //EXPORTAR CURSOS DISCIPLINAS
+    FILE *fp_cursos_disciplinas= fopen("ExportCursosDisciplinas.csv", "w");
+    if (fp_cursos_disciplinas == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportCursosDisciplinas.csv[/red]\n\n");
+    }
+    for (int i = 0; i < n_courses; i++){
+        fprintf(fp_cursos_disciplinas,"\nCurso %d: %s\n", courses[i].id,  courses[i].name);
+        for(int j=0; j<3; j++){
+            fprintf(fp_cursos_disciplinas,"Disciplinas do %d ano : ", j+1);
+            if(courses[i].num_disciplinas[j] == 0){
+                fprintf(fp_cursos_disciplinas,"Inexistente!;");
+            }
+            else{
+                for(int k=0; k<courses[i].num_disciplinas[j]; k++){
+                    if(courses[i].AnoDisciplina[j][k] != NULL)
+                        fprintf(fp_cursos_disciplinas,"%s;", courses[i].AnoDisciplina[j][k]);
+                    else
+                        fprintf(fp_cursos_disciplinas,"Inexistente!;");
+                    if(k%5 == 0)
+                        fprintf(fp_cursos_disciplinas, "\n");
+                }
+            }
+            fprintf(fp_cursos_disciplinas, "\n");
+        }
+        int findID;
+        for(int j=0; j<n_professores; j++){
+            if(courses[i].IdDiretor == professores[j].id){
+                findID = j;
+                break;
+            }
+        }
+        fprintf(fp_cursos_disciplinas, "ID: %d Diretor:  %s \n", courses[i].IdDiretor, professores[findID].nomeProfessor);
+        fprintf(fp_cursos_disciplinas, "------------------------------------------------------------\n");
+    }
+    fclose(fp_cursos_disciplinas);
+
+    //EXPORTAR SALAS
+    FILE *fp_salas= fopen("ExportSalas.csv", "w");
+    if (fp_salas == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportSalas.csv[/red]\n\n");
+    }
+    fprintf(fp_salas, "ID;NOME SALA;NUMERO SALA;NUMERO CADEIRAS\n");
+    for (int i = 0; i < n_salas; i++){
+        fprintf(fp_salas, "%d;%s;%d;%d\n", salas[i].id, salas[i].nomeSala, salas[i].numeroSala, salas[i].numeroCadeiras);
+    }
+    fclose(fp_salas);
+
+
+    //EXPORTAR PROFESSORES
+    FILE *fp_professores= fopen("ExportProfessores.csv", "w");
+    if (fp_professores == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportProfessores.csv[/red]\n\n");
+    }
+    fprintf(fp_professores, "ID;NOME;EMAIL\n");
+    for (int i = 0; i < n_professores; i++){
+        fprintf(fp_professores, "%d;%s;%s\n", professores[i].id, professores[i].nomeProfessor, professores[i].emailProfessor);
+    }
+    fclose(fp_professores);
 }
