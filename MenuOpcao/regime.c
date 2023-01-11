@@ -211,8 +211,7 @@ void moverRegimes(){
         scanf("%d", &id);
         flag = 1;
     }while (checkIfRegimeExists(id) == 0);
-    
-    flag = 0;
+
     do{
         if(flag == 1)
             printc("\n[red]Por favor insira um ID válido![/red]\n");
