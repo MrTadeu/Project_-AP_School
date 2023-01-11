@@ -93,9 +93,20 @@ void diferencaTempo(int mes, int dia, int hora, int minuto){
     tempo.difDia = tempoAgora->tm_mday - dia;
     tempo.difHora = tempoAgora->tm_hour - hora;
     tempo.difMinuto = tempoAgora->tm_min;
-}
- */
+}*/
 
+/*     struct Date date;
+    date.year = 2020;
+    date.month = 1;
+    date.day = 31;
+    date.hour = 12;
+    date.minute = 30; */
+
+/*     date = add_time(date, 10, 90);
+
+    printf("New date and time: %d-%02d-%02d %02d:%02d\n", date.year, date.month, date.day, date.hour, date.minute); */
+
+//auxiliar
 int days_in_month(int month, int year) {
     if (month == 2) {
         if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
@@ -110,9 +121,8 @@ int days_in_month(int month, int year) {
     }
 }
 
-struct Date add_time(struct Date date, int hours, int minutes) {
+struct Date dataFinal(struct Date date, int hours, int minutes) {
     int days = 0;
-
     date.minute += minutes;
     while (date.minute >= 60) {
         date.minute -= 60;
@@ -134,31 +144,55 @@ struct Date add_time(struct Date date, int hours, int minutes) {
             date.year++;
         }
     }
-
     return date;
 }
-/* int generate_unique_numbers(int *numbers, int size) {
-  // seed the random number generator
-  srand(time(NULL));
-  int max = 100000000, min = 1000;
 
-  int unique = 0;  // flag to store whether a unique number has been found
-  int number;      // declare the number variable
-
-  // generate a random number and check if it is unique
-  while (!unique) {
-    number = rand() % (max - min + 1) + min;  // generate a random number between MIN_NUMBER and MAX_NUMBER
-    unique = 1;  // assume the number is unique
-    for (int i = 0; i < size; i++) {  // check if the number is already in the array
-      if (numbers[i] == number) {
-        unique = 0;  // number is not unique
-        break;
-      }
+int chackIfdataExiste(struct Date dataInicaial, struct Date dataFinal, struct Date check){
+    if (check.year < dataInicaial.year || check.year > dataFinal.year){
+        return 0;
     }
-  }
+    if (check.month < dataInicaial.month || check.month > dataFinal.month){
+        return 0;
+    }
+    if (check.day < dataInicaial.day || check.day > dataFinal.day){
+        return 0;
+    }
+    if (check.hour < dataInicaial.hour || check.hour > dataFinal.hour){
+        return 0;
+    }
+    if (check.minute < dataInicaial.minute || check.minute > dataFinal.minute){
+        return 0;
+    }
+    return 1;
+}
 
-  return number;  // return the unique number
-} */
+
+int isValidDate(struct Date date) {
+    if (date.year < 1) {
+        return 0;
+    }
+
+    int monthLength[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    // Check for leap year
+    if (date.year % 4 == 0 && (date.year % 100 != 0 || date.year % 400 == 0)) {
+        monthLength[1] = 29;
+    }
+
+    if (date.month < 1 || date.month > 12) {
+        return 0;
+    }
+    if (date.day < 1 || date.day > monthLength[date.month - 1]) {
+        return 0;
+    }
+    if (date.hour < 0 || date.hour > 23) {
+        return 0;
+    }
+    if (date.minute < 0 || date.minute > 59) {
+        return 0;
+    }
+    return 1;
+}
 
 void generate_unique_numbers(int *array, int length) {
   // Create a set to store the unique values
