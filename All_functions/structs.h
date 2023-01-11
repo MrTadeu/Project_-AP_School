@@ -76,6 +76,5 @@ typedef struct{
 //dia, mes, hora, minuto //utils.c
 
 typedef struct{
-    int anoAtual, mesAtual, diaAtual, horaAtual, minutoAtual;
-    int difAno, difMes, difDia, difHora, difMinuto;
+    int difMes, difDia, difHora, difMinuto;
 }TempoAnoAtualDiferenca;
