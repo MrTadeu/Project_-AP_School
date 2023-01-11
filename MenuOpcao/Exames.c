@@ -138,11 +138,11 @@ void ReservarSala(int N_exames)
             salas[j].reservas[salas[j].n_reservas].dia = exame[N_exames].data.dia;
             salas[j].reservas[salas[j].n_reservas].hora = exame[N_exames].data.hora;
             salas[j].reservas[salas[j].n_reservas].minuto = exame[N_exames].data.minuto;
-            tempoExames date = dataFinal(exame[N_exames].data, exame[N_exames].duracao.hora, exame[N_exames].duracao.minuto);
-            salas[j].reservas[salas[j].n_reservas].mesFinal; 
-            salas[j].reservas[salas[j].n_reservas].diaFinal;  //=funcao final
-            salas[j].reservas[salas[j].n_reservas].horaFinal; //=funcao final
-            salas[j].reservas[salas[j].n_reservas].minutoFinal; //=funcao final
+            tempoExames dateFinal = dataFinal(exame[N_exames].data, exame[N_exames].duracao.hora, exame[N_exames].duracao.minuto);
+            salas[j].reservas[salas[j].n_reservas].mesFinal = dateFinal.mes; 
+            salas[j].reservas[salas[j].n_reservas].diaFinal = dateFinal.dia;
+            salas[j].reservas[salas[j].n_reservas].horaFinal = dateFinal.hora;
+            salas[j].reservas[salas[j].n_reservas].minutoFinal = dateFinal.hora; 
             salas[j].reservas[salas[j].n_reservas].vagas = exame[N_exames].max_inscritos;
             salas[j].n_reservas++;
             }

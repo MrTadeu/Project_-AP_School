@@ -121,33 +121,33 @@ int days_in_month(int month, int year) {
     }
 }
 
-struct Date dataFinal(struct Date date, int hours, int minutes) {
+tempoExames dataFinal(tempoExames date, int hours, int minutes) {
     int days = 0;
-    date.minute += minutes;
-    while (date.minute >= 60) {
-        date.minute -= 60;
-        date.hour++;
+    date.minuto += minutes;
+    while (date.minuto >= 60) {
+        date.minuto -= 60;
+        date.hora++;
     }
 
-    date.hour += hours;
-    while (date.hour >= 24) {
-        date.hour -= 24;
+    date.hora += hours;
+    while (date.hora >= 24) {
+        date.hora -= 24;
         days++;
     }
 
-    date.day += days;
-    while (date.day > days_in_month(date.month, date.year)) {
-        date.day -= days_in_month(date.month, date.year);
-        date.month++;
-        if (date.month > 12) {
-            date.month = 1;
-            date.year++;
+    date.dia += days;
+    while (date.dia > days_in_month(date.mes, date.ano)) {
+        date.dia -= days_in_month(date.mes, date.ano);
+        date.mes++;
+        if (date.mes > 12) {
+            date.mes = 1;
+            date.ano++;
         }
     }
     return date;
 }
 
-int chackIfdataExiste(struct Date dataInicaial, struct Date dataFinal, struct Date check){
+int chackIfdataExiste(Date dataInicaial,Date dataFinal,Date check){
     if (check.year < dataInicaial.year || check.year > dataFinal.year){
         return 0;
     }
@@ -167,7 +167,7 @@ int chackIfdataExiste(struct Date dataInicaial, struct Date dataFinal, struct Da
 }
 
 
-int isValidDate(struct Date date) {
+int isValidDate(Date date) {
     if (date.year < 1) {
         return 0;
     }
