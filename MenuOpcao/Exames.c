@@ -42,16 +42,16 @@ void criarExame(){
     scanf("%d", &exame[n_exames].regime);
         
     do{
-    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-    ListarDisciplinas();
-    printf("Para qual disciplina pretende criar um exame? Insira o nome da disciplina:");
-    scanf("%s", exame[n_exames].disciplina);
-    exame[n_exames].disciplina = realloc(exame[n_exames].disciplina, (strlen(exame[n_exames].disciplina)+1));
-    uppercase(exame[n_exames].disciplina);
-    if(CheckIFDisciplinaExisteNome(exame[n_exames].disciplina) == -1){
-        printc("[red]Disciplina não existe![/red]");
-        Sleep(1000);
-    }
+        fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+        ListarDisciplinas();
+        printf("Para qual disciplina pretende criar um exame? Insira o nome da disciplina:");
+        scanf("%s", exame[n_exames].disciplina);
+        exame[n_exames].disciplina = realloc(exame[n_exames].disciplina, (strlen(exame[n_exames].disciplina)+1));
+        uppercase(exame[n_exames].disciplina);
+        if(CheckIFDisciplinaExisteNome(exame[n_exames].disciplina) == -1){
+            printc("[red]Disciplina não existe![/red]");
+            Sleep(1000);
+        }
     }while(CheckIFDisciplinaExisteNome(exame[n_exames].disciplina) == -1);
 
     do{
@@ -80,10 +80,10 @@ void criarExame(){
         printf("Insira o número da sala? ");
         scanf("%d", &exame[n_exames].SalaNum);
 
-    if(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0){
-        printc("[red]Sala não existe![/red]");
-        Sleep(1000);
-    }
+        if(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0){
+            printc("[red]Sala não existe![/red]");
+            Sleep(1000);
+        }
     }while(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0);
 
     /* mostrarSalasocupada(sala&dia)(); */
