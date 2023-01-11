@@ -98,3 +98,24 @@ void importDataTxtBin(){
         saveAndSetPermissionsBinByTxt();
     }
 }
+
+void exportDataBinTxt(){
+    printc("\n[green]Exportar dados para ficheiro de texto[/green]\n\n");
+    FILE *fp= fopen("ExportAlunos.txt", "w");
+    if (fp == NULL) {
+        printc("\n[red]Erro ao abrir ficheiro ExportAlunos.txt[/red]\n\n");
+    }
+
+    fprintf(fp, "NOME\tREGIME\tANO\tNÚMERO\tCURSO\n");
+
+    for (int i = 0; i < n_alunos; i++){
+        courseStruct courseAluno = getCourseByID(alunos[i].id_course);
+        regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime); 
+        fprintf(fp, "%s\t%s\t%d\t%d\t%s\n", alunos[i].name, regimeAluno.name, alunos[i].year, alunos[i].id, courseAluno.name);
+    }
+    
+
+    // Close the file
+    fclose(fp);
+
+}
