@@ -63,17 +63,16 @@ int isletter_cheker(char *str){
     }
 }
 
-void ValidarZeroUm(int num){
-    if(num == 1 || num == 0){
-        return;
-    }
-    else{
-        while (num != 0 || num != 1){
-            printf("\n[yellow]Escolha uma opção: Não --> 0 Sim --> 1[/yellow]\n");
-            scanf("%d", &num);
+int ValidarZeroUm(){
+    int flag = 0, num = -1;
+    while (num != 0 || num != 1){
+        if(flag == 1){
+            printf("\n[red]Opção inválida, tente novamente: [/red]\n");
         }
-    return;
+        scanf("%d", &num);
+        flag = 1;
     }
+    return num;
 }
 
 /* void timeNow(){
