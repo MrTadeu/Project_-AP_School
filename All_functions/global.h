@@ -22,6 +22,7 @@ char *capitalize(char *str);
 int isletter_cheker(char *str);
 void timeNow();
 void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
+int TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto);
 
 //alunosTxt.c
 AlunoFileStruct* getTxt();
