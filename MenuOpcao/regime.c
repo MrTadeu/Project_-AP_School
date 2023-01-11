@@ -24,7 +24,7 @@ void criarRegime(){
     regimes[n_regimes].name = realloc(regimes[n_regimes].name, (strlen(regimes[n_regimes].name) + 1));
 
     perms_file[n_regimes].id_regime = n_regimes+1;
-    printf("Tem permissao para Menu Exames? (1 - Sim, 0 - Nao): ");
+    printf("\n\nTem permissao para Menu Exames? (1 - Sim, 0 - Nao): ");
     scanf("%d", &perms_file[n_regimes].perm.MenuExames);
     printf("Tem permissao para Ver Disciplinas? (1 - Sim, 0 - Nao): ");
     scanf("%d", &perms_file[n_regimes].perm.VerDisciplinas);
@@ -89,7 +89,19 @@ void criarRegime(){
 }
 
 void editarNomeRegime(){
+    listarRegimes();
+    int flag = 0, id;
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (checkIfRegimeExists(id) == 0);
     
+    printf("\n\nPor favor introduza o novo nome do regime: ");
+    scanf("%s", regimes[id].name);
 }
 
 void editarPermissoesRegime(){

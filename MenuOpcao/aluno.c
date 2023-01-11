@@ -95,12 +95,14 @@ void alterarAluno(){
             case 1:
                 printf("Introduza o nome do aluno: ");
                 scanf("%s", alunos[position].name);
+                updateUser();
                 saveBinAlunos();
                 break;
             case 2:
                 printf("Introduza a password do aluno: ");
                 scanf("%s", alunos[position].password);
                 saveBinAlunos();
+                updateUser();
                 break;
             case 3:
                 listarRegimes();
@@ -116,6 +118,7 @@ void alterarAluno(){
 
                 alunos[position].id_regime = id;
                 saveBinAlunos();
+                updateUser();
                 break;
             case 4:
                 ListarCursos();
@@ -130,6 +133,7 @@ void alterarAluno(){
                 }while (CheckIFCursoExiste(id) == -1);
                 alunos[position].id_course = id;
                 saveBinAlunos();
+                updateUser();
                 break;
             case 5:
                 int year;
@@ -145,6 +149,7 @@ void alterarAluno(){
                 } while (year < 1 || year > 4);
                 alunos[position].year = year;
                 saveBinAlunos();
+                updateUser();
                 break;
         default:
             printf("\nOpção inválida!\n");

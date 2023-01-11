@@ -627,14 +627,14 @@ void editarRegimeMenu(){
     do{
         i = 0;
         printc("**************************************************\n");
-        printc("*************** [blue]Menu Editar Regimes[/blue] **************\n");
+        printc("**************** [blue]Menu Editar Regimes[/blue] *************\n");
         printc("**************************************************\n");
         printf("**        %d -> Sair                             **\n", i++);
         if(aluno.regime.perm.MenuAlunos){
-            printf("**        %d -> Editar Nome Do Regime        **\n", i++);
+            printf("**        %d -> Editar Nome Do Regime            **\n", i++);
         }
         if(aluno.regime.perm.MenuProfessor){
-            printf("**        %d -> Editar Permissoes            **\n", i++);
+            printf("**        %d -> Editar Permissoes                **\n", i++);
         }
         printc("**************************************************\n");
         printc("Qual a opção que pretende?");
