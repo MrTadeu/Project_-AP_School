@@ -280,6 +280,7 @@ void EditarCursos(){
     scanf(" %c", &op);
     if(op == 'S' || op == 's')
     {
+        listarProfessor();
         printc("\n\n\t[green]Insira o ID do novo diretor deste curso: [/green] ");
         scanf("%d", &TmpIdDiretor);
         if(CheckIFProfessor(TmpIdDiretor) == -1){

@@ -94,7 +94,7 @@ void alterarAluno(){
                 break;
             case 1:
                 printf("Introduza o nome do aluno: ");
-                scanf("%s", alunos[position].name);
+                scanf(" %[^\n]", alunos[position].name);
                 saveBinAlunos();
                 updateUser();
                 break;
@@ -195,7 +195,7 @@ void criarAluno(){
     alunos[n_alunos].id = generateUserID();
     alunos[n_alunos].name = malloc(50 * sizeof(char));
     printf("Introduza o nome do aluno: ");
-    scanf("%s", alunos[n_alunos].name);
+    scanf(" %[^\n]", alunos[n_alunos].name);
 
     do{
         if(flag == 1)
