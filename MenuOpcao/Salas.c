@@ -357,6 +357,6 @@ void removerSala(){
             }
         }
 
-    }while(salas[posicao].n_reservas == 1 && CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
+    }while(salas[posicao].n_reservas == 1 || CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
     printf("Sala removida com sucesso!\n");
 }
