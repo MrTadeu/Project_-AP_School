@@ -74,7 +74,6 @@ typedef struct{
 }Exames;
 
 //dia, mes, hora, minuto //utils.c
-struct tm *tempoAgora;
 
 typedef struct{
     int anoAtual, mesAtual, diaAtual, horaAtual, minutoAtual;
