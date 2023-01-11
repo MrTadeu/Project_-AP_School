@@ -692,6 +692,7 @@ void MenuSalas(){
         }
         if (aluno.regime.perm.EditarSalas){
             if (opcao == i++){
+                listarSalas();
                 editarSala(); 
             }
         }
