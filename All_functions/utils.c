@@ -149,20 +149,20 @@ tempoExames dataFinal(tempoExames date, int hours, int minutes) {
     return date;
 }
 
-int chackIfdataExiste(Date dataInicaial,Date dataFinal,Date check){
-    if (check.year < dataInicaial.year || check.year > dataFinal.year){
+int chackIfdataExiste(tempoExames dataInicaial,tempoExames dataFinal,tempoExames check){
+    if (check.ano < dataInicaial.ano || check.ano > dataFinal.ano){
         return 0;
     }
-    if (check.month < dataInicaial.month || check.month > dataFinal.month){
+    if (check.mes < dataInicaial.mes || check.mes > dataFinal.mes){
         return 0;
     }
-    if (check.day < dataInicaial.day || check.day > dataFinal.day){
+    if (check.dia < dataInicaial.dia || check.dia > dataFinal.dia){
         return 0;
     }
-    if (check.hour < dataInicaial.hour || check.hour > dataFinal.hour){
+    if (check.hora < dataInicaial.hora || check.hora > dataFinal.hora){
         return 0;
     }
-    if (check.minute < dataInicaial.minute || check.minute > dataFinal.minute){
+    if (check.minuto < dataInicaial.minuto || check.minuto > dataFinal.minuto){
         return 0;
     }
     return 1;
