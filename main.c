@@ -32,7 +32,6 @@ void main(){
             MenuFilesNovos();
         }
     }else { //Pasta bin existe!
-        mkdir("data/bin"); //Não funciona no linux (algumas dunções do folderExists())
         printc("[red]Error[/red] Pastas não existem.\n\n");
         MenuFilesNovos();
     }
@@ -71,6 +70,7 @@ void main(){
 }
 
 void readData(){
+    mkdir("data/bin");
     readBinAlunos();
     readBinRegimes();
     readBinPermissions();

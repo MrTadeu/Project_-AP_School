@@ -1,4 +1,4 @@
-NOME	REGIME	ANO	NÚMERO	CURSO
+NOME	REGIME	ANO	NUMERO	CURSO
 as	Admin	0	17919	Não existe!
 Alexandre Araujo	Normal	3	3506	EM
 Ana Beatriz Silva	Normal	2	3248	CONT

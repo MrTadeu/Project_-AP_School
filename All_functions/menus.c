@@ -63,7 +63,7 @@ int mainMenu(){
 int importExportMenu(){
     int opcao;
     printf("**************************************************\n");
-    printf("************ Menu Importar / Exportar ************\n");
+    printc("************ [red]Menu Importar / Exportar[/red] ************\n");
     printf("**************************************************\n");
     printf("**        0 -> Voltar                           **\n");
     printf("**        1 -> Importar (TXT -> BIN)            **\n");

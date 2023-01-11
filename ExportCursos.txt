@@ -1,2 +1,0 @@
-ID	NOME	DIRETOR DE CURSO	EMAIL
-1	EE	A	pvA1@estgv.ipv.prof.pt	91688128

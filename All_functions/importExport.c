@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <windows.h>
 #include "global.h"
 
 extern disciplinasStruct *disciplinas;
@@ -25,6 +27,7 @@ void importExportData(){
             case 1:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 importDataTxtBin();
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 break;
             case 2:
                 fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -103,14 +106,18 @@ void importDataTxtBin(){
 }
 
 void exportDataBinTxt(){
+    mkdir("data");
+    mkdir("data/export");
+    mkdir("data/export/txt");
+    
     printc("\n[green]Exportar dados para ficheiro de texto[/green]\n\n");
 
     //EXPORTAR ALUNOS
-    FILE *fp_aluno= fopen("ExportAlunos.txt", "w");
+    FILE *fp_aluno= fopen("data/export/txt/ExportAlunos.txt", "w");
     if (fp_aluno == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportAlunos.txt[/red]\n\n");
     }
-    fprintf(fp_aluno, "NOME\tREGIME\tANO\tNÚMERO\tCURSO\n");
+    fprintf(fp_aluno, "NOME\tREGIME\tANO\tNUMERO\tCURSO\n");
     for (int i = 0; i < n_alunos; i++){
         courseStruct courseAluno = getCourseByID(alunos[i].id_course);
         regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime); 
@@ -119,7 +126,7 @@ void exportDataBinTxt(){
     fclose(fp_aluno);
 
     //EXPORTAR REGIMES
-    FILE *fp_regimes= fopen("ExportRegimes.txt", "w");
+    FILE *fp_regimes= fopen("data/export/txt/ExportRegimes.txt", "w");
     if (fp_regimes == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportRegimes.txt[/red]\n\n");
     }
@@ -130,7 +137,7 @@ void exportDataBinTxt(){
     fclose(fp_regimes);
 
     //EXPORTAR CURSOS
-    FILE *fp_cursos= fopen("ExportCursos.txt", "w");
+    FILE *fp_cursos= fopen("data/export/txt/ExportCursos.txt", "w");
     if (fp_cursos == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportCursos.txt[/red]\n\n");
     }
@@ -148,7 +155,7 @@ void exportDataBinTxt(){
     fclose(fp_cursos);
 
     //EXPORTAR DISCIPLINAS
-    FILE *fp_disciplinas= fopen("ExportDisciplinas.txt", "w");
+    FILE *fp_disciplinas= fopen("data/export/txt/ExportDisciplinas.txt", "w");
     if (fp_disciplinas == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportDisciplinas.txt[/red]\n\n");
     }
@@ -160,7 +167,7 @@ void exportDataBinTxt(){
 
 
     //EXPORTAR CURSOS DISCIPLINAS
-    FILE *fp_cursos_disciplinas= fopen("ExportCursosDisciplinas.txt", "w");
+    FILE *fp_cursos_disciplinas= fopen("data/export/txt/ExportCursosDisciplinas.txt", "w");
     if (fp_cursos_disciplinas == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportCursosDisciplinas.txt[/red]\n\n");
     }
@@ -196,7 +203,7 @@ void exportDataBinTxt(){
     fclose(fp_cursos_disciplinas);
 
     //EXPORTAR SALAS
-    FILE *fp_salas= fopen("ExportSalas.txt", "w");
+    FILE *fp_salas= fopen("data/export/txt/ExportSalas.txt", "w");
     if (fp_salas == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportSalas.txt[/red]\n\n");
     }
@@ -208,7 +215,7 @@ void exportDataBinTxt(){
 
 
     //EXPORTAR PROFESSORES
-    FILE *fp_professores= fopen("ExportProfessores.txt", "w");
+    FILE *fp_professores= fopen("data/export/txt/ExportProfessores.txt", "w");
     if (fp_professores == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportProfessores.txt[/red]\n\n");
     }
@@ -220,14 +227,18 @@ void exportDataBinTxt(){
 }
 
 void exportDataBinCsv(){
+    mkdir("data");
+    mkdir("data/export");
+    mkdir("data/export/csv");
+
     printc("\n[green]Exportar dados para ficheiro de CSV[/green]\n\n");
 
     //EXPORTAR ALUNOS
-    FILE *fp_aluno= fopen("ExportAlunos.csv", "w");
+    FILE *fp_aluno= fopen("data/export/csv/ExportAlunos.csv", "w");
     if (fp_aluno == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportAlunos.csv[/red]\n\n");
     }
-    fprintf(fp_aluno, "NOME;REGIME;ANO;NÚMERO;CURSO\n");
+    fprintf(fp_aluno, "NOME;REGIME;ANO;NUMERO;CURSO\n");
     for (int i = 0; i < n_alunos; i++){
         courseStruct courseAluno = getCourseByID(alunos[i].id_course);
         regimeStruct regimeAluno = getRegimeByID(alunos[i].id_regime); 
@@ -236,7 +247,7 @@ void exportDataBinCsv(){
     fclose(fp_aluno);
 
     //EXPORTAR REGIMES
-    FILE *fp_regimes= fopen("ExportRegimes.csv", "w");
+    FILE *fp_regimes= fopen("data/export/csv/ExportRegimes.csv", "w");
     if (fp_regimes == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportRegimes.csv[/red]\n\n");
     }
@@ -247,7 +258,7 @@ void exportDataBinCsv(){
     fclose(fp_regimes);
 
     //EXPORTAR CURSOS
-    FILE *fp_cursos= fopen("ExportCursos.csv", "w");
+    FILE *fp_cursos= fopen("data/export/csv/ExportCursos.csv", "w");
     if (fp_cursos == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportCursos.csv[/red]\n\n");
     }
@@ -265,7 +276,7 @@ void exportDataBinCsv(){
     fclose(fp_cursos);
 
     //EXPORTAR DISCIPLINAS
-    FILE *fp_disciplinas= fopen("ExportDisciplinas.csv", "w");
+    FILE *fp_disciplinas= fopen("data/export/csv/ExportDisciplinas.csv", "w");
     if (fp_disciplinas == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportDisciplinas.csv[/red]\n\n");
     }
@@ -277,7 +288,7 @@ void exportDataBinCsv(){
 
 
     //EXPORTAR CURSOS DISCIPLINAS
-    FILE *fp_cursos_disciplinas= fopen("ExportCursosDisciplinas.csv", "w");
+    FILE *fp_cursos_disciplinas= fopen("data/export/csv/ExportCursosDisciplinas.csv", "w");
     if (fp_cursos_disciplinas == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportCursosDisciplinas.csv[/red]\n\n");
     }
@@ -313,7 +324,7 @@ void exportDataBinCsv(){
     fclose(fp_cursos_disciplinas);
 
     //EXPORTAR SALAS
-    FILE *fp_salas= fopen("ExportSalas.csv", "w");
+    FILE *fp_salas= fopen("data/export/csv/ExportSalas.csv", "w");
     if (fp_salas == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportSalas.csv[/red]\n\n");
     }
@@ -325,7 +336,7 @@ void exportDataBinCsv(){
 
 
     //EXPORTAR PROFESSORES
-    FILE *fp_professores= fopen("ExportProfessores.csv", "w");
+    FILE *fp_professores= fopen("data/export/csv/ExportProfessores.csv", "w");
     if (fp_professores == NULL) {
         printc("\n[red]Erro ao abrir ficheiro ExportProfessores.csv[/red]\n\n");
     }
