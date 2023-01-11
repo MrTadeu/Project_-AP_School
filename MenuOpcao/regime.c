@@ -187,5 +187,19 @@ void editarPermissoesRegime(){
 void removerRegime(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     listarRegimes();
-    
+    int flag = 0, id;
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (checkIfRegimeExists(id) == 0);
+
+    if(checkIfRegimesBeingUsed(id) == 1){
+        printc("\n[red]Não é possível remover este regime, pois existem alunos que o estão a usar![/red]\n");
+        return;
+    }
+
 }

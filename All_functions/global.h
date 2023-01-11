@@ -50,6 +50,8 @@ regimeStruct getRegimeByID(int id);
 void listarRegimes();
 void listarRegimesPermissoes();
 int checkIfRegimeExists(int id);
+int checkIfRegimesBeingUsed(int id);
+void masiveRegimeChange(int id, int new_id);
 
 //permissions.c
 void saveAndSetPermissionsBinByTxt();
