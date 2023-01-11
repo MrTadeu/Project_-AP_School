@@ -607,7 +607,7 @@ void MenuDisciplinas(){
             printf("**        1 -> Listar Disciplinas               **\n");
         }
         if (aluno.regime.perm.CriarDisciplinas){
-            printf("**        2 -> Criar Disciplinas              **\n");
+            printf("**        2 -> Criar Disciplinas                **\n");
         }
         if (aluno.regime.perm.EditarDisciplinas){
             printf("**        3 -> Editar Disciplinas               **\n");

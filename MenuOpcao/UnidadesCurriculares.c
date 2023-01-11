@@ -141,7 +141,7 @@ void ListarCursosDisciplinas()
         printf("\nCurso %d: %s\n", courses[i].id,  courses[i].name);
         for(int j=0; j<3; j++)
         {
-            printf("Disciplinas do %d ano : ", j+1);
+            printc("Disciplinas do [green]%d[/green] ano : ", j+1);
             if(courses[i].num_disciplinas[j] == 0)
             {
                 printc("[red]Inexistente![/red]\t");
@@ -158,10 +158,10 @@ void ListarCursosDisciplinas()
                         printf("\n");
                 }
             }
-            printf("\n\n");
+            printf("\n");
         }
-        printf("Diretor: %d\n", courses[i].IdDiretor);
-        printf("\n\n");
+        printc("[blue]Diretor[/blue]: %d\n", courses[i].IdDiretor);
+        printf("------------------------------------------------------------\n");
     }
 }
 
