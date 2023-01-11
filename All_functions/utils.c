@@ -4,7 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#include "../All_functions/global.h"
+//#include "global.h"
+#include "structs.h"
 
 extern TempoAnoAtualDiferenca tempo;
 
