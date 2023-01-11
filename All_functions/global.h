@@ -21,6 +21,7 @@ void generate_unique_numbers(int *array, int length);
 char *capitalize(char *str);
 int isletter_cheker(char *str);
 tempoExames dataFinal(tempoExames date, int hours, int minutes);
+int isValidDate(tempoExames date);
 /* void timeNow();
 void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
 struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add);

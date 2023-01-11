@@ -40,6 +40,7 @@ void criarExame(){
     
     printf("Qual o regime do exame? (1 - Normal, 2 - Recurso, 3 - Especial): ");
     scanf("%d", &exame[n_exames].regime);
+    //fazer verificacao
         
     do{
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -92,11 +93,13 @@ void criarExame(){
     /*Checkifreservaexiste*/
 
     /* mostrarSalasocupada(sala&dia&horas&minutos)(); */
+    
     printf("Qual a hora do exame (formato HH MM)? ");
     scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
-
+    do{
     printf("Qual a duração máxima do exame (HH MM)? ");
     scanf("%d %d", &exame[n_exames].duracao.hora, &exame[n_exames].duracao.minuto);
+    }while(exame[n_exames].duracao.hora > 2 || exame[n_exames].duracao.minuto > 59);
     /*funcao*/
     /*Checkifreservaexiste*/
 

@@ -167,28 +167,28 @@ int chackIfdataExiste(Date dataInicaial,Date dataFinal,Date check){
 }
 
 
-int isValidDate(Date date) {
-    if (date.year < 1) {
+int isValidDate(tempoExames date) {
+    if (date.ano < 1) {
         return 0;
     }
 
-    int monthLength[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int mesLength[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    // Check for leap year
-    if (date.year % 4 == 0 && (date.year % 100 != 0 || date.year % 400 == 0)) {
-        monthLength[1] = 29;
+    // Check for leap ano
+    if (date.ano % 4 == 0 && (date.ano % 100 != 0 || date.ano % 400 == 0)) {
+        mesLength[1] = 29;
     }
 
-    if (date.month < 1 || date.month > 12) {
+    if (date.mes < 1 || date.mes > 12) {
         return 0;
     }
-    if (date.day < 1 || date.day > monthLength[date.month - 1]) {
+    if (date.dia < 1 || date.dia > mesLength[date.mes - 1]) {
         return 0;
     }
-    if (date.hour < 0 || date.hour > 23) {
+    if (date.hora < 0 || date.hora > 23) {
         return 0;
     }
-    if (date.minute < 0 || date.minute > 59) {
+    if (date.minuto < 0 || date.minuto > 59) {
         return 0;
     }
     return 1;
