@@ -73,17 +73,12 @@ typedef struct {
     int year, id;
 } AlunoFileStruct;
 
+typedef struct{
+    int dia, mes, hora, minuto, ano;
+}tempoExames;
+
 typedef struct { //struct para guardar os dados de uma reserva
-    int dia; 
-    int mes;
-    int ano;
-    int hora;
-    int minuto;
-    int diaFinal; 
-    int mesFinal;
-    int anoFinal;
-    int horaFinal;
-    int minutoFinal;
+    tempoExames data, dataFinal;
     int salaReservada;
     int id_exame;
     int id_reserva;
@@ -116,10 +111,6 @@ typedef struct {
 } AlunoDataStruct;
 
 //EXAMES
-typedef struct{
-    int dia, mes, hora, minuto, ano;
-}tempoExames;
-
 typedef struct{
     int hora, minuto;
 }duracao;

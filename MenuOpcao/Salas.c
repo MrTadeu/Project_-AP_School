@@ -171,19 +171,20 @@ void saveBinSalas(){
         fwrite(&salas[i].n_reservas, sizeof(int), 1, file);
 
         for(int j = 0; j<salas[i].n_reservas; j++){
-            fwrite(&salas[i].reservas[i].salaReservada, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].id_reserva, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].id_exame, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].mes, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].dia, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].hora, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].minuto, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].anoFinal, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].mesFinal, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].diaFinal, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].horaFinal, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].minutoFinal, sizeof(int), 1, file);
-            fwrite(&salas[i].reservas[i].vagas, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].salaReservada, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].id_reserva, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].id_exame, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].data.ano, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].data.mes, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].data.dia, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].data.hora, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].data.minuto, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].dataFinal.ano, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].dataFinal.mes, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].dataFinal.dia, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].dataFinal.hora, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].dataFinal.minuto, sizeof(int), 1, file);
+            fwrite(&salas[i].reservas[j].vagas, sizeof(int), 1, file);
             
         }
     }
@@ -239,19 +240,20 @@ void readBinSalas(){
             fread(&salas[i].n_reservas, sizeof(int), 1, file);
             salas[i].reservas = malloc(sizeof(Reservas)*salas[i].n_reservas);
         for(int j = 0; j<salas[i].n_reservas; j++){
-            fread(&salas[i].reservas[i].salaReservada, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].id_reserva, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].id_exame, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].mes, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].dia, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].hora, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].minuto, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].anoFinal, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].mesFinal, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].diaFinal, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].horaFinal, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].minutoFinal, sizeof(int), 1, file);
-            fread(&salas[i].reservas[i].vagas, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].salaReservada, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].id_reserva, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].id_exame, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].data.ano, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].data.mes, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].data.dia, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].data.hora, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].data.minuto, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].dataFinal.ano, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].dataFinal.mes, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].dataFinal.dia, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].dataFinal.hora, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].dataFinal.minuto, sizeof(int), 1, file);
+            fread(&salas[i].reservas[j].vagas, sizeof(int), 1, file);
         }
         }
         n_salas = i;
