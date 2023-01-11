@@ -55,6 +55,7 @@ void listarRegimesPermissoes();
 int checkIfRegimeExists(int id);
 int checkIfRegimesBeingUsed(int id);
 void masiveRegimeChange(int id, int new_id);
+void moverRegimes();
 
 //permissions.c
 void saveAndSetPermissionsBinByTxt();

@@ -578,11 +578,17 @@ void MenuRegimes(){
         if(aluno.regime.perm.MenuAlunos){
             printf("**        %d -> Listar Regimes                   **\n", i++);
         }
+        if(aluno.regime.perm.MenuAlunos){
+            printf("**        %d -> Listar Regimes Permissões        **\n", i++);
+        }
         if(aluno.regime.perm.MenuProfessor){
             printf("**        %d -> Criar Regime                     **\n", i++);
         }
         if (aluno.regime.perm.MenuCursos){
             printf("**        %d -> Editar Regime                    **\n", i++);
+        }
+        if (aluno.regime.perm.MenuCursos){
+            printf("**        %d -> Mover Regime para outro Regime   **\n", i++);
         }
         if (aluno.regime.perm.MenuRegimes){
             printf("**        %d -> Remover Regime                   **\n", i++);
@@ -594,7 +600,18 @@ void MenuRegimes(){
 
         if (aluno.regime.perm.MenuAlunos){
             if (opcao == i++){
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
                 listarRegimes();
+                printc("Pressione [red]ENTER[/red] para continuar...");
+                getchar();
+                getchar();
+            }
+        }
+
+        if (aluno.regime.perm.MenuAlunos){
+            if (opcao == i++){
+                fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+                listarRegimesPermissoes();
                 printc("Pressione [red]ENTER[/red] para continuar...");
                 getchar();
                 getchar();
@@ -612,6 +629,7 @@ void MenuRegimes(){
                 editarRegimeMenu();
             }
         }
+        
         if (aluno.regime.perm.MenuRegimes){
             if (opcao == i++){
                removerRegime();

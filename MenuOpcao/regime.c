@@ -16,14 +16,14 @@ void criarRegime(){
     listarRegimes();
     regimes = realloc(regimes, (n_regimes + 1) * sizeof(regimeStruct));
     perms_file = realloc(perms_file, (n_regimes + 1) * sizeof(permissionFileStruct));
-    regimes[n_regimes].id = n_regimes+1;
+    regimes[n_regimes].id = regimes[n_regimes-1].id+1;
     regimes[n_regimes].name = malloc(100 * sizeof(char));
     printf("Introduza o nome do regime: ");
     scanf("%s", regimes[n_regimes].name);
     printf("Nome do regime: %s", regimes[n_regimes].name);
     regimes[n_regimes].name = realloc(regimes[n_regimes].name, (strlen(regimes[n_regimes].name) + 1));
 
-    perms_file[n_regimes].id_regime = n_regimes+1;
+    perms_file[n_regimes].id_regime = regimes[n_regimes-1].id+1;
     printf("\n\nTem permissao para Menu Exames? (1 - Sim, 0 - Nao): ");
     scanf("%d", &perms_file[n_regimes].perm.MenuExames);
     printf("Tem permissao para Ver Disciplinas? (1 - Sim, 0 - Nao): ");
@@ -100,9 +100,17 @@ void editarNomeRegime(){
         scanf("%d", &id);
         flag = 1;
     }while (checkIfRegimeExists(id) == 0);
+
+    int position = 0;
+    for (int i = 0; i <= n_regimes; i++){
+        if (id == regimes[i].id){
+            position = i;
+            break;
+        }
+    }
     
     printf("\n\nPor favor introduza o novo nome do regime: ");
-    scanf("%s", regimes[id-1].name);
+    scanf("%s", regimes[position].name);
     saveBinRegimes();
     updateUser();
 }
@@ -120,68 +128,99 @@ void editarPermissoesRegime(){
         flag = 1;
     }while (checkIfRegimeExists(id) == 0);
 
-    printf("id = %d", id);
+    int position = 0;
+    for (int i = 0; i <= n_regimes; i++){
+        if (id == regimes[i].id){
+            position = i;
+            break;
+        }
+    }
 
     printf("\n\nTem permissao para Menu Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuExames);
+    scanf("%d", &perms_file[position].perm.MenuExames);
     printf("Tem permissao para Ver Disciplinas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.VerDisciplinas);
+    scanf("%d", &perms_file[position].perm.VerDisciplinas);
     printf("Tem permissao para Menu Professor? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuProfessor);
+    scanf("%d", &perms_file[position].perm.MenuProfessor);
     printf("Tem permissao para Menu Admin? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuAdmin);
+    scanf("%d", &perms_file[position].perm.MenuAdmin);
     printf("Tem permissao para Menu Salas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuSalas);
+    scanf("%d", &perms_file[position].perm.MenuSalas);
     printf("Tem permissao para Criar Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.CriarExames);
+    scanf("%d", &perms_file[position].perm.CriarExames);
     printf("Tem permissao para Inscritos Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.InscritosExames);
+    scanf("%d", &perms_file[position].perm.InscritosExames);
     printf("Tem permissao para Listar Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ListarExames);
+    scanf("%d", &perms_file[position].perm.ListarExames);
     printf("Tem permissao para Listar Exames Inscritos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ListarExamesInscritos);
+    scanf("%d", &perms_file[position].perm.ListarExamesInscritos);
     printf("Tem permissao para Editar Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.EditarExames);
+    scanf("%d", &perms_file[position].perm.EditarExames);
     printf("Tem permissao para Exportar Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ExportarExames);
+    scanf("%d", &perms_file[position].perm.ExportarExames);
     printf("Tem permissao para Inscrever Exames? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.InscreverExames);
+    scanf("%d", &perms_file[position].perm.InscreverExames);
     printf("Tem permissao para Criar Salas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.CriarSalas);
+    scanf("%d", &perms_file[position].perm.CriarSalas);
     printf("Tem permissao para Listar Salas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ListarSalas);
+    scanf("%d", &perms_file[position].perm.ListarSalas);
     printf("Tem permissao para Editar Salas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.EditarSalas);
+    scanf("%d", &perms_file[position].perm.EditarSalas);
     printf("Tem permissao para Remover Salas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.RemoverSalas);
+    scanf("%d", &perms_file[position].perm.RemoverSalas);
     printf("Tem permissao para Criar Professor? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.CriarProfessor);
+    scanf("%d", &perms_file[position].perm.CriarProfessor);
     printf("Tem permissao para Listar Professor? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ListarProfessor);
+    scanf("%d", &perms_file[position].perm.ListarProfessor);
     printf("Tem permissao para Editar Professor? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.EditarProfessor);
+    scanf("%d", &perms_file[position].perm.EditarProfessor);
     printf("Tem permissao para Remover Professor? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.RemoverProfessor);
+    scanf("%d", &perms_file[position].perm.RemoverProfessor);
     printf("Tem permissao para Menu Cursos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuCursos);
+    scanf("%d", &perms_file[position].perm.MenuCursos);
     printf("Tem permissao para Menu Alunos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuAlunos);
+    scanf("%d", &perms_file[position].perm.MenuAlunos);
     printf("Tem permissao para Menu Regimes? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuRegimes);
+    scanf("%d", &perms_file[position].perm.MenuRegimes);
     printf("Tem permissao para Criar Cursos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.CriarCursos);
+    scanf("%d", &perms_file[position].perm.CriarCursos);
     printf("Tem permissao para Listar Cursos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ListarCursos);
+    scanf("%d", &perms_file[position].perm.ListarCursos);
     printf("Tem permissao para Editar Cursos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.EditarCursos);
+    scanf("%d", &perms_file[position].perm.EditarCursos);
     printf("Tem permissao para Remover Cursos? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.RemoverCursos);
+    scanf("%d", &perms_file[position].perm.RemoverCursos);
     printf("Tem permissao para Listar Cursos Disciplinas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.ListarCursosDisciplinas);
+    scanf("%d", &perms_file[position].perm.ListarCursosDisciplinas);
     printf("Tem permissao para MenuDisciplinas? (1 - Sim, 0 - Nao): ");
-    scanf("%d", &perms_file[id-1].perm.MenuDisciplinas);
+    scanf("%d", &perms_file[position].perm.MenuDisciplinas);
     saveBinPermissions();
     updateUser();
+}
+
+void moverRegimes(){
+    int flag = 0, id, new_id;
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    listarRegimes();
+
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("\n\nPor favor Introduza o ID do regime que pretende mover: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (checkIfRegimeExists(id) == 0);
+
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("\n\nPara onde pretende mover (ID): ");
+        scanf("%d", &new_id);
+        flag = 1;
+    }while (checkIfRegimeExists(new_id) == 0 || new_id == id);
+    masiveRegimeChange(id, new_id);
 }
 
 void removerRegime(){
@@ -222,7 +261,15 @@ void removerRegime(){
         }
     }
 
-    for(int i = id; i < n_regimes; i++){
+    int position = 0;
+    for (int i = 0; i <= n_regimes; i++){
+        if (id == regimes[i].id){
+            position = i;
+            break;
+        }
+    }
+
+    for(int i = position; i < n_regimes; i++){
         regimes[i] = regimes[i+1];
     }
     n_regimes--;
