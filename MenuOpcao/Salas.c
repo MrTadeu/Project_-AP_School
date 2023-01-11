@@ -316,13 +316,12 @@ void editarSala(){
 
 void removerSala(){
     fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-    listarSalas();
+    listarSalasLivre();
     printf("**************************************************\n");
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
     int id;
     int posicao;
-    //mostrarSalasLivres();
     do{
         printf("Qual o ID que deseja remover? ");
         scanf("%d", &id);
@@ -335,11 +334,11 @@ void removerSala(){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao);
+            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d  [green]ocupada[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].n_reservas);
             printc("[red]Enter para continuar[/red]");
             getchar();
             getchar();
-            if(salas[id].n_reservas == 1){
+            if(salas[id].n_reservas > 0){
                 printc("[red]Sala esta ocupada[/red]\n");
             }
             else{
@@ -357,6 +356,6 @@ void removerSala(){
             }
         }
 
-    }while(salas[posicao].n_reservas == 1 || CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
+    }while(salas[posicao].n_reservas > 0 || CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
     printf("Sala removida com sucesso!\n");
 }
