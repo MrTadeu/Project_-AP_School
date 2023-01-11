@@ -83,11 +83,9 @@ void timeNow(){
     //printf("Current date and time: %04d-%02d-%02d %02d:%02d:%02d\n", tempoAgora->tm_year + 1900, tempoAgora->tm_mon + 1, tempoAgora->tm_mday, tempoAgora->tm_hour, tempoAgora->tm_min, tempoAgora->tm_sec);
 }
 
-
-int diferencaTempo(int ano, int mes, int dia, int hora, int minuto, int segundo){
+void diferencaTempo(int ano, int mes, int dia, int hora, int minuto){
     timeNow();
-
-    tempo.anoAtual= tempoAgora->tm_year + 1900;
+    tempo.anoAtual= tempoAgora->tm_year +  1900;
     tempo.mesAtual = tempoAgora->tm_mon + 1;
     tempo.diaAtual = tempoAgora->tm_mday;
     tempo.horaAtual = tempoAgora->tm_hour;
@@ -100,7 +98,9 @@ int diferencaTempo(int ano, int mes, int dia, int hora, int minuto, int segundo)
     tempo.difMinuto = tempo.minutoAtual - minuto;
 }
 
+int TempoCerto(int ano, int mes, int dia, int hora, int minuto){
 
+}
 /* int generate_unique_numbers(int *numbers, int size) {
   // seed the random number generator
   srand(time(NULL));
