@@ -311,7 +311,7 @@ void removerSala(){
     printc("************       [blue]Remover Salas[/blue]      ************\n");
     printf("**************************************************\n");
     int id;
-    mostrarSalasLivres();
+    //mostrarSalasLivres();
     do{
         printf("Qual o nome da sala que deseja remover? ");
         scanf("%s", &id);
