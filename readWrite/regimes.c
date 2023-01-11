@@ -6,6 +6,7 @@
 extern AlunoStruct *alunos;
 extern regimeStruct *regimes;
 extern courseStruct *courses;
+extern permissionFileStruct *perms_file;
 extern int n_alunos, n_regimes, n_courses;
 
 regimeStruct *getAllRegimes(AlunoFileStruct *alunosFile){
@@ -84,6 +85,43 @@ void listarRegimes(){
     printf("\nListagem de todos os Regimes:\n");
     for (int i = 0; i < n_regimes; i++){
         printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
+    }
+}
+
+void listarRegimesPermissoes(){
+    printf("\nListagem de todos os Regimes:\n");
+    for (int i = 0; i < n_regimes; i++){
+        printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
+        printf("\nPermissoes:");
+        printf("\nTem permissao para Menu Exames - %d", perms_file[i].perm.MenuExames);
+        printf("\nTem permissao para Ver Disciplinas %d", perms_file[i].perm.VerDisciplinas);
+        printf("\nTem permissao para Menu Professor %d", perms_file[i].perm.MenuProfessor);
+        printf("\nTem permissao para Menu Admin %d", perms_file[i].perm.MenuAdmin);
+        printf("\nTem permissao para Menu Salas %d", perms_file[i].perm.MenuSalas);
+        printf("\nTem permissao para Criar Exames %d", perms_file[i].perm.CriarExames);
+        printf("\nTem permissao para Inscritos Exames %d", perms_file[i].perm.InscritosExames);
+        printf("\nTem permissao para Listar Exames %d", perms_file[i].perm.ListarExames);
+        printf("\nTem permissao para Listar Exames Inscritos %d", perms_file[i].perm.ListarExamesInscritos);
+        printf("\nTem permissao para Editar Exames %d", perms_file[i].perm.EditarExames);
+        printf("\nTem permissao para Exportar Exames %d", perms_file[i].perm.ExportarExames);
+        printf("\nTem permissao para Inscrever Exames %d", perms_file[i].perm.InscreverExames);
+        printf("\nTem permissao para Criar Salas %d", perms_file[i].perm.CriarSalas);
+        printf("\nTem permissao para Listar Salas %d", perms_file[i].perm.ListarSalas);
+        printf("\nTem permissao para Editar Salas %d", perms_file[i].perm.EditarSalas);
+        printf("\nTem permissao para Remover Salas %d", perms_file[i].perm.RemoverSalas);
+        printf("\nTem permissao para Criar Professor %d", perms_file[i].perm.CriarProfessor);
+        printf("\nTem permissao para Listar Professor %d", perms_file[i].perm.ListarProfessor);
+        printf("\nTem permissao para Editar Professor %d", perms_file[i].perm.EditarProfessor);
+        printf("\nTem permissao para Remover Professor %d", perms_file[i].perm.RemoverProfessor);
+        printf("\nTem permissao para Menu Cursos %d", perms_file[i].perm.MenuCursos);
+        printf("\nTem permissao para Menu Alunos %d", perms_file[i].perm.MenuAlunos);
+        printf("\nTem permissao para Menu Regimes %d", perms_file[i].perm.MenuRegimes);
+        printf("\nTem permissao para Criar Cursos %d", perms_file[i].perm.CriarCursos);
+        printf("\nTem permissao para Listar Cursos %d", perms_file[i].perm.ListarCursos);
+        printf("\nTem permissao para Editar Cursos %d", perms_file[i].perm.EditarCursos);
+        printf("\nTem permissao para Remover Cursos %d", perms_file[i].perm.RemoverCursos);
+        printf("\nTem permissao para Listar Cursos Disciplinas %d", perms_file[i].perm.ListarCursosDisciplinas);
+        printf("\nTem permissao para MenuDisciplinas %d\n", perms_file[i].perm.MenuDisciplinas);
     }
 }
 

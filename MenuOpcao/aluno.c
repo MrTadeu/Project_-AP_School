@@ -95,8 +95,8 @@ void alterarAluno(){
             case 1:
                 printf("Introduza o nome do aluno: ");
                 scanf("%s", alunos[position].name);
-                updateUser();
                 saveBinAlunos();
+                updateUser();
                 break;
             case 2:
                 printf("Introduza a password do aluno: ");

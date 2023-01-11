@@ -101,11 +101,85 @@ void editarNomeRegime(){
     }while (checkIfRegimeExists(id) == 0);
     
     printf("\n\nPor favor introduza o novo nome do regime: ");
-    scanf("%s", regimes[id].name);
+    scanf("%s", regimes[id-1].name);
+    saveBinRegimes();
+    updateUser();
 }
 
 void editarPermissoesRegime(){
+    listarRegimesPermissoes();
+    int flag = 0, id;
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
 
+        printf("\n\nPor favor Introduza o ID do regime que pretende editar: ");
+        scanf("%d", &id);
+        flag = 1;
+    }while (checkIfRegimeExists(id) == 0);
+
+    printf("id = %d", id);
+
+    printf("\n\nTem permissao para Menu Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuExames);
+    printf("Tem permissao para Ver Disciplinas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.VerDisciplinas);
+    printf("Tem permissao para Menu Professor? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuProfessor);
+    printf("Tem permissao para Menu Admin? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuAdmin);
+    printf("Tem permissao para Menu Salas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuSalas);
+    printf("Tem permissao para Criar Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.CriarExames);
+    printf("Tem permissao para Inscritos Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.InscritosExames);
+    printf("Tem permissao para Listar Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ListarExames);
+    printf("Tem permissao para Listar Exames Inscritos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ListarExamesInscritos);
+    printf("Tem permissao para Editar Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.EditarExames);
+    printf("Tem permissao para Exportar Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ExportarExames);
+    printf("Tem permissao para Inscrever Exames? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.InscreverExames);
+    printf("Tem permissao para Criar Salas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.CriarSalas);
+    printf("Tem permissao para Listar Salas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ListarSalas);
+    printf("Tem permissao para Editar Salas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.EditarSalas);
+    printf("Tem permissao para Remover Salas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.RemoverSalas);
+    printf("Tem permissao para Criar Professor? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.CriarProfessor);
+    printf("Tem permissao para Listar Professor? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ListarProfessor);
+    printf("Tem permissao para Editar Professor? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.EditarProfessor);
+    printf("Tem permissao para Remover Professor? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.RemoverProfessor);
+    printf("Tem permissao para Menu Cursos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuCursos);
+    printf("Tem permissao para Menu Alunos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuAlunos);
+    printf("Tem permissao para Menu Regimes? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuRegimes);
+    printf("Tem permissao para Criar Cursos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.CriarCursos);
+    printf("Tem permissao para Listar Cursos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ListarCursos);
+    printf("Tem permissao para Editar Cursos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.EditarCursos);
+    printf("Tem permissao para Remover Cursos? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.RemoverCursos);
+    printf("Tem permissao para Listar Cursos Disciplinas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.ListarCursosDisciplinas);
+    printf("Tem permissao para MenuDisciplinas? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &perms_file[id-1].perm.MenuDisciplinas);
+    saveBinPermissions();
+    updateUser();
 }
 
 void removerRegime(){

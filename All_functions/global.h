@@ -47,6 +47,7 @@ void saveBinRegimes();
 void readBinRegimes();
 regimeStruct getRegimeByID(int id);
 void listarRegimes();
+void listarRegimesPermissoes();
 int checkIfRegimeExists(int id);
 
 //permissions.c
