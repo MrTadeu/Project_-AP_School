@@ -89,6 +89,7 @@ void criarRegime(){
 }
 
 void editarNomeRegime(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     listarRegimes();
     int flag = 0, id;
     do{
@@ -107,6 +108,7 @@ void editarNomeRegime(){
 }
 
 void editarPermissoesRegime(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     listarRegimesPermissoes();
     int flag = 0, id;
     do{
@@ -183,5 +185,7 @@ void editarPermissoesRegime(){
 }
 
 void removerRegime(){
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    listarRegimes();
     
 }
