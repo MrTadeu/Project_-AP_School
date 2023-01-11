@@ -336,7 +336,8 @@ void removerSala(){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            printf("Ocupada: %d nome: %s numero: %d posicao: %d", salas[posicao].n_reservas,salas[posicao].nomeSala, salas[posicao].numeroSala, posicao);
+            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao);
+            printc("[red]Enter para continuar[/red]");
             getchar();
             getchar();
             if(salas[id].n_reservas == 1){
