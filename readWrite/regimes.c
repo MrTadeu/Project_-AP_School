@@ -92,16 +92,16 @@ regimeStruct getRegimeByID(int id){
 void listarRegimes(){
     printf("\nListagem de todos os Regimes:\n");
     for (int i = 0; i < n_regimes; i++){
-        printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
+        printc("\n[green]ID[/green]: %d [green]Regime[/green]: %s\n", regimes[i].id, regimes[i].name);
     }
 }
 
 void listarRegimesPermissoes(){
     printf("\nListagem de todos os Regimes:\n");
     for (int i = 0; i < n_regimes; i++){
-        printf("\nID: %d Regime: %s\n", regimes[i].id, regimes[i].name);
+        printc("\n[green]ID[/green]: %d [green]Regime[/green]: %s\n", regimes[i].id, regimes[i].name);
         printc("**************************************************\n");
-        printc("****************** [blue]Permissões[/blue] ****************\n");
+        printc("******************** [blue]Permissões[/blue] ******************\n");
         printc("**************************************************\n");
 
         printc("[blue]Permissoes Exames:[/blue]\n");
@@ -113,25 +113,25 @@ void listarRegimesPermissoes(){
         printc("\t[blue]Exportar exames[/blue]: %d\n", perms_file[i].perm.ExportarExames);
         printc("\t[blue]Inscrever em exames[/blue]: %d\n", perms_file[i].perm.InscreverExames);
         
-        printc("[blue]Permissoes Salas:[/blue]\n");
+        printc("\n[blue]Permissoes Salas:[/blue]\n");
         printc("\t[blue]Criar salas[/blue]: %d\n", perms_file[i].perm.CriarSalas);
         printc("\t[blue]Listar salas[/blue]: %d\n", perms_file[i].perm.ListarSalas);
         printc("\t[blue]Editar salas[/blue]: %d\n", perms_file[i].perm.EditarSalas);
         printc("\t[blue]Remover salas[/blue]: %d\n", perms_file[i].perm.RemoverSalas);
         
-        printc("[blue]Permissoes Professores:[/blue]\n");
+        printc("\n[blue]Permissoes Professores:[/blue]\n");
         printc("\t[blue]Criar professores[/blue]: %d\n", perms_file[i].perm.CriarProfessor);
         printc("\t[blue]Listar professores[/blue]: %d\n", perms_file[i].perm.ListarProfessor);
         printc("\t[blue]Editar professores[/blue]: %d\n", perms_file[i].perm.EditarProfessor);
         printc("\t[blue]Remover professores[/blue]: %d\n", perms_file[i].perm.RemoverProfessor);
        
-        printc("[blue]Permissoes Cursos:[/blue]\n");
+        printc("\n[blue]Permissoes Cursos:[/blue]\n");
         printc("\t[blue]Criar cursos[/blue]: %d\n", perms_file[i].perm.CriarCursos);
         printc("\t[blue]Listar cursos[/blue]: %d\n", perms_file[i].perm.ListarCursos);
         printc("\t[blue]Editar cursos[/blue]: %d\n", perms_file[i].perm.EditarCursos);
         printc("\t[blue]Remover cursos[/blue]: %d\n", perms_file[i].perm.RemoverCursos);
        
-        printc("[blue]Permissoes Disciplinas:[/blue]\n");
+        printc("\n[blue]Permissoes Disciplinas:[/blue]\n");
         printc("\t[blue]Listar cursos e disciplinas[/blue]: %d\n", perms_file[i].perm.ListarCursosDisciplinas);
         printc("\t[blue]Criar disciplinas[/blue]: %d\n", perms_file[i].perm.CriarDisciplinas);
         printc("\t[blue]Listar disciplinas[/blue]: %d\n", perms_file[i].perm.ListarDisciplinas);
@@ -139,14 +139,14 @@ void listarRegimesPermissoes(){
         printc("\t[blue]Remover disciplinas[/blue]: %d\n", perms_file[i].perm.RemoverDisciplinas);
         printc("\t[blue]Ver disciplinas[/blue]: %d\n", perms_file[i].perm.VerDisciplinas);
        
-        printc("[blue]Permissoes Alunos:[/blue]\n");
+        printc("\n[blue]Permissoes Alunos:[/blue]\n");
         printc("\t[blue]Criar alunos[/blue]: %d\n", perms_file[i].perm.CriarAluno);
         printc("\t[blue]Listar alunos[/blue]: %d\n", perms_file[i].perm.ListarAluno);
         printc("\t[blue]Listar todos os alunos[/blue]: %d\n", perms_file[i].perm.ListarTodosAlunos);
         printc("\t[blue]Editar alunos[/blue]: %d\n", perms_file[i].perm.EditarAluno);
         printc("\t[blue]Remover alunos[/blue]: %d\n", perms_file[i].perm.RemoverAluno);
 
-        printc("[blue]Permissoes Regimes:[/blue]\n");
+        printc("\n[blue]Permissoes Regimes:[/blue]\n");
         printc("\t[blue]Criar regimes[/blue]: %d\n", perms_file[i].perm.CriarRegimes);
         printc("\t[blue]Listar regimes[/blue]: %d\n", perms_file[i].perm.ListarRegimes);
         printc("\t[blue]Listar regimes e permissões[/blue]: %d\n", perms_file[i].perm.ListarRegimesPermissoes);

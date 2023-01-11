@@ -532,7 +532,7 @@ void MenuCursos(){
     do{
         i = 0;
         printc("**************************************************\n");
-        printc("******************* [blue]Menu Cursos[/blue] *****************\n");
+        printc("******************* [blue]Menu Cursos[/blue] ******************\n");
         printc("**************************************************\n");
         printf("**        %d -> Sair                             **\n", i++);
         if (aluno.regime.perm.EditarCursos){
