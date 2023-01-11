@@ -149,7 +149,7 @@ tempoExames dataFinal(tempoExames date, int hours, int minutes) {
     return date;
 }
 
-int chackIfdataExiste(tempoExames dataInicaial,tempoExames dataFinal,tempoExames check){
+int checkIfdataExiste(tempoExames dataInicaial,tempoExames dataFinal,tempoExames check){
     if (check.ano < dataInicaial.ano || check.ano > dataFinal.ano){
         return 0;
     }

@@ -23,6 +23,7 @@ char *capitalize(char *str);
 int isletter_cheker(char *str);
 tempoExames dataFinal(tempoExames date, int hours, int minutes);
 int isValidDate(tempoExames date);
+int checkIfdataExiste(tempoExames dataInicaial,tempoExames dataFinal,tempoExames check);
 /* void timeNow();
 void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
 struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add);
