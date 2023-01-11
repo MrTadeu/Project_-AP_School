@@ -76,7 +76,7 @@ void ValidarZeroUm(int num){
     }
 }
 
-void timeNow(){
+/* void timeNow(){
     time_t now;
     time(&now);
     struct tm *tempoAgora;
@@ -94,76 +94,48 @@ void diferencaTempo(int mes, int dia, int hora, int minuto){
     tempo.difHora = tempoAgora->tm_hour - hora;
     tempo.difMinuto = tempoAgora->tm_min;
 }
+ */
 
-struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add){
-    original_time.tm_min += minutes_to_add;
-    original_time.tm_hour += hours_to_add;
-    mktime(&original_time);
-    return original_time;
-}
-
-struct tm TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto){
-    struct tm *tempoAgora;
-    timeNow();
-    struct tm start_datetime, end_datetime;
-
-    // Inicio da data
-    start_datetime.tm_year = tempoAgora->tm_year + 1900;
-    start_datetime.tm_mon = mes;  // janeiro
-    start_datetime.tm_mday = dia;
-    start_datetime.tm_hour = hora;
-    start_datetime.tm_min = minuto;
-    start_datetime.tm_sec = tempoAgora->tm_sec;
-
-    // Fim da data
-    end_datetime = add_time(start_datetime, n_TesteTempoMinuto, n_TesteTempoHora);
-
-    time_t start_time = mktime(&start_datetime);
-    time_t end_time = mktime(&end_datetime);
-
-    return end_datetime; 
-}
-
-int ChackTempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto){
-    struct tm *tempoAgora;
-    timeNow();
-    struct tm start_datetime, end_datetime, check_datetime;
-
-    // Inicio da data
-    start_datetime.tm_year = tempoAgora->tm_year + 1900;
-    start_datetime.tm_mon = mes;  // janeiro
-    start_datetime.tm_mday = dia;
-    start_datetime.tm_hour = hora;
-    start_datetime.tm_min = minuto;
-    start_datetime.tm_sec = tempoAgora->tm_sec;
-
-    // Fim da data
-    end_datetime = add_time(start_datetime, n_TesteTempoMinuto, n_TesteTempoHora);
-    /* end_datetime.tm_year = tempoAgora->tm_year + 1900;
-    end_datetime.tm_mon = mes;  // dezembro
-    end_datetime.tm_mday = dia;
-    end_datetime.tm_min = add_minutes(start_datetime, n_TesteTempoMinuto);
-    end_datetime.tm_hour = add_hour(start_datetime, n_TesteTempoHora);
-    end_datetime.tm_sec = tempoAgora->tm_sec; */
-
-    //Verificar se a data está correta
-    check_datetime.tm_year = tempoAgora->tm_year + 1900;
-    check_datetime.tm_mon = mes;
-    check_datetime.tm_mday = dia;
-    check_datetime.tm_hour = hora;
-    check_datetime.tm_min = minuto;
-    check_datetime.tm_sec = tempoAgora->tm_sec;
-
-    time_t start_time = mktime(&start_datetime);
-    time_t end_time = mktime(&end_datetime);
-    time_t check_time = mktime(&check_datetime);
-
-    if (check_time >= start_time && check_time <= end_time) {
-        return 1; // tempo certo //The date and time is between the start and end datetime.
+int days_in_month(int month, int year) {
+    if (month == 2) {
+        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+            return 29;
+        } else {
+            return 28;
+        }
+    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+        return 30;
     } else {
-        printf("[red]O tempo está incorreto![/red]\n"); // The date and time is NOT between the start and end datetime.
+        return 31;
     }
-    return 0;
+}
+
+struct Date add_time(struct Date date, int hours, int minutes) {
+    int days = 0;
+
+    date.minute += minutes;
+    while (date.minute >= 60) {
+        date.minute -= 60;
+        date.hour++;
+    }
+
+    date.hour += hours;
+    while (date.hour >= 24) {
+        date.hour -= 24;
+        days++;
+    }
+
+    date.day += days;
+    while (date.day > days_in_month(date.month, date.year)) {
+        date.day -= days_in_month(date.month, date.year);
+        date.month++;
+        if (date.month > 12) {
+            date.month = 1;
+            date.year++;
+        }
+    }
+
+    return date;
 }
 /* int generate_unique_numbers(int *numbers, int size) {
   // seed the random number generator

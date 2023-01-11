@@ -26,6 +26,11 @@ void readData();
 
 
 void main(){
+    struct Date date = {2020, 1, 31, 12, 30};
+    /* add_time(struct Date date, int hours, int minutes) */
+    date = add_time(date, 10, 90);
+
+    printf("New date and time: %d-%02d-%02d %02d:%02d\n", date.year, date.month, date.day, date.hour, date.minute);
     /* if (folderExists("data/bin")){ //Pasta bin existe!
         if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
             printc("[red]Error[/red] Ficheiros não existem.\n\n");

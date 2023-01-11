@@ -91,3 +91,11 @@ typedef struct{
 typedef struct{
     int difMes, difDia, difHora, difMinuto;
 }TempoAnoAtualDiferenca;
+
+struct Date {
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
+};

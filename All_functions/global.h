@@ -20,11 +20,14 @@ int isdigit_cheker(char *str);
 void generate_unique_numbers(int *array, int length);
 char *capitalize(char *str);
 int isletter_cheker(char *str);
-void timeNow();
+/* void timeNow();
 void diferencaTempo(int ano, int mes, int dia, int hora, int minuto);
 struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add);
 struct tm TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto);
-int ChackTempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto);
+int ChackTempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto); */
+int days_in_month(int month, int year);
+struct Date add_time(struct Date date, int hours, int minutes);
+
 
 //alunosTxt.c
 AlunoFileStruct* getTxt();
