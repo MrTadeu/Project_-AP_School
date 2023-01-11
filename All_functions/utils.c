@@ -95,6 +95,12 @@ void diferencaTempo(int mes, int dia, int hora, int minuto){
     tempo.difMinuto = tempoAgora->tm_min;
 }
 
+struct tm add_time(struct tm original_time,int minutes_to_add, int hours_to_add){
+    original_time.tm_min += minutes_to_add;
+    original_time.tm_hour += hours_to_add;
+    mktime(&original_time);
+    return original_time;
+}
 
 int TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto){
     struct tm *tempoAgora;
@@ -110,20 +116,13 @@ int TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, i
     start_datetime.tm_sec = tempoAgora->tm_sec;
 
     // Fim da data
-    end_datetime.tm_year = tempoAgora->tm_year + 1900;
+    end_datetime = add_time(start_datetime, n_TesteTempoMinuto, n_TesteTempoHora);
+    /* end_datetime.tm_year = tempoAgora->tm_year + 1900;
     end_datetime.tm_mon = mes;  // dezembro
     end_datetime.tm_mday = dia;
-    end_datetime.tm_hour = hora + n_TesteTempoHora;
-    end_datetime.tm_min = minuto + n_TesteTempoMinuto;
-    if (end_datetime.tm_min > 60){
-        end_datetime.tm_min = end_datetime.tm_min - 60;
-        end_datetime.tm_hour = end_datetime.tm_hour + 1;
-    }
-    if (end_datetime.tm_hour > 24){
-        end_datetime.tm_hour = end_datetime.tm_hour - 24;
-        end_datetime.tm_mday = end_datetime.tm_mday + 1;
-    }
-    end_datetime.tm_sec = tempoAgora->tm_sec;
+    end_datetime.tm_min = add_minutes(start_datetime, n_TesteTempoMinuto);
+    end_datetime.tm_hour = add_hour(start_datetime, n_TesteTempoHora);
+    end_datetime.tm_sec = tempoAgora->tm_sec; */
 
     //Verificar se a data está correta
     check_datetime.tm_year = tempoAgora->tm_year + 1900;
