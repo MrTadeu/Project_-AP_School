@@ -1,0 +1,12 @@
+ID	NOME
+1	Admin
+2	Professor
+3	Normal
+4	Trabalhador-estudante
+5	Dasaga
+6	Dirigente associativo
+7	Fdsgd
+8	Erasmus
+9	Gewg
+10	Atleta
+11	Noral
