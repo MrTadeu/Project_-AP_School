@@ -262,7 +262,6 @@ void readBinSalas(){
 }
 
 void editarSala(){
-    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     char numeroCadeirasStringImput[1000];
     char numeroSalaStringImput[1000];
 
