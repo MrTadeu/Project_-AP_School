@@ -26,13 +26,8 @@ void readData();
 
 
 void main(){
-    if (folderExists("data/bin")){ //Pasta bin existe!
-        if (fileExistAll() == 0){ // --------------------->SE PARAR DE EXECUTAR A MEIO LIMPAR TERMINAL <-----------------------
-            printc("[red]Error[/red] Ficheiros não existem.\n\n");
-            MenuFilesNovos();
-        }
-    }else { //Pasta bin existe!
-        printc("[red]Error[/red] Pastas não existem.\n\n");
+    if (fileExistAll() == 0){
+        printc("[red]Error[/red] Ficheiros não existem.\n\n");
         MenuFilesNovos();
     }
     readData();
