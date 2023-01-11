@@ -77,6 +77,6 @@ typedef struct{
 struct tm *tempoAgora;
 
 typedef struct{
-    int id;
-    char *name;
+    int anoAtual, mesAtual, diaAtual, horaAtual, minutoAtual;
+    int difAno, difMes, difDia, difHora, difMinuto;
 }TempoAnoAtualDiferenca;
