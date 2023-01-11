@@ -14,6 +14,7 @@ void progress_update();
 #endif
 
 //utils.c
+int ValidarZeroUm();
 char *lowercase(char *str);
 char *uppercase(char *str);
 int isdigit_cheker(char *str);
@@ -172,7 +173,10 @@ void criarExame();
 void zerarExame();
 void listarExames();
 int CheckDiscInCurso(int id, int n_Exame);
-void ReservarSala(int N_exames);
+void ReservarSala(int N_exames, tempoExames dateFinal);
+void RemoverReservaSala(int N_exames);
+void listarSalasReservas();
+void listarReservasIndividuais(char *SalaNome, int SalaNum);
 void MostrarSalasLivresParaHorarioEscolhido();
 void inscreverExame();
 void contarInscrito(int id);
