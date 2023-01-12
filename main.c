@@ -26,11 +26,6 @@ void readData();
 
 
 void main(){
-    readData();
-    criarSala();
-    removerSala();
-
-
     if (fileExistAll() == 0){
         printc("[red]Error[/red] Ficheiros não existem.\n\n");
         MenuFilesNovos();

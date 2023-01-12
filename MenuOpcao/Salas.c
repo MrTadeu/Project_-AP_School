@@ -334,7 +334,7 @@ void removerSala(){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d  [green]id[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].id);
+            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d [green]ocupada[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].n_reservas);
             printc("[red]Enter para continuar[/red]");
             getchar();
             getchar();
@@ -343,22 +343,22 @@ void removerSala(){
             }
             else{
                 for(int i = 0; i < n_salas; i++){
-                    printf("sala id:%d id:%d", salas[i].id, id);
                     if(salas[i].id == id){
                         for(int j = i; j < n_salas; j++){
-                        printf("entrou for j");
-                        printf("j:%d n_salas:%d", j, n_salas);//this is a fucking problem
-                        salas[j] = salas[j + 1];
-                    }
-                    n_salas--;
-                    salas = realloc(salas, n_salas * sizeof(SalaStruct));
-                    saveBinSalas();
-                    readBinSalas();
+                            if (j == n_salas - 1){
+                                salas = realloc(salas, n_salas * sizeof(SalaStruct));
+                                n_salas--;
+                                saveBinSalas();
+                                readBinSalas();
+                                printf("Sala removida com sucesso!\n");
+                                return;
+                            }
+                            salas[j] = salas[j + 1];
+                    }                    
                     }
                 }
             }
         }
-
     }while(salas[posicao].n_reservas > 0 || CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
-    printf("Sala removida com sucesso!\n");
+    
 }
