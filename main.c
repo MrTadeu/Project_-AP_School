@@ -26,6 +26,20 @@ void readData();
 
 
 void main(){
+    readData();
+    getUserDataByID(5978);
+    printf("%s", aluno.name);
+    getchar();
+    getchar();
+    criarExame();
+    listarSalasReservas();
+    inscreverExame();
+    getchar();
+    getchar();
+    listarSalasReservas();
+    removerIncricao();
+    listarSalasReservas();
+    
     if (fileExistAll() == 0){
         printc("[red]Error[/red] Ficheiros não existem.\n\n");
         MenuFilesNovos();

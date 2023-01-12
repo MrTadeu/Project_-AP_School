@@ -29,8 +29,11 @@ void criarExame(){
     printf("**************************************************\n");
     exame[n_exames].SalaNome = malloc(100);
     exame[n_exames].disciplina = malloc(100);
-    exame[n_exames].id = n_exames+1;
-    exame[n_exames].professor = aluno.id;
+    if(n_exames == 0)
+        exame[n_exames].id = 1;
+    else
+        exame[n_exames].id = exame[n_exames-1].id+1;
+    exame[n_exames].professor = aluno.id;  
 
     printf("Qual é o número máximo de inscritos? ");
     scanf("%d", &exame[n_exames].max_inscritos);
@@ -162,7 +165,7 @@ int CheckDiscInCurso(int id, int n_Exame)
 
 void listarExames(){
     printf("**************************************************\n");
-    printc("************        [blue]Listar Exames[/blue]       ***********\n");
+    printc("***********        [blue]Listar Exames[/blue]       ***********\n");
     printf("**************************************************\n");
     for(int i=0;i<n_exames;i++)
         printc("\n[blue]ID Exame:[/blue] %d   [blue]Disciplina:[/blue] %s   [blue]Sala:[/blue] %s%d   [blue]Data:[/blue] %d/%d/%d   [blue]Hora: [/blue][%d/%d]\n",exame[i].id,exame[i].disciplina,exame[i].SalaNome,exame[i].SalaNum,exame[i].data.dia,exame[i].data.mes,exame[i].data.ano,exame[i].data.hora,exame[i].data.minuto);
