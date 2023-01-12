@@ -334,17 +334,20 @@ void removerSala(){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d  [green]ocupada[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].n_reservas);
+            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d  [green]id[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].id);
             printc("[red]Enter para continuar[/red]");
             getchar();
             getchar();
-            if(salas[id].n_reservas > 0){
+            if(salas[posicao].n_reservas > 0){
                 printc("[red]Sala esta ocupada[/red]\n");
             }
             else{
                 for(int i = 0; i < n_salas; i++){
+                    printf("sala id:%d id:%d", salas[i].id, id);
                     if(salas[i].id == id){
                         for(int j = i; j < n_salas; j++){
+                        printf("entrou for j");
+                        printf("j:%d n_salas:%d", j, n_salas);//this is a fucking problem
                         salas[j] = salas[j + 1];
                     }
                     n_salas--;
