@@ -246,6 +246,17 @@ void listarSalasReservas()
     }
 }
 
+void listarSalasLivre()
+{   fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+    printf("**************************************************\n");
+    printc("*********      [blue]Lista de Salas Livres[/blue]     *********\n");
+    printf("**************************************************\n");
+    for(int i=0;i<n_salas;i++){
+        if(salas[i].n_reservas == 0)
+        printc("\n[blue]Sala[/blue] %s%d  -  ID: %d\n",salas[i].nomeSala,salas[i].numeroSala, salas[i].id);
+    }
+}
+
 /* void listarReservasIndividuais(char *SalaNome, int SalaNum)
 {
     for(int i = 0;i<n_exames;i++){
