@@ -35,6 +35,7 @@ void criarExame(){
     else
         exame[n_exames].id = exame[n_exames-1].id+1;
     exame[n_exames].professor = aluno.id;  
+    exame[n_exames].inscritos = 0;
 
     printf("Qual é o número máximo de inscritos? ");
     scanf("%d", &exame[n_exames].max_inscritos);
@@ -323,6 +324,7 @@ void inscreverExame(){
                     exame[i].ids_inscritos[j] = aluno.id;
                     printc("[green]Inscrito com sucesso![/green]\n");
                     vagaMenos(exame[i].SalaNum, exame[i].SalaNome, n_exames+1);
+                    exame[i].inscritos++;
                     return;
                 }
             }
