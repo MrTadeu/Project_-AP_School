@@ -150,25 +150,50 @@ tempoExames dateSumHoursMinutes(tempoExames date, int hours, int minutes) {
     return date;
 }
 
-int checkIfdataExiste(tempoExames dataInicaial,tempoExames dataFinal,tempoExames check){
-    if (check.ano < dataInicaial.ano || check.ano > dataFinal.ano){
-        return 0;
+int is_between_dates(tempoExames start, tempoExames end, tempoExames check) {
+    if (start.ano > end.ano) {
+        tempoExames temp = start;
+        start = end;
+        end = temp;
+    } else if (start.ano == end.ano && start.mes > end.mes) {
+        tempoExames temp = start;
+        start = end;
+        end = temp;
+    } else if (start.ano == end.ano && start.mes == end.mes && start.dia > end.dia) {
+        tempoExames temp = start;
+        start = end;
+        end = temp;
+    } else if (start.ano == end.ano && start.mes == end.mes && start.dia == end.dia && start.hora > end.hora) {
+        tempoExames temp = start;
+        start = end;
+        end = temp;
+    } else if (start.ano == end.ano && start.mes == end.mes && start.dia == end.dia && start.hora == end.hora && start.minuto > end.minuto) {
+        tempoExames temp = start;
+        start = end;
+        end = temp;
     }
-    if (check.mes < dataInicaial.mes || check.mes > dataFinal.mes){
+    if (check.ano < start.ano || check.ano > end.ano) {
         return 0;
-    }
-    if (check.dia < dataInicaial.dia || check.dia > dataFinal.dia){
+    } else if (check.ano == start.ano && check.mes < start.mes) {
         return 0;
-    }
-    if (check.hora < dataInicaial.hora || check.hora > dataFinal.hora){
+    } else if (check.ano == end.ano && check.mes > end.mes) {
         return 0;
-    }
-    if (check.minuto < dataInicaial.minuto || check.minuto > dataFinal.minuto){
+    } else if (check.ano == start.ano && check.mes == start.mes && check.dia < start.dia) {
         return 0;
+    } else if (check.ano == end.ano && check.mes == end.mes && check.dia > end.dia) {
+        return 0;
+    } else if (check.ano == start.ano && check.mes == start.mes && check.dia == start.dia && check.hora < start.hora) {
+        return 0;
+    } else if (check.ano == end.ano && check.mes == end.mes && check.dia == end.dia && check.hora > end.hora) {
+        return 0;
+    } else if (check.ano == start.ano && check.mes == start.mes && check.dia == start.dia && check.hora == start.hora && check.minuto < start.minuto) {
+        return 0;
+    } else if (check.ano == end.ano && check.mes == end.mes && check.dia == end.dia && check.hora == end.hora && check.minuto > end.minuto) {
+        return 0;
+    } else {
+        return 1;
     }
-    return 1;
 }
-
 
 int isValidDate(tempoExames date) {
     if (date.ano < 1) {
