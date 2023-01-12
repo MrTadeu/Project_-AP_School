@@ -334,28 +334,31 @@ void removerSala(){
             printc("[red]Sala não existe[/red]\n");
         }
         else{
-            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d  [green]ocupada[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].n_reservas);
+            printc("[green]Nome[/green]: %s [green]Numero[/green]: %d [green]Posicao[/green]: %d [green]ocupada[/green]: %d\n", salas[posicao].nomeSala, salas[posicao].numeroSala, posicao, salas[posicao].n_reservas);
             printc("[red]Enter para continuar[/red]");
             getchar();
             getchar();
-            if(salas[id].n_reservas > 0){
+            if(salas[posicao].n_reservas > 0){
                 printc("[red]Sala esta ocupada[/red]\n");
             }
             else{
                 for(int i = 0; i < n_salas; i++){
                     if(salas[i].id == id){
                         for(int j = i; j < n_salas; j++){
-                        salas[j] = salas[j + 1];
-                    }
-                    n_salas--;
-                    salas = realloc(salas, n_salas * sizeof(SalaStruct));
-                    saveBinSalas();
-                    readBinSalas();
+                            if (j == n_salas - 1){
+                                salas = realloc(salas, n_salas * sizeof(SalaStruct));
+                                n_salas--;
+                                saveBinSalas();
+                                readBinSalas();
+                                printf("Sala removida com sucesso!\n");
+                                return;
+                            }
+                            salas[j] = salas[j + 1];
+                    }                    
                     }
                 }
             }
         }
-
     }while(salas[posicao].n_reservas > 0 || CheckIFsalaExist(salas[posicao].nomeSala, salas[posicao].numeroSala) == 0);
-    printf("Sala removida com sucesso!\n");
+    
 }
