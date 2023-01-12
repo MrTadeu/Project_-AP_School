@@ -321,11 +321,20 @@ void inscreverExame(){
             }
             for (j = 0; j < exame[i].max_inscritos; j++){
                 if (exame[i].ids_inscritos[j] == 0){
-                    exame[i].ids_inscritos[j] = aluno.id;
-                    printc("[green]Inscrito com sucesso![/green]\n");
-                    vagaMenos(exame[i].SalaNum, exame[i].SalaNome, n_exames+1);
-                    exame[i].inscritos++;
-                    return;
+                    if(exame[i].regime == 3 && exame[i].regime == aluno.regime.id ||  exame[i].regime != 3 )
+                    {
+                        exame[i].ids_inscritos[j] = aluno.id;
+                        printc("[green]Inscrito com sucesso![/green]\n");
+                        vagaMenos(exame[i].SalaNum, exame[i].SalaNome, n_exames+1);
+                        exame[i].inscritos++;
+                        return;  
+                    }
+                    else 
+                    {
+                        printc("[red]Erro (regime imcompatível)[/red]\n");
+                        return;
+                    }
+                    
                 }
             }
             printf("Não há vagas disponíveis!\n");
@@ -337,6 +346,7 @@ void inscreverExame(){
     getchar();
     getchar();
 }
+
 
 void contarInscrito(int id)
 {

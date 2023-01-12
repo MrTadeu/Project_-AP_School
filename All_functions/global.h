@@ -186,6 +186,7 @@ void vagaMais(int salaId, char *SalaNome, int id);
 void vagaMenos(int salaId, char *SalaNome, int id);
 void saveBinExames();
 void readBinExames();
+int checkdiscaluno(char *disc, AlunoDataStruct aluno, int idCurso);
 
 //regime.c on MenuOpcao
 void criarRegime();

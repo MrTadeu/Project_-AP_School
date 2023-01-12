@@ -26,8 +26,6 @@ void readData();
 
 
 void main(){
-    readData();
-    
     if (fileExistAll() == 0){
         printc("[red]Error[/red] Ficheiros não existem.\n\n");
         MenuFilesNovos();
