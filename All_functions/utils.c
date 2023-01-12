@@ -124,7 +124,7 @@ int days_in_month(int month, int year) {
     }
 }
 
-tempoExames dataFinal(tempoExames date, int hours, int minutes) {
+tempoExames dateSumHoursMinutes(tempoExames date, int hours, int minutes) {
     int days = 0;
     date.minuto += minutes;
     while (date.minuto >= 60) {

@@ -165,7 +165,6 @@ void editarPermissoesRegime(){
             printc("\n[red]Não pode editar as permissões do regime Administrador ou Professor![/red]\n");
             flag = 0;
         }
-        
     }while (checkIfRegimeExists(id) == 0 || id == 1 || id == 2);
 
     int position = 0;

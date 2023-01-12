@@ -28,17 +28,24 @@ void readData();
 void main(){
     readData();
     getUserDataByID(5978);
-    printf("%s", aluno.name);
-    getchar();
-    getchar();
+    /* criarExame();
     criarExame();
-    listarSalasReservas();
+    criarExame();
+    listarSalasReservas(); */
+    /* getchar();
+    getchar(); */
     inscreverExame();
+    listarSalasReservas();
+    getchar();
+    getchar();
+
+
+    /* inscreverExame();
     getchar();
     getchar();
     listarSalasReservas();
     removerIncricao();
-    listarSalasReservas();
+    listarSalasReservas(); */
     
     if (fileExistAll() == 0){
         printc("[red]Error[/red] Ficheiros não existem.\n\n");
@@ -87,5 +94,6 @@ void readData(){
     ReadBinCursosDisciplina(); 
     readBinSalas();
     readBinProfessores();
+    readBinExames();
 }
 

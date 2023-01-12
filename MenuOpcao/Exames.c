@@ -22,6 +22,7 @@ extern int n_exames, n_salas, n_alunos, n_courses;
 //NUMERO MAXIMO DE INSCRITOS?? NUMERO DE INSCRITOS = NUMERO DE VAGAS NECESSARIAS 
 
 void criarExame(){
+    int flag = 0;
     exame = realloc(exame, sizeof(Exames)*(n_exames+1));
 
     printf("**************************************************\n");
@@ -41,9 +42,21 @@ void criarExame(){
     for(int i=0;i<exame[n_exames].max_inscritos;i++)
         exame[n_exames].ids_inscritos[i] = 0; 
     
-    printf("Qual o regime do exame? (1 - Normal, 2 - Recurso, 3 - Especial): ");
-    scanf("%d", &exame[n_exames].regime);
-    //fazer verificacao
+
+    listarRegimes();
+    flag = 0;
+    do{
+        if(flag == 1)
+            printc("\n[red]Por favor insira um ID válido![/red]\n");
+
+        printf("\n\nQual é o regime do exame: ");
+        scanf("%d", &exame[n_exames].regime);
+        flag = 1;
+        if (exame[n_exames].regime == 1 || exame[n_exames].regime == 2){
+            printc("\n[red]Não pode marcar exame para Administrador ou Professor![/red]\n");
+            flag = 0;
+        }
+    }while (checkIfRegimeExists(exame[n_exames].regime) == 0 || exame[n_exames].regime == 1 || exame[n_exames].regime == 2);
         
     do{
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
@@ -73,74 +86,79 @@ void criarExame(){
         }
     }while(CheckIFCursoExiste(exame[n_exames].curso) == -1 || CheckDiscInCurso(exame[n_exames].curso, n_exames) == -1);
 
+    flag = 0;
     do{
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
+        if(flag == 1){
+            printc("[red]Sala não existe![/red]\n\n");
+        }
         listarSalasReservas(); 
         printf("Para que sala pretende criar um exame?\n");
         printf("Insira o nome da sala? ");
         scanf("%s", exame[n_exames].SalaNome);
-        exame[n_exames].SalaNome = realloc(exame[n_exames].SalaNome, (strlen(exame[n_exames].SalaNome)+1));
-        uppercase(exame[n_exames].SalaNome);
+        capitalize(exame[n_exames].SalaNome);
         printf("Insira o número da sala ");
         scanf("%d", &exame[n_exames].SalaNum);
-
-        if(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0){
-            printc("[red]Sala não existe![/red]");
-            Sleep(1000);
-        }
+        flag = 1;
     }while(CheckIFsalaExist(exame[n_exames].SalaNome, exame[n_exames].SalaNum) == 0);
+    exame[n_exames].SalaNome = realloc(exame[n_exames].SalaNome, (strlen(exame[n_exames].SalaNome)+1));
+
 
     tempoExames dateFinal; 
-    int *x,*y; 
-    x = malloc(sizeof(int));
-    y = malloc(sizeof(int));
-    *x = 0;
-    *y = 0;
+    int x,y; 
     do{
-    printf("Qual a data do exame (formato DD MM YY)? ");
-    scanf("%d %d %d", &exame[n_exames].data.dia, &exame[n_exames].data.mes, &exame[n_exames].data.ano);
-    printf("Qual a hora do exame (formato HH MM)? ");
-    scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
-    if(exame[n_exames].data.dia > 31 || exame[n_exames].data.mes > 12)
-        printc("\n[red]Data inválida![/red]");
-    if(exame[n_exames].data.dia < 0 || exame[n_exames].data.mes < 0)
-        printc("\n[red]Data inválida![/red]");
-    if(exame[n_exames].data.hora > 23 || exame[n_exames].data.minuto > 59)
-        printc("\n[red]Hora inválida![/red]");
-    if(exame[n_exames].data.hora < 0 || exame[n_exames].data.minuto < 0)
-        printc("\n[red]Hora inválida![/red]\n");
-
-            do{
-        printf("Qual a duração máxima do exame (HH MM)? ");
-        scanf("%d %d", &exame[n_exames].duracao.hora, &exame[n_exames].duracao.minuto);
-        if(exame[n_exames].duracao.hora > 2 && exame[n_exames].duracao.minuto > 59)
-            printc("\n[red]Duração máxima de 3 horas![/red]");
-        if(exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0)
-            printc("\n[red]Duração não pode ser negativa![/red]\n");
-        if(exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0)
-            printc("\n[red]Duração não pode ser 0![/red]\n");
-        Sleep(2000);
-        }while(exame[n_exames].duracao.hora > 2 || exame[n_exames].duracao.minuto > 59 || exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0 || exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0);
+        flag = 0;
+        do{
+            if(flag == 1)
+                printc("[red]Data inválida![/red]\n\n");
+            printf("Qual a data do exame (formato DD MM YY)? ");
+            scanf("%d %d %d", &exame[n_exames].data.dia, &exame[n_exames].data.mes, &exame[n_exames].data.ano);
+            printf("Qual a hora do exame (formato HH MM)? ");
+            scanf("%d %d", &exame[n_exames].data.hora, &exame[n_exames].data.minuto);
+            flag = 1;
+        }while(isValidDate(exame[n_exames].data) == 0);
     
-    dateFinal = dataFinal(exame[n_exames].data, exame[n_exames].duracao.hora, exame[n_exames].duracao.minuto);
-    if(CheckIfDataExisteExame(exame[n_exames].data, dateFinal, x, y) == 0){
-        printc("[red]\nO horário está ocupado pelo seguinte exame:[/red]\n");
-        printc("[blue]ID Exame:[/blue] %d   [blue]Data inicial:[/blue] %d/%d/%d   [blue]Hora:[/blue] [%d/%d] - [%d/%d]   [blue]Vagas:[/blue] %d\n",salas[*x].reservas[*y].id_exame,salas[*x].reservas[*y].data.dia,salas[*x].reservas[*y].data.mes,salas[*x].reservas[*y].data.ano,salas[*x].reservas[*y].data.hora,salas[*x].reservas[*y].data.minuto,salas[*x].reservas[*y].dataFinal.hora,salas[*x].reservas[*y].dataFinal.minuto,salas[*x].reservas[*y].vagas);
-    }
-    }while(exame[n_exames].data.dia > 31 || exame[n_exames].data.mes > 12 || exame[n_exames].data.dia < 0 || exame[n_exames].data.mes < 0 || exame[n_exames].data.hora > 23 || exame[n_exames].data.minuto > 59 || exame[n_exames].data.hora < 0 || exame[n_exames].data.minuto < 0 || CheckIfDataExisteExame(exame[n_exames].data, dateFinal, x, y) == 0);
 
+        do{
+            printf("\nQual a duração máxima do exame (HH MM)? ");
+            scanf("%d %d", &exame[n_exames].duracao.hora, &exame[n_exames].duracao.minuto);
+            if(exame[n_exames].duracao.hora*60+exame[n_exames].duracao.minuto > 180){
+                printc("\n[red]Duração máxima de 3 horas![/red]");
+            }
+            if(exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0)
+                printc("\n[red]Duração não pode ser negativa![/red]\n");
+            if(exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0)
+                printc("\n[red]Duração não pode ser 0![/red]\n");
+        }while(exame[n_exames].duracao.hora*60+exame[n_exames].duracao.minuto > 180
+            || exame[n_exames].duracao.hora < 0 || exame[n_exames].duracao.minuto < 0
+            || exame[n_exames].duracao.hora == 0 && exame[n_exames].duracao.minuto == 0);
+        
+        dateFinal = dateSumHoursMinutes(exame[n_exames].data, exame[n_exames].duracao.hora, exame[n_exames].duracao.minuto);
+        if(CheckIfDataExisteExame(exame[n_exames].data, dateFinal, &x, &y) == 0){/// NAO PERCEBI O QUE ESTÁ AQUI
+            printc("[red]\nO horário está ocupado pelo seguinte exame:[/red]\n");
+            printc("[blue]ID Exame:[/blue] %d   [blue]Data inicial:[/blue] %d/%d/%d   [blue]Hora:[/blue] [%d/%d] - [%d/%d]   [blue]Vagas:[/blue] %d\n",salas[x].reservas[y].id_exame,salas[x].reservas[y].data.dia,salas[x].reservas[y].data.mes,salas[x].reservas[y].data.ano,salas[x].reservas[y].data.hora,salas[x].reservas[y].data.minuto,salas[x].reservas[y].dataFinal.hora,salas[x].reservas[y].dataFinal.minuto,salas[x].reservas[y].vagas);
+        }
+
+    }while(exame[n_exames].data.dia > 31 
+        || exame[n_exames].data.mes > 12 
+        || exame[n_exames].data.dia < 0 
+        || exame[n_exames].data.mes < 0 
+        || exame[n_exames].data.hora > 23 
+        || exame[n_exames].data.minuto > 59 
+        || exame[n_exames].data.hora < 0 
+        || exame[n_exames].data.minuto < 0 
+        || CheckIfDataExisteExame(exame[n_exames].data, dateFinal, &x, &y) == 0);
 
     ReservarSala(n_exames, dateFinal);
-    
     n_exames++;
     saveBinExames();
 }
 
-int CheckIfDataExisteExame(tempoExames dataInicio, tempoExames dataFinal, int *i , int *j)
-{
+int CheckIfDataExisteExame(tempoExames dataInicio, tempoExames dataFinal, int *i , int *j){
     for(*i = 0; *i < n_salas; *i = *i+1){
         for(*j = 0;*j<salas[*i].n_reservas;*j=*j+1){
-            if(checkIfdataExiste(salas[*i].reservas[*j].data,salas[*i].reservas[*j].dataFinal,dataInicio) == 1 && checkIfdataExiste(salas[*i].reservas[*j].data,salas[*i].reservas[*j].dataFinal,dataFinal) == 1)
+            if(checkIfdataExiste(salas[*i].reservas[*j].data,salas[*i].reservas[*j].dataFinal,dataInicio) == 1 
+                && checkIfdataExiste(salas[*i].reservas[*j].data,salas[*i].reservas[*j].dataFinal,dataFinal) == 1)
                 return 0;
         }
     }
@@ -171,34 +189,31 @@ void listarExames(){
         printc("\n[blue]ID Exame:[/blue] %d   [blue]Disciplina:[/blue] %s   [blue]Sala:[/blue] %s%d   [blue]Data:[/blue] %d/%d/%d   [blue]Hora: [/blue][%d/%d]\n",exame[i].id,exame[i].disciplina,exame[i].SalaNome,exame[i].SalaNum,exame[i].data.dia,exame[i].data.mes,exame[i].data.ano,exame[i].data.hora,exame[i].data.minuto);
 }
 
-void ReservarSala(int N_exames, tempoExames dateFinal)
-{   
-    for(int j=0;j<n_salas;j++){
-    if(exame[N_exames].SalaNum == salas[j].numeroSala && strcmp(exame[N_exames].SalaNome , salas[j].nomeSala) == 0){
-        if(salas[j].n_reservas == 0)
-        {
-            salas[j].reservas = malloc(sizeof(Reservas));
-        }
-        else
-        {
-            salas[j].reservas = realloc(salas[j].reservas, (salas[j].n_reservas+1)*sizeof(Reservas));
-        }
-
-        salas[j].reservas[salas[j].n_reservas].salaReservada = 1;
-        salas[j].reservas[salas[j].n_reservas].id_reserva = exame[N_exames].data.hora;
-        salas[j].reservas[salas[j].n_reservas].id_exame = exame[N_exames].id;
-        salas[j].reservas[salas[j].n_reservas].data.mes = exame[N_exames].data.mes;
-        salas[j].reservas[salas[j].n_reservas].data.dia = exame[N_exames].data.dia;
-        salas[j].reservas[salas[j].n_reservas].data.ano = exame[N_exames].data.ano;
-        salas[j].reservas[salas[j].n_reservas].data.hora = exame[N_exames].data.hora;
-        salas[j].reservas[salas[j].n_reservas].data.minuto = exame[N_exames].data.minuto;
-        salas[j].reservas[salas[j].n_reservas].dataFinal.ano = dateFinal.ano;
-        salas[j].reservas[salas[j].n_reservas].dataFinal.mes = dateFinal.mes; 
-        salas[j].reservas[salas[j].n_reservas].dataFinal.dia = dateFinal.dia;
-        salas[j].reservas[salas[j].n_reservas].dataFinal.hora = dateFinal.hora;
-        salas[j].reservas[salas[j].n_reservas].dataFinal.minuto = dateFinal.minuto; 
-        salas[j].reservas[salas[j].n_reservas].vagas = exame[N_exames].max_inscritos;
-        salas[j].n_reservas++;
+void ReservarSala(int N_exames, tempoExames dateFinal){   
+    for(int j=0 ; j < n_salas ; j++){
+        if(exame[N_exames].SalaNum == salas[j].numeroSala && strcmp(exame[N_exames].SalaNome , salas[j].nomeSala) == 0){
+            if(salas[j].n_reservas == 0){
+                salas[j].reservas = malloc(sizeof(Reservas));
+            }
+            else{
+                salas[j].reservas = realloc(salas[j].reservas, (salas[j].n_reservas+1)*sizeof(Reservas));
+            }
+            //salas[j].n_reservas onde setas estes valor??????????????????????????????????
+            salas[j].reservas[salas[j].n_reservas].salaReservada = 1;
+            salas[j].reservas[salas[j].n_reservas].id_reserva = exame[N_exames].data.hora;
+            salas[j].reservas[salas[j].n_reservas].id_exame = exame[N_exames].id;
+            salas[j].reservas[salas[j].n_reservas].data.mes = exame[N_exames].data.mes;
+            salas[j].reservas[salas[j].n_reservas].data.dia = exame[N_exames].data.dia;
+            salas[j].reservas[salas[j].n_reservas].data.ano = exame[N_exames].data.ano;
+            salas[j].reservas[salas[j].n_reservas].data.hora = exame[N_exames].data.hora;
+            salas[j].reservas[salas[j].n_reservas].data.minuto = exame[N_exames].data.minuto;
+            salas[j].reservas[salas[j].n_reservas].dataFinal.ano = dateFinal.ano;
+            salas[j].reservas[salas[j].n_reservas].dataFinal.mes = dateFinal.mes; 
+            salas[j].reservas[salas[j].n_reservas].dataFinal.dia = dateFinal.dia;
+            salas[j].reservas[salas[j].n_reservas].dataFinal.hora = dateFinal.hora;
+            salas[j].reservas[salas[j].n_reservas].dataFinal.minuto = dateFinal.minuto; 
+            salas[j].reservas[salas[j].n_reservas].vagas = exame[N_exames].max_inscritos;
+            salas[j].n_reservas++;
         }
     }
     saveBinSalas();
@@ -230,8 +245,7 @@ void removerExame()
     printf("\n[red]Exame não encontrado![/red]\n");
 }
 
-void listarSalasReservas()
-{
+void listarSalasReservas(){
     printf("**************************************************\n");
     printc("*********        [blue]Salas e Reservas[/blue]       **********\n");
     printf("**************************************************\n");
@@ -320,7 +334,10 @@ void inscreverExame(){
             return;
         }
     }
-    printf("Não existe nenhum exame com esse ID!\n");
+    printc("\n[red]Não existe nenhum exame com esse ID![/red]\n");
+    printc("Pressione [blue]ENTER[/blue] para voltar ao menu principal\n");
+    getchar();
+    getchar();
 }
 
 void contarInscrito(int id)
@@ -415,14 +432,11 @@ void vagaMais(int SalaNum, char* SalaNome, int id)
         }
 }
 
-void vagaMenos(int SalaNum, char* SalaNome, int id) 
-{
+void vagaMenos(int SalaNum, char* SalaNome, int id) {
     for(int i=0;i<n_salas;i++){
         if(salas[i].numeroSala == SalaNum && strcmp(salas[i].nomeSala, SalaNome) == 0){
-            for(int j=0;j<salas[i].n_reservas;j++)
-            {
-                if(salas[i].reservas[j].id_exame == id)
-                {
+            for(int j=0; j < salas[i].n_reservas ; j++){
+                if(salas[i].reservas[j].id_exame == id){
                     salas[i].reservas[j].vagas--;
                     saveBinSalas();
                     return;
@@ -438,21 +452,21 @@ void saveBinExames(){
     FILE *fp;
     fp = fopen("data/bin/exames.bin", "wb");  // ID do exame, ID da disciplina, ID da sala, ID do professor, ID do regime, dia, mes, hora, minuto
             
-    fwrite(&n_exames, sizeof(int), 1, fp);
-
     for (i = 0; i < n_exames; i++){
-
         fwrite(&exame[i].id, sizeof(int), 1, fp);
         fwrite(&exame[i].max_inscritos, sizeof(int), 1, fp);
+        fwrite(&exame[i].inscritos, sizeof(int), 1, fp);//FALTAVA ISTO N SEI SE É PRECISO MAS COLOQUEI saveBinExames E readBinExames
 
         size_t disclen = strlen(exame[i].disciplina)+1;
         fwrite(&disclen, sizeof(size_t), 1, fp);
         fwrite(exame[i].disciplina, disclen ,1, fp);
+
         fwrite(&exame[i].curso, sizeof(int), 1, fp);
 
         size_t salanomelen = strlen(exame[i].SalaNome)+1;
         fwrite(&salanomelen, sizeof(size_t), 1, fp);
         fwrite(exame[i].SalaNome, salanomelen  , 1, fp);
+
         fwrite(&exame[i].SalaNum, sizeof(int), 1, fp);
 
         fwrite(&exame[i].professor, sizeof(int), 1, fp);
@@ -466,37 +480,37 @@ void saveBinExames(){
         fwrite(&exame[i].duracao.hora, sizeof(int), 1, fp);
         fwrite(&exame[i].duracao.minuto, sizeof(int), 1, fp);
         for(int j=0;j<exame[i].max_inscritos;j++)
-        fwrite(&exame[i].ids_inscritos[j], sizeof(int), 1, fp);
+            fwrite(&exame[i].ids_inscritos[j], sizeof(int), 1, fp);
 
     }
     fclose(fp);
 }
 
-void readBinExames()
-{
+void readBinExames(){
     exame = malloc(sizeof(Exames));
     int i;
     FILE *fp;
     fp = fopen("data/bin/exames.bin", "rb"); 
 
-    fread(&n_exames, sizeof(int), 1, fp);
-
-    for(i=0;i<n_exames;i++){
+    for(i=0;;i++){
         exame = realloc(exame, sizeof(Exames)*(i+1));
 
-        fread(&exame[i].id, sizeof(int), 1, fp);
+        if(fread(&exame[i].id, sizeof(int), 1, fp) != 1) break;
         fread(&exame[i].max_inscritos, sizeof(int), 1, fp);
+        fread(&exame[i].inscritos, sizeof(int), 1, fp);//FALTAVA ISTO N SEI SE É PRECISO MAS COLOQUEI saveBinExames E readBinExames
 
         size_t disclen;
         fread(&disclen, sizeof(size_t), 1, fp);
         exame[i].disciplina = malloc(disclen);
         fread(exame[i].disciplina, disclen, 1, fp);
+        
         fread(&exame[i].curso, sizeof(int), 1, fp);
 
         size_t salanomelen;
         fread(&salanomelen, sizeof(size_t), 1, fp);
         exame[i].SalaNome = malloc(salanomelen);
         fread(exame[i].SalaNome, salanomelen, 1, fp);
+
         fread(&exame[i].SalaNum, sizeof(int), 1, fp);
 
         fread(&exame[i].professor, sizeof(int), 1, fp);
@@ -514,5 +528,6 @@ void readBinExames()
         for(int j=0;j<exame[i].max_inscritos;j++) 
             fread(&exame[i].ids_inscritos[j], sizeof(int), 1, fp);
     }
+    n_exames = i;
     fclose(fp);
 }

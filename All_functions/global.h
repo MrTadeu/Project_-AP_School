@@ -21,7 +21,7 @@ int isdigit_cheker(char *str);
 void generate_unique_numbers(int *array, int length);
 char *capitalize(char *str);
 int isletter_cheker(char *str);
-tempoExames dataFinal(tempoExames date, int hours, int minutes);
+tempoExames dateSumHoursMinutes(tempoExames date, int hours, int minutes);
 int isValidDate(tempoExames date);
 int checkIfdataExiste(tempoExames dataInicaial,tempoExames dataFinal,tempoExames check);
 /* void timeNow();
