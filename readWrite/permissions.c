@@ -24,7 +24,7 @@ void saveAndSetPermissionsBinByTxt(){
     perms_file[0].perm.ListarExamesInscritos = 1;
     perms_file[0].perm.EditarExames = 1;
     perms_file[0].perm.ExportarExames = 1;
-    perms_file[0].perm.InscreverExames = 1;
+    perms_file[0].perm.InscreverExames = 0;
      /* SALAS */
     perms_file[0].perm.CriarSalas = 1;
     perms_file[0].perm.ListarSalas = 1;
@@ -72,7 +72,7 @@ void saveAndSetPermissionsBinByTxt(){
     perms_file[1].perm.ListarExamesInscritos = 1;
     perms_file[1].perm.EditarExames = 1;
     perms_file[1].perm.ExportarExames = 1;
-    perms_file[1].perm.InscreverExames = 1;
+    perms_file[1].perm.InscreverExames = 0;
      /* SALAS */
     perms_file[1].perm.CriarSalas = 0;
     perms_file[1].perm.ListarSalas = 1;
@@ -90,7 +90,7 @@ void saveAndSetPermissionsBinByTxt(){
     perms_file[1].perm.RemoverCursos = 0;
      /* DISCIPLINAS */
     perms_file[1].perm.ListarCursosDisciplinas = 1;
-    perms_file[1].perm.CriarDisciplinas = 1;
+    perms_file[1].perm.CriarDisciplinas = 0;
     perms_file[1].perm.ListarDisciplinas = 1;
     perms_file[1].perm.EditarDisciplinas = 0;
     perms_file[1].perm.RemoverDisciplinas = 0;
