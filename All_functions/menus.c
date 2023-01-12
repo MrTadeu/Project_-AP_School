@@ -10,14 +10,15 @@ void MenuFilesNovos(){
     int opcao;
     do{
         fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
-        printf("*******************************************\n");
-        printc("************ [blue]Menu Files[/blue] ************\n");
-        printf("*******************************************\n");
-        printf("**        0 -> Sair                      **\n");
-        printf("**        1 -> Continuar                 **\n");
-        printf("**        2 -> importar dados alunos txt **\n");
-        printf("*******************************************\n");
-        printf("Opcao: ");
+        printc("[red]**********************************[/red]\n");
+        printc("[red]*********** Menu Files ***********[/red]\n");
+        printc("[red]**********************************[/red]\n");
+        printc("[red]**     0 -> Sair                **[/red]\n");
+        printc("[red]**     1 -> Continuar           **[/red]\n");
+        printc("[red]**     2 -> Importar dados      **[/red]\n");
+        printc("[red]**********************************[/red]\n");
+        printc("[yellow]ERRO FICHEIROS EM FALTA![/yellow]");
+        printf("\nOpcao: ");
         scanf("%d", &opcao);
     switch (opcao){
       case 0:
@@ -27,11 +28,10 @@ void MenuFilesNovos(){
         printc("Deseja continuar com os dados [red]Corrompidos[/red]? ([red]0 - Não[/red]/[green]1 - Sim[/green]) ");
         scanf("%d", &opcao);
         if (opcao == 1){
-          readData();
-          opcao = 0;
+            opcao = 0;
         }
         else{
-          MenuFilesNovos();
+            exit(0);
         }
         break;
       case 2:

@@ -31,7 +31,7 @@ struct tm TempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoH
 int ChackTempoDeTeste(int mes, int dia, int hora, int minuto, int n_TesteTempoHora, int n_TesteTempoMinuto); */
 int days_in_month(int month, int year);
 struct Date add_time(struct Date date, int hours, int minutes);
-
+int fileExistAll();
 
 //alunosTxt.c
 AlunoFileStruct* getTxt();
@@ -117,7 +117,6 @@ int InitCursos();//Apenas necessario primeira vez(apos isso ja temos o ficheiro 
 void ReadBinCursosDisciplina();
 void SaveBinCursosDisciplina();
 
-
 //UnidadesCurriculares.c
 void criardisciplinas();
 void ListarDisciplinas();
@@ -155,11 +154,6 @@ void changeName();
 void changePassword();
 void editAccount();
 void updateUser();
-
-
-//ficheiros.c
-int fileExistAll();
-bool folderExists();
 
 //main.c
 void readData();

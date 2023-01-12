@@ -31,7 +31,7 @@ void main(){
         MenuFilesNovos();
     }
     readData();
-
+    fputs("\x1b[H\x1b[2J\x1b[3J", stdout);
     int op = -1;
     setlocale(LC_ALL, "Portuguese");
     do{

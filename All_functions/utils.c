@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include <sys/stat.h>
 #include "global.h"
 //#include "structs.h"
 
@@ -217,5 +218,23 @@ void generate_unique_numbers(int *array, int length) {
       // Mark the current number as seen
       unique_values[array[i] - min] = 1;
     }
+  }
+}
+
+
+int fileExists(const char* path) {
+  struct stat st;
+  if (stat(path, &st) == 0) {
+    return 1;
+  }
+  return 0;
+}
+
+int fileExistAll(){
+  if(fileExists("data/bin/alunos.bin") && fileExists("data/bin/cursosdisciplina.bin") && fileExists("data/bin/disciplinas.bin") && fileExists("data/bin/permission.bin") && fileExists("data/bin/professores.bin") && fileExists("data/bin/regimes.bin") && fileExists("data/bin/salas.bin")){
+    return 1;
+  }
+  else{
+    return 0;
   }
 }
