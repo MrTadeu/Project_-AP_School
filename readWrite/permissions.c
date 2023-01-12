@@ -46,7 +46,7 @@ void saveAndSetPermissionsBinByTxt(){
     perms_file[0].perm.ListarDisciplinas = 1;
     perms_file[0].perm.EditarDisciplinas = 1;
     perms_file[0].perm.RemoverDisciplinas = 1;
-    perms_file[0].perm.VerDisciplinas = 1;
+    perms_file[0].perm.VerDisciplinas = 0;
      /* ALUNOS */
     perms_file[0].perm.CriarAluno = 1;
     perms_file[0].perm.ListarAluno = 1;
@@ -74,41 +74,41 @@ void saveAndSetPermissionsBinByTxt(){
     perms_file[1].perm.ExportarExames = 1;
     perms_file[1].perm.InscreverExames = 1;
      /* SALAS */
-    perms_file[1].perm.CriarSalas = 1;
+    perms_file[1].perm.CriarSalas = 0;
     perms_file[1].perm.ListarSalas = 1;
-    perms_file[1].perm.EditarSalas = 1;
-    perms_file[1].perm.RemoverSalas = 1;
+    perms_file[1].perm.EditarSalas = 0;
+    perms_file[1].perm.RemoverSalas = 0;
      /* PROFESSOR */
-    perms_file[1].perm.CriarProfessor = 1;
+    perms_file[1].perm.CriarProfessor = 0;
     perms_file[1].perm.ListarProfessor = 1;
-    perms_file[1].perm.EditarProfessor = 1;
-    perms_file[1].perm.RemoverProfessor = 1;
+    perms_file[1].perm.EditarProfessor = 0;
+    perms_file[1].perm.RemoverProfessor = 0;
      /* CURSOS */
-    perms_file[1].perm.CriarCursos = 1;
+    perms_file[1].perm.CriarCursos = 0;
     perms_file[1].perm.ListarCursos = 1;
-    perms_file[1].perm.EditarCursos = 1;
-    perms_file[1].perm.RemoverCursos = 1;
-     /* DISCIPL1NAS */
+    perms_file[1].perm.EditarCursos = 0;
+    perms_file[1].perm.RemoverCursos = 0;
+     /* DISCIPLINAS */
     perms_file[1].perm.ListarCursosDisciplinas = 1;
     perms_file[1].perm.CriarDisciplinas = 1;
     perms_file[1].perm.ListarDisciplinas = 1;
-    perms_file[1].perm.EditarDisciplinas = 1;
-    perms_file[1].perm.RemoverDisciplinas = 1;
-    perms_file[1].perm.VerDisciplinas = 1;
+    perms_file[1].perm.EditarDisciplinas = 0;
+    perms_file[1].perm.RemoverDisciplinas = 0;
+    perms_file[1].perm.VerDisciplinas = 0;
      /* ALUNOS */
-    perms_file[1].perm.CriarAluno = 1;
+    perms_file[1].perm.CriarAluno = 0;
     perms_file[1].perm.ListarAluno = 1;
     perms_file[1].perm.ListarTodosAlunos = 1;
-    perms_file[1].perm.EditarAluno = 1;
-    perms_file[1].perm.RemoverAluno = 1;
+    perms_file[1].perm.EditarAluno = 0;
+    perms_file[1].perm.RemoverAluno = 0;
      /* Regimes*/
-    perms_file[1].perm.CriarRegimes = 1;
+    perms_file[1].perm.CriarRegimes = 0;
     perms_file[1].perm.ListarRegimes = 1;
-    perms_file[1].perm.ListarRegimesPermissoes = 1;
-    perms_file[1].perm.EditarNomeRegimes = 1;
-    perms_file[1].perm.EditarPermissoesRegimes = 1;
-    perms_file[1].perm.MoverRegimes = 1;
-    perms_file[1].perm.RemoverRegimes = 1;
+    perms_file[1].perm.ListarRegimesPermissoes = 0;
+    perms_file[1].perm.EditarNomeRegimes = 0;
+    perms_file[1].perm.EditarPermissoesRegimes = 0;
+    perms_file[1].perm.MoverRegimes = 0;
+    perms_file[1].perm.RemoverRegimes = 0;
     fwrite(&perms_file[1], sizeof(permissionFileStruct),1,file);
 
     printf("\n1º Regime - %s\n", regimes[0].name);
